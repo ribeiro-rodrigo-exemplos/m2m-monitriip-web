@@ -66,7 +66,7 @@
 				</div>
 
 				<section class="filter__content__buttons">
-					<button class="button button--cancel">LIMPAR</button>
+					<button class="button button--cancel text-size-11">LIMPAR</button>
 					<button class="button button--confirm">CONSULTAR</button>
 				</section>
 			</div><!-- fim div filter content-->
@@ -74,16 +74,16 @@
 
 	<div class="row row--space-between row--search-and-export">
 		<div>
-			<span class="search-information"> 85500 | 689465465875 | Fev 02 - Fev 05, 2017</span>
+			<span class="search-information text-size-13"> 85500 | 689465465875 | Fev 02 - Fev 05, 2017</span>
 		</div>
 		<div class="row row--align-flex-end">
 			<div class="layout-mode">
 				<img class="layout-mode__image" src="img/moon.png">
-				<span class="layout-mode__description">Modo Noite</span>
+				<span class="layout-mode__description text-size-11">Modo Noite</span>
 				<input class="switch" type="checkbox" checked='checked'/>
 			</div>
 			<div class="layout-mode">
-				<button class="button button--gray-bg">
+				<button class="button button--gray-bg text-size-10">
 					<svg version="1.1" class="button__svg" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" x="0px" y="0px"
 						 viewBox="0 0 478 422" style="enable-background:new 0 0 478 422;" xml:space="preserve">
 						<g>
@@ -101,8 +101,8 @@
 				</button>
 			</div>
 			<div class="row row--buttons">
-				<button class="button button--gray-bg"><i class="fa fa-file-excel-o"></i> CSV</button>
-				<button class="button button--gray-bg"><i class="fa fa-file-excel-o"></i> PDF</button>
+				<button class="button button--gray-bg text-size-10"><i class="fa fa-file-excel-o"></i> CSV</button>
+				<button class="button button--gray-bg text-size-10"><i class="fa fa-file-excel-o"></i> PDF</button>
 			</div>
 		</div>
 	</div>
@@ -113,35 +113,35 @@
 			<div class="main-chart">
 				<div class="row row--space-between">
 					<div class="row__start">
-							<h2>Visão Geral</h2>
+							<h2 class="text-size-24">Visão Geral</h2>
 					</div>
 					<div class="row__end">
-						<button class="expandir-js button button--dark-gray-bg button--light-gray-border button--row">EXPANDIR</button>
+						<button class="expandir-js button button--dark-gray-bg button--light-gray-border button--row text-size-10">EXPANDIR</button>
 						<div class="dropdown dropdown--main-chart">
-							<span class="dropdown__title">Geral <i class="fa fa-caret-down"></i></span>
-							<div class="dropdown__content hidden">
-								<p class="no-margin">
-								  <input type="radio" name="chart" id="km-percorrido-chart">
+							<span class="dropdown__title" id="main-chart-select-title">Geral <i class="fa fa-caret-down"></i></span>
+							<div class="dropdown__content dropdown__content--main-chart hidden">
+								<p>
+								  <input type="radio" name="chart" class="none" id="km-percorrido-chart">
 								  <label for="km-percorrido-chart">Km Percorrido</label>
 								</p>
-								<p class="no-margin">
-								  <input type="radio" name="chart" id="leitura-de-bilhetes-chart">
+								<p>
+								  <input type="radio" name="chart" class="none" id="leitura-de-bilhetes-chart">
 								  <label for="leitura-de-bilhetes-chart">Leitura de Bilhetes</label>
 								</p>
-								<p class="no-margin">
-								  <input type="radio" name="chart" id="tempo-de-viagem-chart">
+								<p>
+								  <input type="radio" name="chart" class="none" id="tempo-de-viagem-chart">
 								  <label for="tempo-de-viagem-chart">Tempo de Viagem</label>
 								</p>
-								<p class="no-margin">
-								  <input type="radio" name="chart" id="direcao-continua-chart">
+								<p>
+								  <input type="radio" name="chart" class="none" id="direcao-continua-chart">
 								  <label for="direcao-continua-chart">Direção Contínua</label>
 								</p>	
-								<p class="no-margin">
-								  <input type="radio" name="chart" id="jornada-de-trabalho-chart">
+								<p>
+								  <input type="radio" name="chart" class="none" id="jornada-de-trabalho-chart">
 								  <label for="jornada-de-trabalho-chart">Jornada de Trabalho</label>
 								</p>
-								<p class="no-margin">
-								  <input type="radio" name="chart" id="detector-de-paradas-chart">
+								<p>
+								  <input type="radio" name="chart" class="none" id="detector-de-paradas-chart">
 								  <label for="detector-de-paradas-chart">Detector de Paradas</label>
 								</p>
 							</div><!--fim dropdown__content-->
@@ -149,59 +149,60 @@
 					</div><!-- fim row__end-->
 				</div><!-- fim row-->
 
-				<div class="chart" id="chartdiv"></div>
-				<div class="chart none" id="chartdiv-2"></div>
-				<div class="chart none" id="chartdiv-3"></div>
-				<div class="chart none" id="chartdiv-4"></div>
-				<div class="chart none" id="chartdiv-5"></div>
-				<div class="chart none" id="chartdiv-6"></div>
+				<div class="chart" id="container-highcharts"></div>
+				<div class="chart none" id="container-highcharts2"></div>
+				<div class="chart none" id="container-highcharts3"></div>
+				<div class="chart none" id="container-highcharts4"></div>
+				<div class="chart none" id="container-highcharts5"></div>
+				<div class="chart none" id="container-highcharts6"></div>
+
+				<div class="row row--space-between">
+					<div class="row__start">
+							<h2 class="text-size-24">Totalizadores</h2>
+					</div>
+					<div class="row__end">
+						<div class="dropdown">
+							<span class="dropdown__title">Visualização <i class="fa fa-caret-down"></i></span>
+							<div class="dropdown__content hidden">
+								<p class="no-margin">
+								  <input type="checkbox">
+								  <label>Km Percorrido</label>
+								</p>
+								<p class="no-margin">
+								  <input type="checkbox">
+								  <label>Tempo de Viagem</label>
+								</p>
+								<p class="no-margin">
+								  <input type="checkbox">
+								  <label>Leitor de Bilhetes</label>
+								</p>
+								<p class="no-margin">
+								  <input type="checkbox">
+								  <label>Total de Viagens</label>
+								</p>
+								<p class="no-margin">
+								  <input type="checkbox">
+								  <label>Motivo de Paradas</label>
+								</p>
+								<p class="no-margin">
+								  <input type="checkbox">
+								  <label>Jornada de Trabalho</label>
+								</p>
+								<p class="no-margin">
+								  <input type="checkbox">
+								  <label>Troca de Motorista</label>
+								</p>
+							</div>
+						</div><!-- fim dropdown-->
+					</div><!-- fim row__end-->
+				</div><!-- fim row-->
 			</div><!-- fim main-chart -->
 
-			<div class="row row--space-between">
-				<div class="row__start">
-						<h2>Totalizadores</h2>
-				</div>
-				<div class="row__end">
-					<div class="dropdown">
-						<span class="dropdown__title">Visualização <i class="fa fa-caret-down"></i></span>
-						<div class="dropdown__content hidden">
-							<p class="no-margin">
-							  <input type="checkbox">
-							  <label>Km Percorrido</label>
-							</p>
-							<p class="no-margin">
-							  <input type="checkbox">
-							  <label>Tempo de Viagem</label>
-							</p>
-							<p class="no-margin">
-							  <input type="checkbox">
-							  <label>Leitor de Bilhetes</label>
-							</p>
-							<p class="no-margin">
-							  <input type="checkbox">
-							  <label>Total de Viagens</label>
-							</p>
-							<p class="no-margin">
-							  <input type="checkbox">
-							  <label>Motivo de Paradas</label>
-							</p>
-							<p class="no-margin">
-							  <input type="checkbox">
-							  <label>Jornada de Trabalho</label>
-							</p>
-							<p class="no-margin">
-							  <input type="checkbox">
-							  <label>Troca de Motorista</label>
-							</p>
-						</div>
-					</div><!-- fim dropdown-->
-				</div><!-- fim row__end-->
-			</div><!-- fim row-->
 			<div class="info-boxes">
 				<div class="info-box">
 					<div class="info-box__content info-box__content--green info-km-percorrido-js">
 
-						<h5 class="info-box__content__title">Km Percorrido</h5>
+						<h5 class="info-box__content__title text-size-13">Km Percorrido</h5>
 						<div class="row row--align-baseline">
 							<svg version="1.1" class="info-box__content__svg" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" x="0px" y="0px"
 								 viewBox="0 0 478 422" style="enable-background:new 0 0 478 422;" xml:space="preserve">
@@ -226,29 +227,29 @@
 									</g>
 								</g>
 							</svg>
-							<span class="info-box__content__span">70</span><span class="light-gray"> km</span>
+							<span class="info-box__content__span text-size-56">70</span><span class="light-gray text-size-16"> km</span>
 						</div>
 						<div id="info-box-chartdiv" class="info-box__chart"></div>
 					</div>
 					<footer class="info-box__footer green-bg">
 						<section class="column info-box__footer__column">
 							<span class="semitransparent-text">02 Fev</span>
-							<span><span class="much-bigger-text">35</span>km</span>
+							<span><span class="text-size-24">35</span>km</span>
 						</section>
 						<section class="column info-box__footer__column">
 							<span class="semitransparent-text">03 Fev</span>
-							<span><span class="much-bigger-text">10</span>km</span>
+							<span><span class="text-size-24">10</span>km</span>
 						</section>
 						<section class="column info-box__footer__column">
 							<span class="semitransparent-text">04 Fev</span>
-							<span><span class="much-bigger-text">25</span>km</span>
+							<span><span class="text-size-24">25</span>km</span>
 						</section>
 					</footer>
 				</div><!-- fim info-box km percorrido-->
 
 				<div class="info-box">
 					<div class="info-box__content info-box__content--pink info-leitura-de-bilhetes-js">
-						<h5 class="info-box__content__title">Leitura de Bilhetes</h5>
+						<h5 class="info-box__content__title text-size-13">Leitura de Bilhetes</h5>
 
 						<div class="row row--align-baseline">
 							<svg version="1.1" class="info-box__content__svg" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" x="0px" y="0px" viewBox="0 0 246 246" style="enable-background:new 0 0 246 246;" xml:space="preserve">
@@ -291,7 +292,7 @@
 										C115.7,159.8,117.6,161.7,117.6,164.8z"/>
 								</g>
 							</svg>
-							<span class="info-box__content__span">1.987</span>
+							<span class="info-box__content__span text-size-56">1.987</span>
 						</div>
 
 						<!-- gráfico -->
@@ -300,15 +301,15 @@
 					<footer class="info-box__footer pink-bg">
 						<section class="column info-box__footer__column">
 							<span class="semitransparent-text">02 Fev</span>
-							<span class="much-bigger-text">497</span>
+							<span class="text-size-24">497</span>
 						</section>
 						<section class="column info-box__footer__column">
 							<span class="semitransparent-text">03 Fev</span>
-							<span class="much-bigger-text">498</span>
+							<span class="text-size-24">498</span>
 						</section>
 						<section class="column info-box__footer__column">
 							<span class="semitransparent-text">04 Fev</span>
-							<span class="much-bigger-text">497</span>
+							<span class="text-size-24">497</span>
 						</section>
 					</footer>
 				</div><!-- fim info-box leitura de bilhetes-->
@@ -316,7 +317,7 @@
 				<div class="info-box">
 					<div class="info-box__content info-box__content--blue info-tempo-de-viagem-js">
 
-						<h5 class="info-box__content__title">Tempo de Viagem (média)</h5>
+						<h5 class="info-box__content__title text-size-13">Tempo de Viagem (média)</h5>
 						<div class="row row--align-baseline">
 							<svg version="1.1" class="info-box__content__svg" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" x="0px" y="0px"
 								 viewBox="0 0 478 422" style="enable-background:new 0 0 478 422;" xml:space="preserve">
@@ -332,7 +333,7 @@
 									</g>
 								</g>
 							</svg>
-							<span class="info-box__content__span">621</span><span class="light-gray"> min</span>
+							<span class="info-box__content__span text-size-56">621</span><span class="light-gray text-size-16"> min</span>
 						</div>
 						<!-- gráfico -->
 						<div id="info-box-chartdiv3" class="info-box__chart"></div>
@@ -340,19 +341,19 @@
 					<footer class="info-box__footer blue-bg">
 						<section class="column info-box__footer__column">
 							<span class="semitransparent-text">02 Fev</span>
-							<span><span class="much-bigger-text">155</span>min</span>
+							<span><span class="text-size-24">155</span>min</span>
 						</section>
 						<section class="column info-box__footer__column">
 							<span class="semitransparent-text">03 Fev</span>
-							<span><span class="much-bigger-text">156</span>min</span>
+							<span><span class="text-size-24">156</span>min</span>
 						</section>
 						<section class="column info-box__footer__column">
 							<span class="semitransparent-text">04 Fev</span>
-							<span><span class="much-bigger-text">150</span>min</span>
+							<span><span class="text-size-24">150</span>min</span>
 						</section>
 					</footer>
 				</div><!-- fim info-box tempo de viagem-->
-			</div><!-- fim 1st row -->
+			</div><!-- fim 1st row of info-boxes-->
 
 			<div class="info-boxes">
 				<div class="info-box">
@@ -363,7 +364,7 @@
 							<option>Ricardo Souza</option>
 						</select>
 						
-						<h5 class="info-box__content__title">Direção Contínua</h5>
+						<h5 class="info-box__content__title text-size-13">Direção Contínua</h5>
 						<div class="row row--align-baseline">
 							<svg version="1.1" class="info-box__content__svg" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" x="0px" y="0px"
 								 viewBox="0 0 379 358" style="enable-background:new 0 0 379 358;" xml:space="preserve">
@@ -401,7 +402,7 @@
 									c13.2-2.7,24.6,1.4,33,11.9c8.3,10.4,10.3,22.5,4.5,34.4c-8.5,17.5-18.2,34.4-27.3,51.5C279.4,149,278.4,150.9,277.1,153.3z
 									 M294,82.2c0-9.2-7.7-17-16.9-16.9c-9.1,0-16.7,7.5-16.8,16.6c-0.1,9.2,7.5,17,16.7,17.1C286.1,99.1,293.9,91.4,294,82.2z"/>
 							</svg>
-							<span class="info-box__content__span">23</span><span class="light-gray"> horas</span>
+							<span class="info-box__content__span text-size-56">23</span><span class="light-gray text-size-16"> horas</span>
 						</div>
 						<!-- gráfico -->
 						<div id="info-box-chartdiv4" class="info-box__chart"></div>
@@ -409,15 +410,15 @@
 					<footer class="info-box__footer purple-bg">
 						<section class="column info-box__footer__column">
 							<span class="semitransparent-text">02 Fev</span>
-							<span><span class="much-bigger-text">7</span>hs</span>
+							<span><span class="text-size-24">7</span>hs</span>
 						</section>
 						<section class="column info-box__footer__column">
 							<span class="semitransparent-text">03 Fev</span>
-							<span><span class="much-bigger-text">9</span>hs</span>
+							<span><span class="text-size-24">9</span>hs</span>
 						</section>
 						<section class="column info-box__footer__column">
 							<span class="semitransparent-text">04 Fev</span>
-							<span><span class="much-bigger-text">7</span>hs</span>
+							<span><span class="text-size-24">7</span>hs</span>
 						</section>
 					</footer>
 				</div><!-- fim info-box direção contínua-->
@@ -430,7 +431,7 @@
 							<option>Ricardo Souza</option>
 						</select>
 
-						<h5 class="info-box__content__title">Jornada de Trabalho</h5>
+						<h5 class="info-box__content__title text-size-13">Jornada de Trabalho</h5>
 						<div class="row row--align-baseline">
 							<svg version="1.1" class="info-box__content__svg" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" x="0px" y="0px"
 								 viewBox="0 0 478 422" style="enable-background:new 0 0 478 422;" xml:space="preserve">
@@ -448,7 +449,7 @@
 								 M242.9,50.5c9.7,0,19.4,0.1,29.1,0c7.9-0.1,12.8-4.5,12.9-10.9c0.1-6.9-4.9-11.2-13.3-11.3c-19.1-0.1-38.2-0.1-57.3,0
 								c-8.6,0-13.4,4.3-13.3,11.2c0.1,6.5,5,10.8,12.9,11C223.6,50.6,233.3,50.5,242.9,50.5z"/>
 							</svg>
-							<span class="info-box__content__span">420</span>
+							<span class="info-box__content__span text-size-56">420</span>
 						</div>
 
 						<!-- gráfico -->
@@ -457,15 +458,15 @@
 					<footer class="info-box__footer red-bg">
 						<section class="column info-box__footer__column">
 							<span class="semitransparent-text">02 Fev</span>
-							<span class="much-bigger-text">90</span>
+							<span class="text-size-24">90</span>
 						</section>
 						<section class="column info-box__footer__column">
 							<span class="semitransparent-text">03 Fev</span>
-							<span class="much-bigger-text">115</span>
+							<span class="text-size-24">115</span>
 						</section>
 						<section class="column info-box__footer__column">
 							<span class="semitransparent-text">04 Fev</span>
-							<span class="much-bigger-text">105</span>
+							<span class="text-size-24">105</span>
 						</section>
 					</footer>
 				</div><!-- fim info-box jornada de trabalho-->
@@ -480,7 +481,7 @@
 							<option>Acidente na Via</option>
 						</select>
 
-						<h5 class="info-box__content__title">Detector de Paradas</h5>
+						<h5 class="info-box__content__title text-size-13">Detector de Paradas</h5>
 						<div class="row row--align-baseline">
 							<svg version="1.1" class="info-box__content__svg" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" x="0px" y="0px"
 								 viewBox="0 0 478 422" style="enable-background:new 0 0 478 422;" xml:space="preserve">
@@ -584,7 +585,7 @@
 									</g>
 								</g>
 							</svg>
-							<span class="info-box__content__span">420</span>
+							<span class="info-box__content__span text-size-56">420</span>
 						</div>
 
 						<!-- gráfico -->
@@ -593,28 +594,28 @@
 					<footer class="info-box__footer orange-bg">
 						<section class="column info-box__footer__column">
 							<span class="semitransparent-text">02 Fev</span>
-							<span class="much-bigger-text">90</span>
+							<span class="text-size-24">90</span>
 						</section>
 						<section class="column info-box__footer__column">
 							<span class="semitransparent-text">03 Fev</span>
-							<span class="much-bigger-text">115</span>
+							<span class="text-size-24">115</span>
 						</section>
 						<section class="column info-box__footer__column">
 							<span class="semitransparent-text">04 Fev</span>
-							<span class="much-bigger-text">105</span>
+							<span class="text-size-24">105</span>
 						</section>
 					</footer>
 				</div><!-- fim info-box detector de paradas-->
-				</div><!-- fim 2nd row -->
+			</div><!-- fim 2nd row of info-boxes-->
 		</div><!-- fim div main-panel -->
 
 		<aside class="sidebar">
 			<header class="sidebar__header row row--space-between">
-				<h3 class="sidebar__header__title">Extrato por dia</h3>
-				<button class="button button--dark-gray-bg">REDUZIR</button>
+				<h3 class="sidebar__header__title text-size-14">Extrato por dia</h3>
+				<button class="button button--dark-gray-bg text-size-10">REDUZIR</button>
 			</header>
 
-			<h4 class="sidebar__day">
+			<h4 class="sidebar__day text-size-13">
 				01 Fevereiro
 				<span class="sidebar__day__toggle-control">
 					<i class="fa fa-minus"></i><!-- trocar fa-minus por fa-plus se o sidebar__content subsequente estiver oculto -->
@@ -648,7 +649,7 @@
 								</g>
 							</g>
 						</svg>
-						<span class="much-bigger-text">35</span><span class="unit"> km</span>
+						<span class="text-size-24">35</span><span class="unit"> km</span>
 					</section>
 					<section class="sidebar__content__info pink-bg">
 						<svg version="1.1" class="sidebar__svg" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" x="0px" y="0px" viewBox="0 0 246 246" style="enable-background:new 0 0 246 246;" xml:space="preserve">
@@ -691,7 +692,7 @@
 									C115.7,159.8,117.6,161.7,117.6,164.8z"/>
 							</g>
 						</svg>
-						<span class="much-bigger-text">497</span>
+						<span class="text-size-24">497</span>
 					</section>
 					<section class="sidebar__content__info blue-bg">
 						<svg version="1.1" class="sidebar__svg" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" x="0px" y="0px"
@@ -708,7 +709,7 @@
 								</g>
 							</g>
 						</svg>
-						<span class="much-bigger-text">155</span><span class="unit"> min</span>
+						<span class="text-size-24">155</span><span class="unit"> min</span>
 					</section>
 					<section class="sidebar__content__info purple-bg">
 						<svg version="1.1" class="sidebar__svg" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" x="0px" y="0px"
@@ -747,7 +748,7 @@
 								c13.2-2.7,24.6,1.4,33,11.9c8.3,10.4,10.3,22.5,4.5,34.4c-8.5,17.5-18.2,34.4-27.3,51.5C279.4,149,278.4,150.9,277.1,153.3z
 								 M294,82.2c0-9.2-7.7-17-16.9-16.9c-9.1,0-16.7,7.5-16.8,16.6c-0.1,9.2,7.5,17,16.7,17.1C286.1,99.1,293.9,91.4,294,82.2z"/>
 						</svg>
-						<span class="much-bigger-text">25</span>
+						<span class="text-size-24">25</span>
 					</section>
 					<section class="sidebar__content__info red-bg">
 						<svg version="1.1" class="sidebar__svg" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" x="0px" y="0px"
@@ -766,7 +767,7 @@
 							 M242.9,50.5c9.7,0,19.4,0.1,29.1,0c7.9-0.1,12.8-4.5,12.9-10.9c0.1-6.9-4.9-11.2-13.3-11.3c-19.1-0.1-38.2-0.1-57.3,0
 							c-8.6,0-13.4,4.3-13.3,11.2c0.1,6.5,5,10.8,12.9,11C223.6,50.6,233.3,50.5,242.9,50.5z"/>
 						</svg>
-						<span class="much-bigger-text">90</span>
+						<span class="text-size-24">90</span>
 					</section>
 					<section class="sidebar__content__info orange-bg">
 						<svg version="1.1" xmlns="http://www.w3.org/2000/svg" class="sidebar__svg" xmlns:xlink="http://www.w3.org/1999/xlink" x="0px" y="0px" viewBox="0 0 478 422" style="enable-background:new 0 0 478 422;" xml:space="preserve">
@@ -870,11 +871,11 @@
 								</g>
 							</g>
 						</svg>
-						<span class="much-bigger-text">90</span>
+						<span class="text-size-24">90</span>
 					</section>
 				</div><!-- fim row-->
 
-				<table class="table" cellspacing="0">
+				<table class="table text-size-10" cellspacing="0">
 					<thead class="table__header">
 						<tr>
 							<td>LINHA</td>
@@ -916,7 +917,7 @@
 				</table>
 			</div><!-- fim div sidebar__content -->
 
-			<h4 class="sidebar__day">
+			<h4 class="sidebar__day text-size-13">
 				02 Fevereiro
 				<span class="sidebar__day__toggle-control">
 					<i class="fa fa-minus"></i><!-- trocar fa-minus por fa-plus se o sidebar__content subsequente estiver oculto -->
@@ -949,7 +950,7 @@
 								</g>
 							</g>
 						</svg>
-						<span class="much-bigger-text">35</span><span class="unit"> km</span>
+						<span class="text-size-24">35</span><span class="unit"> km</span>
 					</section>
 					<section class="sidebar__content__info pink-bg">
 						<svg version="1.1" class="sidebar__svg" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" x="0px" y="0px" viewBox="0 0 246 246" style="enable-background:new 0 0 246 246;" xml:space="preserve">
@@ -992,7 +993,7 @@
 									C115.7,159.8,117.6,161.7,117.6,164.8z"/>
 							</g>
 						</svg>
-						<span class="much-bigger-text">497</span>
+						<span class="text-size-24">497</span>
 					</section>
 					<section class="sidebar__content__info blue-bg">
 						<svg version="1.1" class="sidebar__svg" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" x="0px" y="0px"
@@ -1009,7 +1010,7 @@
 								</g>
 							</g>
 						</svg>
-						<span class="much-bigger-text">155</span><span class="unit"> min</span>
+						<span class="text-size-24">155</span><span class="unit"> min</span>
 					</section>
 					<section class="sidebar__content__info purple-bg">
 						<svg version="1.1" class="sidebar__svg" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" x="0px" y="0px"
@@ -1048,7 +1049,7 @@
 								c13.2-2.7,24.6,1.4,33,11.9c8.3,10.4,10.3,22.5,4.5,34.4c-8.5,17.5-18.2,34.4-27.3,51.5C279.4,149,278.4,150.9,277.1,153.3z
 								 M294,82.2c0-9.2-7.7-17-16.9-16.9c-9.1,0-16.7,7.5-16.8,16.6c-0.1,9.2,7.5,17,16.7,17.1C286.1,99.1,293.9,91.4,294,82.2z"/>
 						</svg>
-						<span class="much-bigger-text">25</span>
+						<span class="text-size-24">25</span>
 					</section>
 					<section class="sidebar__content__info red-bg">
 						<svg version="1.1" class="sidebar__svg" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" x="0px" y="0px"
@@ -1067,7 +1068,7 @@
 							 M242.9,50.5c9.7,0,19.4,0.1,29.1,0c7.9-0.1,12.8-4.5,12.9-10.9c0.1-6.9-4.9-11.2-13.3-11.3c-19.1-0.1-38.2-0.1-57.3,0
 							c-8.6,0-13.4,4.3-13.3,11.2c0.1,6.5,5,10.8,12.9,11C223.6,50.6,233.3,50.5,242.9,50.5z"/>
 						</svg>
-						<span class="much-bigger-text">90</span>
+						<span class="text-size-24">90</span>
 					</section>
 					<section class="sidebar__content__info orange-bg">
 						<svg version="1.1" xmlns="http://www.w3.org/2000/svg" class="sidebar__svg" xmlns:xlink="http://www.w3.org/1999/xlink" x="0px" y="0px" viewBox="0 0 478 422" style="enable-background:new 0 0 478 422;" xml:space="preserve">
@@ -1171,7 +1172,7 @@
 								</g>
 							</g>
 						</svg>
-						<span class="much-bigger-text">90</span>
+						<span class="text-size-24">90</span>
 					</section>
 				</div><!-- fim row-->
 
@@ -1217,7 +1218,7 @@
 				</table>
 			</div><!-- fim div sidebar__content -->
 
-			<h4 class="sidebar__day">
+			<h4 class="sidebar__day text-size-13">
 				03 Fevereiro
 				<span class="sidebar__day__toggle-control">
 					<i class="fa fa-minus"></i><!-- trocar fa-minus por fa-plus se o sidebar__content subsequente estiver oculto -->
@@ -1250,7 +1251,7 @@
 								</g>
 							</g>
 						</svg>
-						<span class="much-bigger-text">35</span><span class="unit"> km</span>
+						<span class="text-size-24">35</span><span class="unit"> km</span>
 					</section>
 					<section class="sidebar__content__info pink-bg">
 						<svg version="1.1" class="sidebar__svg" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" x="0px" y="0px" viewBox="0 0 246 246" style="enable-background:new 0 0 246 246;" xml:space="preserve">
@@ -1293,7 +1294,7 @@
 									C115.7,159.8,117.6,161.7,117.6,164.8z"/>
 							</g>
 						</svg>
-						<span class="much-bigger-text">497</span>
+						<span class="text-size-24">497</span>
 					</section>
 					<section class="sidebar__content__info blue-bg">
 						<svg version="1.1" class="sidebar__svg" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" x="0px" y="0px"
@@ -1310,7 +1311,7 @@
 								</g>
 							</g>
 						</svg>
-						<span class="much-bigger-text">155</span><span class="unit"> min</span>
+						<span class="text-size-24">155</span><span class="unit"> min</span>
 					</section>
 					<section class="sidebar__content__info purple-bg">
 						<svg version="1.1" class="sidebar__svg" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" x="0px" y="0px"
@@ -1349,7 +1350,7 @@
 								c13.2-2.7,24.6,1.4,33,11.9c8.3,10.4,10.3,22.5,4.5,34.4c-8.5,17.5-18.2,34.4-27.3,51.5C279.4,149,278.4,150.9,277.1,153.3z
 								 M294,82.2c0-9.2-7.7-17-16.9-16.9c-9.1,0-16.7,7.5-16.8,16.6c-0.1,9.2,7.5,17,16.7,17.1C286.1,99.1,293.9,91.4,294,82.2z"/>
 						</svg>
-						<span class="much-bigger-text">25</span>
+						<span class="text-size-24">25</span>
 					</section>
 					<section class="sidebar__content__info red-bg">
 						<svg version="1.1" class="sidebar__svg" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" x="0px" y="0px"
@@ -1368,7 +1369,7 @@
 							 M242.9,50.5c9.7,0,19.4,0.1,29.1,0c7.9-0.1,12.8-4.5,12.9-10.9c0.1-6.9-4.9-11.2-13.3-11.3c-19.1-0.1-38.2-0.1-57.3,0
 							c-8.6,0-13.4,4.3-13.3,11.2c0.1,6.5,5,10.8,12.9,11C223.6,50.6,233.3,50.5,242.9,50.5z"/>
 						</svg>
-						<span class="much-bigger-text">90</span>
+						<span class="text-size-24">90</span>
 					</section>
 					<section class="sidebar__content__info orange-bg">
 						<svg version="1.1" xmlns="http://www.w3.org/2000/svg" class="sidebar__svg" xmlns:xlink="http://www.w3.org/1999/xlink" x="0px" y="0px" viewBox="0 0 478 422" style="enable-background:new 0 0 478 422;" xml:space="preserve">
@@ -1472,7 +1473,7 @@
 								</g>
 							</g>
 						</svg>
-						<span class="much-bigger-text">90</span>
+						<span class="text-size-24">90</span>
 					</section>
 				</div><!-- fim row-->
 
@@ -1523,17 +1524,17 @@
 	<!-- popup/modal -->
 	<div class="popup none"><!-- esta classe apenas cria o efeito cinza semi-transparente sobre a tela-->
 		<div class="popup__content"><!-- nesta div o popup realmente é mostrado-->
-			<header class="popup__content__header">
+			<header class="popup__content__header text-size-14">
 				<span class="number-box number-box--larger">1</span>
 				<span>PINGO D'ÁGUA X ALVORADA</span>
 				<span class="popup__content__close"></span>
 			</header>
 			<div class="popup__tabs">
 				<!-- incluir classe tab-active na guia ativa-->
-				<span class="popup__tab popup__tab__info-de-viagem tab--active">
+				<span class="popup__tab text-size-14 popup__tab__info-de-viagem tab--active">
 					Info de Viagem
 				</span>
-				<span class="popup__tab popup__tab__bilhetes">
+				<span class="popup__tab text-size-24 popup__tab__bilhetes">
 					<svg version="1.1" class="popup__tab__svg" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" x="0px" y="0px" viewBox="0 0 246 246" style="enable-background:new 0 0 246 246;" xml:space="preserve">
 						<g>
 							<path d="M52.2,210.8c-3.9,0-7.4-0.1-10.9,0c-4.3,0.1-6-1.3-6-5.6c0-1.9,0.2-3.7,0.2-5.6c0-1.7,0-3.4,0-5.6c-3.9,0-7.5,0-11.1,0
@@ -1576,7 +1577,7 @@
 					</svg>
 					1987
 				</span>
-				<span class="popup__tab popup__tab__jornada-de-trabalho">
+				<span class="popup__tab text-size-24 popup__tab__jornada-de-trabalho">
 					<svg version="1.1" class="popup__tab__svg" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" x="0px" y="0px"
 						 viewBox="0 0 478 422" style="enable-background:new 0 0 478 422;" xml:space="preserve">
 						<path d="M343.4,375.7c-67.3,0-133.5,0-200.9,0c0,6,0,11.8,0,17.7c-0.1,11.4-4.9,17.3-16.4,18.1c-12.6,0.8-25.3,0.8-37.9-0.1
@@ -1595,7 +1596,7 @@
 					</svg>
 					23hs
 				</span>
-				<span class="popup__tab popup__tab__detector-de-paradas">
+				<span class="popup__tab text-size-24 popup__tab__detector-de-paradas">
 					<svg version="1.1" xmlns="http://www.w3.org/2000/svg" class="popup__tab__svg" xmlns:xlink="http://www.w3.org/1999/xlink" x="0px" y="0px" viewBox="0 0 478 422" style="enable-background:new 0 0 478 422;" xml:space="preserve">
 							<path d="M242.6,408c-17.6-22.7-34.4-44.9-51.9-66.5c-4.5-5.5-10.5-10.4-16.8-13.5c-67.1-32.8-104.4-110.7-87.7-184.1
 								C103.8,67.1,169.7,13,243.1,15.1c77.7,2.2,141.4,57.2,155.3,134c13.1,72.4-22,144.1-86.3,177.5c-6.6,3.4-12.7,8.8-17.5,14.7
@@ -1727,7 +1728,7 @@
 								</g>
 							</g>
 						</svg>
-						<span class="much-bigger-text">70</span><span> km</span>
+						<span class="text-size-24">70</span><span> km</span>
 					</section>
 					<section class="popup__pills__pill blue-bg">
 						<svg version="1.1" class="popup__svg" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" x="0px" y="0px"
@@ -1744,7 +1745,7 @@
 								</g>
 							</g>
 						</svg>
-						<span class="much-bigger-text">00:50:00</span>
+						<span class="text-size-24">00:50:00</span>
 					</section>
 					<section class="popup__pills__pill purple-bg">
 						<svg version="1.1" class="popup__svg" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" x="0px" y="0px"
@@ -1783,7 +1784,7 @@
 								c13.2-2.7,24.6,1.4,33,11.9c8.3,10.4,10.3,22.5,4.5,34.4c-8.5,17.5-18.2,34.4-27.3,51.5C279.4,149,278.4,150.9,277.1,153.3z
 								 M294,82.2c0-9.2-7.7-17-16.9-16.9c-9.1,0-16.7,7.5-16.8,16.6c-0.1,9.2,7.5,17,16.7,17.1C286.1,99.1,293.9,91.4,294,82.2z"/>
 						</svg>
-						<span class="much-bigger-text">00:42:00</span>
+						<span class="text-size-24">00:42:00</span>
 					</section>
 				</div>
 
@@ -1792,66 +1793,66 @@
 					<br><span class="m2m-green">
 						INFORMAÇÕES BÁSICAS
 					</span><br>
-					<span class="popup__content__label">Linha</span><br>
-					<span class="popup__content__informations">014 - PINGO D'ÁGUA X ALVORADA</span><br>
+					<span class="popup__content__label text-size-13">Linha</span><br>
+					<span class="popup__content__informations text-size-13">014 - PINGO D'ÁGUA X ALVORADA</span><br>
 
-					<span class="popup__content__label">Sentido</span><br>
-					<span class="popup__content__informations">ALVORADA</span><br>
+					<span class="popup__content__label text-size-13">Sentido</span><br>
+					<span class="popup__content__informations text-size-13">ALVORADA</span><br>
 
-					<span class="popup__content__label">Tipo</span><br>
+					<span class="popup__content__label text-size-13">Tipo</span><br>
 					<!-- mesma lógica da tabela, classes red ou purple dependendo se é fretamento ou regular -->
-					<span class="popup__content__informations purple">REGULAR</span><br>
+					<span class="popup__content__informations text-size-13 purple">REGULAR</span><br>
 
-					<span class="popup__content__label">IMEI</span><br>
-					<span class="popup__content__informations">5468465468464868</span><br>
+					<span class="popup__content__label text-size-13">IMEI</span><br>
+					<span class="popup__content__informations text-size-13">5468465468464868</span><br>
 
-					<span class="popup__content__label">PDOP</span><br>
-					<span class="popup__content__informations">5556989-900</span><br>
+					<span class="popup__content__label text-size-13">PDOP</span><br>
+					<span class="popup__content__informations text-size-13">5556989-900</span><br>
 
-					<span class="popup__content__label">Veículos </span>
+					<span class="popup__content__label text-size-13">Veículos </span>
 					<span class="m2m-green"><strong>(2)</strong></span><br>
 					<!-- repetir a div class="row" para cada veículo -->
 					<div class="row">
-						<span class="popup__content__informations equidistant">56358 | 89856586</span>
-						<span class="popup__content__informations equidistant font-weight-normal">09:00:57 - 09:15:17</span>
+						<span class="popup__content__informations text-size-13 equidistant">56358 | 89856586</span>
+						<span class="popup__content__informations text-size-13 equidistant font-weight-normal">09:00:57 - 09:15:17</span>
 					</div>
 					<div class="row">
-						<span class="popup__content__informations equidistant">56900 | 78899969</span>
-						<span class="popup__content__informations equidistant font-weight-normal">09:00:57 - 09:15:17</span>
+						<span class="popup__content__informations text-size-13 equidistant">56900 | 78899969</span>
+						<span class="popup__content__informations text-size-13 equidistant font-weight-normal">09:00:57 - 09:15:17</span>
 					</div>
 
 					<br><span class="m2m-green">
 						TEMPO
 					</span><br>
 					<div class="row">
-						<span class="popup__content__label equidistant">Data/Hora Inicial</span>
-						<span class="popup__content__label equidistant">Data/Hora Final</span>
+						<span class="popup__content__label text-size-13 equidistant">Data/Hora Inicial</span>
+						<span class="popup__content__label text-size-13 equidistant">Data/Hora Final</span>
 					</div>
 					<div class="row">
-						<span class="popup__content__informations equidistant">12/02/2017 - 09:00:57</span>
-						<span class="popup__content__informations equidistant">12/02/2017 - 09:50:57</span>
+						<span class="popup__content__informations text-size-13 equidistant">12/02/2017 - 09:00:57</span>
+						<span class="popup__content__informations text-size-13 equidistant">12/02/2017 - 09:50:57</span>
 					</div>
-					<span class="popup__content__label eq">Tempo de Viagem</span><br>
-					<span class="popup__content__informations">00:50:00</span><br><br>
+					<span class="popup__content__label text-size-13 eq">Tempo de Viagem</span><br>
+					<span class="popup__content__informations text-size-13">00:50:00</span><br><br>
 
 					<span class="m2m-green">
 						DISTÂNCIA
 					</span><br>
 					<div class="row">
-						<span class="popup__content__label equidistant">Km Percorrido</span>
-						<span class="popup__content__label equidistant">Velocidade Média</span>
+						<span class="popup__content__label text-size-13 equidistant">Km Percorrido</span>
+						<span class="popup__content__label text-size-13 equidistant">Velocidade Média</span>
 					</div>
 					<div class="row">
-						<span class="popup__content__informations equidistant">70 km</span>
-						<span class="popup__content__informations equidistant">45,7%</span>
+						<span class="popup__content__informations text-size-13 equidistant">70 km</span>
+						<span class="popup__content__informations text-size-13 equidistant">45,7%</span>
 					</div>
 					<div class="row">
-						<span class="popup__content__label equidistant">Velocidade Máxima</span>
-						<span class="popup__content__label equidistant">Velocidade Mínima</span>
+						<span class="popup__content__label text-size-13 equidistant">Velocidade Máxima</span>
+						<span class="popup__content__label text-size-13 equidistant">Velocidade Mínima</span>
 					</div>
 					<div class="row">
-						<span class="popup__content__informations equidistant">96,02 km</span>
-						<span class="popup__content__informations equidistant">12,05 km</span>
+						<span class="popup__content__informations text-size-13 equidistant">96,02 km</span>
+						<span class="popup__content__informations text-size-13 equidistant">12,05 km</span>
 					</div>
 				</div><!-- fim div scrollable-->
 
@@ -1875,7 +1876,7 @@
 							<span class="td--like toggle-control">+</span>
 						</div>	
 
-						<table cellspacing="0" class="table table--tab toggle_table none">
+						<table cellspacing="0" class="text-size-10 table table--tab toggle_table none">
 							<tr class="table__row darker-gray-bg light-gray">
 								<td width="100"></td>
 								<td>CÓD.DESC</td>
@@ -1904,7 +1905,7 @@
 							<span class="td--like toggle-control">+</span>
 						</div>	
 
-						<table cellspacing="0" class="table table--tab toggle_table none">
+						<table cellspacing="0" class="text-size-10 table table--tab toggle_table none">
 							<tr class="table__row darker-gray-bg light-gray">
 								<td width="100"></td>
 								<td>CÓD.DESC</td>
@@ -1925,7 +1926,7 @@
 			</div><!-- fim div bilhetes-->
 
 			<div class="tab__content popup__scrollable jornada-de-trabalho-js none">
-				<table cellspacing="0" class="table table--tab">
+				<table cellspacing="0" class="text-size-10 table table--tab">
 					<thead>
 						<tr class="table__header__row">
 							<td>NOME</td>
@@ -1969,7 +1970,7 @@
 			</div>
 
 			<div class="tab__content popup__scrollable detector-de-paradas-js none">
-				<table cellspacing="0" class="table table--tab"><!-- remember to insert scroll -->
+				<table cellspacing="0" class="text-size-10 table table--tab"><!-- remember to insert scroll -->
 					<thead>
 						<tr class="table__header__row">
 							<td>MOTIVO</td>
@@ -2013,11 +2014,11 @@
 	</div><!-- fim popup-->
 
 <!-- scripts -->
-<script src="../bower_components/amcharts3/amcharts/amcharts.js" type="text/javascript"></script>
-<script src="../bower_components/amcharts3/amcharts/serial.js" type="text/javascript"></script>
-<!-- achei melhor colocar os dados dos gráficos em outro arquivo para não extender muito o html. se preferirem mudem a pasta, mas de preferência mantenham o arquivo separado deste -->
-<script src="js/mock/charts-data.js" type="text/javascript"></script>
 <script src="../bower_components/jquery/dist/jquery.min.js"></script>
+<script src='../bower_components/highcharts/highcharts.js'></script>
+
+<!-- achei melhor colocar os dados dos gráficos em outro arquivo para não extender muito o html-->
+<script src="js/mock/charts-data.js"></script>
 <script>
 	/*Toggle do Filtro*/
 	$(".toggle").click(function(){
@@ -2027,67 +2028,83 @@
 	/*Exibir gráficos na div main-chart de acordo com o click no dropdown--main-chart*/
 	$("#km-percorrido-chart").click(function(){
 			$(".chart").addClass("none");
-			$("#chartdiv").removeClass("none");
+			$("#container-highcharts").removeClass("none");
+			$("#container-highcharts").highcharts().reflow();
 	});
 
 	$("#leitura-de-bilhetes-chart").click(function(){
 			$(".chart").addClass("none");
-			$("#chartdiv-2").removeClass("none");
+			$("#container-highcharts2").removeClass("none");
+			$("#container-highcharts2").highcharts().reflow();
 	});
 
 	$("#tempo-de-viagem-chart").click(function(){
 			$(".chart").addClass("none");
-			$("#chartdiv-3").removeClass("none");
+			$("#container-highcharts3").removeClass("none");
+			$("#container-highcharts3").highcharts().reflow();
 	});
 
 	$("#direcao-continua-chart").click(function(){
 			$(".chart").addClass("none");
-			$("#chartdiv-4").removeClass("none");
+			$("#container-highcharts4").removeClass("none");
+			$("#container-highcharts4").highcharts().reflow();
 	});
 
 	$("#jornada-de-trabalho-chart").click(function(){
 			$(".chart").addClass("none");
-			$("#chartdiv-5").removeClass("none");
+			$("#container-highcharts5").removeClass("none");
+			$("#container-highcharts5").highcharts().reflow();
 	});
 
 	$("#detector-de-paradas-chart").click(function(){
 			$(".chart").addClass("none");
-			$("#chartdiv-6").removeClass("none");
+			$("#container-highcharts6").removeClass("none");
+			$("#container-highcharts6").highcharts().reflow();
 	});
+
+	$(".dropdown__content--main-chart").click(function(){
+		$(this).addClass("hidden");
+	})
 
 	/*Exibir gráficos na div main-chart de acordo com o click nas info-box__content*/
 	$(".info-km-percorrido-js").click(function(){
 			$(".chart").addClass("none");
-			$("#chartdiv").removeClass("none");
+			$("#container-highcharts").removeClass("none");
+			$("#container-highcharts").highcharts().reflow();
 	});
 
 	$(".info-leitura-de-bilhetes-js").click(function(){
 			$(".chart").addClass("none");
-			$("#chartdiv-2").removeClass("none");
+			$("#container-highcharts2").removeClass("none").width('100%');
+			$("#container-highcharts2").highcharts().reflow();
 	});
 
 	$(".info-tempo-de-viagem-js").click(function(){
 			$(".chart").addClass("none");
-			$("#chartdiv-3").removeClass("none");
+			$("#container-highcharts3").removeClass("none");
+			$("#container-highcharts3").highcharts().reflow();
 	});
 
 	$(".info-direcao-continua-js").click(function(){
 			$(".chart").addClass("none");
-			$("#chartdiv-4").removeClass("none");
+			$("#container-highcharts4").removeClass("none");
+			$("#container-highcharts4").highcharts().reflow();
 	});
 
 	$(".info-jornada-de-trabalho-js").click(function(){
 			$(".chart").addClass("none");
-			$("#chartdiv-5").removeClass("none");
+			$("#container-highcharts5").removeClass("none");
+			$("#container-highcharts5").highcharts().reflow();
 	});
 
 	$(".info-detector-de-paradas-js").click(function(){
 			$(".chart").addClass("none");
-			$("#chartdiv-6").removeClass("none");
+			$("#container-highcharts6").removeClass("none");
+			$("#container-highcharts6").highcharts().reflow();
 	});
 
 	/*Dropdown - Visualização Info-Box */
-	$(".dropdown__title").click(function(){
+	$("#main-chart-select-title").click(function(){ //OBS: Mudar conteúdo deste ID para exibir o título do gráfico exibido na div main-chart, seja clicando no select ou info-box
 		$(this).next(".dropdown__content").toggleClass("hidden");
 	});
 
@@ -2106,6 +2123,15 @@
 		$(".sidebar").toggleClass("none");
 		$(".dropdown").toggleClass("dropdown--expanded-parent");
 		$(".main-panel").toggleClass("expanded");
+
+		//não achei uma forma menos repetitiva de se fazer isso, $(".chart") não funciona
+		//somente o gráfico ativo (sem a classe none) precisa desse "reflow". se houver uma forma de se verificar isso, por favor apliquem
+		$("#container-highcharts6").highcharts().reflow();
+		$("#container-highcharts5").highcharts().reflow();
+		$("#container-highcharts4").highcharts().reflow();
+		$("#container-highcharts3").highcharts().reflow();
+		$("#container-highcharts2").highcharts().reflow();
+		$("#container-highcharts").highcharts().reflow();
 	});
 
 	/*Controla visualização das guias dentro do popup*/
@@ -2140,6 +2166,7 @@
 	/*controla toggle interno da tabela da segunda guia no popup*/
 	$(".table--toggle-control").click(function(){
 		$(this).next(".toggle_table").toggleClass("none");
+		$(this).next(".toggle_table").toggleClass("opacity-animation");
 	})
 
 	/*abre popup ao se clicar nas rows da tabela da sidebar*/
@@ -2150,7 +2177,9 @@
 	/*fecha popup ao se clicar no X*/
 	$(".popup__content__close").click(function(){
 		$(".popup").addClass("none");
-	})
+	});
+
+
 </script>
 </body>
 </html>

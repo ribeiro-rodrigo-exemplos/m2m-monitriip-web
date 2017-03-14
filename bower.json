@@ -16,6 +16,7 @@
   ],
   "dependencies": {
     "amcharts3": "^3.21.0",
-    "jquery": "^3.1.1"
+    "jquery": "^3.1.1",
+    "highcharts-chart": "^2.0.1"
   }
 }

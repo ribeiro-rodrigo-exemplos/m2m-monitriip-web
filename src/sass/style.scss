@@ -36,9 +36,27 @@ $off_white: #BEC6C8;
 $open_sans: 'Open Sans', sans-serif;
 $montserrat: 'Montserrat', sans-serif;
 
+$base-font: 1em;
+
+
+/*animations*/
+@keyframes opacity
+{
+	from {
+		opacity: 0;
+    }
+	to {  
+		 opacity: 1;
+	}
+}
+
+
+html {
+    font-size: 16px; /* our base font size */
+}
 body{
 	font-family: $open_sans;
-	font-size: 16px;
+	font-size: 62.5%; /* now our em = 10px */
 }
 
 .night-theme{
@@ -55,7 +73,6 @@ body{
 
 .search-information{
 	color: $light_gray;
-	font-size: 0.8em;
 	font-weight: bold
 }
 
@@ -72,7 +89,6 @@ body{
 	&__description{
 		align-self: center;
 	    margin: 0 3px;
-	    font-size: 70%;
 	}
 }
 /*row*/
@@ -115,7 +131,6 @@ body{
 	border: none;
 	outline: none;
 	color: #fff;
-	font-size: 60%;
 	padding: 10px 15px;
 	touch-action: manipulation;
 	cursor: pointer;
@@ -123,7 +138,6 @@ body{
 	&--create{
 		background-color: $blue;
 		font-weight: bold;
-		font-size: 0.7em;
 		&:hover{
 			background-color: lighten($blue, 10%);
 		}
@@ -131,7 +145,6 @@ body{
 	&--confirm{
 		background-color: $m2m_green;
 		font-weight: bold;
-		font-size: 0.7em;
 		&:hover{
 			background-color: lighten($m2m_green, 10%);
 			color: darken(#fff, 10%)
@@ -140,7 +153,6 @@ body{
 	&--cancel{
 		background-color: $light_gray;
 		font-weight: bold;
-		font-size: 0.7em;
 		&:hover{
 			background-color: lighten($light_gray, 10%);
 			color: darken(#fff, 10%)
@@ -178,7 +190,6 @@ body{
     	fill: #fff;
 	}
 	.fa-file-excel-o{
-		font-size: 1.3em;
     	margin-right: 3px;
 	}
 }
@@ -186,16 +197,15 @@ body{
 /*dropdown*/
 .dropdown{
 	color: #fff;
-	font-size: 0.6em;
 	position: absolute;
-	right: -1.2%;
+	right: 1.8%;
 	&--main-chart{
 		right: 110px;
 		z-index: 99;
 		top: 20px;
 	}
 	&--expanded-parent{
-		
+		right: 130px;
 	}
 	&__title{
 		cursor: pointer;
@@ -205,7 +215,6 @@ body{
 		display: block;
 		padding-left: 10px;
 		padding-top: 5px;
-		width: 90px;
 		.fa{
 			margin-left: 8px;
 			margin-top: 3px;
@@ -214,6 +223,10 @@ body{
 	&__content{
 		width: 120px;
 		background-color: $light_gray;
+		padding-left: 5px;
+		&--main-chart{
+			padding: 8px 0 5px 10px;
+		}
 	}
 }
 
@@ -222,14 +235,13 @@ body{
     position: absolute;
     left: 98%;
     top: -1px;
-    font-size: 1.2em;
     height: 22px;
     overflow: hidden;
     a{
     	color: $light_gray;
     }
     .fa{
-    	padding: 5px 10px 0px 10px;
+    	padding: 5px 10px 0 10px;
     }
 }
 
@@ -237,7 +249,6 @@ body{
 .filter{
 	&__header{
 		font-weight: 600;
-		font-size: 0.7em;
 		position: relative;
 		&__title{
 			padding: 3px 12px;
@@ -268,7 +279,6 @@ body{
     flex-direction: column;
     margin: 0 10px;
 		&__label{
-			font-size: 0.6em;
     		letter-spacing: 0.2px;
     		color: $off_white
 		}
@@ -277,7 +287,6 @@ body{
 .select{
 	background-color: $dark_gray;
 	color: #fff;
-	font-size: 0.7em;
 	padding: 3px 10px;
 	height: 30px;
     min-width: 98px;
@@ -286,10 +295,9 @@ body{
     + .fa{
     	background: #95ca31;
 	    position: absolute;
-	    bottom: 0px;
+	    bottom: 0;
 	    right: 0;
 	    padding: 9px;
-	    font-size: 0.8em;
 	    color: #000;
     }
     @media screen and (min-width:1400px){
@@ -297,24 +305,24 @@ body{
     }
 }
 
+.radio{
+	
+}
 .input{
 	background-color: $dark_gray;
 	color: #fff;
 	border: 0;
 	min-height: 28px;
-	font-size: 0.8em;
 	outline: none;
 	&--icon + .fa{
 		background: $m2m_green;
 		position: absolute;
-		bottom: 0px;
+		bottom: 0;
 		right: 0;
 		padding: 8px;
-		font-size: 0.8em;
 		color: #000;
 	}
 	&--icon + .fa-clock-o{
-		font-size: 0.9em;
     	padding: 7px;
 	}
 }
@@ -347,7 +355,7 @@ body{
 		width: 15px;
 		height: 15px;
 		background-color:darken($green, 30%);
-		top: 1.4px;
+		top: 2.4px;
 		left:2px;
 		border-radius: 20px;
 		// @include border-radius(50%);
@@ -380,34 +388,35 @@ body{
 
 /*charts - am charts*/
 .chart{
+	max-width: 100%;
 	width:100%; 
 	height:200px;
+	position: relative;
 }
 
 /*info-box*/
 .info-boxes{
-	margin-top: 36px;
+	margin-bottom: 36px;
 	display: flex;
 	align-items: center;
 	justify-content: space-around;
-	padding: 0 1.2%;
+	padding: 0 1.8%;
 	max-width: 100%;
 }
 
 .info-box{
 	flex-basis: 30%;
+	width: 30%;
 	font-family: $montserrat;
 	text-align: center;
 	flex-grow: 1;
 	cursor: pointer;
-	max-width: 100%;
 	&:nth-child(2){
 		margin: 0 10px;
 	}
 	&__select{
 		background: $gray;
 		color: #fff;
-		font-size: 0.6em;
 		float:right;
 	}
 	&__chart{
@@ -432,7 +441,6 @@ body{
 		}
 		&__span{
 			font-weight: 300;
-			font-size: 350%;
 			margin-right: 3px;
 		}
 		&--pink{
@@ -468,7 +476,6 @@ body{
 	}
 	&__footer{
 		display: flex;
-		font-size: 0.7em;
 		justify-content: space-around;
 		&__column{
 			padding: 3px 15px;
@@ -492,21 +499,19 @@ body{
 .sidebar{
 	flex-basis: 31.5%;
 	box-sizing: border-box;
+	//height: 100vh;
 	&__header{
 		padding: 0 3%;
-		&__title{
-			font-size: 0.85em;
+		&__title{;
 		}
 	}
 	&__day{
 		border-left: 3px solid $m2m_green;
 		border-top: 2px solid $bright_gray;
 		cursor: pointer;
-		padding: 3%;
 		display: flex;
 		margin: 0;
 		font-weight: normal;
-		font-size: 0.8em;
 		padding: 5px 0 5px 3%;
 		&__toggle-control{
 			position: relative;
@@ -528,7 +533,6 @@ body{
 			display: flex;
 			align-items: center;
 			justify-content: center;
-			font-size: 0.7em;
 			font-family: $montserrat;
 			font-weight: 300;
 			height: 50px;
@@ -539,7 +543,6 @@ body{
 .table{
 	padding-bottom: 30px;
 	background-color: $bright_gray;
-	font-size: 0.6em;
 	text-align: center;
 	width: 100%;
 	&__header{
@@ -566,10 +569,8 @@ body{
 	&--tab{
 		padding-top: 8px;
     	padding-left: 12px;
-    	font-size: 1em;
     	.table__header__row{
     		height: 30px;
-    		font-size: 0.9em;
     	}
     	&.toggle_table{
     		padding-top: 0;
@@ -608,7 +609,6 @@ body{
 				&.toggle-control{
 				    flex-grow: 0;
 				    padding-right: 10px;
-				    font-size: 1.5em;
 				    display: block;
 				    position: relative;
 				    top: -5px;
@@ -626,15 +626,15 @@ body{
 .popup{
 	width: 100%;
 	height: 100%;
+	background: #1c2021;
 	background: rgba(0,0,0,0.5);
 	color: $light_gray;
 	position: fixed;
-    top: 0px;
+    top: 0;
     z-index: 9999999;
     &__content{
 		background: $bright_gray;
-	    margin: 150px auto 0;
-	    font-size: 11px;
+	    margin: 50px auto 0;
 	    width: 750px;
 	    height: 600px;
 	    -webkit-animation: 0.5s fadeIn ease;
@@ -642,7 +642,6 @@ body{
 		animation: 0.5s fadeIn ease;
 		&__header{
 			background: $bright_gray;
-			font-size: 1.3em;
 	    	height: 40px;
 			&__title{
 				font-weight: bold;
@@ -659,7 +658,7 @@ body{
 		    background-color: $light_gray;
 		    width: 11px;
 		    height: 11px;
-		    background-position: -22px 0px;
+		    background-position: -22px 0;
 		    &:hover{
 				opacity: 0.7;
 			}
@@ -670,20 +669,17 @@ body{
     		overflow-y: scroll;
 		}
 		&__label{
-			font-size: 1.2em;
 			padding-top: 5px;
     		display: inline-block;
 		}
 		&__informations{
 			font-weight: bold;
 			color: #fff;
-			font-size: 1.2em;
 			margin: 5px 0;
 		}
 	}
 	&__tabs{
 		background: $dark_gray;
-		font-size: 2.6em;
 		display: flex;
     	justify-content: space-around;
     	height: 50px;
@@ -692,7 +688,7 @@ body{
 		text-align: center;
 		flex-grow: 1;
     	flex-basis: 0;
-    	padding-top: 3px;
+    	padding-top: 8px;
     	box-sizing: border-box;
     	border-bottom: 3px solid transparent;
     	border-right: 1px solid $gray;
@@ -704,7 +700,6 @@ body{
 		    margin-right: -3px;
     	}
     	&__info-de-viagem{
-			font-size: 45%;
 			border-bottom-color: $m2m_green;
 			padding-top: 15px;
 			font-weight: bold;
@@ -757,7 +752,7 @@ body{
 		    height: 40px;
 		    align-items: center;
 		}
-		span:not(.much-bigger-text){
+		span:not(.text-size-24){
 			padding-top: 12px;
 		}
 	}
@@ -795,12 +790,16 @@ body{
 /* units are texts that usually follow numbers to indicate what they are about: kms, minutes, hours, etc */
 .unit{
 	padding-top: 10px;
-	font-size: 70%;
 }
 
 /* "atomic" */
 .none{
 	display: none !important
+}
+
+
+.opacity-animation{
+	animation: opacity .5s;
 }
 
 /*atomic background colors*/
@@ -876,16 +875,26 @@ body{
 .text-align-left{
 	text-align: left;
 }
+
 /*atomic font adjustments*/
-.normal-text-size{
-	font-size: 1em;
+.text-size-10{
+	font-size: 10px; //only one that uses px because it's only appliable in situations when the base-font (em/%) is not working, but can be changed if found a solution
 }
-.smaller-text{
-	font-size: 70%;
+.text-size-11{
+	font-size: $base-font*1.1;
 }
-.bigger-text{
-	font-size: 150%;
+.text-size-13{
+	font-size: $base-font*1.3;
 }
-.much-bigger-text{
-	font-size: 250%;
+.text-size-14{
+	font-size: $base-font*1.4;
+}
+.text-size-16{
+	font-size: $base-font*1.6;
+}
+.text-size-24{
+	font-size: $base-font*2.4;
+}
+.text-size-56{
+	font-size: $base-font*5.6;
 }
