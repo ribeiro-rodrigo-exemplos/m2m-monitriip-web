@@ -66,7 +66,7 @@
 				</div>
 
 				<section class="filter__content__buttons">
-					<button class="button button--cancel text-size-11">LIMPAR</button>
+					<button class="button button--cancel">LIMPAR</button>
 					<button class="button button--confirm">CONSULTAR</button>
 				</section>
 			</div><!-- fim div filter content-->
@@ -74,12 +74,12 @@
 
 	<div class="row row--space-between row--search-and-export">
 		<div>
-			<span class="search-information text-size-13"> 85500 | 689465465875 | Fev 02 - Fev 05, 2017</span>
+			<span class="search-information text-size-13"> 85500 | 689465465875 | <i class="fa fa-calendar"></i> Fev 02 - Fev 05, 2017</span>
 		</div>
 		<div class="row row--align-flex-end">
 			<div class="layout-mode">
 				<img class="layout-mode__image" src="img/moon.png">
-				<span class="layout-mode__description text-size-11">Modo Noite</span>
+				<span class="layout-mode__description">Modo Noite</span>
 				<input class="switch" type="checkbox" checked='checked'/>
 			</div>
 			<div class="layout-mode">
@@ -112,11 +112,11 @@
 
 			<div class="main-chart">
 				<div class="row row--space-between">
-					<div class="row__start">
-							<h2 class="text-size-24">Visão Geral</h2>
+					<div>
+						<h2 class="text-size-24">Visão Geral</h2>
 					</div>
-					<div class="row__end">
-						<button class="expandir-js button button--dark-gray-bg button--light-gray-border button--row text-size-10">EXPANDIR</button>
+					<div>
+						<button class="expandir-js button button--dark-gray-bg button--light-gray-border button--row text-size-10"><a name="focus-chart" id="focus-chart">EXPANDIR</a></button>
 						<div class="dropdown dropdown--main-chart">
 							<span class="dropdown__title" id="main-chart-select-title">Geral <i class="fa fa-caret-down"></i></span>
 							<div class="dropdown__content dropdown__content--main-chart hidden">
@@ -157,10 +157,10 @@
 				<div class="chart none" id="container-highcharts6"></div>
 
 				<div class="row row--space-between">
-					<div class="row__start">
+					<div>
 							<h2 class="text-size-24">Totalizadores</h2>
 					</div>
-					<div class="row__end">
+					<div>
 						<div class="dropdown">
 							<span class="dropdown__title">Visualização <i class="fa fa-caret-down"></i></span>
 							<div class="dropdown__content hidden">
@@ -1176,7 +1176,7 @@
 					</section>
 				</div><!-- fim row-->
 
-				<table class="table" cellspacing="0">
+				<table class="table text-size-10" cellspacing="0">
 					<thead class="table__header">
 						<tr>
 							<td>LINHA</td>
@@ -1477,7 +1477,7 @@
 					</section>
 				</div><!-- fim row-->
 
-				<table class="table" cellspacing="0">
+				<table class="table text-size-10" cellspacing="0">
 					<thead class="table__header">
 						<tr>
 							<td>LINHA</td>
@@ -1873,7 +1873,7 @@
 							</span>
 							<span class="td--like">67,50</span>
 							<span class="td--like">17/02/2017 - 09:02:56</span>
-							<span class="td--like toggle-control">+</span>
+							<span class="td--like text-size-14 toggle-control">+</span>
 						</div>	
 
 						<table cellspacing="0" class="text-size-10 table table--tab toggle_table none">
@@ -1902,7 +1902,7 @@
 							</span>
 							<span class="td--like">67,50</span>
 							<span class="td--like">17/02/2017 - 09:02:56</span>
-							<span class="td--like toggle-control">+</span>
+							<span class="td--like text-size-14 toggle-control">+</span>
 						</div>	
 
 						<table cellspacing="0" class="text-size-10 table table--tab toggle_table none">
@@ -2017,7 +2017,7 @@
 <script src="../bower_components/jquery/dist/jquery.min.js"></script>
 <script src='../bower_components/highcharts/highcharts.js'></script>
 
-<!-- achei melhor colocar os dados dos gráficos em outro arquivo para não extender muito o html-->
+<!-- achei melhor colocar os dados dos gráficos em outro arquivo para não estender muito o html-->
 <script src="js/mock/charts-data.js"></script>
 <script>
 	/*Toggle do Filtro*/
@@ -2103,6 +2103,12 @@
 			$("#container-highcharts6").highcharts().reflow();
 	});
 
+	$(".info-box__content").click(function(){
+	    var url = location.href;               //Save down the URL without hash.
+	    location.href = "#"+"focus-chart";     //Go to the target element.
+	    history.replaceState(null,null,url);   //Don't like hashes. Changing it back.
+	});
+
 	/*Dropdown - Visualização Info-Box */
 	$("#main-chart-select-title").click(function(){ //OBS: Mudar conteúdo deste ID para exibir o título do gráfico exibido na div main-chart, seja clicando no select ou info-box
 		$(this).next(".dropdown__content").toggleClass("hidden");
@@ -2111,6 +2117,7 @@
 	/*Toggle Sidebar pela sidebar*/
 	$(".sidebar__day").click(function(){
 		$(this).next(".sidebar__content").toggleClass("none");
+		$(this).next(".sidebar__content").toggleClass("opacity-animation");
 	});
 
 	/*Toggle sidebar pelos footers das info-boxes*/

@@ -299,15 +299,13 @@ body{
 	    right: 0;
 	    padding: 9px;
 	    color: #000;
+	    @extend .text-size-11;
     }
     @media screen and (min-width:1400px){
     	min-width: 168px;
     }
 }
 
-.radio{
-	
-}
 .input{
 	background-color: $dark_gray;
 	color: #fff;
@@ -319,12 +317,14 @@ body{
 		position: absolute;
 		bottom: 0;
 		right: 0;
-		padding: 8px;
+		padding: 8.5px;
 		color: #000;
+		@extend .text-size-11;
 	}
 	&--icon + .fa-clock-o{
     	padding: 7px;
-	}
+    	@extend .text-size-13;
+    }
 }
 
 /* switch button (checkbox styled as an iphone on/off) */
@@ -424,9 +424,6 @@ body{
 		height:80px;
 	}
 	&__content{
-		border-top: 2px solid $bright_gray;
-		border-left: 2px solid $bright_gray;
-		border-right: 2px solid $bright_gray;
 		&__svg{
 			width: 30px;
 			height: 30px;
@@ -442,36 +439,6 @@ body{
 		&__span{
 			font-weight: 300;
 			margin-right: 3px;
-		}
-		&--pink{
-			&:hover{
-				border-color: $pink;
-			}	
-		}
-		&--red{
-			&:hover{
-				border-color: $red;
-			}
-		}
-		&--orange{
-			&:hover{
-				border-color: $orange;
-			}
-		}
-		&--purple{
-			&:hover{
-				border-color: $purple;
-			}
-		}
-		&--green{
-			&:hover{
-				border-color: $green;
-			}
-		}
-		&--blue{
-			&:hover{
-				border-color: $blue;
-			}
 		}
 	}
 	&__footer{
@@ -576,6 +543,7 @@ body{
     		padding-top: 0;
 		    padding-bottom: 0;
 		    padding-left: 14px;
+		    margin: -3px 0 3px;
 		    td{
 		    	border: none;
 		    }
@@ -772,6 +740,43 @@ body{
 	}
 }
 
+/*border-box*/
+.border-box{
+	border-top: 2px solid $bright_gray;
+	border-left: 2px solid $bright_gray;
+	border-right: 2px solid $bright_gray;
+	&--pink{
+		&:hover{
+			border-color: $pink;
+		}	
+	}
+	&--red{
+		&:hover{
+			border-color: $red;
+		}
+	}
+	&--orange{
+		&:hover{
+			border-color: $orange;
+		}
+	}
+	&--purple{
+		&:hover{
+			border-color: $purple;
+		}
+	}
+	&--green{
+		&:hover{
+			border-color: $green;
+		}
+	}
+	&--blue{
+		&:hover{
+			border-color: $blue;
+		}
+	}
+}
+		
 /*number-box*/
 .number-box{
 	color: $dark_gray;
@@ -832,6 +837,7 @@ body{
 .darker-gray-bg{
 	background-color: $darker_gray
 }
+
 /*atomic colors*/
 .purple{
 	color: $purple;
@@ -879,9 +885,6 @@ body{
 /*atomic font adjustments*/
 .text-size-10{
 	font-size: 10px; //only one that uses px because it's only appliable in situations when the base-font (em/%) is not working, but can be changed if found a solution
-}
-.text-size-11{
-	font-size: $base-font*1.1;
 }
 .text-size-13{
 	font-size: $base-font*1.3;
