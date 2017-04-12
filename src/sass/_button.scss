@@ -1,0 +1,82 @@
+.button{
+	border: none;
+	outline: none;
+	color: #fff;
+	padding: 10px 15px;
+	touch-action: manipulation;
+	cursor: pointer;
+	letter-spacing: 0.5px;
+	background-color: $gelo;
+	&--create{
+		background-color: $blue;
+		font-weight: bold;
+		&:hover{
+			background-color: lighten($blue, 10%);
+		}
+	}
+	&--confirm{
+		background-color: $m2m_green;
+		font-weight: bold;
+		&:hover{
+			background-color: lighten($m2m_green, 10%);
+			color: darken(#fff, 10%)
+		}
+	}
+	&--cancel{
+		background-color: $light_gray;
+		font-weight: bold;
+		&:hover{
+			background-color: lighten($light_gray, 10%);
+			color: darken(#fff, 10%)
+		}
+	}
+	&--row{
+		margin-top: -6px;
+		padding-top: 7px;
+		padding-bottom: 7px;
+	}
+	&--day-mode{
+		color: $dark_gray;
+		&:hover{
+			background-color: $light_gray;
+			color: #fff;
+			cursor: pointer;
+			svg{
+				fill: #fff;
+			}
+		}
+	}
+	&--light-gray-border{
+		border: 1px solid $light_gray;
+		&:hover{
+			border-color: #fff;
+		}
+	}
+	&--small-window-fit{
+		@media screen and (max-width:1400px){
+		    padding: 7px 7px 15px;
+		    font-size: 80%;
+		    height: 10px;	
+	    }
+	}
+	&--right-space{
+		margin-right: 5px;
+	}
+	&--row-search-and-export{
+		font-size: 80%;
+		padding: 8px 5px;
+	}
+	&__svg{
+		margin-right: 3px;
+    	margin-bottom: -3px;
+    	width: 15px;
+    	fill: $dark_gray;
+	}
+	.fa-button-with-long-arrow-right{
+		font-size: 11px;
+    	line-height: 0.5;
+	}
+	.fa-file-excel-o{
+    	margin-right: 3px;
+	}
+}

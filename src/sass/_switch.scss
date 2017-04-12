@@ -1,0 +1,85 @@
+.switch{
+	display:inline-block;
+	-webkit-appearance:none;
+	-moz-appearance:none;
+	appearance:none;
+	width: 45px;
+    height: 21px;
+	background-color:$green;
+	position: relative;
+	border-radius: 20px;
+	outline: none;
+	cursor: pointer;
+	top: 1px;
+	@media screen and (max-width: 1400px){
+		width: 29px;
+    	height: 18px;
+	}
+	&:hover:after{
+		background-color: darken($green, 20%);
+	}
+	&:after{      
+		content:'';
+		display:inline-block;
+		position:absolute;
+		width: 15px;
+		height: 15px;
+		background-color:darken($green, 30%);
+		top: 3.4px;
+		left:2px;
+		border-radius: 20px;
+		@media screen and (max-width: 1400px){
+			width: 12px;
+		    height: 12px;    
+		}
+	}
+	&:checked{
+	    &:after{
+			left:14px;
+			background-color:#fff;
+			@media screen and (min-width: 1400px){
+	    		left:26px;
+	    	}
+	    }
+  	}
+  	&--labels-inside{
+  		display: flex;
+  	}
+  	&__label{
+  		padding: 8px;
+	    border-top: 2px solid $dark_gray;
+	    border-bottom: 2px solid $dark_gray;
+	    border-color: $dark_gray;
+	    color: $dark_gray;
+	    text-transform: uppercase;
+	    @media screen and (max-width: 1400px){
+	    	border-top: 1px solid $dark_gray;
+	    	border-bottom: 1px solid $dark_gray;
+	    }
+	    &:nth-child(1){	
+		    border-left-width: 2px;
+		    border-left-style: solid;
+		    @media screen and (max-width: 1400px){
+		    	border-left-width: 1px;
+		    }
+	  	}
+	  	&:nth-child(2){
+		    border-right-width: 2px;
+		    border-right-style: solid;
+		    @media screen and (max-width: 1400px){
+		    	border-right-width: 1px;
+		    }
+	  	}
+	    &--active{
+	    	background-color: $m2m_green;
+	    	border-color: $m2m_green;
+	    	color: $dark_gray; //só fica active se o body tiver night-theme
+	    }
+	    &--small-window-fit{
+	    	@media screen and (max-width:1400px){
+		    	padding: 4px;
+	    		font-size: 80%;
+		    }
+	    }
+  	}
+}

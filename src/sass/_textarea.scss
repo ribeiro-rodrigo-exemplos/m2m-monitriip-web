@@ -1,0 +1,5 @@
+.textarea{
+	border: none;
+    width: calc(90% - 6px);/*considering textarea needs to be aligned with inputs and selects that will be inside a form with margin-right of 10px*/
+    height: 60px;;
+}

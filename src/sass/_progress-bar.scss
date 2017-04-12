@@ -1,0 +1,27 @@
+.progress-bar {
+  font-size: .6em;
+  line-height: .5em;
+  text-indent: .5em;
+  width: 5em;
+  height: .5em;
+  background: #fff;
+	&::-webkit-progress-bar { 
+		background: #fff;
+		border-radius: 50px;
+	}
+	&::-webkit-progress-value {
+		border-radius: 50px;
+	}
+	&--filled::-webkit-progress-value {
+		background: $green;
+	}
+	&--almost-filled::-webkit-progress-value {
+		background: $yellow;
+	}
+	&--average::-webkit-progress-value {
+		background: $orange;
+	}
+	&--empty::-webkit-progress-value {
+		background: $red;
+	}
+}

@@ -22,24 +22,28 @@
 				<div class="filter__content__forms">
 					<section class="form">
 						<label class="form__label">Motorista<span class="m2m-green">*</span></label>
-						<select class="select">
-							<option default class="none" value="">- Selecione -</option>
-							<option value="">Jorge</option>
-							<option value="">Michel</option>
-							<option value="">Marcelo</option>
-						</select>
-						<i class="fa fa-caret-down"></i>
+						<div class="content-flex">
+							<select class="select">
+								<option default class="none" value="">- Selecione -</option>
+								<option value="">Jorge Carvalho de Souza e Pinto</option>
+								<option value="">Michel Guimarães Soares Correa</option>
+								<option value="">Marcelo Rocha Martins da Silva</option>
+							</select>
+							<i class="fa fa-caret-down fa-adjustment"></i>
+						</div>
 					</section>
 
 					<section class="form">
 						<label class="form__label">Veículo<span class="m2m-green">*</span></label>
-						<select class="select">
-							<option default class="none" value="">- Selecione -</option>
-							<option value="">848555</option>
-							<option value="">996333</option>
-							<option value="">855455</option>
-						</select>
-						<i class="fa fa-caret-down"></i>
+						<div class="content-flex">
+							<select class="select">
+								<option default class="none" value="">- Selecione -</option>
+								<option value="">848555</option>
+								<option value="">996333</option>
+								<option value="">855455</option>
+							</select>
+							<i class="fa fa-caret-down fa-adjustment"></i>
+						</div>
 					</section>
 
 					<section class="form">
@@ -83,7 +87,7 @@
 				<input class="switch" type="checkbox" checked='checked'/>
 			</div>
 			<div class="layout-mode">
-				<button class="button button--gray-bg text-size-10">
+				<button class="button button--row-search-and-export">
 					<svg version="1.1" class="button__svg" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" x="0px" y="0px"
 						 viewBox="0 0 478 422" style="enable-background:new 0 0 478 422;" xml:space="preserve">
 						<g>
@@ -101,8 +105,8 @@
 				</button>
 			</div>
 			<div class="row row--buttons">
-				<button class="button button--gray-bg text-size-10"><i class="fa fa-file-excel-o"></i> CSV</button>
-				<button class="button button--gray-bg text-size-10"><i class="fa fa-file-excel-o"></i> PDF</button>
+				<button class="button button--row-search-and-export"><i class="fa fa-file-excel-o"></i> CSV</button>
+				<button class="button button--row-search-and-export"><i class="fa fa-file-excel-o"></i> PDF</button>
 			</div>
 		</div>
 	</div>
@@ -116,7 +120,7 @@
 						<h2 class="text-size-24">Visão Geral</h2>
 					</div>
 					<div>
-						<button class="expandir-js button button--dark-gray-bg button--light-gray-border button--row text-size-10"><a name="focus-chart" id="focus-chart">EXPANDIR</a></button>
+						<button class="expandir-js button button--row-search-and-export"><a name="focus-chart" id="focus-chart">EXPANDIR</a></button>
 						<div class="dropdown dropdown--main-chart">
 							<span class="dropdown__title" id="main-chart-select-title">Geral <i class="fa fa-caret-down"></i></span>
 							<div class="dropdown__content dropdown__content--main-chart hidden">
@@ -612,7 +616,7 @@
 		<aside class="sidebar">
 			<header class="sidebar__header row row--space-between">
 				<h3 class="sidebar__header__title text-size-14">Extrato por dia</h3>
-				<button class="button button--dark-gray-bg text-size-10">REDUZIR</button>
+				<button class="button button--row-search-and-export">REDUZIR</button>
 			</header>
 
 			<h4 class="sidebar__day text-size-13">
@@ -623,7 +627,7 @@
 			</h4>
 
 			<!-- first sidebar__content must be visible by default. others will be hidden by default (classe=none)-->
-			<div class="sidebar__content"><!-- uma para cada h4 -->
+			<div class="sidebar__content slide-from-right--active"><!-- uma para cada h4 -->
 				<div class="row">
 					<section class="sidebar__content__info green-bg">
 						<svg class="sidebar__svg" version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" x="0px" y="0px"
@@ -875,14 +879,14 @@
 					</section>
 				</div><!-- fim row-->
 
-				<table class="table text-size-10" cellspacing="0">
+				<table class="table" cellspacing="0">
 					<thead class="table__header">
 						<tr>
 							<td>LINHA</td>
 							<td>TIPO</td>
 							<td>KM</td>
 							<td>TEMPO</td>
-							<td>BILHET.</td>
+							<td>BILHET.</td> 
 							<td>PARAD.</td>
 						</tr>
 					</thead>
@@ -924,7 +928,7 @@
 				</span>
 			</h4>
 
-			<div class="sidebar__content none"><!-- uma para cada h4 -->
+			<div class="sidebar__content slide-from-right"><!-- uma para cada h4 -->
 				<div class="row">
 					<section class="sidebar__content__info green-bg">
 						<svg class="sidebar__svg" version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" x="0px" y="0px"
@@ -1176,7 +1180,7 @@
 					</section>
 				</div><!-- fim row-->
 
-				<table class="table text-size-10" cellspacing="0">
+				<table class="table" cellspacing="0">
 					<thead class="table__header">
 						<tr>
 							<td>LINHA</td>
@@ -1225,7 +1229,7 @@
 				</span>
 			</h4>
 
-			<div class="sidebar__content none"><!-- uma para cada h4 -->
+			<div class="sidebar__content slide-from-right"><!-- uma para cada h4 -->
 				<div class="row">
 					<section class="sidebar__content__info green-bg">
 						<svg class="sidebar__svg" version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" x="0px" y="0px"
@@ -1477,7 +1481,7 @@
 					</section>
 				</div><!-- fim row-->
 
-				<table class="table text-size-10" cellspacing="0">
+				<table class="table" cellspacing="0">
 					<thead class="table__header">
 						<tr>
 							<td>LINHA</td>
@@ -1876,7 +1880,7 @@
 							<span class="td--like text-size-14 toggle-control">+</span>
 						</div>	
 
-						<table cellspacing="0" class="text-size-10 table table--tab toggle_table none">
+						<table cellspacing="0" class="table table--tab toggle_table none">
 							<tr class="table__row darker-gray-bg light-gray">
 								<td width="100"></td>
 								<td>CÓD.DESC</td>
@@ -1905,7 +1909,7 @@
 							<span class="td--like text-size-14 toggle-control">+</span>
 						</div>	
 
-						<table cellspacing="0" class="text-size-10 table table--tab toggle_table none">
+						<table cellspacing="0" class="table table--tab toggle_table none">
 							<tr class="table__row darker-gray-bg light-gray">
 								<td width="100"></td>
 								<td>CÓD.DESC</td>
@@ -1926,7 +1930,7 @@
 			</div><!-- fim div bilhetes-->
 
 			<div class="tab__content popup__scrollable jornada-de-trabalho-js none">
-				<table cellspacing="0" class="text-size-10 table table--tab">
+				<table cellspacing="0" class="table table--tab">
 					<thead>
 						<tr class="table__header__row">
 							<td>NOME</td>
@@ -1970,7 +1974,7 @@
 			</div>
 
 			<div class="tab__content popup__scrollable detector-de-paradas-js none">
-				<table cellspacing="0" class="text-size-10 table table--tab"><!-- remember to insert scroll -->
+				<table cellspacing="0" class="table table--tab"><!-- remember to insert scroll -->
 					<thead>
 						<tr class="table__header__row">
 							<td>MOTIVO</td>
@@ -2116,8 +2120,9 @@
 
 	/*Toggle Sidebar pela sidebar*/
 	$(".sidebar__day").click(function(){
-		$(this).next(".sidebar__content").toggleClass("none");
-		$(this).next(".sidebar__content").toggleClass("opacity-animation");
+		$(this).next(".sidebar__content").toggleClass("slide-from-right--active");
+		$(this).next(".sidebar__content").toggleClass("slide-from-right");
+		
 	});
 
 	/*Toggle sidebar pelos footers das info-boxes*/
@@ -2172,8 +2177,9 @@
 
 	/*controla toggle interno da tabela da segunda guia no popup*/
 	$(".table--toggle-control").click(function(){
+		$(this).next(".toggle_table").toggleClass("slide-from-right--active");
+		$(this).next(".toggle_table").toggleClass("slide-from-right");
 		$(this).next(".toggle_table").toggleClass("none");
-		$(this).next(".toggle_table").toggleClass("opacity-animation");
 	})
 
 	/*abre popup ao se clicar nas rows da tabela da sidebar*/

@@ -1,0 +1,242 @@
+
+.table{
+	padding-bottom: 30px;
+	text-align: center;
+	width: 100%;
+	position: relative;
+	&__header{	
+		&--fixed{
+			position: fixed;
+		    width: 96.4%;
+		    top: calc(100vh - 654px);
+		    display: table;
+		    z-index: 9;
+		}
+		td{
+			font-size: 50%;
+			background-color: $off_white;
+		}
+	}
+	&__row{
+		td{
+			background-color: $gelo;
+			color: $darker_gray;
+			font-weight: 600;
+			padding: 6px 0;
+			border-bottom: 2px solid $dark_gray;
+			font-size: 50%;
+			position: relative;
+			&.td__disabled{
+				color: $light_gray;
+				cursor: default;
+			}
+			&.td__disabled:hover{
+				background-color: $gelo !important; /*DISABLED não pode ter nenhum efeito de hover, de forma alguma!*/
+				cursor: default;
+			}
+		}
+		&--large-td{
+			td{
+				padding: 0 10px;
+				height: 90px;
+				position: relative;			
+			}
+		}
+	}
+	td{/*idealmente eu teria criado uma classe .td para todos os td's, mas como eles podem ser muitos, confesso que fugi do ideal e resolvi abrir uma exceção*/
+		&.table__td{
+			&--alignment-adjustment{
+			    min-width: 21px;
+			}
+			&--decreased{
+			    text-align: left;
+			    padding-left: 15px;
+			    width: 15%;
+			    &-font{
+			    	font-size: 8px;
+			    }
+			}
+			&--smaller{
+				width: 7%;
+			    font-size: 8px;
+			    padding-left: 0;
+			    text-align: center;
+			}
+			&--small{
+				width: 5%;
+			}
+		}/*try not to create any class table__td__child-element, since it would mess up too much the BEM structure because of my decision of not inserting a class in every td*/
+	}
+	&__larger-row{
+		text-align: left;
+		width: 37%;
+	}
+	&__container__more-options{
+		z-index: 1;
+    	position: relative;
+	}
+	&__more-options{
+		position: absolute;
+	    top: 9px;
+	    left: 44%;
+	    border-radius: 5%;
+	    background-color: $gelo;
+	    text-align: left;
+	    display: flex;
+    	flex-direction: column;
+    	box-shadow: 0px 0px 25px 5px $gray;
+    	@media screen and (min-width: 1400px){
+    		left: 50%;
+    	}
+	    &__title{
+	    	width: calc(100% - 9px);
+		    margin: 0;
+		    padding-left: 9px;
+		    padding-top: 3px;
+    		padding-bottom: 3px;
+	    	color: $gelo;
+	    	border-radius: 4px 4px 0 0;
+	    }
+	    &__item{
+	    	display: inline-block;
+	    	padding: 5px 10px;
+	    	cursor: pointer;
+	    	&:hover{
+	    		background-color: $light_gray;
+	    	}
+	    	&--red-hover{
+				&:hover{
+		    		background-color: $red;
+		    		color: #fff;
+		    	}
+	    	}
+	    }
+	}
+	&__status{
+		margin-right: 5px;
+		padding: 2px;
+		border-radius: 5px;
+	}
+	&--transparent-borders{
+		&__header{
+			background-color: $off_white;
+		}
+		td.table--transparent-borders__td{ //tive de colocar assim para ser capaz de sobreescrever a regra algumas linhas acima que coloca borda no td
+			border: none;
+			border-color: transparent;
+		}
+		.fa-table-clock{
+			padding: 3px 5px;
+    		font-size: 150%;
+		}
+		.fa-circle:first-child{
+    		margin-right: 3px;
+    	}
+	}
+	&--tab{
+		padding-top: 8px;
+    	padding-left: 12px;
+    	.table__header__row{
+    		height: 30px;
+    		font-size: 10px;
+    	}
+    	&.toggle_table{
+    		padding-top: 0;
+		    padding-bottom: 0;
+		    padding-left: 14px;
+		    margin: -3px 0 3px;
+		    td{
+		    	border: none;
+		    }
+    	}
+	}
+	&--toggle-control{
+		cursor: pointer;
+	}
+	&--scroll-and-alert{ //necessário para aparecer os círculos de "after" dos alertas das tabelas
+		margin-left: 21px;
+	}
+	&--like{/*imita table mas é outro elemento*/
+		display: flex;
+	    justify-content: space-around;
+	    height: 22px;
+    	margin-left: 15px;
+    	background-color: inherit;
+    	color: #fff;
+    	border-bottom: 2px solid $bright_gray;
+	    .td--like{
+	    	flex-basis: 0;
+    		flex-grow: 1;
+	    }
+	    &.thead--like{
+			padding-top: 15px;
+			background-color: $bright_gray;
+		}
+		&.tbody--like{
+			background-color: $dark_gray;
+			height: 27px;
+			.td--like{
+				padding-top: 6px;
+				min-height: 21px;
+				&.toggle-control{
+				    flex-grow: 0;
+				    padding-right: 10px;
+				    display: block;
+				    position: relative;
+				    top: -5px;
+				    color: $m2m_green;
+				}
+			}
+		}
+	}
+	/* elementos externos e exceções/utilities dentro de tabela*/
+	.fa-absolute-right{
+		position: absolute;
+		right: 10px;
+	}
+	.m2m-green-alert:after,
+	.red-alert:after{/*não pode ser before porque altera a ordem da tabela!*/
+		content: '';
+	    position: relative;
+	    left: -96.9vw;
+	    right: 0;
+	    bottom: 0;
+	    top: 10px;
+	    background: $red;
+	    height: 10px;
+	    width: 10px;
+	    display: block;
+	    border-radius: 10px;
+	    animation: opacity 2s linear infinite;
+	}
+	.m2m-green-alert {
+		td{/*usado em painel de execuções de viagem, pode ser reusado como alerta*/
+			&:first-child{
+				border-left: 1px solid $m2m_green	
+			}
+			background-color: $green_white;
+			animation: blinkerDay 2s linear infinite;
+			border-top: 1px solid $m2m_green;
+			border-bottom: 1px solid $m2m_green;
+			&:last-child{
+				border-right: 1px solid $m2m_green
+			}
+		}
+		&:after{
+		    background: $m2m_green;
+		}
+	}
+	
+	.red-alert td{
+		&:first-child{
+			border-left: 1px solid $red
+		}
+		background-color: $red_white;
+		animation: blinkerDay 2s linear infinite;
+		border-top: 1px solid $red;
+		border-bottom: 1px solid $red;
+		&:last-child{
+			border-right: 1px solid $red
+		}
+	}
+}

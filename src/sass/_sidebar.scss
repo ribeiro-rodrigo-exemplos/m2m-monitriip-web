@@ -1,0 +1,45 @@
+.sidebar{
+	flex-basis: 31.5%;
+    box-sizing: border-box;
+    max-width: 31.5%;
+    overflow: hidden;
+	//height: 100vh;
+	&__header{
+		padding: 0 3%;
+		&__title{;
+		}
+	}
+	&__day{
+		border-left: 3px solid $m2m_green;
+		border-top: 2px solid $bright_gray;
+		cursor: pointer;
+		display: flex;
+		margin: 0;
+		font-weight: normal;
+		padding: 5px 0 5px 3%;
+		&__toggle-control{
+			position: relative;
+			left: 75%;
+			top: 5px;
+			line-height: 0.5em;
+		}
+	}
+	&__svg{
+		width: 15px;
+		height: 15px;
+		fill: #fff;
+		margin-right: 3px;
+	}
+	&__content{
+		&__info{
+			flex-grow: 1;
+			flex-basis: 0;
+			display: flex;
+			align-items: center;
+			justify-content: center;
+			font-family: $montserrat;
+			font-weight: 300;
+			height: 50px;
+		}
+	}
+}

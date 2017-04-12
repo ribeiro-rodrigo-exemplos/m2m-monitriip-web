@@ -1,0 +1,35 @@
+
+.main-panel{
+	flex-basis: 68.5%;
+	width: 68.5%;
+	box-sizing: border-box;
+	position: relative;
+}
+
+.main-chart{/*holds chart + title, options, buttons, etc*/
+	padding: 0 1.8%;
+}
+.chart{/*holds only chart*/
+	max-width: 100%;
+	width:100%; 
+	height:200px;
+	position: relative;
+}
+.totalizadores-highcharts-container{
+	padding-top: 5px;
+	width: 150px;
+}
+
+.search-information-container{
+	width: 60%;
+	height: 16px;
+	overflow: hidden;
+	@media screen and (max-width: 1400px){
+		width: 50%
+	}
+}
+
+.search-information{
+	color: $gray;
+	font-weight: bold
+}

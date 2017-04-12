@@ -1,0 +1,23 @@
+.svg{
+    &--average{
+        width: 18px;
+        height: 18px;
+    }
+}
+
+/*icons container*/
+.icon-round{
+	margin: 0 5px;
+    border-radius: 18px;
+    height: 18px;
+    width: 18px;
+    position: relative;
+    color: #fff;
+    .fa{
+    	line-height: 2
+    }
+    &--height-fix{
+    	font-size: 180%;
+    	line-height: 1.2;
+	}
+}

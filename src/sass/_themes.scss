@@ -1,0 +1,184 @@
+.night-theme{
+	background-color: $dark_gray;
+	color: #fff;
+	.search-information{
+		color: $light_gray;
+	}
+	.filter, .toggle{
+		background-color: $gray;
+	}
+	.filter__header,
+	.sidebar__header{
+		background-color: $bright_gray;
+	}
+	.form{
+		&__label{
+			color: $lighter_gray
+		}
+	}
+	.button,
+	.button--day-mode{
+		background-color: $gray;
+		color: #fff;
+		&:hover{
+			background-color: lighten($gray, 30%);
+		}
+		&__svg{
+			fill: #fff;
+		}
+		&--create{
+			background-color: $blue;
+			&:hover{
+				background-color: lighten($blue, 10%);
+			}
+		}
+		&--confirm{
+			background-color: $m2m_green;
+			&:hover{
+				background-color: lighten($m2m_green, 10%);
+				color: darken(#fff, 10%)
+			}
+		}
+		&--cancel{
+			background-color: $light_gray;
+			&:hover{
+				background-color: lighten($light_gray, 10%);
+				color: darken(#fff, 10%)
+			}
+		}
+	}
+	.select, .input, .textarea{
+		background-color: $dark_gray;
+		color: #fff;
+	}
+	.checkbox{
+		border-color: $light_gray;
+	}
+	.switch{
+		&__label{
+		    border-color: $light_gray;
+		    color: $light_gray;
+		    &--active{
+		    	color: $dark_gray;
+		    }
+		}
+	}
+	.dropdown{
+		color: #fff;
+		&__title{
+			background-color: $light_gray;
+		}
+		&__content{
+			background-color: $light_gray;
+		}
+	}
+	.table{
+		&__header{
+			background-color: $dark_gray;
+			td{
+				background-color: $dark_gray;
+			}
+		}
+		&__row td{
+			background-color: $gray;
+			border-bottom: 2px solid $bright_gray;
+			color: #fff;
+			font-weight: 400;
+			&.td__disabled{
+				color: $light_gray;
+			}
+			&.td__disabled:hover{
+				background-color: $gray !important;/*certificando-se de que o disabled SEMPRE será cinza*/
+			}
+		}
+		&__more-options{
+			background-color: $bright_gray;
+	    	box-shadow: 0px 0px 25px 5px $dark_gray;
+	    	&__title{
+	    		color: $light_gray;
+	    	}
+	    }
+		&--like{/*imita table mas é outro elemento*/
+    		border-bottom: 2px solid $bright_gray;			
+    		.thead--like{
+				background-color: $bright_gray;
+			}
+			&.tbody--like{
+				background-color: $dark_gray;
+			}
+		}
+		&--transparent-borders{
+			&__header{
+				td{
+					background-color: $bright-gray;
+				}
+			}
+			td.table--transparent-borders__td {
+			    border: none;
+			    border-color: transparent;
+			}
+		}
+		.m2m-green-alert {
+			td{/*usado em painel de execuções de viagem, pode ser reusado como alerta*/
+				background-color: $green_gray;
+				animation: blinkerNight 2s linear infinite;
+			}
+		}
+		.red-alert td{
+			background-color: $red_gray;
+			animation: blinkerNight 2s linear infinite;
+		}	
+	}
+	.progress-bar{
+		background: $dark_gray;
+		&::-webkit-progress-bar { 
+			background: $dark_gray;
+		}
+	}
+	.info-box{
+		&__select{
+			background: $gray;
+		}
+		&__content{
+			&__svg{
+				fill: $light_gray;
+			}
+			&__title{
+				color: $light_gray;
+			}
+		}
+	}
+	.popup{
+		color: $light_gray;
+		&__content{
+			background: $bright_gray;
+			box-shadow: 0px 0px 9px 1px $darker_gray;
+			&__header{
+				background: $bright_gray;
+			}
+		}
+		&__label{
+			color: #fff;
+		}
+		&__tabs{
+			background: $dark_gray;
+		}
+	}
+	.box, .rectangle--title-and-information{
+		background-color: $gray;
+		color: $light_gray;
+		fill: #fff;
+		&__main-number{
+	    	color: #fff;
+	    }
+		&--hover:hover{
+			background-color: $light_gray;
+		}	
+	}
+	.fade-out-gradient:after {
+	    background: linear-gradient(to left, $dark_gray , $dark_gray 5%, transparent);
+	}
+	.green-according-to-theme{
+		color: $m2m_green
+	}
+}

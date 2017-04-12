@@ -1,0 +1,69 @@
+.row{
+	display: flex;
+	align-items: center;
+	justify-content: center;
+	position: relative;
+	&--space-between{
+		justify-content: space-between;
+	}
+	&--space-around{
+		justify-content: space-around;
+	}
+	&--align-baseline{
+		align-items: baseline;
+	}
+	&--align-flex-end{
+		align-items: flex-end;
+	}
+	&--buttons{
+		min-width: 90px;
+		justify-content: space-between;
+	}
+	&--search-and-export{
+		padding: 10px 1.12% 18px;
+		&__button{
+			font-size: 80%;
+			padding: 8px 5px;
+		}
+	}
+	&--totalizadores{
+		justify-content: space-between;
+		padding: 0 1.2%;
+		align-items: flex-start;
+	}
+	&__start{
+		display: flex;
+		justify-content: space-around;
+		flex-grow: 0.5
+	}
+}
+
+.export-information-container{/*container of buttons such as Excel and PDF exports*/
+	justify-content: flex-end;
+	width: 50%;
+    padding: 0 0.8% 0 0;
+}
+
+.layout-mode{/*container of the moon or sun image + modo noite/modo dia + switch button!*/
+	display: flex;
+    padding-right: 10px;
+    border-right: 1px solid $light_gray;
+    margin-right: 10px;
+    &--border-left{
+    	border-left: 1px solid #899b9b;
+    	padding-left: 10px;
+    }
+	&__image{
+	    width: 15px;
+	    height: 15px;
+	    margin-right: 5px;
+	    align-self: center;
+	}
+	&__description{
+		align-self: center;
+	    margin: 0 3px;
+	    @media screen and (max-width:1400px){
+	    	margin: 0 1px;
+	    }
+	}
+}

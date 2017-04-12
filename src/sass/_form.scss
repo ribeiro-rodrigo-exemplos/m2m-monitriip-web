@@ -1,0 +1,15 @@
+.form{
+	position: relative;
+    display: flex;
+    flex-direction: column;
+    margin: 0 10px;
+    &:first-child{
+    	margin: 0 10px 0 0;
+    }
+	&__label{
+		letter-spacing: 0.2px;
+		color: $gray;
+		font-size: 80%;
+		margin-top: -5px;
+	}
+}

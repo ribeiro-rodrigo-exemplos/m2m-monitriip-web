@@ -1,0 +1,13 @@
+.toggle{
+    position: absolute;
+    left: 98%;
+    top: -1px;
+    height: 22px;
+    overflow: hidden;
+    a{
+    	color: $light_gray;
+    }
+    .fa{
+    	padding: 5px 10px 0 10px;
+    }
+}

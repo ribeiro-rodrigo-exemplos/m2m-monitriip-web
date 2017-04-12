@@ -1,0 +1,251 @@
+/* csslint allow(important):start */
+.none{
+	display: none !important
+}
+
+/*atomic background colors*/
+.m2m-green-bg{
+	background-color: $m2m_green !important
+}
+
+.green-bg, .before-green-bg:before{
+	background-color: $green !important
+}
+
+.red-bg, .before-red-bg:before{
+	background-color: $red !important
+}
+
+.pink-bg, .before-pink-bg:before{
+	background-color: $pink !important
+}
+
+.purple-bg, .before-purple-bg:before{
+	background-color: $purple !important
+}
+
+.blue-bg, .before-blue-bg:before{
+	background-color: $blue !important
+}
+
+.orange-bg, .before-orange-bg:before{
+	background-color: $orange !important
+}
+
+.yellow-bg, .before-yellow-bg:before{
+	background-color: $yellow !important
+}
+
+.aquamarine-green-bg, .before-aquamarine-green-bg:before{
+	background-color: mediumaquamarine !important
+}
+.light-gray-bg, .before-light-gray-bg:before{
+	background-color: $light_gray !important
+}
+
+.bright-gray-bg, .before-gray-bg:before{
+	background-color: $bright_gray !important
+}
+
+.dark-gray-bg, .before-dark-gray-bg:before{
+	background-color: $dark_gray !important
+}
+
+.darker-gray-bg, .before-darker-gray-bg:before{
+	background-color: $darker_gray !important
+}
+.white-bg{
+	background-color: #fff !important
+}
+.transparent-bg{
+	background-color: transparent !important
+}
+.hover-light-gray-bg:hover{
+	background-color: $light_gray !important;
+	cursor: pointer
+}
+/*atomic colors*/
+.purple{
+	color: $purple;
+}
+.red{
+	color: $red;
+}
+.green{
+	color: $green
+}
+.blue{
+	color: $blue
+}
+.m2m-green{
+	color: $m2m_green !important;
+}
+.light-gray{
+	color: $light_gray;
+}
+.gray{
+	color: $gray;
+}
+.light-gray{
+	color: $light_gray;
+}
+.dark-gray{
+	color: $dark_gray;
+}
+.white{
+	color: #fff;
+}
+.yellow{
+	color: $yellow;
+}
+.green-according-to-theme{
+	color: $dark_green;
+}
+.round{
+	border-radius: 50%;
+}
+/*atomic structure adjustments*/
+.basic-border-radius{
+	border-radius: 2%;
+}
+.standard-padding{
+	padding: 0 1.2%;
+}
+.right-side-padding{
+	padding: 0 0 0 1.2%
+}
+.absolute-first-corner{
+	position: absolute;
+    top: 0;
+    left: 0;
+}
+.no-margin{
+	margin: 0;
+}
+.no-border{
+	border: none !important;
+}
+.hidden{
+	visibility: hidden;
+}
+.opacity-zero{
+	opacity: 0;
+	cursor: default;
+	pointer-events: none
+}
+.expanded{
+	width: 100%;
+	flex-basis: 100%;
+}
+.equidistant{ /*flex-items will be same width and same distance with this*/
+	flex-basis: 0;
+	flex-grow: 1;
+}
+.flex-grow-05{
+	flex-grow: 0.5;
+}
+.float-right{
+	float: right;
+}
+/* units are texts that usually follow numbers to indicate what they are about: kms, minutes, hours, etc */
+.unit{
+	padding-top: 10px;
+}
+.blue-border{
+	border: 1px solid $blue !important;
+}
+.content-flex{
+	display: flex;
+}
+
+.text-align-left{
+	text-align: left;
+}
+.text-align-center{
+	text-align: center;
+}
+.light-text{
+	font-weight: 300;
+}
+
+.scroll{
+	max-height: calc(100vh - 250px);
+	overflow-x: hidden;
+    overflow-y: auto;
+    width: 98%;
+    margin: 0 auto;
+    position: fixed;
+    &--fixing-table-with-fixed-header{
+    	padding-top: 21px;
+    }
+	&::-webkit-scrollbar{
+		top: 5px;
+		height: 5px;
+		width: 8px;
+	}
+	/* Track */
+	&::-webkit-scrollbar-track{
+		-webkit-box-shadow: inset 0 0 6px rgba(0,0,0,0.3);
+		-webkit-border-radius: 10px;
+		border-radius: 10px;
+	}
+	/* Handle */
+	&::-webkit-scrollbar-thumb {
+		-webkit-border-radius: 10px;
+		border-radius: 10px;
+		background: rgba(194,194,194,0.8);
+		-webkit-box-shadow: inset 0 0 6px rgba(255,255,255,0.1);
+	}
+	&::-webkit-scrollbar-thumb:window-inactive{
+		background: rgba(194,194,194,0.4);
+	}
+	&::-webkit-scrollbar-thumb:hover{
+		background: rgba(126,126,126,0.8);
+	}
+}
+.blur{
+	filter: blur(2px);
+}
+.cursor-pointer{
+	cursor: pointer;
+}
+
+
+/*gradient*/
+.fade-out-gradient:after {
+    content: "";
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 62%;
+    height: 100%;
+    background: linear-gradient(to left, #fff, #fff 5%, transparent);
+    z-index: 2;
+    @media screen and (max-width:1400px){
+    	width: 52%;
+    }
+}
+
+/*atomic font adjustments*/
+.text-size-10{
+	font-size: 10px; //only one that uses px because it's only appliable in situations when the base-font (em/%) is not working, but can be changed if found a solution
+}
+.text-size-13{
+	font-size: $base-font*1.3;
+}
+.text-size-14{
+	font-size: $base-font*1.4;
+}
+.text-size-16{
+	font-size: $base-font*1.6;
+}
+.text-size-24{
+	font-size: $base-font*2.4;
+}
+.text-size-36{
+	font-size: $base-font*3.6;
+}
+.text-size-56{
+	font-size: $base-font*5.6;
+}
+/* csslint allow(important):end */

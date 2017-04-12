@@ -1,0 +1,31 @@
+.filter{
+	width: 99.8%; /*only to avoid having the filter occupy more than 100% of the body's width, causing a scrollbar to appear */
+	background-color: $gelo;
+	color: $gray;
+	&__header{
+		font-weight: 600;
+		position: relative;
+		background-color: $off_white;
+		&__title{
+			padding: 3px 12px;
+		}
+	}
+	&__content{
+		display: flex;
+		align-items: flex-end;
+		justify-content: space-between;
+		padding: 0 1.12% 10px;
+		&__forms{
+			display: flex;
+			align-items: flex-end;
+		}
+		&__buttons{
+			flex-grow: 0.5;
+			justify-content: flex-end;
+			display: flex;
+			> .button:not(:last-child){
+				margin-right: 10px;
+			}
+		}
+	}
+}
