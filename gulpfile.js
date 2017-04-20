@@ -18,7 +18,7 @@ gulp.task('server',() => {
 
   gulp.watch('src/js/**/*').on('change',event => 
       gulp.src(event.path) 
-          .pipe(jshint()) 
+          .pipe(jshint({esversion:6})) 
           .pipe(jshint.reporter(jshintStylish))
   );
 
