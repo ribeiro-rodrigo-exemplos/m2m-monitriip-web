@@ -10,8 +10,9 @@ gulp.task('server',() => {
   browserSync.init({
     server:{
       baseDir:'src',
+      index:'index.html',
       routes:{
-        '/bower_components':'bower_components'
+        '/bower_components':'bower_components',
       }
     }
   });

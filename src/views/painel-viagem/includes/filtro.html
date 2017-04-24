@@ -1,0 +1,52 @@
+<div class="filter">
+    <div class="filter__header">
+        <p class="filter__header__title">Filtro</p>
+        <div class="toggle">
+            <a href="#nav-toggle" data-id="nav-toggle-filter">
+                <i class="fa fa-chevron-down"></i>
+                <i class="fa fa-chevron-right"></i>
+            </a>
+        </div>
+    </div>
+    <div class="filter__content">
+            <div class="filter__content__forms">
+                <section class="form">
+                    <label class="form__label">Motorista<span class="m2m-green">*</span></label>
+                    <div class="content-flex">
+                        <input type="text" class="select" ng-model="ctrl.filtro.cpf" placeholder="Cpf do motorista"/>
+                    </div>
+                </section>
+
+                <section class="form">
+                    <label class="form__label">Veículo<span class="m2m-green">*</span></label>
+                    <div class="content-flex">
+                        <input type="text" class="select" ng-model="ctrl.filtro.placa" placeholder="Placa do veículo"/>
+                    </div>
+                </section>
+
+                <section class="form">
+                    <label class="form__label">Empresa<span class="m2m-green">*</span></label>
+                    <div class="content-flex">
+                        <input type="text" class="select" ng-model="ctrl.filtro.cnpj" placeholder="Cnpj da empresa"/>
+                    </div>
+                </section>
+
+                <section class="form">
+                    <label class="form__label">De</label>
+                    <input type="date" class="input input--icon">
+                    <i class="fa fa-calendar"></i>
+                </section>
+
+                <section class="form">
+                    <label class="form__label">Até</label>
+                    <input type="date" class="input input--icon">
+                    <i class="fa fa-calendar"></i>
+                </section>
+            </div>
+
+            <section class="filter__content__buttons">
+                <button class="button button--cancel" ng-click="ctrl.limparFiltros()">LIMPAR</button>
+                <button class="button button--confirm" ng-click="ctrl.consultarViagens()">CONSULTAR</button>
+            </section>
+        </div>
+</div>

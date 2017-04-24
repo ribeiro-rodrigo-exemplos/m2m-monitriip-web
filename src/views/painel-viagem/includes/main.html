@@ -1,0 +1,271 @@
+<div class="main-chart">
+    <div class="row row--space-between">
+        <div>
+            <h2 class="text-size-24">Visão Geral</h2>
+        </div>
+    <div>
+            <button class="expandir-js button button--row-search-and-export"><a name="focus-chart" id="focus-chart">EXPANDIR</a></button>
+            <div class="dropdown dropdown--main-chart">
+                <span class="dropdown__title" id="main-chart-select-title">Geral <i class="fa fa-caret-down"></i></span>
+                <div class="dropdown__content dropdown__content--main-chart hidden">
+                    <p>
+                        <input type="radio" name="chart" class="none" id="km-percorrido-chart">
+                        <label for="km-percorrido-chart">Km Percorrido</label>
+                    </p>
+                    <p>
+                        <input type="radio" name="chart" class="none" id="leitura-de-bilhetes-chart">
+                        <label for="leitura-de-bilhetes-chart">Leitura de Bilhetes</label>
+                    </p>
+                    <p>
+                        <input type="radio" name="chart" class="none" id="tempo-de-viagem-chart">
+                        <label for="tempo-de-viagem-chart">Tempo de Viagem</label>
+                    </p>
+                    <p>
+                        <input type="radio" name="chart" class="none" id="direcao-continua-chart">
+                        <label for="direcao-continua-chart">Direção Contínua</label>
+                    </p>	
+                    <p>
+                        <input type="radio" name="chart" class="none" id="jornada-de-trabalho-chart">
+                        <label for="jornada-de-trabalho-chart">Jornada de Trabalho</label>
+                    </p>
+                    <p>
+                        <input type="radio" name="chart" class="none" id="detector-de-paradas-chart">
+                        <label for="detector-de-paradas-chart">Detector de Paradas</label>
+                    </p>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <highchart class="chart" id="container-geral" config="ctrl.graficoGeral.render"></highchart>
+    <div class="chart none" id="container-highcharts3"></div>
+    <div class="chart none" id="container-highcharts4"></div>
+    <div class="chart none" id="container-highcharts5"></div>
+    <div class="chart none" id="container-highcharts6"></div>
+
+    <div class="row row--space-between">
+        <div>
+                <h2 class="text-size-24">Totalizadores</h2>
+        </div>
+        <div>
+            <div class="dropdown">
+                <span class="dropdown__title">Visualização <i class="fa fa-caret-down"></i></span>
+                <div class="dropdown__content hidden">
+                    <p class="no-margin">
+                        <input type="checkbox">
+                        <label>Km Percorrido</label>
+                    </p>
+                    <p class="no-margin">
+                        <input type="checkbox">
+                        <label>Tempo de Viagem</label>
+                    </p>
+                    <p class="no-margin">
+                        <input type="checkbox">
+                        <label>Leitor de Bilhetes</label>
+                    </p>
+                    <p class="no-margin">
+                        <input type="checkbox">
+                        <label>Total de Viagens</label>
+                    </p>
+                    <p class="no-margin">
+                        <input type="checkbox">
+                        <label>Motivo de Paradas</label>
+                    </p>
+                    <p class="no-margin">
+                        <input type="checkbox">
+                        <label>Jornada de Trabalho</label>
+                    </p>
+                    <p class="no-margin">
+                        <input type="checkbox">
+                        <label>Troca de Motorista</label>
+                    </p>
+                </div>
+            </div><!-- fim dropdown-->
+        </div><!-- fim row__end-->
+    </div><!-- fim row-->
+</div><!-- fim main-chart -->
+
+<div class="info-boxes">
+    <div class="info-box">
+        <div class="info-box__content info-box__content--green info-km-percorrido-js">
+
+            <h5 class="info-box__content__title text-size-13">Km Percorrido</h5>
+            <div class="row row--align-baseline">
+                <ng-include src="'views/icons/km-percorrido-totalizador-icon.html'"></ng-include>
+                <span class="info-box__content__span text-size-56">70</span><span class="light-gray text-size-16"> km</span>
+            </div>
+            <highchart class="info-box__chart" id="info-box-km-percorrido" config="ctrl.kmPercorridoTotalizador.grafico"></highchart>
+        </div>
+        <footer class="info-box__footer green-bg">
+            <section class="column info-box__footer__column">
+                <span class="semitransparent-text">02 Fev</span>
+                <span><span class="text-size-24">35</span>km</span>
+            </section>
+            <section class="column info-box__footer__column">
+                <span class="semitransparent-text">03 Fev</span>
+                <span><span class="text-size-24">10</span>km</span>
+            </section>
+            <section class="column info-box__footer__column">
+                <span class="semitransparent-text">04 Fev</span>
+                <span><span class="text-size-24">25</span>km</span>
+            </section>
+        </footer>
+    </div><!-- fim info-box km percorrido-->
+
+    <div class="info-box">
+        <div class="info-box__content info-box__content--pink info-leitura-de-bilhetes-js">
+            <h5 class="info-box__content__title text-size-13">Leitura de Bilhetes</h5>
+
+            <div class="row row--align-baseline">
+                <ng-include src="'views/icons/leitura-bilhetes-totalizador-icon.html'"></ng-include>
+                <span class="info-box__content__span text-size-56">1.987</span>
+            </div>
+
+            <!-- gráfico -->
+            <div id="info-box-chartdiv2" class="info-box__chart"></div>
+        </div>
+        <footer class="info-box__footer pink-bg">
+            <section class="column info-box__footer__column">
+                <span class="semitransparent-text">02 Fev</span>
+                <span class="text-size-24">497</span>
+            </section>
+            <section class="column info-box__footer__column">
+                <span class="semitransparent-text">03 Fev</span>
+                <span class="text-size-24">498</span>
+            </section>
+            <section class="column info-box__footer__column">
+                <span class="semitransparent-text">04 Fev</span>
+                <span class="text-size-24">497</span>
+            </section>
+        </footer>
+    </div><!-- fim info-box leitura de bilhetes-->
+
+    <div class="info-box">
+        <div class="info-box__content info-box__content--blue info-tempo-de-viagem-js">
+
+            <h5 class="info-box__content__title text-size-13">Tempo de Viagem (média)</h5>
+            <div class="row row--align-baseline">
+                <ng-include src="'views/icons/tempo-viagem-totalizador-icon.html'"></ng-include>
+                <span class="info-box__content__span text-size-56">621</span><span class="light-gray text-size-16"> min</span>
+            </div>
+            <!-- gráfico -->
+            <div id="info-box-chartdiv3" class="info-box__chart"></div>
+        </div>
+        <footer class="info-box__footer blue-bg">
+            <section class="column info-box__footer__column">
+                <span class="semitransparent-text">02 Fev</span>
+                <span><span class="text-size-24">155</span>min</span>
+            </section>
+            <section class="column info-box__footer__column">
+                <span class="semitransparent-text">03 Fev</span>
+                <span><span class="text-size-24">156</span>min</span>
+            </section>
+            <section class="column info-box__footer__column">
+                <span class="semitransparent-text">04 Fev</span>
+                <span><span class="text-size-24">150</span>min</span>
+            </section>
+        </footer>
+    </div><!-- fim info-box tempo de viagem-->
+</div><!-- fim 1st row of info-boxes-->
+
+<div class="info-boxes">
+    <div class="info-box">
+        <div class="info-box__content info-box__content--purple info-direcao-continua-js">
+            <select class="info-box__select">
+                <option>Todos</option>
+                <option>Marcelo Campos</option>
+                <option>Ricardo Souza</option>
+            </select>
+            
+            <h5 class="info-box__content__title text-size-13">Direção Contínua</h5>
+            <div class="row row--align-baseline">
+                <ng-include src="'views/icons/direcao-continua-totalizador-icon.html'"></ng-include>
+                <span class="info-box__content__span text-size-56">23</span><span class="light-gray text-size-16"> horas</span>
+            </div>
+            <!-- gráfico -->
+            <div id="info-box-chartdiv4" class="info-box__chart"></div>
+        </div>
+        <footer class="info-box__footer purple-bg">
+            <section class="column info-box__footer__column">
+                <span class="semitransparent-text">02 Fev</span>
+                <span><span class="text-size-24">7</span>hs</span>
+            </section>
+            <section class="column info-box__footer__column">
+                <span class="semitransparent-text">03 Fev</span>
+                <span><span class="text-size-24">9</span>hs</span>
+            </section>
+            <section class="column info-box__footer__column">
+                <span class="semitransparent-text">04 Fev</span>
+                <span><span class="text-size-24">7</span>hs</span>
+            </section>
+        </footer>
+    </div><!-- fim info-box direção contínua-->
+
+    <div class="info-box">
+        <div class="info-box__content info-box__content--red info-jornada-de-trabalho-js">
+            <select class="info-box__select">
+                <option>Todos</option>
+                <option>Marcelo Campos</option>
+                <option>Ricardo Souza</option>
+            </select>
+
+            <h5 class="info-box__content__title text-size-13">Jornada de Trabalho</h5>
+            <div class="row row--align-baseline">
+                <ng-include src="'views/icons/jornada-trabalho-totalizador-icon.html'"></ng-include>
+                <span class="info-box__content__span text-size-56">420</span>
+            </div>
+
+            <!-- gráfico -->
+            <div id="info-box-chartdiv5" class="info-box__chart"></div>
+        </div>
+        <footer class="info-box__footer red-bg">
+            <section class="column info-box__footer__column">
+                <span class="semitransparent-text">02 Fev</span>
+                <span class="text-size-24">90</span>
+            </section>
+            <section class="column info-box__footer__column">
+                <span class="semitransparent-text">03 Fev</span>
+                <span class="text-size-24">115</span>
+            </section>
+            <section class="column info-box__footer__column">
+                <span class="semitransparent-text">04 Fev</span>
+                <span class="text-size-24">105</span>
+            </section>
+        </footer>
+    </div><!-- fim info-box jornada de trabalho-->
+
+    <div class="info-box">
+        <div class="info-box__content info-box__content--orange info-detector-de-paradas-js">
+            <select class="info-box__select">
+                <option>Todos</option>
+                <option>Parada Programada</option>
+                <option>Solicitação do Passageiro</option>
+                <option>Solicitação do Agente</option>
+                <option>Acidente na Via</option>
+            </select>
+
+            <h5 class="info-box__content__title text-size-13">Detector de Paradas</h5>
+            <div class="row row--align-baseline">
+                <ng-include src="'views/icons/detector-parada-totalizador-icon.html'"></ng-include>
+                <span class="info-box__content__span text-size-56">420</span>
+            </div>
+
+            <!-- gráfico -->
+            <div id="info-box-chartdiv6" class="info-box__chart"></div>
+        </div>
+        <footer class="info-box__footer orange-bg">
+            <section class="column info-box__footer__column">
+                <span class="semitransparent-text">02 Fev</span>
+                <span class="text-size-24">90</span>
+            </section>
+            <section class="column info-box__footer__column">
+                <span class="semitransparent-text">03 Fev</span>
+                <span class="text-size-24">115</span>
+            </section>
+            <section class="column info-box__footer__column">
+                <span class="semitransparent-text">04 Fev</span>
+                <span class="text-size-24">105</span>
+            </section>
+        </footer>
+    </div>
+</div>
