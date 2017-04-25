@@ -3,43 +3,53 @@
  */
 class PainelViagemController{
 
-    constructor(viagemService,graficoGeral,kmPercorridoTotalizador,FullScreen){
+    constructor(viagemService,painelService,FullScreen,graficoGeral,kmPercorridoTotalizador){
 
         this.graficoGeral = graficoGeral;
         this.kmPercorridoTotalizador = kmPercorridoTotalizador;
 
         this._viagemService = viagemService;
+        this._painelService = painelService;
+
         this._FullScreen = FullScreen;
+
+        this._listeners = [];
+
+        this._init();
+    }
+
+    consultarPeriodo() {
+        this._painelService.obterTotalizadoresDoPeriodo()
+            .then(retorno => this._notify(retorno.totalizadores));
     }
 
     limparFiltros(){
         this.filtro = {};
-        this.kmPercorridoTotalizador.kmPercorrido = [35, 10, 25];
-    }
-
-    consultarViagens(){
-        this._viagemService.obterViagens();
     }
 
     habilitarTelaCheia(){
         this._FullScreen.enable(document.documentElement);
     }
 
-    postConstruct(){
+    _init(){
+        this._addListener(this.kmPercorridoTotalizador);
+    }
 
-        this.filtro = {
-            placa:'85500',
-            cpf:'689465465875',
-            cnpj:'aaa'
-        };
+    _addListener(listener){
+        this._listeners.push(listener);
+    }
+
+    _notify(event){
+        this._listeners.forEach(listener => listener.atualizar(event));
     }
 }
 
 PainelViagemController.$inject = [
                                     'ViagemService',
+                                    'PainelService',
+                                    'Fullscreen',
                                     'GraficoGeral',
-                                    'KmPercorridoTotalizador',
-                                    'Fullscreen'
+                                    'KmPercorridoTotalizador'
                                  ];
 
 angular.module('monitriip-web')

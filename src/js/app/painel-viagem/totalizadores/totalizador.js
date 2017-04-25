@@ -3,6 +3,9 @@
  */
 class Totalizador{
     constructor(){
+
+        this._dateUtil = new DateUtil();
+
         this._grafico = {
             chart: {
                 backgroundColor: 'transparent',
@@ -56,12 +59,28 @@ class Totalizador{
         };
     }
 
-    get grafico(){
-        return this._grafico;
+    criarGrafico(data){
+
+        this.grafico.series[0].data = data;
+    }
+
+    formatarData(data){
+        return this._dateUtil.obterDiaEMes(data);
+    }
+
+    formatarNumero(numero){
+        return parseFloat(numero).toFixed(2);
+    }
+
+    atualizar(event){
+        throw new Error('É preciso implementar o método atualizar');
     }
 
 
 
+    get grafico(){
+        return this._grafico;
+    }
 }
 
 angular.module('monitriip-web')

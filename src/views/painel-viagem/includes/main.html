@@ -92,22 +92,14 @@
             <h5 class="info-box__content__title text-size-13">Km Percorrido</h5>
             <div class="row row--align-baseline">
                 <ng-include src="'views/icons/km-percorrido-totalizador-icon.html'"></ng-include>
-                <span class="info-box__content__span text-size-56">70</span><span class="light-gray text-size-16"> km</span>
+                <span class="info-box__content__span text-size-56">{{ctrl.kmPercorridoTotalizador.total}}</span><span class="light-gray text-size-16"> km</span>
             </div>
             <highchart class="info-box__chart" id="info-box-km-percorrido" config="ctrl.kmPercorridoTotalizador.grafico"></highchart>
         </div>
         <footer class="info-box__footer green-bg">
-            <section class="column info-box__footer__column">
-                <span class="semitransparent-text">02 Fev</span>
-                <span><span class="text-size-24">35</span>km</span>
-            </section>
-            <section class="column info-box__footer__column">
-                <span class="semitransparent-text">03 Fev</span>
-                <span><span class="text-size-24">10</span>km</span>
-            </section>
-            <section class="column info-box__footer__column">
-                <span class="semitransparent-text">04 Fev</span>
-                <span><span class="text-size-24">25</span>km</span>
+            <section ng-repeat="data in ctrl.kmPercorridoTotalizador.datas" class="column info-box__footer__column">
+                <span class="semitransparent-text">{{data.dia}}</span>
+                <span><span class="text-size-24">{{data.total}}</span>km</span>
             </section>
         </footer>
     </div><!-- fim info-box km percorrido-->

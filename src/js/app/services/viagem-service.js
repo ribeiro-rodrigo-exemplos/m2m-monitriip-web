@@ -2,6 +2,10 @@ class ViagemService{
     constructor(httpClient){
         this.httpClient = httpClient; 
     }
+
+    obterViagemPorId(id){
+
+    }
 }
 
 ViagemService.$inject = ['$http'];
