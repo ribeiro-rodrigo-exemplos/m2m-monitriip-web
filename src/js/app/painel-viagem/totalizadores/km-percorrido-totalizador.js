@@ -8,15 +8,15 @@ class KmPercorridoTotalizador extends Totalizador{
         this.total = 0;
     }
 
-    atualizar(totalizadores){
+    atualizar(event){
 
-        this.criarGrafico(totalizadores.map(totalizador => totalizador.totalQuilometragem));
+        this.criarGrafico(event.totalizadores.map(totalizador => totalizador.totalQuilometragem));
 
-        this.datas = totalizadores.map(totalizador => {
+        this.datas = event.totalizadores.map(totalizador => {
             return {dia:this.formatarData(totalizador._id),total:this.formatarNumero(totalizador.totalQuilometragem)};
         });
 
-        this.total = this.formatarNumero(this.datas.reduce((total,data) => total+data.total,0));
+        this.total = this.formatarNumero(this.datas.reduce((total,data) => total+parseFloat(data.total),0));
     }
 }
 

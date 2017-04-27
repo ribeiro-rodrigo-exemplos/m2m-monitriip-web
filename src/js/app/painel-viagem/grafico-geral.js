@@ -3,82 +3,145 @@
  */
 class GraficoGeral{
     constructor(){
+        
+        this._dateUtil = new DateUtil();
+
         this._grafico = {
             chart: {
-                type: 'area',
-                spacingBottom: 30,
-                backgroundColor: 'transparent'
+                backgroundColor: 'transparent',
+                renderTo: 'container',
+                type: 'column'
             },
-            navigation: {
-                buttonOptions: {
-                    enabled: false
-                }
-            },
+            colors: ['#0bb48d', '#cb3f7e','#358fcd','#9157ab','#ec6051','#e18e18'],
             title: {
-                text: null
+                text: ""
             },
-            xAxis: {
-                tickmarkplacement:"on",
-                lineWidth: 0,
-                minorGridLineWidth: 0,
-                lineColor: 'transparent',
-                minorTickLength: 0,
-                tickLength: 0,
-                type: 'datetime'
+            subtitle: {
+                text: ""
             },
-            yAxis: {
+             yAxis: {
                 title: {
                     text: ''
                 },
                 lineWidth: 0,
                 minorGridLineWidth: 0,
-                lineColor: 'transparent',
                 gridLineColor: 'transparent',
                 labels: {
                     enabled: false
                 }
             },
 
-            plotOptions: {
-                series: {
-                    fillColor: {
-                        linearGradient: { x1: 0, y1: 0, x2: 0, y2: 1 },
-                        stops: [
-                            [0, 'rgb(10,133,104)'], //dark green
-                            [1, 'rgb(17,202,158)'] //light green
-                        ]
-                    },
-                    lineWidth: 0,
-                    lineColor: 'rgb(17,202,158)',
-                    marker: {
-                        fillColor: 'rgb(17,202,158)',
-                        lineWidth: 2,
-                        lineColor: "#FFFFFF"
-                    }
+            drilldown: {
+                activeAxisLabelStyle: {
+                    color: '#F0F0F3'
                 },
-                area: {
-                    dataLabels: {
-                        enabled: true,
-                        color: "#FFFFFF"
-                    },
-                    enableMouseTracking: true
+                activeDataLabelStyle: {
+                    color: '#F0F0F3'
                 }
             },
 
-            credits: {
-                enabled: false
-            },
+            xAxis:{
+                lineColor: 'transparent',
+                minorGridLineColor: 'transparent',
+                tickColor: 'transparent',
+                title: {
+                    style: {
+                        color: '#e18e18'
 
+                    }
+                },
+                 labels: {
+                    enabled: true,
+                    style: {
+                        color: '#ec6051'
+                    }
+                },
+                categories:[], 
+                gridLineColor: 'transparent'
+            },
+            tooltip: {
+                backgroundColor: 'rgba(0, 0, 0, 0.85)',
+                style: {
+                    color: '#F0F0F0'
+                }
+            },
+           plotOptions: {
+            series:{
+                shadow:false,
+                borderWidth:0.1,
+                pointPadding:0.1,
+                groupPadding:0
+                }    
+            },
+            rangeSelector: {
+                buttonTheme: {
+                    fill: '#505053',
+                    stroke: '#000000',
+                    style: {
+                        color: '#CCC'
+                    },
+                    states: {
+                        hover: {
+                            fill: '#707073',
+                            stroke: '#000000',
+                            style: {
+                                color: 'white'
+                            }
+                        },
+                        select: {
+                            fill: '#000003',
+                            stroke: '#000000',
+                            style: {
+                                color: 'white'
+                            }
+                        }
+                    }
+                },
+                inputBoxBorderColor: '#505053',
+                inputStyle: {
+                    backgroundColor: '#333',
+                    color: 'silver'
+                },
+                labelStyle: {
+                    color: 'silver'
+                }
+            },
+        
             series: [{
                 showInLegend: false,
-                name: 'Km Percorrido',
-                data: [35,10,25],
-                //Ano, Mês, Dia - lembrando que para este fim Janeiro é mês 0, Fevereiro mês 1, etc
-                pointStart: Date.UTC(2017, 1, 2),
-                //1 dia de intervalo
-                pointInterval: 24 * 3600 * 1000
+                data: []
             }]
         };
+
+        
+    }
+        
+
+    criarGrafico(data){
+        this.grafico.series[0].data = data;
+        this.grafico.series[0].xAxis = data.dia;
+    }
+
+    formatarData(data){
+        return this._dateUtil.obterDiaEMes(data);
+    }
+
+    atualizar(event){
+        
+        this.datas = event.totalizadores.map(totalizador => {
+            dia = this.formatarData(jornada._id);
+
+            let duracaoTotal = 0;
+
+            jornada.jornadaMotoristas.forEach(jornadaMotorista =>{
+                duracaoTotal = duracaoTotal + jornadaMotorista.duracao;
+            });
+
+            return {dia:dia,total:duracaoTotal};
+        });
+
+        this.criarGrafico(this.datas.map(data => data.total));
+
     }
 
     get render(){
