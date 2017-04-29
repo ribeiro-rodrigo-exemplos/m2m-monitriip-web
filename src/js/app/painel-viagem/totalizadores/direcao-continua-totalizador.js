@@ -5,33 +5,43 @@ class DirecaoContinuaTotalizador extends Totalizador{
     constructor(graficoGeral){
         super();
 
-        this._graficoGeral = graficoGeral;
+        this.graficoGeral = graficoGeral;
 
         this.total = 0; 
     }
 
     atualizar(event){
         
-        let dia = "";
         let maximo = 0;
         
-        this.datas = event.totalizadores.map(totalizador => {
-            dia = this.formatarData(totalizador._id);
+        let objeto = {
+            name:"Direção Contínua",
+            data:[]
+        };
 
-            totalizador.direcoes.forEach(direcao =>{
-                if (direcao.direcaoContinuaMaxima > maximo){
+        let arrayDias = [];
+
+        this.datas = event.dias.map(dia => {
+
+            dia.direcoes.forEach(direcao =>{
+                if(direcao.direcaoContinuaMaxima > maximo){
                     maximo = direcao.direcaoContinuaMaxima;
                 }
             });
-
-            return {dia:dia,direcaoMaxima:maximo};
+            
+            return {dia:this.formatarData(dia.data),direcaoMaxima:maximo};
+        
         });
+
+        objeto.data.push(maximo);
+        
 
         this.criarGrafico(this.datas.map(data => data.direcaoMaxima));
 
-        this.total = this.formatarNumero(this.datas.reduce((total,data) => total+data.direcaoMaxima,0.0));
+        this.total = this.datas.reduce((total,data) => total+data.direcaoMaxima,0);
 
-        this._graficoGeral.totalizadorDirecaoMaxima = this.total;
+        this.graficoGeral.totalizadorDirecaoContinua = objeto;
+        this.graficoGeral.dias = arrayDias;
         
     }
 }

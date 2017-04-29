@@ -3,6 +3,12 @@
  */
 class GraficoGeral{
     constructor(){
+        this.totalizadorDirecaoContinua = [];
+        this.totalizadorJornada = [];
+        this.totalizadorKmPercorrido = [];
+        this.totalizadorLeituraBilhetes = [];
+        this.mediaTempoViagem = [];
+        this.dias = [];
         
         this._dateUtil = new DateUtil();
 
@@ -43,20 +49,14 @@ class GraficoGeral{
             xAxis:{
                 lineColor: 'transparent',
                 minorGridLineColor: 'transparent',
-                tickColor: 'transparent',
-                title: {
-                    style: {
-                        color: '#e18e18'
-
-                    }
-                },
-                 labels: {
+                tickColor: 'yellow',
+                labels: {
                     enabled: true,
                     style: {
-                        color: '#ec6051'
+                        color: 'white'
                     }
                 },
-                categories:[], 
+                categories:[],
                 gridLineColor: 'transparent'
             },
             tooltip: {
@@ -107,19 +107,18 @@ class GraficoGeral{
                 }
             },
         
-            series: [{
-                showInLegend: false,
-                data: []
-            }]
+            series: []
         };
 
         
     }
-        
-
+    
     criarGrafico(data){
-        this.grafico.series[0].data = data;
-        this.grafico.series[0].xAxis = data.dia;
+        this._grafico.series.push(data);
+    }
+
+    criaCabecalhoGrafico(cabecalho){
+        this._grafico.xAxis.categories.push(cabecalho);
     }
 
     formatarData(data){
@@ -127,21 +126,16 @@ class GraficoGeral{
     }
 
     atualizar(event){
+        this.criarGrafico(this.totalizadorKmPercorrido);
+        this.criarGrafico(this.totalizadorLeituraBilhetes);
+        this.criarGrafico(this.mediaTempoViagem);
+        this.criarGrafico(this.totalizadorDirecaoContinua);
+        this.criarGrafico(this.totalizadorJornada);
         
-        this.datas = event.totalizadores.map(totalizador => {
-            dia = this.formatarData(jornada._id);
-
-            let duracaoTotal = 0;
-
-            jornada.jornadaMotoristas.forEach(jornadaMotorista =>{
-                duracaoTotal = duracaoTotal + jornadaMotorista.duracao;
-            });
-
-            return {dia:dia,total:duracaoTotal};
+        this.dias.forEach(dia =>{
+            this.criaCabecalhoGrafico(dia);
         });
-
-        this.criarGrafico(this.datas.map(data => data.total));
-
+        
     }
 
     get render(){

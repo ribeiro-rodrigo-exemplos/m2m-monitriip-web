@@ -4,7 +4,7 @@
 class PainelViagemController{
 
     constructor(viagemService,painelService,FullScreen,graficoGeral,kmPercorridoTotalizador,leituraBilhetesTotalizador, tempoViagemTotalizador, jornadaTrabalhoTotalizador,
-                direcaoContinuaTotalizador, GraficoGeral){
+                direcaoContinuaTotalizador, painelViagens){
 
         this.graficoGeral = graficoGeral;
         this.kmPercorridoTotalizador = kmPercorridoTotalizador;
@@ -12,8 +12,8 @@ class PainelViagemController{
         this.tempoViagemTotalizador = tempoViagemTotalizador;
         this.jornadaTrabalhoTotalizador = jornadaTrabalhoTotalizador;
         this.direcaoContinuaTotalizador = direcaoContinuaTotalizador;
-        this.GraficoGeral = GraficoGeral;
-
+        this.painelViagens = painelViagens;
+        
         this._viagemService = viagemService;
         this._painelService = painelService;
 
@@ -38,12 +38,13 @@ class PainelViagemController{
     }
 
     _init(){
-        this._addListener(this.kmPercorridoTotalizador);
         this._addListener(this.leituraBilhetesTotalizador);
+        this._addListener(this.kmPercorridoTotalizador);
         this._addListener(this.tempoViagemTotalizador);
         this._addListener(this.jornadaTrabalhoTotalizador);
         this._addListener(this.direcaoContinuaTotalizador);
-        this._addListener(this.GraficoGeral);
+        // this._addListener(this.graficoGeral);
+        // this._addListener(this.painelViagens);
     }
 
     _addListener(listener){
@@ -65,7 +66,7 @@ PainelViagemController.$inject = [
                                     'TempoViagemTotalizador',
                                     'JornadaTrabalhoTotalizador',
                                     'DirecaoContinuaTotalizador',
-                                    'GraficoGeral'
+                                    'PainelViagens'                                    
                                  ];
 
 angular.module('monitriip-web')
