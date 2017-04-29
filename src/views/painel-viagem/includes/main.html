@@ -153,8 +153,7 @@
         <div class="info-box__content info-box__content--purple info-direcao-continua-js">
             <select class="info-box__select">
                 <option>Todos</option>
-                <option>Marcelo Campos</option>
-                <option>Ricardo Souza</option>
+                <option ng-repeat="data in ctrl.direcaoContinuaTotalizador.combo">{{data}}</option>
             </select>
             
             <h5 class="info-box__content__title text-size-13">Direção Contínua</h5>
@@ -179,8 +178,7 @@
         <div class="info-box__content info-box__content--red info-jornada-de-trabalho-js">
             <select class="info-box__select">
                 <option>Todos</option>
-                <option>Marcelo Campos</option>
-                <option>Ricardo Souza</option>
+                <option ng-repeat="data in ctrl.jornadaTrabalhoTotalizador.combo">{{data}}</option>
             </select>
 
             <h5 class="info-box__content__title text-size-13">Jornada de Trabalho</h5>
@@ -206,33 +204,24 @@
         <div class="info-box__content info-box__content--orange info-detector-de-paradas-js">
             <select class="info-box__select">
                 <option>Todos</option>
-                <option>Parada Programada</option>
-                <option>Solicitação do Passageiro</option>
-                <option>Solicitação do Agente</option>
-                <option>Acidente na Via</option>
+                <option ng-repeat="data in ctrl.paradasTotalizador.combo">{{data}}</option>
             </select>
 
             <h5 class="info-box__content__title text-size-13">Detector de Paradas</h5>
             <div class="row row--align-baseline">
                 <ng-include src="'views/icons/detector-parada-totalizador-icon.html'"></ng-include>
-                <span class="info-box__content__span text-size-56">420</span>
+                <span class="info-box__content__span text-size-56">{{ctrl.paradasTotalizador.total}}</span>
             </div>
 
             <!-- gráfico -->
-            <div id="info-box-chartdiv6" class="info-box__chart"></div>
+            <div id="info-box-chartdiv6" class="info-box__chart">
+                <highchart class="info-box__chart" id="info-box-km-percorrido" config="ctrl.paradasTotalizador.grafico"></highchart>
+            </div>
         </div>
         <footer class="info-box__footer orange-bg">
-            <section class="column info-box__footer__column">
-                <span class="semitransparent-text">02 Fev</span>
-                <span class="text-size-24">90</span>
-            </section>
-            <section class="column info-box__footer__column">
-                <span class="semitransparent-text">03 Fev</span>
-                <span class="text-size-24">115</span>
-            </section>
-            <section class="column info-box__footer__column">
-                <span class="semitransparent-text">04 Fev</span>
-                <span class="text-size-24">105</span>
+            <section ng-repeat="data in ctrl.paradasTotalizador.datas" class="column info-box__footer__column">
+                <span class="semitransparent-text">{{data.dia}}</span>
+                <span class="text-size-24">{{data.total}}</span>
             </section>
         </footer>
     </div>

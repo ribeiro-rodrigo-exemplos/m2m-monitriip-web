@@ -249,7 +249,7 @@ class PainelService{
                                         "totalQuilometragem": 30.071618726313545,
                                         "totalBilhetes": 13,
                                         "totalTempo": 900,
-                                        "totalParadas":20,
+                                        "totalParadas":80,
                                         "totalJornadas":100
                                     }
 

@@ -115,10 +115,12 @@ class GraficoGeral{
     
     criarGrafico(data){
         this._grafico.series.push(data);
+        
     }
 
     criaCabecalhoGrafico(cabecalho){
-        this._grafico.xAxis.categories.push(cabecalho);
+        // this._grafico.xAxis.categories.push(cabecalho);
+        this._grafico.xAxis.categories=cabecalho;
     }
 
     formatarData(data){
@@ -131,10 +133,11 @@ class GraficoGeral{
         this.criarGrafico(this.mediaTempoViagem);
         this.criarGrafico(this.totalizadorDirecaoContinua);
         this.criarGrafico(this.totalizadorJornada);
-        
-        this.dias.forEach(dia =>{
-            this.criaCabecalhoGrafico(dia);
-        });
+        this.criarGrafico(this.totalizadorParadas);
+        this.criaCabecalhoGrafico(this.dias);
+        // this.dias.forEach(dia =>{
+        //     this.criaCabecalhoGrafico(dia);
+        // });
         
     }
 

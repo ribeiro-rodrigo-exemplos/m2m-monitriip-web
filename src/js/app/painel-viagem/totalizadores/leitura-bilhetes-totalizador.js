@@ -12,7 +12,7 @@ class LeituraBilhetesTotalizador extends Totalizador{
     atualizar(event){
 
         let objeto = {
-            name:"Leitura de Bilhetes",
+            name:"Bilhetes",
             data:[]
         };
 

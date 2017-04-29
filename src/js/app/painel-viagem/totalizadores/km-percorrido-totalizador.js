@@ -9,25 +9,6 @@ class KmPercorridoTotalizador extends Totalizador{
         this.total = 0;
     }
 
-    // atualizar(event){
-
-    //     let objeto = {
-    //         name:"kmPercorrido",
-    //         data:[]
-    //     };
-
-    //     this.criarGrafico(event.totalizadores.map(totalizador => totalizador.totalQuilometragem));
-
-    //     this.datas = event.totalizadores.map(totalizador => {
-    //         objeto.data.push(parseFloat(this.formatarNumero(totalizador.totalQuilometragem)));
-    //         return {dia:this.formatarData(totalizador._id),total:this.formatarNumero(totalizador.totalQuilometragem)};
-    //     });
-
-    //     this.total = this.formatarNumero(this.datas.reduce((total,data) => total+parseFloat(data.total),0));
-
-    //     this.graficoGeral.totalizadorKmPercorrido = objeto;
-    // }
-
     atualizar(event){
 
         let objeto = {
@@ -42,7 +23,7 @@ class KmPercorridoTotalizador extends Totalizador{
 
         this.datas = event.dias.map(dia => {
             objeto.data.push(parseFloat(this.formatarNumero(dia.totalizadores.totalQuilometragem)));
-
+            this.graficoGeral.dias.push(this.formatarData(dia.data));
             return {dia:this.formatarData(dia.data),total:this.formatarNumero(dia.totalizadores.totalQuilometragem)};
         });
 

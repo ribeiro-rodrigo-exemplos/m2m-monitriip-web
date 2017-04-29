@@ -12,7 +12,7 @@ class TempoViagemTotalizador extends Totalizador{
     atualizar(event){
 
         let objeto = {
-            name:"tempoViagem",
+            name:"Tempo Viagem",
             data:[]
         };
 

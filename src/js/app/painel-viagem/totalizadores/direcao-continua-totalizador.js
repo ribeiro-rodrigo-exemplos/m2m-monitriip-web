@@ -6,7 +6,7 @@ class DirecaoContinuaTotalizador extends Totalizador{
         super();
 
         this.graficoGeral = graficoGeral;
-
+        this.combo = [];
         this.total = 0; 
     }
 
@@ -19,7 +19,7 @@ class DirecaoContinuaTotalizador extends Totalizador{
             data:[]
         };
 
-        let arrayDias = [];
+        this.combo = event.motoristasCombo;
 
         this.datas = event.dias.map(dia => {
 
@@ -29,11 +29,11 @@ class DirecaoContinuaTotalizador extends Totalizador{
                 }
             });
             
+            objeto.data.push(maximo);
             return {dia:this.formatarData(dia.data),direcaoMaxima:maximo};
         
         });
 
-        objeto.data.push(maximo);
         
 
         this.criarGrafico(this.datas.map(data => data.direcaoMaxima));
@@ -41,7 +41,6 @@ class DirecaoContinuaTotalizador extends Totalizador{
         this.total = this.datas.reduce((total,data) => total+data.direcaoMaxima,0);
 
         this.graficoGeral.totalizadorDirecaoContinua = objeto;
-        this.graficoGeral.dias = arrayDias;
         
     }
 }
