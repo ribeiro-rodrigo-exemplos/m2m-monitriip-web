@@ -23,22 +23,20 @@ class DirecaoContinuaTotalizador extends Totalizador{
 
         this.datas = event.dias.map(dia => {
 
-            dia.direcoes.forEach(direcao =>{
-                if(direcao.direcaoContinuaMaxima > maximo){
-                    maximo = direcao.direcaoContinuaMaxima;
-                }
-            });
+            if (dia.totalizadores.totalDirecao > maximo){
+                maximo = dia.totalizadores.totalDirecao;
+            }
             
             objeto.data.push(maximo);
             return {dia:this.formatarData(dia.data),direcaoMaxima:maximo};
         
         });
 
-        
+        this.criarGrafico(event.dias.map(dia => {
+            return dia.totalizadores.totalDirecao;
+        }));
 
-        this.criarGrafico(this.datas.map(data => data.direcaoMaxima));
-
-        this.total = this.datas.reduce((total,data) => total+data.direcaoMaxima,0);
+        this.total = maximo;
 
         this.graficoGeral.totalizadorDirecaoContinua = objeto;
         

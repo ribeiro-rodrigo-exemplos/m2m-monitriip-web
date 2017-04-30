@@ -47,7 +47,7 @@ class PainelViagemController{
         this._addListener(this.direcaoContinuaTotalizador);
         this._addListener(this.paradasTotalizador);
         this._addListener(this.graficoGeral);
-        // this._addListener(this.painelViagens);
+        this._addListener(this.painelViagens);
     }
 
     _addListener(listener){

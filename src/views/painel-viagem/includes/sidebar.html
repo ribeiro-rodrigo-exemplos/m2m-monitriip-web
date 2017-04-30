@@ -3,76 +3,67 @@
     <button class="button button--row-search-and-export">REDUZIR</button>
 </header>
 
-<h4 class="sidebar__day text-size-13">
-    01 Fevereiro
-    <span class="sidebar__day__toggle-control">
-        <i class="fa fa-minus"></i>
-    </span>
-</h4>
+<div ng-repeat="dia in ctrl.painelViagens.viagens.dias">
+    <h4 class="sidebar__day text-size-13">
+        {{dia.data}}
+        <span class="sidebar__day__toggle-control">
+            <i class="fa fa-minus"></i>
+        </span>
+    </h4>
 
-<div class="sidebar__content slide-from-right--active">
-    <div class="row">
-        <section class="sidebar__content__info green-bg">
-            <ng-include src="'views/icons/km-percorrido-extrato-icon.html'"></ng-include>
-            <span class="text-size-24">{{ctrl.kmPercorridoTotalizador.total}}</span><span class="unit"> km</span>
-        </section>
-        <section class="sidebar__content__info pink-bg">
-            <ng-include src="'views/icons/leitura-bilhetes-extrato-icon.html'"></ng-include>
-            <span class="text-size-24">497</span>
-        </section>
-        <section class="sidebar__content__info blue-bg">
-            <ng-include src="'views/icons/tempo-viagem-extrato-icon.html'"></ng-include>
-            <span class="text-size-24">155</span><span class="unit"> min</span>
-        </section>
-        <section class="sidebar__content__info purple-bg">
-            <ng-include src="'views/icons/direcao-continua-extrato-icon.html'"></ng-include>
-            <span class="text-size-24">25</span>
-        </section>
-        <section class="sidebar__content__info red-bg">
-            <ng-include src="'views/icons/jornada-de-trabalho-extrato-icon.html'"></ng-include>
-            <span class="text-size-24">90</span>
-        </section>
-        <section class="sidebar__content__info orange-bg">
-            <ng-include src="'views/icons/detector-parada-extrato-icon.html'"></ng-include>
-            <span class="text-size-24">90</span>
-        </section>
+    <div class="sidebar__content slide-from-right--active">
+        <div class="row">
+            <section class="sidebar__content__info green-bg">
+                <ng-include src="'views/icons/km-percorrido-extrato-icon.html'"></ng-include>
+                <span class="text-size-24">{{dia.totalizadores.totalQuilometragem}}</span><span class="unit"> km</span>
+            </section>
+            <section class="sidebar__content__info pink-bg">
+                <ng-include src="'views/icons/leitura-bilhetes-extrato-icon.html'"></ng-include>
+                <span class="text-size-24">{{dia.totalizadores.totalBilhetes}}</span>
+            </section>
+            <section class="sidebar__content__info blue-bg">
+                <ng-include src="'views/icons/tempo-viagem-extrato-icon.html'"></ng-include>
+                <span class="text-size-24">{{dia.totalizadores.totalTempo}}</span><span class="unit"> min</span>
+            </section>
+            <section class="sidebar__content__info purple-bg">
+                <ng-include src="'views/icons/direcao-continua-extrato-icon.html'"></ng-include>
+                <span class="text-size-24">{{dia.totalizadores.totalDirecao}}</span>
+            </section>
+            <section class="sidebar__content__info red-bg">
+                <ng-include src="'views/icons/jornada-de-trabalho-extrato-icon.html'"></ng-include>
+                <span class="text-size-24">{{dia.totalizadores.totalJornadas}}</span>
+            </section>
+            <section class="sidebar__content__info orange-bg">
+                <ng-include src="'views/icons/detector-parada-extrato-icon.html'"></ng-include>
+                <span class="text-size-24">{{dia.totalizadores.totalParadas}}</span>
+            </section>
+        </div>
+
+        <table class="table" cellspacing="0">
+            <thead class="table__header">
+                <tr>
+                    <td>LINHA</td>
+                    <td>TIPO</td>
+                    <td>KM</td>
+                    <td>TEMPO</td>
+                    <td>BILHET.</td>
+                    <td>PARAD.</td>
+                </tr>
+            </thead>
+            <tbody>
+                <tr ng-repeat="viagem in dia.viagens" class="table__row open-pop-up">
+                    <td class="table__larger-row">
+                        <span class="number-box">{{$index + 1}}</span>
+                        {{viagem.descricaoLinha}}
+                    </td>
+
+                    <td><span class="purple">{{viagem.tipoViagem}}</span></td>
+                    <td>{{viagem.totalKm}}</td>
+                    <td>{{viagem.totalTempo}}</td>
+                    <td>{{viagem.totalBilhetes}}</td>
+                    <td>{{viagem.totalParadas}}</td>
+                </tr>
+            </tbody>
+        </table>
     </div>
-
-    <table class="table" cellspacing="0">
-        <thead class="table__header">
-            <tr>
-                <td>LINHA</td>
-                <td>TIPO</td>
-                <td>KM</td>
-                <td>TEMPO</td>
-                <td>BILHET.</td>
-                <td>PARAD.</td>
-            </tr>
-        </thead>
-        <tbody>
-            <tr class="table__row open-pop-up">
-                <td class="table__larger-row">
-                    <span class="number-box">1</span>
-                    Pingo D'água x Alvorada
-                </td>
-
-                <td><span class="purple">REGULAR</span></td>
-                <td>17,95</td>
-                <td>09:00 - 09:30 (00:30:52)</td>
-                <td>87</td>
-                <td>14</td>
-            </tr>
-            <tr class="table__row open-pop-up">
-                <td class="table__larger-row">
-                    <span class="number-box">2</span>
-                    Pingo D'água x Alvorada
-                </td>
-                <td><span class="red">FRETAMENTO</span></td>
-                <td>17,95</td>
-                <td>09:00 - 09:30 (00:30:52)</td>
-                <td>87</td>
-                <td>14</td>
-            </tr>
-        </tbody>
-    </table>
 </div>

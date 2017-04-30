@@ -1,20 +1,34 @@
 
 class PainelViagens{
     constructor(){
-        // this.id = "";
-        // this.descricaoLinha = "";
-        // this.tipoViagem = "";
-        // this.totalKm = 0;
-        // this.totalTempo = 0;
-        // this.totalBilhetes = 0;
-        // this.totalParadas = 0;
+        this._dateUtil = new DateUtil();
         this.viagens = [];
     }
 
+    formatarData(data){
+        return this._dateUtil.obterDiaEMes(data);
+    }
+
+    formatarNumero(numero){
+        return parseFloat(numero).toFixed(2);
+    }
+
     atualizar(event){
-        event.viagens.forEach(viagem =>{
-            this.viagens.push(viagem);
-        });      
+        let dias = [];
+        
+        event.dias = event.dias.map(dia =>{
+            dia.data = this.formatarData(dia.data);
+            dia.totalizadores.totalQuilometragem = this.formatarNumero(dia.totalizadores.totalQuilometragem);
+            
+            dia.viagens = dia.viagens.map(viagem =>{
+                viagem.totalKm = this.formatarNumero(viagem.totalKm);
+                return viagem;
+            });
+            
+            return dia;
+        });
+
+        this.viagens = event;
     }
 }
 

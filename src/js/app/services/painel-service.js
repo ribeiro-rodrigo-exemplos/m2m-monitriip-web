@@ -128,27 +128,30 @@ class PainelService{
                                 "viagens":[
                                         {
                                         "_id": "1",
-                                        "descricaoLinha": null,
+                                        "descricaoLinha": "Rio de Janeiro x Resende",
                                         "tipoViagem": "REGULAR",
                                         "totalKm": 18.071618726313545,
                                         "totalTempo": 1440,
-                                        "totalBilhetes": 17
+                                        "totalBilhetes": 17,
+                                        "totalParadas" : 30
                                         },
                                         {
                                         "_id": "2",
-                                        "descricaoLinha": null,
+                                        "descricaoLinha": "Rio de Janeiro x Petrópolis",
                                         "tipoViagem": "REGULAR",
                                         "totalKm": 12.071618726313545,
                                         "totalTempo": 1240,
-                                        "totalBilhetes": 35
+                                        "totalBilhetes": 35,
+                                        "totalParadas" : 23
                                         },
                                         {
                                         "_id": "3",
-                                        "descricaoLinha": null,
+                                        "descricaoLinha": "Lumiar X Rio de Janeiro",
                                         "tipoViagem": "REGULAR",
                                         "totalKm": 19.071618726313545,
                                         "totalTempo": 1440,
-                                        "totalBilhetes": 20
+                                        "totalBilhetes": 20,
+                                        "totalParadas" : 19
                                         }
                                 ],
                                 "jornadas":[
@@ -185,7 +188,8 @@ class PainelService{
                                         "totalBilhetes": 17,
                                         "totalTempo": 1440,
                                         "totalParadas":20,
-                                        "totalJornadas":100
+                                        "totalJornadas":100,
+                                        "totalDirecao" : 56
                                     }
 
                             },
@@ -193,27 +197,30 @@ class PainelService{
                                 "viagens":[
                                         {
                                         "_id": "1",
-                                        "descricaoLinha": null,
+                                        "descricaoLinha": "Rio de Janeiro x Teresópolis",
                                         "tipoViagem": "REGULAR",
                                         "totalKm": 25.071618726313545,
                                         "totalTempo": 1440,
-                                        "totalBilhetes": 17
+                                        "totalBilhetes": 17,
+                                        "totalParadas" : 5
                                         },
                                         {
                                         "_id": "2",
-                                        "descricaoLinha": null,
+                                        "descricaoLinha": "Rio de Janeiro x Itatiaia",
                                         "tipoViagem": "REGULAR",
                                         "totalKm": 25.071618726313545,
                                         "totalTempo": 1240,
-                                        "totalBilhetes": 35
+                                        "totalBilhetes": 35,
+                                        "totalParadas" : 15
                                         },
                                         {
                                         "_id": "3",
-                                        "descricaoLinha": null,
+                                        "descricaoLinha": "Rio de Janeiro x Penedo",
                                         "tipoViagem": "REGULAR",
                                         "totalKm": 19.071618726313545,
                                         "totalTempo": 1440,
-                                        "totalBilhetes": 20
+                                        "totalBilhetes": 20,
+                                        "totalParadas" : 10
                                         }
                                 ],
                                 "jornadas":[
@@ -250,7 +257,8 @@ class PainelService{
                                         "totalBilhetes": 13,
                                         "totalTempo": 900,
                                         "totalParadas":80,
-                                        "totalJornadas":100
+                                        "totalJornadas":10,
+                                        "totalDirecao" : 64
                                     }
 
                             }], 

@@ -12,9 +12,6 @@ class JornadaTrabalhoTotalizador extends Totalizador{
 
     atualizar(event){
         
-        let dia = "";
-        let total = 0;
-
         let objeto = {
             name:"Jornada Trabalho",
             data:[]
@@ -23,14 +20,15 @@ class JornadaTrabalhoTotalizador extends Totalizador{
         this.combo = event.motoristasCombo;
 
         this.datas = event.dias.map(dia => {
-            this.total = dia.jornadas.reduce((total,data) => total+data.duracao,0);
-            objeto.data.push(dia.jornadas.reduce((total,data) => total+data.duracao,0)); 
-            return {dia:this.formatarData(dia.data),total:this.total};
+            //this.total = dia.totalizadores.reduce((total,data) => total+data.duracao,0);
+            // objeto.data.push(dia.jornadas.reduce((total,data) => total+data.duracao,0)); 
+            objeto.data.push(dia.totalizadores.totalJornadas); 
+            return {dia:this.formatarData(dia.data),total:dia.totalizadores.totalJornadas};
         });
 
         this.criarGrafico(this.datas.map(data => data.total));
 
-        //this.total = this.datas.reduce((total,data) => total+data.total,0);
+        this.total = this.datas.reduce((total,data) => total+data.total,0);
 
         this.graficoGeral.totalizadorJornada = objeto;
         
