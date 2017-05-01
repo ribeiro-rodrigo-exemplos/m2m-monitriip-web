@@ -5,6 +5,7 @@ class ParadasTotalizador extends Totalizador{
 
         this.graficoGeral = graficoGeral;
         this.combo = [];
+        this.event = [];
         this.total = 0; 
     }
 
@@ -18,6 +19,7 @@ class ParadasTotalizador extends Totalizador{
             data:[]
         };
 
+        this.event = event;
         this.combo = event.paradasCombo;
 
         this.criarGrafico(event.dias.map(dia => {
@@ -27,14 +29,47 @@ class ParadasTotalizador extends Totalizador{
         
         this.datas = event.dias.map(dia => {
             objeto.data.push(parseFloat(this.formatarNumero(dia.totalizadores.totalParadas)));
-
-            return {dia:this.formatarData(dia.data),total:dia.totalizadores.totalParadas};
+            if (this.combo[0] != "TODOS"){
+                return {dia:this.formatarData(dia.data),total:dia.totalizadores.totalParadas};
+            }else{
+                return {dia:dia.data,total:dia.totalizadores.totalParadas};
+            }
         });
+
+        if (this.combo[0] != "TODOS"){
+            this.combo.splice(0, 0, "TODOS");
+        }
 
         this.total = this.datas.reduce((total,data) => total+parseFloat(data.total),0);
 
         this.graficoGeral.totalizadorParadas = objeto;
         
+    }
+
+    buscaCombo(motivo){
+        let grafico = [];
+        let total = 0;
+        this.datas = [];
+        
+        if(motivo != "TODOS"){
+            this.event.dias.forEach(dia =>{
+                total = 0;
+                dia.paradas.forEach(parada =>{
+                    if(parada.motivo == motivo){
+                        total++;
+                    }
+                });
+                grafico.push(total);
+                this.datas.push({dia:dia.data,total:total});
+            });
+
+            this.criarGrafico(grafico);
+
+            this.total = this.datas.reduce((total,data) => total+data.total,0);
+
+        }else{
+            this.atualizar(this.event);
+        }
     }
 }
 

@@ -156,11 +156,11 @@ class PainelService{
                                 ],
                                 "jornadas":[
                                         {
-                                            "motorista": "213456",
+                                            "motorista": "121613",
                                             "duracao": 180
                                         },
                                         {
-                                            "motorista": "12345",
+                                            "motorista": "121614",
                                             "duracao": 120
                                         }
                                 
@@ -172,12 +172,21 @@ class PainelService{
                                             },
                                             {
                                             "motorista": "121614",
-                                            "direcaoContinuaMaxima": 2
+                                            "direcaoContinuaMaxima": 8
                                             }
                                     ],
                                     "paradas":[
                                             {
                                                 motivo:"SOLICITACAO_DE_PASSAGEIRO"
+                                            },
+                                            {
+                                                motivo:"SOLICITACAO_DE_PASSAGEIRO"
+                                            },
+                                            {
+                                                motivo:"SOLICITACAO_DE_PASSAGEIRO"
+                                            },
+                                            {
+                                                motivo:"PARADA PROGRAMADA"
                                             },
                                             {
                                                 motivo:"PARADA PROGRAMADA"
@@ -225,11 +234,11 @@ class PainelService{
                                 ],
                                 "jornadas":[
                                         {
-                                            "motorista": "213456",
+                                            "motorista": "121613",
                                             "duracao": 250
                                         },
                                         {
-                                            "motorista": "12345",
+                                            "motorista": "121614",
                                             "duracao": 150
                                         }
                                 
@@ -267,8 +276,8 @@ class PainelService{
                                     "PARADA PROGRAMADA"
                                 ], 
                             "motoristasCombo":[
-                                    "213456",
-                                    "12345"
+                                    "121613",
+                                    "121614"
                                 ],
                             });
 

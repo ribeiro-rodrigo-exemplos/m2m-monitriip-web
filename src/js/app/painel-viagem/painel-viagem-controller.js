@@ -55,7 +55,9 @@ class PainelViagemController{
     }
 
     _notify(event){
-        this._listeners.forEach(listener => listener.atualizar(event));
+        this._listeners.forEach(listener => {
+            listener.atualizar(event)
+        });
     }
 }
 

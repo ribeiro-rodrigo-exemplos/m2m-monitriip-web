@@ -151,9 +151,8 @@
 <div class="info-boxes">
     <div class="info-box">
         <div class="info-box__content info-box__content--purple info-direcao-continua-js">
-            <select class="info-box__select">
-                <option>Todos</option>
-                <option ng-repeat="data in ctrl.direcaoContinuaTotalizador.combo">{{data}}</option>
+            <select ng-model="comboDirecao" ng-options="data for data in ctrl.direcaoContinuaTotalizador.combo"
+            ng-change="ctrl.direcaoContinuaTotalizador.buscaCombo(comboDirecao)" class="info-box__select">
             </select>
             
             <h5 class="info-box__content__title text-size-13">Direção Contínua</h5>
@@ -176,11 +175,10 @@
 
     <div class="info-box">
         <div class="info-box__content info-box__content--red info-jornada-de-trabalho-js">
-            <select class="info-box__select">
-                <option>Todos</option>
-                <option ng-repeat="data in ctrl.jornadaTrabalhoTotalizador.combo">{{data}}</option>
+            <select ng-model="comboJornada" ng-options="data for data in ctrl.jornadaTrabalhoTotalizador.combo"
+            ng-change="ctrl.jornadaTrabalhoTotalizador.buscaCombo(comboJornada)" class="info-box__select">
             </select>
-
+            
             <h5 class="info-box__content__title text-size-13">Jornada de Trabalho</h5>
             <div class="row row--align-baseline">
                 <ng-include src="'views/icons/jornada-trabalho-totalizador-icon.html'"></ng-include>
@@ -202,9 +200,8 @@
 
     <div class="info-box">
         <div class="info-box__content info-box__content--orange info-detector-de-paradas-js">
-            <select class="info-box__select">
-                <option>Todos</option>
-                <option ng-repeat="data in ctrl.paradasTotalizador.combo">{{data}}</option>
+            <select ng-model="comboParadas" ng-options="data for data in ctrl.paradasTotalizador.combo"
+            ng-change="ctrl.paradasTotalizador.buscaCombo(comboParadas)" class="info-box__select">
             </select>
 
             <h5 class="info-box__content__title text-size-13">Detector de Paradas</h5>
