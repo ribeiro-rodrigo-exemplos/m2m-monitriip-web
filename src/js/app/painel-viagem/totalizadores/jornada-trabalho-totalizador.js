@@ -24,11 +24,7 @@ class JornadaTrabalhoTotalizador extends Totalizador{
 
         this.datas = this.event.dias.map(dia => {
             objeto.data.push(dia.totalizadores.totalJornadas); 
-            if (this.combo[0] != "Todos"){
-                return {dia:this.formatarData(dia.data),total:dia.totalizadores.totalJornadas};
-            }else{
-                return {dia:dia.data,total:dia.totalizadores.totalJornadas};
-            }
+            return {dia:this.formatarData(dia.data),total:dia.totalizadores.totalJornadas};
         });
 
         if (this.combo[0] != "Todos"){
@@ -52,7 +48,7 @@ class JornadaTrabalhoTotalizador extends Totalizador{
                 dia.jornadas.forEach(jornada =>{
                     if(jornada.motorista == motorista){
                         grafico.push(jornada.duracao);
-                        this.datas.push({dia:dia.data,total:jornada.duracao});
+                        this.datas.push({dia:this.formatarData(dia.data),total:jornada.duracao});
                     }
                 });
             });

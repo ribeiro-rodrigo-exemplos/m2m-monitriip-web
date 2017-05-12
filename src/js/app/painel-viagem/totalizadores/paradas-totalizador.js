@@ -20,20 +20,16 @@ class ParadasTotalizador extends Totalizador{
         };
 
         this.event = event;
-        this.combo = event.paradasCombo;
+        this.combo = this.event.paradasCombo;
 
-        this.criarGrafico(event.dias.map(dia => {
+        this.criarGrafico(this.event.dias.map(dia => {
             return dia.totalizadores.totalParadas;
         }));
         
         
-        this.datas = event.dias.map(dia => {
+        this.datas = this.event.dias.map(dia => {
             objeto.data.push(parseFloat(this.formatarNumero(dia.totalizadores.totalParadas)));
-            if (this.combo[0] != "TODOS"){
-                return {dia:this.formatarData(dia.data),total:dia.totalizadores.totalParadas};
-            }else{
-                return {dia:dia.data,total:dia.totalizadores.totalParadas};
-            }
+           return {dia:this.formatarData(dia.data),total:dia.totalizadores.totalParadas};
         });
 
         if (this.combo[0] != "TODOS"){
@@ -60,7 +56,7 @@ class ParadasTotalizador extends Totalizador{
                     }
                 });
                 grafico.push(total);
-                this.datas.push({dia:dia.data,total:total});
+                this.datas.push({dia:this.formatarData(dia.data),total:total});
             });
 
             this.criarGrafico(grafico);

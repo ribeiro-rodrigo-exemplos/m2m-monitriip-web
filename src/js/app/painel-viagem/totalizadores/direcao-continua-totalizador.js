@@ -21,28 +21,23 @@ class DirecaoContinuaTotalizador extends Totalizador{
         };
 
         this.event = event;
-        this.combo = event.motoristasCombo;
+        this.combo = this.event.motoristasCombo;
 
 
-        this.datas = event.dias.map(dia => {
+        this.datas = this.event.dias.map(dia => {
             if (dia.totalizadores.totalDirecao > maximo){
                 maximo = dia.totalizadores.totalDirecao;
             }
             
             objeto.data.push(maximo);
-            
-            if (this.combo[0] != "Todos"){
-                return {dia:this.formatarData(dia.data),direcaoMaxima:maximo};
-            }else{
-                return {dia:dia.data,direcaoMaxima:maximo};
-            }
+            return {dia:this.formatarData(dia.data),direcaoMaxima:maximo};
         });
         
         if (this.combo[0] != "Todos"){
             this.combo.splice(0, 0, "Todos");
         }
 
-        this.criarGrafico(event.dias.map(dia => {
+        this.criarGrafico(this.event.dias.map(dia => {
             return dia.totalizadores.totalDirecao;
         }));
 
@@ -65,7 +60,7 @@ class DirecaoContinuaTotalizador extends Totalizador{
                             maximo = direcao.direcaoContinuaMaxima;
                         }
                         grafico.push(direcao.direcaoContinuaMaxima);
-                        this.datas.push({dia:dia.data,direcaoMaxima:direcao.direcaoContinuaMaxima});
+                        this.datas.push({dia:this.formatarData(dia.data),direcaoMaxima:direcao.direcaoContinuaMaxima});
                     }
                 });
             });

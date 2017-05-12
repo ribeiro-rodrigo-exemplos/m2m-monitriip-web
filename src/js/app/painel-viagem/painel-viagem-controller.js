@@ -55,9 +55,11 @@ class PainelViagemController{
     }
 
     _notify(event){
-        this._listeners.forEach(listener => {
-            listener.atualizar(event)
-        });
+        this._listeners.forEach(listener => listener.atualizar(this._clone(event)));
+    }
+
+    _clone(event){
+        return JSON.parse(JSON.stringify(event))
     }
 }
 

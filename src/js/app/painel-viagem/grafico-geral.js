@@ -119,7 +119,6 @@ class GraficoGeral{
     }
 
     criaCabecalhoGrafico(cabecalho){
-        // this._grafico.xAxis.categories.push(cabecalho);
         this._grafico.xAxis.categories=cabecalho;
     }
 
