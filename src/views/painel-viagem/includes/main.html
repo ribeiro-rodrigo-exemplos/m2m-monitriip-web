@@ -227,3 +227,81 @@
 
 
 <div ng-include="'views/painel-viagem/includes/info-viagem-popup.html'"></div>
+<script>
+ /*Exibir gráficos na div main-chart de acordo com o click no dropdown--main-chart*/
+$("#km-percorrido-chart").click(function(){
+        $(".chart").addClass("none");
+        $("#chartdiv").removeClass("none");
+});
+
+$("#leitura-de-bilhetes-chart").click(function(){
+        $(".chart").addClass("none");
+        $("#chartdiv-2").removeClass("none");
+});
+
+$("#tempo-de-viagem-chart").click(function(){
+        $(".chart").addClass("none");
+        $("#chartdiv-3").removeClass("none");
+});
+
+$("#direcao-continua-chart").click(function(){
+        $(".chart").addClass("none");
+        $("#chartdiv-4").removeClass("none");
+});
+
+$("#jornada-de-trabalho-chart").click(function(){
+        $(".chart").addClass("none");
+        $("#chartdiv-5").removeClass("none");
+});
+
+$("#detector-de-paradas-chart").click(function(){
+        $(".chart").addClass("none");
+        $("#chartdiv-6").removeClass("none");
+});
+ /*Dropdown - Visualização Info-Box */
+$(".dropdown__title").click(function(){
+    $(this).next(".dropdown__content").toggleClass("hidden");
+});
+
+/*Aparece o dia na sidebar pelos footers das info-boxes*/
+$(".info-box__footer__column").click(function(){
+    $(".sidebar__content").toggleClass("none");
+});
+
+/*Exibir gráficos na div main-chart de acordo com o click nas info-box__content*/
+$(".info-km-percorrido-js").click(function(){
+        $(".chart").addClass("none");
+        $("#chartdiv").removeClass("none");
+});
+
+$(".info-leitura-de-bilhetes-js").click(function(){
+        $(".chart").addClass("none");
+        $("#chartdiv-2").removeClass("none");
+});
+
+$(".info-tempo-de-viagem-js").click(function(){
+        $(".chart").addClass("none");
+        $("#chartdiv-3").removeClass("none");
+});
+
+$(".info-direcao-continua-js").click(function(){
+        $(".chart").addClass("none");
+        $("#chartdiv-4").removeClass("none");
+});
+
+$(".info-jornada-de-trabalho-js").click(function(){
+        $(".chart").addClass("none");
+        $("#chartdiv-5").removeClass("none");
+});
+
+$(".info-detector-de-paradas-js").click(function(){
+        $(".chart").addClass("none");
+        $("#chartdiv-6").removeClass("none");
+});
+
+$(".expandir-js").click(function(){
+    $(".sidebar").toggleClass("none");
+    $(".dropdown").toggleClass("dropdown--expanded-parent");
+    $(".main-panel").toggleClass("expanded");
+}); 
+</script>
