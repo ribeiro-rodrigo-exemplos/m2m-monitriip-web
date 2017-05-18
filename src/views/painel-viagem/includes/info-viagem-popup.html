@@ -1,7 +1,7 @@
 <div class="popup__content">
     <header class="popup__content__header text-size-14">
-        <span class="number-box number-box--larger">1</span>
-        <span>PINGO D'ÁGUA X ALVORADA</span>
+        <span class="number-box number-box--larger">{{$index + 1}}</span>
+        <span>{{ctrl.infoViagemPopup.detalheViagem.descricaoDaLinha}}</span>
         <span class="popup__content__close"></span>
     </header>
     <div class="popup__tabs">
@@ -11,7 +11,7 @@
         </span>
         <span class="popup__tab text-size-24 popup__tab__bilhetes">
             <ng-include src="'views/icons/km-percorrido-info-icon.html'"></ng-include>
-            1987
+            {{ctrl.infoViagemPopup.detalheViagem.totalBilhetes}}
         </span>
         <span class="popup__tab text-size-24 popup__tab__jornada-de-trabalho">
             <ng-include src="'views/icons/jornada-trabalho-info-icon.html'"></ng-include>
@@ -19,7 +19,7 @@
         </span>
         <span class="popup__tab text-size-24 popup__tab__detector-de-paradas">
             <ng-include src="'views/icons/detector-parada-info-icon.html'"></ng-include>
-                420
+                {{ctrl.infoViagemPopup.detalheViagem.totalParadas}}
         </span>
     </div>
 
@@ -27,7 +27,7 @@
         <div class="popup__pills">
             <section class="popup__pills__pill green-bg">
             <ng-include src="'views/icons/km-percorrido-info-icon.html'"></ng-include>
-                <span class="text-size-24">70</span><span> km</span>
+                <span class="text-size-24">{{ctrl.infoViagemPopup.detalheViagem.totalKm | number:2}}</span><span> km</span>
             </section>
             <section class="popup__pills__pill blue-bg">
                 <ng-include src="'views/icons/tempo-viagem-info-icon.html'"></ng-include>
@@ -35,7 +35,7 @@
             </section>
             <section class="popup__pills__pill purple-bg">
                 <ng-include src="'views/icons/direcao-continua-info-icon.html'"></ng-include>
-                <span class="text-size-24">00:42:00</span>
+                <span class="text-size-24">{{ctrl.infoViagemPopup.detalheViagem.direcaoContinuaMaxima}} min</span>
             </section>
         </div>
 
@@ -45,30 +45,34 @@
                 INFORMAÇÕES BÁSICAS
             </span><br>
             <span class="popup__content__label text-size-13">Linha</span><br>
-            <span class="popup__content__informations text-size-13">014 - PINGO D'ÁGUA X ALVORADA</span><br>
+            <span class="popup__content__informations text-size-13">{{ctrl.infoViagemPopup.detalheViagem.identificacaoLinha}} - {{ctrl.infoViagemPopup.detalheViagem.descricaoDaLinha}} </span><br>
 
             <span class="popup__content__label text-size-13">Sentido</span><br>
-            <span class="popup__content__informations text-size-13">ALVORADA</span><br>
+            <span class="popup__content__informations text-size-13">{{ctrl.infoViagemPopup.detalheViagem.sentidoLinha}}</span><br>
 
             <span class="popup__content__label text-size-13">Tipo</span><br>
-            <span class="popup__content__informations text-size-13 purple">REGULAR</span><br>
+            <span class="popup__content__informations text-size-13 purple">{{ctrl.infoViagemPopup.detalheViagem.tipoViagem}}</span><br>
 
             <span class="popup__content__label text-size-13">IMEI</span><br>
-            <span class="popup__content__informations text-size-13">5468465468464868</span><br>
+            <span class="popup__content__informations text-size-13">{{ctrl.infoViagemPopup.detalheViagem.imei}}</span><br>
 
             <span class="popup__content__label text-size-13">PDOP</span><br>
-            <span class="popup__content__informations text-size-13">5556989-900</span><br>
+            <span class="popup__content__informations text-size-13">{{ctrl.infoViagemPopup.detalheViagem.pdop}}</span><br>
 
-            <span class="popup__content__label text-size-13">Veículos </span>
-            <span class="m2m-green"><strong>(2)</strong></span><br>
+            <br><span class="popup__content__label text-size-13">Veículos </span>
+            <span class="m2m-green"><strong>({{ctrl.infoViagemPopup.detalheViagem.veiculos.length}})</strong></span><br>
             <!-- repetir a div class="row" para cada veículo -->
-            <div class="row">
-                <span class="popup__content__informations text-size-13 equidistant">56358 | 89856586</span>
-                <span class="popup__content__informations text-size-13 equidistant font-weight-normal">09:00:57 - 09:15:17</span>
+            <div class="row" ng-repeat="veiculo in ctrl.infoViagemPopup.detalheViagem.veiculos">
+                <span class="popup__content__informations text-size-13 equidistant">{{veiculo}}</span>
+                <!--<span class="popup__content__informations text-size-13 equidistant font-weight-normal">09:00:57 - 09:15:17</span>-->
             </div>
-            <div class="row">
-                <span class="popup__content__informations text-size-13 equidistant">56900 | 78899969</span>
-                <span class="popup__content__informations text-size-13 equidistant font-weight-normal">09:00:57 - 09:15:17</span>
+
+            <br><span class="popup__content__label text-size-13">Motoristas </span>
+            <span class="m2m-green"><strong>({{ctrl.infoViagemPopup.detalheViagem.motoristas.length}})</strong></span><br>
+            <!-- repetir a div class="row" para cada veículo -->
+            <div class="row" ng-repeat="motorista in ctrl.infoViagemPopup.detalheViagem.motoristas">
+                <span class="popup__content__informations text-size-13 equidistant">{{motorista}}</span>
+                <!--<span class="popup__content__informations text-size-13 equidistant font-weight-normal">09:00:57 - 09:15:17</span>-->
             </div>
 
             <br><span class="m2m-green">
@@ -83,7 +87,7 @@
                 <span class="popup__content__informations text-size-13 equidistant">12/02/2017 - 09:50:57</span>
             </div>
             <span class="popup__content__label text-size-13 eq">Tempo de Viagem</span><br>
-            <span class="popup__content__informations text-size-13">00:50:00</span><br><br>
+            <span class="popup__content__informations text-size-13">{{ctrl.infoViagemPopup.detalheViagem.duracao}} min</span><br><br>
 
             <span class="m2m-green">
                 DISTÂNCIA
@@ -93,16 +97,16 @@
                 <span class="popup__content__label text-size-13 equidistant">Velocidade Média</span>
             </div>
             <div class="row">
-                <span class="popup__content__informations text-size-13 equidistant">70 km</span>
-                <span class="popup__content__informations text-size-13 equidistant">45,7%</span>
+                <span class="popup__content__informations text-size-13 equidistant">{{ctrl.infoViagemPopup.detalheViagem.totalKm | number:2}} km</span>
+                <span class="popup__content__informations text-size-13 equidistant">{{ctrl.infoViagemPopup.velocidadeMedia | number:2}} km</span>
             </div>
             <div class="row">
                 <span class="popup__content__label text-size-13 equidistant">Velocidade Máxima</span>
                 <span class="popup__content__label text-size-13 equidistant">Velocidade Mínima</span>
             </div>
             <div class="row">
-                <span class="popup__content__informations text-size-13 equidistant">96,02 km</span>
-                <span class="popup__content__informations text-size-13 equidistant">12,05 km</span>
+                <span class="popup__content__informations text-size-13 equidistant">{{ctrl.infoViagemPopup.detalheViagem.velocidadeMaxima | number:2}} km</span>
+                <span class="popup__content__informations text-size-13 equidistant">{{ctrl.infoViagemPopup.detalheViagem.velocidadeMinima | number:2}} km</span>
             </div>
         </div>
     </div>
@@ -114,63 +118,37 @@
                     <span class="td--like">DATA/HORA</span>
                 </div>
 
-                <div class="table--like tbody--like table--toggle-control">
-                    <span class="td--like">
-                        <span class="number-box number-box--square">1</span>
-                        265864684
-                    </span>
-                    <span class="td--like">67,50</span>
-                    <span class="td--like">17/02/2017 - 09:02:56</span>
-                    <span class="td--like text-size-14 toggle-control">+</span>
-                </div>	
+                <div ng-repeat="bilhete in ctrl.infoViagemPopup.detalheViagem.bilhetes">
+                    <div class="table--like tbody--like table--toggle-control">
+                        <span class="td--like">
+                            <span class="number-box number-box--square">{{$index + 1}}</span>
+                            {{bilhete.numeroBilheteEmbarque}}
+                        </span>
+                        <span class="td--like">{{bilhete.valorTarifa | number:2}}</span>
+                        <span class="td--like">{{bilhete.dataHoraEvento}}</span>
+                        <span class="td--like text-size-14 toggle-control">+</span>
+                    </div>	
 
-                <table cellspacing="0" class="table table--tab toggle_table none">
-                    <tr class="table__row darker-gray-bg light-gray">
-                        <td width="100"></td>
-                        <td>CÓD.DESC</td>
-                        <td>% DESC</td>
-                        <td>ORIG/DEST</td>
-                        <td>CEL PASS</td>
-                        <td>LAT/LONG</td>
-                    </tr>
-                    <tr class="table__row darker-gray-bg">
-                        <td width="100"></td>
-                        <td>-</td>
-                        <td>15%</td>
-                        <td>Madureira x Alvorada</td>
-                        <td>2198575752</td>
-                        <td>8985458545 / 896587458<br> Av. Victor Civita, 77 - Barra, Rio de Janeiro - 0990-900</td>
-                    </tr>
-                </table>
-
-                <div class="table--like tbody--like table--toggle-control">
-                    <span class="td--like">
-                        <span class="number-box number-box--square">2</span>
-                        265864684
-                    </span>
-                    <span class="td--like">67,50</span>
-                    <span class="td--like">17/02/2017 - 09:02:56</span>
-                    <span class="td--like text-size-14 toggle-control">+</span>
-                </div>	
-
-                <table cellspacing="0" class="table table--tab toggle_table none">
-                    <tr class="table__row darker-gray-bg light-gray">
-                        <td width="100"></td>
-                        <td>CÓD.DESC</td>
-                        <td>% DESC</td>
-                        <td>ORIG/DEST</td>
-                        <td>CEL PASS</td>
-                        <td>LAT/LONG</td>
-                    </tr>
-                    <tr class="table__row darker-gray-bg">
-                        <td width="100"></td>
-                        <td>-</td>
-                        <td>15%</td>
-                        <td>Madureira x Alvorada</td>
-                        <td>2198575752</td>
-                        <td>8985458545 / 896587458<br> Av. Victor Civita, 77 - Barra, Rio de Janeiro - 0990-900</td>
-                    </tr>
-                </table>
+                    <table cellspacing="0" class="table table--tab toggle_table none">
+                        <tr class="table__row darker-gray-bg light-gray">
+                            <td width="100"></td>
+                            <td>CÓD.DESC</td>
+                            <td>% DESC</td>
+                            <td>ORIG/DEST</td>
+                            <td>CEL PASS</td>
+                            <td>LAT/LONG</td>
+                        </tr>
+                        <tr class="table__row darker-gray-bg">
+                            <td width="100"></td>
+                            <td>{{bilhete.codigoDesconto}}</td>
+                            <td>{{bilhete.percentualDesconto}}%</td>
+                            <td>{{ctrl.infoViagemPopup.detalheViagem.descricaoDaLinha}}</td>
+                            <td>{{bilhete.celularPassageiro}}</td>
+                            <td>{{bilhete.coordenadasFormatadas}}<br> Av. Victor Civita, 77 - Barra, Rio de Janeiro - 0990-900</td>
+                        </tr>
+                    </table>
+                </div>
+                
     </div><!-- fim div bilhetes-->
 
     <div class="tab__content popup__scrollable jornada-de-trabalho-js none">
@@ -223,39 +201,154 @@
                 <tr class="table__header__row">
                     <td>MOTIVO</td>
                     <td>HORA EVENT.</td>
-                    <td>HORA EMBAR.</td>
                     <td>LAT/LONG</td>
                 </tr>
             </thead>
             <tbody>
-                <tr class="table__row dark-gray-bg">
+                <tr class="table__row dark-gray-bg" ng-repeat="parada in ctrl.infoViagemPopup.detalheViagem.paradas">
                     <td class="table__larger-row">
                         <span class="number-box">1</span>
-                        Acidente na Via
+                        {{parada.motivoParada}}
                     </td>
-                    <td>09:07:35</td>
-                    <td>-</td>
-                    <td>8985458545 / 896587458</td>
-                </tr>
-                <tr class="table__row dark-gray-bg">
-                    <td class="table__larger-row">
-                        <span class="number-box">2</span>
-                        Solicitação Passageiro
-                    </td>
-                    <td>09:09:12</td>
-                    <td>09:10:09</td>
-                    <td>8985458545 / 896587458</td>
-                </tr>
-                <tr class="table__row dark-gray-bg">
-                    <td class="table__larger-row">
-                        <span class="number-box">2</span>
-                        Solicitação Agente
-                    </td>
-                    <td>09:09:12</td>
-                    <td>09:10:09</td>
-                    <td>8985458545 / 896587458</td>
+                    <td>{{parada.dataHora}}</td>
+                    <td>{{parada.coordenadasFormatadas}}</td>
                 </tr>
             </tbody>
         </table>
     </div>
 </div>
+
+<script>
+            /*Toggle do Filtro*/
+            $(".toggle").click(function(){
+                $(this).find(".fa-chevron-down").toggleClass("none");
+            })
+            
+            /*Exibir gráficos na div main-chart de acordo com o click no dropdown--main-chart*/
+            $("#km-percorrido-chart").click(function(){
+                    $(".chart").addClass("none");
+                    $("#chartdiv").removeClass("none");
+            });
+
+            $("#leitura-de-bilhetes-chart").click(function(){
+                    $(".chart").addClass("none");
+                    $("#chartdiv-2").removeClass("none");
+            });
+
+            $("#tempo-de-viagem-chart").click(function(){
+                    $(".chart").addClass("none");
+                    $("#chartdiv-3").removeClass("none");
+            });
+
+            $("#direcao-continua-chart").click(function(){
+                    $(".chart").addClass("none");
+                    $("#chartdiv-4").removeClass("none");
+            });
+
+            $("#jornada-de-trabalho-chart").click(function(){
+                    $(".chart").addClass("none");
+                    $("#chartdiv-5").removeClass("none");
+            });
+
+            $("#detector-de-paradas-chart").click(function(){
+                    $(".chart").addClass("none");
+                    $("#chartdiv-6").removeClass("none");
+            });
+
+            /*Exibir gráficos na div main-chart de acordo com o click nas info-box__content*/
+            $(".info-km-percorrido-js").click(function(){
+                    $(".chart").addClass("none");
+                    $("#chartdiv").removeClass("none");
+            });
+
+            $(".info-leitura-de-bilhetes-js").click(function(){
+                    $(".chart").addClass("none");
+                    $("#chartdiv-2").removeClass("none");
+            });
+
+            $(".info-tempo-de-viagem-js").click(function(){
+                    $(".chart").addClass("none");
+                    $("#chartdiv-3").removeClass("none");
+            });
+
+            $(".info-direcao-continua-js").click(function(){
+                    $(".chart").addClass("none");
+                    $("#chartdiv-4").removeClass("none");
+            });
+
+            $(".info-jornada-de-trabalho-js").click(function(){
+                    $(".chart").addClass("none");
+                    $("#chartdiv-5").removeClass("none");
+            });
+
+            $(".info-detector-de-paradas-js").click(function(){
+                    $(".chart").addClass("none");
+                    $("#chartdiv-6").removeClass("none");
+            });
+
+            /*Dropdown - Visualização Info-Box */
+            $(".dropdown__title").click(function(){
+                $(this).next(".dropdown__content").toggleClass("hidden");
+            });
+
+            /*Toggle Sidebar pela sidebar*/
+            $(".sidebar__day").click(function(){
+                $(this).next(".sidebar__content").toggleClass("none");
+            });
+
+            /*Toggle sidebar pelos footers das info-boxes*/
+            $(".info-box__footer__column").click(function(){
+                $(".sidebar__content").toggleClass("none");
+            });
+            
+            /*Expandir main-panel e esconder sidebar*/
+            $(".expandir-js").click(function(){
+                $(".sidebar").toggleClass("none");
+                $(".dropdown").toggleClass("dropdown--expanded-parent");
+                $(".main-panel").toggleClass("expanded");
+            });
+
+            /*Controla visualização das guias dentro do popup*/
+            $(".popup__tab__info-de-viagem").click(function(){
+                $(".tab__content").addClass("none");
+                $(".info-de-viagem-js").removeClass("none");
+                $(".popup__tab").removeClass("tab--active");
+                $(this).addClass("tab--active");
+            });
+
+            $(".popup__tab__bilhetes").click(function(){
+                $(".tab__content").addClass("none");
+                $(".bilhetes-js").removeClass("none");
+                $(".popup__tab").removeClass("tab--active");
+                $(this).addClass("tab--active");
+            });
+
+            $(".popup__tab__detector-de-paradas").click(function(){
+                $(".tab__content").addClass("none");
+                $(".detector-de-paradas-js").removeClass("none");
+                $(".popup__tab").removeClass("tab--active");
+                $(this).addClass("tab--active");
+            });
+
+            $(".popup__tab__jornada-de-trabalho").click(function(){
+                $(".tab__content").addClass("none");
+                $(".jornada-de-trabalho-js").removeClass("none");
+                $(".popup__tab").removeClass("tab--active");
+                $(this).addClass("tab--active");
+            });
+
+            /*controla toggle interno da tabela da segunda guia no popup*/
+            $(".table--toggle-control").click(function(){
+                $(this).next(".toggle_table").toggleClass("none");
+            })
+
+            /*abre popup ao se clicar nas rows da tabela da sidebar*/
+            $(".open-pop-up").click(function(){
+                $(".popup").removeClass("none");
+            })
+            
+            /*fecha popup ao se clicar no X*/
+            $(".popup__content__close").click(function(){
+                $(".popup").addClass("none");
+            })
+        </script>

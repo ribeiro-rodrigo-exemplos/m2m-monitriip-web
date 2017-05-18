@@ -5,8 +5,8 @@ class PainelViagemController{
 
     constructor(viagemService,painelService,FullScreen,graficoGeral,kmPercorridoTotalizador,leituraBilhetesTotalizador, 
                 tempoViagemTotalizador, jornadaTrabalhoTotalizador,direcaoContinuaTotalizador, paradasTotalizador, 
-                painelViagens){
-
+                painelViagens, infoViagemPopup){
+        
         this.graficoGeral = graficoGeral;
         this.kmPercorridoTotalizador = kmPercorridoTotalizador;
         this.leituraBilhetesTotalizador = leituraBilhetesTotalizador;
@@ -15,6 +15,7 @@ class PainelViagemController{
         this.direcaoContinuaTotalizador = direcaoContinuaTotalizador;
         this.paradasTotalizador = paradasTotalizador;
         this.painelViagens = painelViagens;
+        this.infoViagemPopup = infoViagemPopup;
         
         this._viagemService = viagemService;
         this._painelService = painelService;
@@ -29,6 +30,13 @@ class PainelViagemController{
     consultarPeriodo() {
         this._painelService.obterTotalizadoresDoPeriodo()
             .then(retorno => this._notify(retorno));
+    }
+
+    consultarViagemPorId(id){
+        this._viagemService.obterViagemPorId(id)
+            .then(detalheViagem => {
+                this.infoViagemPopup.obterDetalheViagem(detalheViagem);
+            });
     }
 
     limparFiltros(){
@@ -74,7 +82,8 @@ PainelViagemController.$inject = [
                                     'JornadaTrabalhoTotalizador',
                                     'DirecaoContinuaTotalizador',
                                     'ParadasTotalizador',
-                                    'PainelViagens'                                    
+                                    'PainelViagens',
+                                    'InfoViagemPopup'
                                  ];
 
 angular.module('monitriip-web')

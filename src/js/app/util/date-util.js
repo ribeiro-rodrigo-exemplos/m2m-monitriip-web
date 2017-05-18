@@ -28,6 +28,12 @@ class DateUtil{
         data = moment(data);
         return `${data.format('DD')} ${this.meses[data.month()]}`;
     }
+
+    formatarDataHora(dataHora){
+        let dtHora = dataHora.split(" ");
+        let data = dtHora[0].split("-");
+        return data[2] + "/" + data[1] + "/" + data[0] + " " + dtHora[1];
+    }
 }
 
 angular.module('monitriip-web')
