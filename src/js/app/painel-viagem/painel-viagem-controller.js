@@ -25,6 +25,8 @@ class PainelViagemController{
         this._listeners = [];
 
         this._init();
+
+
     }
 
     consultarPeriodo() {
@@ -33,10 +35,12 @@ class PainelViagemController{
     }
 
     consultarViagemPorId(id){
+        $(".popup").removeClass("none");
+
         this._viagemService.obterViagemPorId(id)
             .then(detalheViagem => {
                 this.infoViagemPopup.obterDetalheViagem(detalheViagem);
-            });
+            }); 
     }
 
     limparFiltros(){

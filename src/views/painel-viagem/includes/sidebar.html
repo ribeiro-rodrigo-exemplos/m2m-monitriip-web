@@ -1,12 +1,12 @@
 <header class="sidebar__header row row--space-between">
     <h3 class="sidebar__header__title text-size-14">Extrato por dia</h3>
-    <button class="button button--row-search-and-export">REDUZIR</button>
+    <button class="button button--row-search-and-export reduzir-js">REDUZIR</button>
 </header>
 
 <div ng-repeat="dia in ctrl.painelViagens.viagens.dias">
     <h4 class="sidebar__day text-size-13">
         {{dia.data}}
-        <span class="sidebar__day__toggle-control">
+        <span class="sidebar__day__toggle-control toggle-control-js">
             <i class="fa fa-minus"></i>
         </span>
     </h4>
@@ -68,10 +68,15 @@
     </div>
 </div>
 <script>
-/*abre popup ao se clicar nas rows da tabela da sidebar*/
-$(".open-pop-up").on("click", function(){
-   // console.log("clique forte");
-    $(".popup").removeClass("none");
-})
+    //fazer com este código o mesmo que foi feito com o popup
+    $(".toggle-control-js").click(function(){
+        $(this).find(".sidebar__content").toggleClass("none");
+    });
+    //fim
 
+    $(".reduzir-js").click(function(){
+        $(".sidebar").addClass("none");
+        $(".dropdown").toggleClass("dropdown--expanded-parent");
+        $(".main-panel").toggleClass("expanded");
+    });
 </script>
