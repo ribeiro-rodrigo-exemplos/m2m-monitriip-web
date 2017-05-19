@@ -5,6 +5,7 @@ class PainelViagens{
         this.viagens = [];
     }
 
+    
     formatarData(data){
         return this._dateUtil.obterDiaEMes(data);
     }
@@ -14,6 +15,7 @@ class PainelViagens{
     }
 
     atualizar(event){
+                   
         let dias = [];
         
         event.dias = event.dias.map(dia =>{

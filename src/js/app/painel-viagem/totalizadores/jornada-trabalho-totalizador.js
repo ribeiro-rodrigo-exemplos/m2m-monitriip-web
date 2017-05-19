@@ -33,6 +33,8 @@ class JornadaTrabalhoTotalizador extends Totalizador{
 
         this.criarGrafico(this.datas.map(data => data.total));
 
+        this.trocarCorLinhaGrafico("#ec6051");
+
         this.total = this.datas.reduce((total,data) => total+data.total,0);
 
         this.graficoGeral.totalizadorJornada = objeto;

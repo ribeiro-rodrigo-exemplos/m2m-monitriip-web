@@ -19,6 +19,8 @@ class TempoViagemTotalizador extends Totalizador{
         this.criarGrafico(event.dias.map(dia => {
             return dia.totalizadores.totalTempo;
         }));
+
+        this.trocarCorLinhaGrafico("#358fcd");
         
         this.datas = event.dias.map(dia => {
             objeto.data.push(dia.totalizadores.totalTempo);

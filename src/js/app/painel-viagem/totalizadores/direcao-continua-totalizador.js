@@ -41,6 +41,8 @@ class DirecaoContinuaTotalizador extends Totalizador{
             return dia.totalizadores.totalDirecao;
         }));
 
+        this.trocarCorLinhaGrafico("#9157ab");
+
         this.total = maximo;
 
         this.graficoGeral.totalizadorDirecaoContinua = objeto;

@@ -25,7 +25,8 @@ class ParadasTotalizador extends Totalizador{
         this.criarGrafico(this.event.dias.map(dia => {
             return dia.totalizadores.totalParadas;
         }));
-        
+
+        this.trocarCorLinhaGrafico("#e18e18");       
         
         this.datas = this.event.dias.map(dia => {
             objeto.data.push(parseFloat(this.formatarNumero(dia.totalizadores.totalParadas)));

@@ -19,7 +19,8 @@ class KmPercorridoTotalizador extends Totalizador{
         this.criarGrafico(event.dias.map(dia => {
             return dia.totalizadores.totalQuilometragem;
         }));
-        
+
+        this.trocarCorLinhaGrafico("#0bb48d");      
 
         this.datas = event.dias.map(dia => {
             objeto.data.push(parseFloat(this.formatarNumero(dia.totalizadores.totalQuilometragem)));

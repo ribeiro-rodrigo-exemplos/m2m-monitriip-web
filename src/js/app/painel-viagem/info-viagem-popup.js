@@ -6,6 +6,8 @@ class InfoViagemPopup{
     }
 
     obterDetalheViagem(detalheViagem){
+        $(".popup").removeClass("none");
+        
         this.detalheViagem = detalheViagem;
         let totalKm = this.detalheViagem.localizacoes.length;
         
@@ -28,6 +30,10 @@ class InfoViagemPopup{
 
     _formataCoordenadas(x, y){
         return x + " / " + y;
+    }
+
+    AbrirDetalhes(campo){
+        $(campo).next(".toggle_table").toggleClass("none");
     }
 }
 

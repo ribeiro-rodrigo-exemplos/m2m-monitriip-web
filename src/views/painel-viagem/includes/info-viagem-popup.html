@@ -59,18 +59,18 @@
 
                 <span class="popup__content__label text-size-13">PDOP</span><br>
                 <span class="popup__content__informations text-size-13">{{ctrl.infoViagemPopup.detalheViagem.pdop}}</span><br>
-
+                
                 <br><span class="popup__content__label text-size-13">Veículos </span>
                 <span class="m2m-green"><strong>({{ctrl.infoViagemPopup.detalheViagem.veiculos.length}})</strong></span><br>
-                <!-- repetir a div class="row" para cada veículo -->
+                
                 <div class="row" ng-repeat="veiculo in ctrl.infoViagemPopup.detalheViagem.veiculos">
                     <span class="popup__content__informations text-size-13 equidistant">{{veiculo}}</span>
                     <!--<span class="popup__content__informations text-size-13 equidistant font-weight-normal">09:00:57 - 09:15:17</span>-->
                 </div>
-
+                
                 <br><span class="popup__content__label text-size-13">Motoristas </span>
                 <span class="m2m-green"><strong>({{ctrl.infoViagemPopup.detalheViagem.motoristas.length}})</strong></span><br>
-                <!-- repetir a div class="row" para cada veículo -->
+                
                 <div class="row" ng-repeat="motorista in ctrl.infoViagemPopup.detalheViagem.motoristas">
                     <span class="popup__content__informations text-size-13 equidistant">{{motorista}}</span>
                     <!--<span class="popup__content__informations text-size-13 equidistant font-weight-normal">09:00:57 - 09:15:17</span>-->
@@ -120,7 +120,7 @@
                     </div>
 
                     <div ng-repeat="bilhete in ctrl.infoViagemPopup.detalheViagem.bilhetes">
-                        <div class="table--like tbody--like table--toggle-control">
+                        <div class="table--like tbody--like table--toggle-control" ng-click='ctrl.infoViagemPopup.AbrirDetalhes(this)'>
                             <span class="td--like">
                                 <span class="number-box number-box--square">{{$index + 1}}</span>
                                 {{bilhete.numeroBilheteEmbarque}}
@@ -208,7 +208,7 @@
                 <tbody>
                     <tr class="table__row dark-gray-bg" ng-repeat="parada in ctrl.infoViagemPopup.detalheViagem.paradas">
                         <td class="table__larger-row">
-                            <span class="number-box">1</span>
+                            <span class="number-box">{{$index + 1}}</span>
                             {{parada.motivoParada}}
                         </td>
                         <td>{{parada.dataHora}}</td>
@@ -221,44 +221,44 @@
 </div>
 
 <script>
-/*Controla visualização das guias dentro do popup*/
-$(".popup__tab__info-de-viagem").click(function(){
-    $(".tab__content").addClass("none");
-    $(".info-de-viagem-js").removeClass("none");
-    $(".popup__tab").removeClass("tab--active");
-    $(this).addClass("tab--active");
-});
+    /*Controla visualização das guias dentro do popup*/
+    $(".popup__tab__info-de-viagem").click(function(){
+        $(".tab__content").addClass("none");
+        $(".info-de-viagem-js").removeClass("none");
+        $(".popup__tab").removeClass("tab--active");
+        $(this).addClass("tab--active");
+    });
 
-$(".popup__tab__bilhetes").click(function(){
-    $(".tab__content").addClass("none");
-    $(".bilhetes-js").removeClass("none");
-    $(".popup__tab").removeClass("tab--active");
-    $(this).addClass("tab--active");
-});
+    $(".popup__tab__bilhetes").click(function(){
+        $(".tab__content").addClass("none");
+        $(".bilhetes-js").removeClass("none");
+        $(".popup__tab").removeClass("tab--active");
+        $(this).addClass("tab--active");
+    });
 
-$(".popup__tab__detector-de-paradas").click(function(){
-    $(".tab__content").addClass("none");
-    $(".detector-de-paradas-js").removeClass("none");
-    $(".popup__tab").removeClass("tab--active");
-    $(this).addClass("tab--active");
-});
+    $(".popup__tab__detector-de-paradas").click(function(){
+        $(".tab__content").addClass("none");
+        $(".detector-de-paradas-js").removeClass("none");
+        $(".popup__tab").removeClass("tab--active");
+        $(this).addClass("tab--active");
+    });
 
-$(".popup__tab__jornada-de-trabalho").click(function(){
-    $(".tab__content").addClass("none");
-    $(".jornada-de-trabalho-js").removeClass("none");
-    $(".popup__tab").removeClass("tab--active");
-    $(this).addClass("tab--active");
-});
+    $(".popup__tab__jornada-de-trabalho").click(function(){
+        $(".tab__content").addClass("none");
+        $(".jornada-de-trabalho-js").removeClass("none");
+        $(".popup__tab").removeClass("tab--active");
+        $(this).addClass("tab--active");
+    });
 
-/*controla toggle interno da tabela da segunda guia no popup*/
-$(".table--toggle-control").click(function(){
-    $(this).next(".toggle_table").toggleClass("none");
-})
+    /*controla toggle interno da tabela da segunda guia no popup*/
+    $(".table--toggle-control").click(function(){
+        $(this).next(".toggle_table").toggleClass("none");
+    })
 
 
-/*fecha popup ao se clicar no X*/
-$(".popup__content__close").click(function(){
-    $(".popup").addClass("none");
-});
+    /*fecha popup ao se clicar no X*/
+    $(".popup__content__close").click(function(){
+        $(".popup").addClass("none");
+    });
 
-        </script>
+</script>

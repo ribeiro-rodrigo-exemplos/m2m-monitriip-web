@@ -20,6 +20,8 @@ class LeituraBilhetesTotalizador extends Totalizador{
             return dia.totalizadores.totalBilhetes;
         }));
 
+        this.trocarCorLinhaGrafico("#cb3f7e");
+
         this.datas = event.dias.map(dia => {
             objeto.data.push(dia.totalizadores.totalBilhetes);
             return {dia:this.formatarData(dia.data),total:dia.totalizadores.totalBilhetes};

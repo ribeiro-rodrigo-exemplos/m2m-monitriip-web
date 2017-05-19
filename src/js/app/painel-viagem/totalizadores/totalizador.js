@@ -40,7 +40,7 @@ class Totalizador{
             },
             plotOptions: {
                 series: {
-                    color: '#0bb48d',
+                    color: '',
                     enableMouseTracking: false,
                     pointStart: null,
                     pointInterval: 24 * 3600 * 1000,
@@ -76,7 +76,9 @@ class Totalizador{
         throw new Error('É preciso implementar o método atualizar');
     }
 
-
+    trocarCorLinhaGrafico(cor){
+        this._grafico.plotOptions.series.color = cor;
+    }
 
     get grafico(){
         return this._grafico;
