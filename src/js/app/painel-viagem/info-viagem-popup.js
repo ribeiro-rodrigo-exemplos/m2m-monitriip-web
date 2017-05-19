@@ -33,7 +33,8 @@ class InfoViagemPopup{
     }
 
     AbrirDetalhes(campo){
-        $(campo).next(".toggle_table").toggleClass("none");
+        //alert(campo);
+        $('.bilhete-'+campo).next(".toggle_table").toggleClass("none");
     }
 }
 

@@ -6,12 +6,12 @@
 <div ng-repeat="dia in ctrl.painelViagens.viagens.dias">
     <h4 class="sidebar__day text-size-13">
         {{dia.data}}
-        <span class="sidebar__day__toggle-control toggle-control-js">
+        <span class="sidebar__day__toggle-control toggle-control-js" ng-click="ctrl.painelViagens.minimizar($index+1)">
             <i class="fa fa-minus"></i>
         </span>
     </h4>
 
-    <div class="sidebar__content slide-from-right--active">
+    <div class="minimizar-{{$index + 1}} sidebar__content slide-from-right--active">
         <div class="row">
             <section class="sidebar__content__info green-bg">
                 <ng-include src="'views/icons/km-percorrido-extrato-icon.html'"></ng-include>

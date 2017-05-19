@@ -32,6 +32,10 @@ class PainelViagens{
 
         this.viagens = event;
     }
+
+    minimizar(index){
+        $(".minimizar-"+index).toggleClass("none");
+    }
 }
 
 angular.module('monitriip-web')
