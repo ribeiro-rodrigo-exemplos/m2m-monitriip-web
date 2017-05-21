@@ -30,7 +30,7 @@ class PainelViagemController{
     consultarPeriodo() {
 
         let dataInicial = '2017-04-01';
-        let dataFinal = '2017-04-08';
+        let dataFinal = '2017-04-03';
         let cnpjCliente = '123456';
 
         this._painelService.consultarPeriodo(dataInicial,dataFinal,cnpjCliente)
@@ -57,7 +57,7 @@ class PainelViagemController{
 
         this._addListener(
             //this.leituraBilhetesTotalizador,
-            //this.kmPercorridoTotalizador,
+            this.kmPercorridoTotalizador,
             //this.tempoViagemTotalizador,
             //this.jornadaTrabalhoTotalizador,
             //this.direcaoContinuaTotalizador,

@@ -85,7 +85,7 @@ class PainelService{
             rootData[jornada.dataInicial].jornadas.push(jornada);
         });
 
-        rootData.datas = Object.keys(rootData); 
+        rootData.datas = Object.keys(rootData).sort(); 
 
         return rootData;
     }

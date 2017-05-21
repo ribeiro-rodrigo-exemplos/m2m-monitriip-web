@@ -10,25 +10,24 @@ class KmPercorridoTotalizador extends Totalizador{
     }
 
     atualizar(event){
-
         let objeto = {
             name:"Km Percorrido",
             data:[]
         };
 
-        this.criarGrafico(event.dias.map(dia => {
-            return dia.totalizadores.totalQuilometragem;
-        }));
-
-        this.trocarCorLinhaGrafico("#0bb48d");      
-
-        this.datas = event.dias.map(dia => {
-            objeto.data.push(parseFloat(this.formatarNumero(dia.totalizadores.totalQuilometragem)));
-            this.graficoGeral.dias.push(this.formatarData(dia.data));
-            return {dia:this.formatarData(dia.data),total:this.formatarNumero(dia.totalizadores.totalQuilometragem)};
+        this.totalizadoresPorData = event.datas.map(data => {
+            let totalizador = {data:this.formatarData(data),totalKm:0};
+            if(event[data].totalKm){
+                totalizador.totalKm = this.formatarNumero(event[data].totalKm);
+                this.total += event[data].totalKm;
+            } 
+            objeto.data.push(totalizador.totalKm);           
+            return totalizador;
         });
 
-        this.total = this.formatarNumero(this.datas.reduce((total,data) => total+parseFloat(data.total),0));
+        this.total = this.formatarNumero(this.total);
+        this.criarGrafico(this.totalizadoresPorData.map(t => parseFloat(t.totalKm)));
+        this.trocarCorLinhaGrafico("#0bb48d");
 
         this.graficoGeral.totalizadorKmPercorrido = objeto;
     }

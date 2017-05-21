@@ -67,9 +67,9 @@
             <highchart class="info-box__chart" id="info-box-km-percorrido" config="ctrl.kmPercorridoTotalizador.grafico"></highchart>
         </div>
         <footer class="info-box__footer green-bg">
-            <section ng-repeat="data in ctrl.kmPercorridoTotalizador.datas" class="column info-box__footer__column">
-                <span class="semitransparent-text">{{data.dia}}</span>
-                <span><span class="text-size-24">{{data.total}}</span>km</span>
+            <section ng-repeat="totalizador in ctrl.kmPercorridoTotalizador.totalizadoresPorData" class="column info-box__footer__column">
+                <span class="semitransparent-text">{{totalizador.data}}</span>
+                <span><span class="text-size-24">{{totalizador.totalKm}}</span>km</span>
             </section>
         </footer>
     </div><!-- fim info-box km percorrido-->

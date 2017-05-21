@@ -19,8 +19,6 @@ class ExtratoPorDia{
 
     atualizar(event){
 
-        event.datas = event.datas.sort();
-
         this.extratos = event.datas.map(data => {
             let extratoPorDia = {}
             extratoPorDia.data = this.formatarData(data);
@@ -34,8 +32,6 @@ class ExtratoPorDia{
 
             return extratoPorDia;
         });
-
-        console.log(this.extratos);
     }
 
     minimizar(index){
