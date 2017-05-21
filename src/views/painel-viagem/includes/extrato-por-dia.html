@@ -3,10 +3,10 @@
     <button class="button button--row-search-and-export reduzir-js">REDUZIR</button>
 </header>
 
-<div ng-repeat="dia in ctrl.painelViagens.viagens.dias">
+<div ng-repeat="dia in ctrl.extratoPorDia.viagens.dias">
     <h4 class="sidebar__day text-size-13">
         {{dia.data}}
-        <span class="sidebar__day__toggle-control toggle-control-js" ng-click="ctrl.painelViagens.minimizar($index+1)">
+        <span class="sidebar__day__toggle-control toggle-control-js" ng-click="ctrl.extratoPorDia.minimizar($index+1)">
             <i class="fa fa-minus"></i>
         </span>
     </h4>
@@ -67,16 +67,3 @@
         </table>
     </div>
 </div>
-<script>
-    // //fazer com este código o mesmo que foi feito com o popup
-    // $(".toggle-control-js").click(function(){
-    //     $(this).find(".sidebar__content").toggleClass("none");
-    // });
-    // //fim
-
-    $(".reduzir-js").click(function(){
-        $(".sidebar").addClass("none");
-        $(".dropdown").toggleClass("dropdown--expanded-parent");
-        $(".main-panel").toggleClass("expanded");
-    });
-</script>

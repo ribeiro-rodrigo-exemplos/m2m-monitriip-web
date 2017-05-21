@@ -120,7 +120,7 @@
                     </div>
 
                     <div ng-repeat="bilhete in ctrl.infoViagemPopup.detalheViagem.bilhetes">
-                        <div class="bilhete-{{$index + 1}} table--like tbody--like table--toggle-control" ng-click='ctrl.infoViagemPopup.AbrirDetalhes($index + 1)'>
+                        <div class="bilhete-{{$index + 1}} table--like tbody--like table--toggle-control" ng-click='ctrl.infoViagemPopup.abrirDetalhesDoBilhete($index + 1)'>
                             <span class="td--like">
                                 <span class="number-box number-box--square">{{$index + 1}}</span>
                                 {{bilhete.numeroBilheteEmbarque}}

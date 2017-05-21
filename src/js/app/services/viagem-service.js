@@ -4,6 +4,27 @@ class ViagemService{
         this._promise = promise;
     }
 
+    obterExtratosDeViagensPorPeriodo(dataInicial,dataFinal,cnpjCliente,cpfMotorista,placaVeiculo){
+        let query = {};
+
+        if(cpfMotorista)
+            query.cpfMotorista = cpfMotorista;
+        
+        if(placaVeiculo)
+            query.placaVeiculo = placaVeiculo;
+        
+        if(cnpjCliente)
+            query.cnpjCliente = cnpjCliente;
+        
+        query.dataInicial = dataInicial;
+        query.dataFinal = dataFinal;
+        
+        return this._httpClient
+                    .get("http://localhost:3009/v1/viagens/extratos",{params:query})
+                    .then(response => response.data);
+
+    }
+
     obterViagemPorId(id){
          
         let defer = this._promise.defer();

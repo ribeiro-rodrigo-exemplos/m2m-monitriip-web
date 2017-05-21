@@ -1,11 +1,11 @@
 
-class PainelViagens{
-    constructor(){
+class ExtratoPorDia{
+    constructor(document){
         this._dateUtil = new DateUtil();
         this.viagens = [];
+        this._document = document[0];
     }
 
-    
     formatarData(data){
         return this._dateUtil.obterDiaEMes(data);
     }
@@ -34,9 +34,12 @@ class PainelViagens{
     }
 
     minimizar(index){
-        $(".minimizar-"+index).toggleClass("none");
+        let element = this._document.querySelector(`.minimizar-${index}`);
+        element.classList.toggle('none');
     }
 }
 
+ExtratoPorDia.$inject = ['$document'];
+
 angular.module('monitriip-web')
-        .service('PainelViagens', PainelViagens);
+        .service('ExtratoPorDia', ExtratoPorDia);

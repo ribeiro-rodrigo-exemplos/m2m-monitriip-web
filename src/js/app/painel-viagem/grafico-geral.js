@@ -106,11 +106,9 @@ class GraficoGeral{
                     color: 'silver'
                 }
             },
-        
             series: []
         };
 
-        
     }
     
     criarGrafico(data){
@@ -136,8 +134,7 @@ class GraficoGeral{
         this.criaCabecalhoGrafico(this.dias);
         // this.dias.forEach(dia =>{
         //     this.criaCabecalhoGrafico(dia);
-        // });
-        
+        // }); 
     }
 
     get render(){

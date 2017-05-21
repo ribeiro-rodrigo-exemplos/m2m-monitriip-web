@@ -5,7 +5,7 @@ class PainelViagemController{
 
     constructor(viagemService,painelService,FullScreen,graficoGeral,kmPercorridoTotalizador,leituraBilhetesTotalizador, 
                 tempoViagemTotalizador, jornadaTrabalhoTotalizador,direcaoContinuaTotalizador, paradasTotalizador, 
-                painelViagens, infoViagemPopup){
+                extratoPorDia, infoViagemPopup){
         
         this.graficoGeral = graficoGeral;
         this.kmPercorridoTotalizador = kmPercorridoTotalizador;
@@ -14,7 +14,7 @@ class PainelViagemController{
         this.jornadaTrabalhoTotalizador = jornadaTrabalhoTotalizador;
         this.direcaoContinuaTotalizador = direcaoContinuaTotalizador;
         this.paradasTotalizador = paradasTotalizador;
-        this.painelViagens = painelViagens;
+        this.extratoPorDia = extratoPorDia;
         this.infoViagemPopup = infoViagemPopup;
         
         this._viagemService = viagemService;
@@ -25,13 +25,15 @@ class PainelViagemController{
         this._listeners = [];
 
         this._init();
-
-
     }
 
     consultarPeriodo() {
         this._painelService.obterTotalizadoresDoPeriodo()
             .then(retorno => this._notify(retorno));
+        /*this._viagemService
+            .obterExtratosDeViagensPorPeriodo('2017-04-01','2017-04-08','123456')
+            .then(result => console.log(result))
+            .catch(error => console.error(error));*/
     }
 
     consultarViagemPorId(id){
@@ -50,18 +52,21 @@ class PainelViagemController{
     }
 
     _init(){
-        this._addListener(this.leituraBilhetesTotalizador);
-        this._addListener(this.kmPercorridoTotalizador);
-        this._addListener(this.tempoViagemTotalizador);
-        this._addListener(this.jornadaTrabalhoTotalizador);
-        this._addListener(this.direcaoContinuaTotalizador);
-        this._addListener(this.paradasTotalizador);
-        this._addListener(this.graficoGeral);
-        this._addListener(this.painelViagens);
+
+        this._addListener(
+            this.leituraBilhetesTotalizador,
+            this.kmPercorridoTotalizador,
+            this.tempoViagemTotalizador,
+            this.jornadaTrabalhoTotalizador,
+            this.direcaoContinuaTotalizador,
+            this.paradasTotalizador,
+            this.graficoGeral,
+            this.extratoPorDia
+        );
     }
 
-    _addListener(listener){
-        this._listeners.push(listener);
+    _addListener(){
+        this._listeners.push(...arguments);
     }
 
     _notify(event){
@@ -69,7 +74,7 @@ class PainelViagemController{
     }
 
     _clone(event){
-        return JSON.parse(JSON.stringify(event))
+        return JSON.parse(JSON.stringify(event)); 
     }
 }
 
@@ -84,7 +89,7 @@ PainelViagemController.$inject = [
                                     'JornadaTrabalhoTotalizador',
                                     'DirecaoContinuaTotalizador',
                                     'ParadasTotalizador',
-                                    'PainelViagens',
+                                    'ExtratoPorDia',
                                     'InfoViagemPopup'
                                  ];
 

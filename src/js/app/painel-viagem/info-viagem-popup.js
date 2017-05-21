@@ -1,12 +1,16 @@
 class InfoViagemPopup{
-    constructor(){
+    constructor(document){
         this.detalheViagem = {};
         this.velocidadeMedia = 0;
         this._dateUtil = new DateUtil();
+        this._document = document[0];
     }
 
     obterDetalheViagem(detalheViagem){
-        $(".popup").removeClass("none");
+        this._document
+                    .querySelector('.popup')
+                    .classList
+                    .remove('none');
         
         this.detalheViagem = detalheViagem;
         let totalKm = this.detalheViagem.localizacoes.length;
@@ -28,15 +32,19 @@ class InfoViagemPopup{
         
     }
 
+    abrirDetalhesDoBilhete(campo){
+        this._document
+                .querySelector(`.bilhete-${campo} + .toggle_table`)
+                .classList
+                .toggle('none');
+    }
+
     _formataCoordenadas(x, y){
         return x + " / " + y;
     }
-
-    AbrirDetalhes(campo){
-        //alert(campo);
-        $('.bilhete-'+campo).next(".toggle_table").toggleClass("none");
-    }
 }
+
+InfoViagemPopup.$inject = ['$document'];
 
 angular.module('monitriip-web')
         .service('InfoViagemPopup', InfoViagemPopup);
