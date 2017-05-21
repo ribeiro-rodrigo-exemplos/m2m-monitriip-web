@@ -3,9 +3,9 @@
     <button class="button button--row-search-and-export reduzir-js">REDUZIR</button>
 </header>
 
-<div ng-repeat="dia in ctrl.extratoPorDia.viagens.dias">
+<div ng-repeat="extrato in ctrl.extratoPorDia.extratos">
     <h4 class="sidebar__day text-size-13">
-        {{dia.data}}
+        {{extrato.data}}
         <span class="sidebar__day__toggle-control toggle-control-js" ng-click="ctrl.extratoPorDia.minimizar($index+1)">
             <i class="fa fa-minus"></i>
         </span>
@@ -15,27 +15,27 @@
         <div class="row">
             <section class="sidebar__content__info green-bg">
                 <ng-include src="'views/icons/km-percorrido-extrato-icon.html'"></ng-include>
-                <span class="text-size-24">{{dia.totalizadores.totalQuilometragem}}</span><span class="unit"> km</span>
+                <span class="text-size-24">{{extrato.totalKm}}</span><span class="unit"> km</span>
             </section>
             <section class="sidebar__content__info pink-bg">
                 <ng-include src="'views/icons/leitura-bilhetes-extrato-icon.html'"></ng-include>
-                <span class="text-size-24">{{dia.totalizadores.totalBilhetes}}</span>
+                <span class="text-size-24">{{extrato.totalBilhetes}}</span>
             </section>
             <section class="sidebar__content__info blue-bg">
                 <ng-include src="'views/icons/tempo-viagem-extrato-icon.html'"></ng-include>
-                <span class="text-size-24">{{dia.totalizadores.totalTempo}}</span><span class="unit"> min</span>
+                <span class="text-size-24">{{extrato.totalTempo}}</span><span class="unit"> min</span>
             </section>
             <section class="sidebar__content__info purple-bg">
                 <ng-include src="'views/icons/direcao-continua-extrato-icon.html'"></ng-include>
-                <span class="text-size-24">{{dia.totalizadores.totalDirecao}}</span>
+                <span class="text-size-24">{{extrato.totalDirecao}}</span>
             </section>
             <section class="sidebar__content__info red-bg">
                 <ng-include src="'views/icons/jornada-de-trabalho-extrato-icon.html'"></ng-include>
-                <span class="text-size-24">{{dia.totalizadores.totalJornadas}}</span>
+                <span class="text-size-24">{{extrato.totalTempoJornada}}</span>
             </section>
             <section class="sidebar__content__info orange-bg">
                 <ng-include src="'views/icons/detector-parada-extrato-icon.html'"></ng-include>
-                <span class="text-size-24">{{dia.totalizadores.totalParadas}}</span>
+                <span class="text-size-24">{{extrato.totalParadas}}</span>
             </section>
         </div>
 
@@ -51,15 +51,15 @@
                 </tr>
             </thead>
             <tbody>
-                <tr ng-repeat="viagem in dia.viagens" class="table__row open-pop-up" ng-click="ctrl.consultarViagemPorId(viagem._id)">
+                <tr ng-repeat="viagem in extrato.viagensExtrato" class="table__row open-pop-up" ng-click="ctrl.consultarViagemPorId(viagem._id)">
                     <td class="table__larger-row">
                         <span class="number-box">{{$index + 1}}</span>
-                        {{viagem.descricaoLinha}}
+                        {{viagem.identificacaoLinha}}
                     </td>
 
-                    <td><span class="purple">{{viagem.tipoViagem}}</span></td>
-                    <td>{{viagem.totalKm}}</td>
-                    <td>{{viagem.totalTempo}}</td>
+                    <td><span class="purple">{{viagem.tipoTransporte}}</span></td>
+                    <td>{{ctrl.extratoPorDia.formatarNumero(viagem.totalKm)}}</td>
+                    <td>{{viagem.totalTempo ? viagem.totalTempo : 0}}</td>
                     <td>{{viagem.totalBilhetes}}</td>
                     <td>{{viagem.totalParadas}}</td>
                 </tr>

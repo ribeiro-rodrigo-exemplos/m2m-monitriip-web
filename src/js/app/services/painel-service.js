@@ -5,173 +5,100 @@ class PainelService{
     constructor(httpClient,promise){
         this._httpClient = httpClient;
         this._promise = promise;
+        this._url = "http://localhost:3009/v1";
     }
 
-    obterTotalizadoresDoPeriodo(dataInicial,dataFinal,cpfMotorista,placaVeiculo){
+    consultarPeriodo(dataInicial,dataFinal,cnpjCliente,cpfMotorista,placaVeiculo){
 
-        let defer = this._promise.defer();
+         const query = this._createQuery(dataInicial,dataFinal,cnpjCliente,cpfMotorista,placaVeiculo);
 
-        defer.resolve({
-                        dias:[
-                            {    "data":"2017-04-03",
-                                "viagens":[
-                                        {
-                                        "_id": "1",
-                                        "descricaoLinha": "Rio de Janeiro x Resende",
-                                        "tipoViagem": "REGULAR",
-                                        "totalKm": 18.071618726313545,
-                                        "totalTempo": 1440,
-                                        "totalBilhetes": 17,
-                                        "totalParadas" : 30
-                                        },
-                                        {
-                                        "_id": "2",
-                                        "descricaoLinha": "Rio de Janeiro x Petrópolis",
-                                        "tipoViagem": "REGULAR",
-                                        "totalKm": 12.071618726313545,
-                                        "totalTempo": 1240,
-                                        "totalBilhetes": 35,
-                                        "totalParadas" : 23
-                                        },
-                                        {
-                                        "_id": "3",
-                                        "descricaoLinha": "Lumiar X Rio de Janeiro",
-                                        "tipoViagem": "REGULAR",
-                                        "totalKm": 19.071618726313545,
-                                        "totalTempo": 1440,
-                                        "totalBilhetes": 20,
-                                        "totalParadas" : 19
-                                        }
-                                ],
-                                "jornadas":[
-                                        {
-                                            "motorista": "121613",
-                                            "duracao": 180
-                                        },
-                                        {
-                                            "motorista": "121614",
-                                            "duracao": 120
-                                        }
-                                
-                                    ],
-                                    "direcoes":[
-                                            {
-                                            "motorista": "121613",
-                                            "direcaoContinuaMaxima": 30
-                                            },
-                                            {
-                                            "motorista": "121614",
-                                            "direcaoContinuaMaxima": 8
-                                            }
-                                    ],
-                                    "paradas":[
-                                            {
-                                                motivo:"SOLICITACAO_DE_PASSAGEIRO"
-                                            },
-                                            {
-                                                motivo:"SOLICITACAO_DE_PASSAGEIRO"
-                                            },
-                                            {
-                                                motivo:"SOLICITACAO_DE_PASSAGEIRO"
-                                            },
-                                            {
-                                                motivo:"PARADA PROGRAMADA"
-                                            },
-                                            {
-                                                motivo:"PARADA PROGRAMADA"
-                                            }
-                                    ], 
-                                    "totalizadores":{      
-                                        "totalQuilometragem": 18.071618726313545,
-                                        "totalBilhetes": 17,
-                                        "totalTempo": 1440,
-                                        "totalParadas":20,
-                                        "totalJornadas":100,
-                                        "totalDirecao" : 56
-                                    }
+         let totalizadoresPromise = this._obterTotalizadores(query);
+         let extratosPromise = this._obterExtratos(query);
+         let jornadasPromise = this._obterJornadas(query);
 
-                            },
-                            {    "data":"2017-04-04",
-                                "viagens":[
-                                        {
-                                        "_id": "1",
-                                        "descricaoLinha": "Rio de Janeiro x Teresópolis",
-                                        "tipoViagem": "REGULAR",
-                                        "totalKm": 25.071618726313545,
-                                        "totalTempo": 1440,
-                                        "totalBilhetes": 17,
-                                        "totalParadas" : 5
-                                        },
-                                        {
-                                        "_id": "2",
-                                        "descricaoLinha": "Rio de Janeiro x Itatiaia",
-                                        "tipoViagem": "REGULAR",
-                                        "totalKm": 25.071618726313545,
-                                        "totalTempo": 1240,
-                                        "totalBilhetes": 35,
-                                        "totalParadas" : 15
-                                        },
-                                        {
-                                        "_id": "3",
-                                        "descricaoLinha": "Rio de Janeiro x Penedo",
-                                        "tipoViagem": "REGULAR",
-                                        "totalKm": 19.071618726313545,
-                                        "totalTempo": 1440,
-                                        "totalBilhetes": 20,
-                                        "totalParadas" : 10
-                                        }
-                                ],
-                                "jornadas":[
-                                        {
-                                            "motorista": "121613",
-                                            "duracao": 250
-                                        },
-                                        {
-                                            "motorista": "121614",
-                                            "duracao": 150
-                                        }
-                                
-                                    ],
-                                    "direcoes":[
-                                            {
-                                            "motorista": "121613",
-                                            "direcaoContinuaMaxima": 60
-                                            },
-                                            {
-                                            "motorista": "121614",
-                                            "direcaoContinuaMaxima": 2
-                                            }
-                                    ],
-                                    "paradas":[
-                                            {
-                                                motivo:"SOLICITACAO_DE_PASSAGEIRO"
-                                            },
-                                            {
-                                                motivo:"PARADA PROGRAMADA"
-                                            }
-                                    ], 
-                                    "totalizadores":{      
-                                        "totalQuilometragem": 30.071618726313545,
-                                        "totalBilhetes": 13,
-                                        "totalTempo": 900,
-                                        "totalParadas":80,
-                                        "totalJornadas":10,
-                                        "totalDirecao" : 64
-                                    }
+        return this._promise.all({
+                    totalizadoresPromise,
+                    extratosPromise,
+                    jornadasPromise
+               })
+                .then(response => this._prepareResult(response));
+    }
 
-                            }], 
-                            "paradasCombo":[
-                                    "SOLICITACAO_DE_PASSAGEIRO",
-                                    "PARADA PROGRAMADA"
-                                ], 
-                            "motoristasCombo":[
-                                    "121613",
-                                    "121614"
-                                ],
-                            });
+    _obterTotalizadores(query){
+        return this._httpClient
+                    .get(`${this._url}/viagens/totalizadores`,{params:query});
+    }
 
-         return defer.promise;
-      
+    _obterExtratos(query){
+        return this._httpClient
+                    .get(`${this._url}/viagens/extratos`,{params:query});
+    }
+
+    _obterJornadas(query){
+        return this._httpClient
+                    .get(`${this._url}/jornadas`,{params:query});
+    }
+
+    _createQuery(dataInicial,dataFinal,cnpjCliente,cpfMotorista,placaVeiculo){
+        let query = {};
+
+        if(cpfMotorista)
+            query.cpfMotorista = cpfMotorista;
+        
+        if(placaVeiculo)
+            query.placaVeiculo = placaVeiculo;
+        
+        if(cnpjCliente)
+            query.cnpjCliente = cnpjCliente;
+        
+        query.dataInicial = dataInicial;
+        query.dataFinal = dataFinal;
+
+        return query;
+    }
+
+    _prepareResult(result){
+        
+        let totalizadores = result.totalizadoresPromise.data;
+        let jornadas = result.jornadasPromise.data;
+        let extratos = result.extratosPromise.data; 
+
+        let rootData = {};
+
+        totalizadores.forEach(t => {
+            rootData[t._id] = t;
+            t.extratos = [];
+            t.jornadas = [];
+        });
+
+        extratos.forEach(extrato => {
+            if(!rootData[extrato.dataInicial])
+                this._criarData(rootData,extrato.dataInicial);
+
+            rootData[extrato.dataInicial].extratos.push(extrato);
+        });
+
+        jornadas.forEach(jornada => {
+            if(!rootData[jornada.dataInicial])
+                this._criarData(rootData,jornada.dataInicial); 
+
+            rootData[jornada.dataInicial].jornadas.push(jornada);
+        });
+
+        rootData.datas = Object.keys(rootData); 
+
+        return rootData;
+    }
+
+    _criarData(rootData,data){
+        if(!rootData[data])
+            rootData[data] = {};
+        
+        if(!rootData[data].jornadas)
+           rootData[data].jornadas = [];
+        
+        if(!rootData[data].extratos)
+            rootData[data].extratos = [];
     }
 }
 

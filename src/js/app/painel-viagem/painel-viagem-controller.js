@@ -28,12 +28,14 @@ class PainelViagemController{
     }
 
     consultarPeriodo() {
-        this._painelService.obterTotalizadoresDoPeriodo()
-            .then(retorno => this._notify(retorno));
-        /*this._viagemService
-            .obterExtratosDeViagensPorPeriodo('2017-04-01','2017-04-08','123456')
-            .then(result => console.log(result))
-            .catch(error => console.error(error));*/
+
+        let dataInicial = '2017-04-01';
+        let dataFinal = '2017-04-08';
+        let cnpjCliente = '123456';
+
+        this._painelService.consultarPeriodo(dataInicial,dataFinal,cnpjCliente)
+            .then(retorno => this._notify(retorno))
+            .catch(error => alert(error.message));
     }
 
     consultarViagemPorId(id){
@@ -54,13 +56,13 @@ class PainelViagemController{
     _init(){
 
         this._addListener(
-            this.leituraBilhetesTotalizador,
-            this.kmPercorridoTotalizador,
-            this.tempoViagemTotalizador,
-            this.jornadaTrabalhoTotalizador,
-            this.direcaoContinuaTotalizador,
-            this.paradasTotalizador,
-            this.graficoGeral,
+            //this.leituraBilhetesTotalizador,
+            //this.kmPercorridoTotalizador,
+            //this.tempoViagemTotalizador,
+            //this.jornadaTrabalhoTotalizador,
+            //this.direcaoContinuaTotalizador,
+            //this.paradasTotalizador,
+            //this.graficoGeral,
             this.extratoPorDia
         );
     }

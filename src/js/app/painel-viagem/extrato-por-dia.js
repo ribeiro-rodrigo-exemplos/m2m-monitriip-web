@@ -11,26 +11,31 @@ class ExtratoPorDia{
     }
 
     formatarNumero(numero){
+        if(!numero)
+            return 0.0;
+
         return parseFloat(numero).toFixed(2);
     }
 
     atualizar(event){
-                   
-        let dias = [];
-        
-        event.dias = event.dias.map(dia =>{
-            dia.data = this.formatarData(dia.data);
-            dia.totalizadores.totalQuilometragem = this.formatarNumero(dia.totalizadores.totalQuilometragem);
-            
-            dia.viagens = dia.viagens.map(viagem =>{
-                viagem.totalKm = this.formatarNumero(viagem.totalKm);
-                return viagem;
-            });
-            
-            return dia;
+
+        event.datas = event.datas.sort();
+
+        this.extratos = event.datas.map(data => {
+            let extratoPorDia = {}
+            extratoPorDia.data = this.formatarData(data);
+            extratoPorDia.totalKm = this.formatarNumero(event[data].totalKm);
+            extratoPorDia.totalBilhetes = event[data].totalBilhetes ? event[data].totalBilhetes : 0;
+            extratoPorDia.totalParadas = event[data].totalParadas ? event[data].totalParadas : 0;
+            extratoPorDia.totalTempo = event[data].tempo ? event[data].tempo : 0;
+            extratoPorDia.viagensExtrato = event[data].extratos;
+            extratoPorDia.totalDirecao = 0;
+            extratoPorDia.totalTempoJornada = 0;
+
+            return extratoPorDia;
         });
 
-        this.viagens = event;
+        console.log(this.extratos);
     }
 
     minimizar(index){
