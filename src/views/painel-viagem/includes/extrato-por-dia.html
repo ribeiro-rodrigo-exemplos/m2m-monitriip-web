@@ -54,7 +54,7 @@
                 <tr ng-repeat="viagem in extrato.viagensExtrato" class="table__row open-pop-up" ng-click="ctrl.consultarViagemPorId(viagem._id)">
                     <td class="table__larger-row">
                         <span class="number-box">{{$index + 1}}</span>
-                        {{viagem.identificacaoLinha}}
+                        {{viagem.descricaoLinha}}
                     </td>
 
                     <td><span class="purple">{{viagem.tipoTransporte}}</span></td>
