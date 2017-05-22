@@ -68,8 +68,8 @@ class Totalizador{
         return this._dateUtil.obterDiaEMes(data);
     }
 
-    formatarNumero(numero){
-        return parseFloat(numero).toFixed(2);
+    formatarNumero(numero,fixade){
+        return parseFloat(numero).toFixed(fixade || 2);
     }
 
     atualizar(event){

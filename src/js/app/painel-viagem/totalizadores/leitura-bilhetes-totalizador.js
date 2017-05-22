@@ -16,18 +16,18 @@ class LeituraBilhetesTotalizador extends Totalizador{
             data:[]
         };
 
-        this.criarGrafico(event.dias.map(dia => {
-            return dia.totalizadores.totalBilhetes;
-        }));
-
-        this.trocarCorLinhaGrafico("#cb3f7e");
-
-        this.datas = event.dias.map(dia => {
-            objeto.data.push(dia.totalizadores.totalBilhetes);
-            return {dia:this.formatarData(dia.data),total:dia.totalizadores.totalBilhetes};
+        this.totalizadoresPorData = event.datas.map(data => {
+            let totalizador = {data:this.formatarData(data),totalBilhetes:0};
+            if(event[data].totalBilhetes){
+                totalizador.totalBilhetes = event[data].totalBilhetes;
+                this.total += event[data].totalBilhetes;
+            } 
+            objeto.data.push(totalizador.totalBilhetes);           
+            return totalizador;
         });
 
-        this.total = this.datas.reduce((total,data) => total+data.total,0);
+        this.criarGrafico(this.totalizadoresPorData.map(t => parseFloat(t.totalBilhetes)));
+        this.trocarCorLinhaGrafico("#cb3f7e");
 
         this.graficoGeral.totalizadorLeituraBilhetes = objeto;
     }

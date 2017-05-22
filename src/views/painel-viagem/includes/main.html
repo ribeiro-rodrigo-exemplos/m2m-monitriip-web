@@ -89,9 +89,9 @@
             </div>
         </div>
         <footer class="info-box__footer pink-bg">
-            <section ng-repeat="data in ctrl.leituraBilhetesTotalizador.datas" class="column info-box__footer__column">
-                <span class="semitransparent-text">{{data.dia}}</span>
-                <span class="text-size-24">{{data.total}}</span>
+            <section ng-repeat="totalizador in ctrl.leituraBilhetesTotalizador.totalizadoresPorData" class="column info-box__footer__column">
+                <span class="semitransparent-text">{{totalizador.data}}</span>
+                <span class="text-size-24">{{totalizador.totalBilhetes}}</span>
             </section>
         </footer>
     </div><!-- fim info-box leitura de bilhetes-->
@@ -110,9 +110,9 @@
             </div>
         </div>
         <footer class="info-box__footer blue-bg">
-            <section ng-repeat="data in ctrl.tempoViagemTotalizador.datas" class="column info-box__footer__column">
-                <span class="semitransparent-text">{{data.dia}}</span>
-                <span><span class="text-size-24">{{data.total}}</span>min</span>
+            <section ng-repeat="totalizador in ctrl.tempoViagemTotalizador.totalizadoresPorData" class="column info-box__footer__column">
+                <span class="semitransparent-text">{{totalizador.data}}</span>
+                <span><span class="text-size-24">{{totalizador.mediaTempoViagem}}</span>min</span>
             </section>
         </footer>
     </div><!-- fim info-box tempo de viagem-->
@@ -121,14 +121,14 @@
 <div class="info-boxes">
     <div class="info-box">
         <div class="info-box__content info-box__content--purple info-direcao-continua-js">
-            <select ng-model="comboDirecao" ng-options="data for data in ctrl.direcaoContinuaTotalizador.combo"
-            ng-change="ctrl.direcaoContinuaTotalizador.buscaCombo(comboDirecao)" class="info-box__select">
+            <select ng-model="ctrl.direcaoContinuaTotalizador.motoristaSelecionado" ng-options="data for data in ctrl.direcaoContinuaTotalizador.motoristas"
+             class="info-box__select">
             </select>
             
-            <h5 class="info-box__content__title text-size-13">Direção Contínua</h5>
+            <h5 class="info-box__content__title text-size-13">Direção Contínua (maior)</h5>
             <div class="row row--align-baseline">
                 <ng-include src="'views/icons/direcao-continua-totalizador-icon.html'"></ng-include>
-                <span class="info-box__content__span text-size-56">{{ctrl.direcaoContinuaTotalizador.total}}</span><span class="light-gray text-size-16"> horas</span>
+                <span class="info-box__content__span text-size-56">{{ctrl.direcaoContinuaTotalizador.direcaoContinuaMaxima}}</span><span class="light-gray text-size-16"> horas</span>
             </div>
             <!-- gráfico -->
             <div id="info-box-chartdiv4" class="info-box__chart">
@@ -136,9 +136,9 @@
             </div>
         </div>
         <footer class="info-box__footer purple-bg">
-            <section ng-repeat="data in ctrl.direcaoContinuaTotalizador.datas" class="column info-box__footer__column">
-                <span class="semitransparent-text">{{data.dia}}</span>
-                <span><span class="text-size-24">{{data.direcaoMaxima}}</span>hs</span>
+            <section ng-repeat="direcao in ctrl.direcaoContinuaTotalizador.direcoesContinuas" class="column info-box__footer__column">
+                <span class="semitransparent-text">{{direcao.data}}</span>
+                <span><span class="text-size-24">{{direcao.maxima}}</span>hs</span>
             </section>
         </footer>
     </div><!-- fim info-box direção contínua-->
@@ -170,8 +170,8 @@
 
     <div class="info-box">
         <div class="info-box__content info-box__content--orange info-detector-de-paradas-js">
-            <select ng-model="comboParadas" ng-options="data for data in ctrl.paradasTotalizador.combo"
-            ng-change="ctrl.paradasTotalizador.buscaCombo(comboParadas)" class="info-box__select">
+            <select ng-model="ctrl.paradasTotalizador.paradaSelecionada" ng-options="data for data in ctrl.paradasTotalizador.paradas"
+             class="info-box__select">
             </select>
 
             <h5 class="info-box__content__title text-size-13">Detector de Paradas</h5>
@@ -186,9 +186,9 @@
             </div>
         </div>
         <footer class="info-box__footer orange-bg">
-            <section ng-repeat="data in ctrl.paradasTotalizador.datas" class="column info-box__footer__column">
-                <span class="semitransparent-text">{{data.dia}}</span>
-                <span class="text-size-24">{{data.total}}</span>
+            <section ng-repeat="totalizador in ctrl.paradasTotalizador.totalPorData" class="column info-box__footer__column">
+                <span class="semitransparent-text">{{totalizador.data}}</span>
+                <span class="text-size-24">{{totalizador.total}}</span>
             </section>
         </footer>
     </div>

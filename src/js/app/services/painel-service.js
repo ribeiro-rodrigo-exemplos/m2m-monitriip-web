@@ -99,6 +99,12 @@ class PainelService{
         
         if(!rootData[data].extratos)
             rootData[data].extratos = [];
+        
+        if(!rootData[data].direcoesContinuas)
+            rootData[data].direcoesContinuas = [];
+
+        if(!rootData[data].totalParadas)
+            rootData[data].totalParadas = 0;
     }
 }
 

@@ -35,7 +35,7 @@ class PainelViagemController{
 
         this._painelService.consultarPeriodo(dataInicial,dataFinal,cnpjCliente)
             .then(retorno => this._notify(retorno))
-            .catch(error => alert(error.message));
+            .catch(error => console.error(error));
     }
 
     consultarViagemPorId(id){
@@ -56,13 +56,13 @@ class PainelViagemController{
     _init(){
 
         this._addListener(
-            //this.leituraBilhetesTotalizador,
+            this.leituraBilhetesTotalizador,
             this.kmPercorridoTotalizador,
-            //this.tempoViagemTotalizador,
+            this.tempoViagemTotalizador,
             //this.jornadaTrabalhoTotalizador,
-            //this.direcaoContinuaTotalizador,
-            //this.paradasTotalizador,
-            //this.graficoGeral,
+            this.direcaoContinuaTotalizador,
+            this.paradasTotalizador,
+            this.graficoGeral,
             this.extratoPorDia
         );
     }

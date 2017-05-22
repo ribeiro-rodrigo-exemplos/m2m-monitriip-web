@@ -6,74 +6,73 @@ class DirecaoContinuaTotalizador extends Totalizador{
         super();
 
         this.graficoGeral = graficoGeral;
-        this.combo = [];
-        this.event = [];
-        this.total = 0;
+        this.direcaoContinuaMaxima = 0;
     }
 
     atualizar(event){
+
+        this._ultimoEvento = event;
+
+        if(!this._motoristas)
+            this._montarComboDeMotoristas(event);
         
-        let maximo = 0;
+        this.direcoesContinuas = event.datas.map(data => {
+            return {
+                data:this.formatarData(data),
+                maxima:event[data].direcoesContinuas
+                                    .filter(this._filtrarMotorista.bind(this))
+                                    .map(direcao => direcao.tempoMaximo)
+                                    .reduce(this._obterMaiorDirecao,0)
+            };
+        });
+
+        this.direcaoContinuaMaxima = this.direcoesContinuas
+                                         .map(direcao => direcao.maxima)
+                                         .reduce(this._obterMaiorDirecao,0);
+
+        this.trocarCorLinhaGrafico("#9157ab");
+        this.criarGrafico(this.direcoesContinuas.map(direcao => direcao.maxima));
         
         let objeto = {
             name:"Direção Contínua",
             data:[]
         };
 
-        this.event = event;
-        this.combo = this.event.motoristasCombo;
-
-
-        this.datas = this.event.dias.map(dia => {
-            if (dia.totalizadores.totalDirecao > maximo){
-                maximo = dia.totalizadores.totalDirecao;
-            }
-            
-            objeto.data.push(maximo);
-            return {dia:this.formatarData(dia.data),direcaoMaxima:maximo};
-        });
-        
-        if (this.combo[0] != "Todos"){
-            this.combo.splice(0, 0, "Todos");
-        }
-
-        this.criarGrafico(this.event.dias.map(dia => {
-            return dia.totalizadores.totalDirecao;
-        }));
-
-        this.trocarCorLinhaGrafico("#9157ab");
-
-        this.total = maximo;
-
-        this.graficoGeral.totalizadorDirecaoContinua = objeto;
-        
+        this.graficoGeral.totalizadorDirecaoContinua = objeto; 
     }
 
-    buscaCombo(motorista){
-        let maximo = 0;
-        let grafico = [];
-        this.datas = [];
-        
-        if(motorista != "Todos"){
-            this.event.dias.forEach(dia =>{
-                dia.direcoes.forEach(direcao =>{
-                    if(direcao.motorista == motorista){
-                        if (direcao.direcaoContinuaMaxima > maximo){
-                            maximo = direcao.direcaoContinuaMaxima;
-                        }
-                        grafico.push(direcao.direcaoContinuaMaxima);
-                        this.datas.push({dia:this.formatarData(dia.data),direcaoMaxima:direcao.direcaoContinuaMaxima});
-                    }
-                });
-            });
+    get motoristas(){
+        return this._motoristas;
+    }
 
-            this.criarGrafico(grafico);
+    get motoristaSelecionado(){
+        return this._motoristaSelecionado;
+    }
 
-            this.total = maximo;
+    set motoristaSelecionado(motorista){
+        this._motoristaSelecionado = motorista;
+        this.atualizar(this._ultimoEvento);
+    }
 
-        }else{
-            this.atualizar(this.event);
-        }
+    _montarComboDeMotoristas(event){
+        this._motoristas = new Set();
+
+        event.datas.forEach(data => {
+            if(event[data].direcoesContinuas)
+                event[data].direcoesContinuas
+                           .forEach(direcao => this._motoristas.add(direcao.cpfMotorista));
+        });
+
+        this._motoristas = ['Todos'].concat([...this._motoristas.values()]);
+        this._motoristaSelecionado = this._motoristas[0];
+    }
+
+    _filtrarMotorista(direcao){
+        return this._motoristaSelecionado == "Todos" || this._motoristaSelecionado == direcao.cpfMotorista;
+    }
+
+    _obterMaiorDirecao(tempo,maior){
+        return tempo > maior ? tempo : maior;
     }
 }
 
