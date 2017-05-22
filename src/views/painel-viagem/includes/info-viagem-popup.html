@@ -63,11 +63,11 @@
                 <br><span class="popup__content__label text-size-13">Veículos </span>
                 <span class="m2m-green"><strong>({{ctrl.infoViagemPopup.detalheViagem.veiculos.length}})</strong></span><br>
                 
-                <div class="row" ng-repeat="veiculo in ctrl.infoViagemPopup.detalheViagem.veiculos">
-                    <span class="popup__content__informations text-size-13 equidistant">{{veiculo}}</span>
-                    <!--<span class="popup__content__informations text-size-13 equidistant font-weight-normal">09:00:57 - 09:15:17</span>-->
+                <div class="row" ng-repeat="transbordo in ctrl.infoViagemPopup.detalheViagem.transbordos">
+                    <span class="popup__content__informations text-size-13 equidistant">{{transbordo.placaVeiculo}}</span>
+                    <span class="popup__content__informations text-size-13 equidistant font-weight-normal">{{transbordo.dataHoraInicio}} - {{transbordo.dataHoraFim}}</span>
                 </div>
-                
+
                 <br><span class="popup__content__label text-size-13">Motoristas </span>
                 <span class="m2m-green"><strong>({{ctrl.infoViagemPopup.detalheViagem.motoristas.length}})</strong></span><br>
                 

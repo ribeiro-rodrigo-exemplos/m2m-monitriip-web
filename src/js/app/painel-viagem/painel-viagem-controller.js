@@ -5,7 +5,7 @@ class PainelViagemController{
 
     constructor(viagemService,painelService,FullScreen,graficoGeral,kmPercorridoTotalizador,leituraBilhetesTotalizador, 
                 tempoViagemTotalizador, jornadaTrabalhoTotalizador,direcaoContinuaTotalizador, paradasTotalizador, 
-                extratoPorDia, infoViagemPopup){
+                extratoPorDia, infoViagemPopup,dateUtil){
         
         this.graficoGeral = graficoGeral;
         this.kmPercorridoTotalizador = kmPercorridoTotalizador;
@@ -21,6 +21,7 @@ class PainelViagemController{
         this._painelService = painelService;
 
         this._FullScreen = FullScreen;
+        this._dateUtil = dateUtil; 
 
         this._listeners = [];
 
@@ -28,20 +29,26 @@ class PainelViagemController{
     }
 
     consultarPeriodo() {
-console.log(this.filtro);
-        let dataInicial = '2017-04-01';
-        let dataFinal = '2017-04-03';
-        let cnpjCliente = '123456';
 
-        this._painelService.consultarPeriodo(dataInicial,dataFinal,cnpjCliente)
+        if(this._consultaInvalida())
+            return; 
+        
+        let dataInicial = this._dateUtil.formatarParaIsoDate(this.filtro.dataInicial);
+        let dataFinal = this._dateUtil.formatarParaIsoDate(this.filtro.dataFinal);
+
+        this._painelService.consultarPeriodo(dataInicial,dataFinal,this.filtro.cnpjCliente,this.filtro.cpfMotorista,this.filtro.placaVeiculo)
             .then(retorno => this._notify(retorno))
-            .catch(error => console.error(error));
+            .catch(error => console.error(error)); 
     }
 
     consultarViagemPorId(id){
         this._viagemService.obterViagemPorId(id)
             .then(detalheViagem => {
-                this.infoViagemPopup.obterDetalheViagem(detalheViagem);
+
+                if(detalheViagem)
+                    this.infoViagemPopup.exibirDetalhesDaViagem(detalheViagem);
+                else
+                    alert('Não foi possível consultar a viagem selecionada');
             });
     }
 
@@ -78,6 +85,26 @@ console.log(this.filtro);
     _clone(event){
         return JSON.parse(JSON.stringify(event)); 
     }
+
+    _consultaInvalida(){
+
+        if(!this.filtro || !this.filtro.dataInicial || !this.filtro.dataFinal){
+            alert('Informe das datas inicias e finais');
+            return true; 
+        }
+
+        if(!this._dateUtil.periodoValido(this.filtro.dataInicial,this.filtro.dataFinal)){
+            alert('A data inicial deve ser menor que a data final');
+            return true; 
+        }
+
+        if(!this._dateUtil.dentroDoPeriodoDeDias(this.filtro.dataInicial,this.filtro.dataFinal,3)){
+            alert('O período máximo de consulta é de até 3 dias.');
+            return true;
+        }
+
+        return false;
+    }
 }
 
 PainelViagemController.$inject = [
@@ -92,7 +119,8 @@ PainelViagemController.$inject = [
                                     'DirecaoContinuaTotalizador',
                                     'ParadasTotalizador',
                                     'ExtratoPorDia',
-                                    'InfoViagemPopup'
+                                    'InfoViagemPopup',
+                                    'DateUtil'
                                  ];
 
 angular.module('monitriip-web')

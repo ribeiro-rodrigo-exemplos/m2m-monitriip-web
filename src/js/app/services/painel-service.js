@@ -26,17 +26,20 @@ class PainelService{
 
     _obterTotalizadores(query){
         return this._httpClient
-                    .get(`${this._url}/viagens/totalizadores`,{params:query});
+                    .get(`${this._url}/viagens/totalizadores`,{params:query})
+                    .then(response => response.status == 200 ? response.data : []);
     }
 
     _obterExtratos(query){
         return this._httpClient
-                    .get(`${this._url}/viagens/extratos`,{params:query});
+                    .get(`${this._url}/viagens/extratos`,{params:query})
+                    .then(response => response.status == 200 ? response.data : []);
     }
 
     _obterJornadas(query){
         return this._httpClient
-                    .get(`${this._url}/jornadas`,{params:query});
+                    .get(`${this._url}/jornadas`,{params:query})
+                    .then(response => response.status == 200 ? response.data : []);
     }
 
     _createQuery(dataInicial,dataFinal,cnpjCliente,cpfMotorista,placaVeiculo){
@@ -59,9 +62,9 @@ class PainelService{
 
     _prepareResult(result){
         
-        let totalizadores = result.totalizadoresPromise.data;
-        let jornadas = result.jornadasPromise.data;
-        let extratos = result.extratosPromise.data; 
+        let totalizadores = result.totalizadoresPromise;
+        let jornadas = result.jornadasPromise;
+        let extratos = result.extratosPromise; 
 
         let rootData = {};
 

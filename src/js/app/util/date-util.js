@@ -17,6 +17,9 @@ class DateUtil{
             "Nov",
             "Dez"
         ];
+
+        this._isoDatePattern = 'YYYY-MM-DD';
+        this._horarioPattern = 'HH:mm:ss';
     }
 
     obterMes(data){
@@ -29,10 +32,29 @@ class DateUtil{
         return `${data.format('DD')} ${this.meses[data.month()]}`;
     }
 
+    obterHorario(dataHora){
+        return moment(dataHora).format(this._horarioPattern);
+    }
+
     formatarDataHora(dataHora){
         let dtHora = dataHora.split(" ");
         let data = dtHora[0].split("-");
         return data[2] + "/" + data[1] + "/" + data[0] + " " + dtHora[1];
+    }
+
+    formatarParaIsoDate(data){
+        return moment(data).format(this._isoDatePattern);
+    }
+
+    dentroDoPeriodoDeDias(dataInicial,dataFinal,dias){
+        let dataInicialMoment = moment(dataInicial,this._isoDatePattern);
+        let dataFinalMoment = moment(dataFinal,this._isoDatePattern);
+
+        return dataFinalMoment.diff(dataInicialMoment,'days') <= dias; 
+    }
+
+    periodoValido(dataInicial,dataFinal){
+        return dataInicial.getTime() <= dataFinal.getTime();
     }
 }
 

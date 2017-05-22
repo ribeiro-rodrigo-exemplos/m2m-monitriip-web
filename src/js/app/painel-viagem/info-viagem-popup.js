@@ -1,34 +1,17 @@
 class InfoViagemPopup{
-    constructor(document){
-        this.detalheViagem = {};
-        this.velocidadeMedia = 0;
-        this._dateUtil = new DateUtil();
+    constructor(document,dateUtil){
+        this._dateUtil = dateUtil;
         this._document = document[0];
+        this._detalheDaViagem = {};
     }
 
-    obterDetalheViagem(detalheViagem){
-        this._document
-                    .querySelector('.popup')
-                    .classList
-                    .remove('none');
+    exibirDetalhesDaViagem(detalheViagem){
+        this._abrirPopup();
         
-        this.detalheViagem = detalheViagem;
-        let totalKm = this.detalheViagem.localizacoes.length;
-        
-        this.velocidadeMedia = (this.detalheViagem.localizacoes.reduce((total, localizacao) => total + localizacao.velocidade, 0)) / totalKm;
+        if(detalheViagem.length === 0)
+            return; 
 
-        this.detalheViagem.bilhetes = this.detalheViagem.bilhetes.map(bilhete =>{
-            bilhete.dataHoraEvento = this._dateUtil.formatarDataHora(bilhete.dataHoraEvento);
-            bilhete.coordenadasFormatadas = this._formataCoordenadas(bilhete.localizacao.coordinates[0], bilhete.localizacao.coordinates[1]);
-            return bilhete;
-        });
-
-        this.detalheViagem.paradas = this.detalheViagem.paradas.map(parada =>{
-            parada.dataHora = this._dateUtil.formatarDataHora(parada.dataHora);
-            parada.motivoParada = parada.motivoParada.replace("_", " ");
-            parada.coordenadasFormatadas = this._formataCoordenadas(parada.localizacao.coordinates[0], parada.localizacao.coordinates[1]);
-            return parada;
-        }); 
+        this._montarInfoViagem(detalheViagem);
         
     }
 
@@ -39,12 +22,39 @@ class InfoViagemPopup{
                 .toggle('none');
     }
 
+    get detalheViagem(){
+        return this._detalheDaViagem;
+    }
+
+    _montarInfoViagem(detalheViagem){
+        this._detalheDaViagem = detalheViagem[0];
+        this._detalheDaViagem.transbordos = detalheViagem.map(servicos => {
+            return {
+                placaVeiculo:servicos.placaVeiculo,
+                dataHoraInicio:this._formatarHorario(servicos.dataHoraInicial),
+                dataHoraFim:this._formatarHorario(servicos.dataHoraFinal)
+            };
+        });
+        console.log(this._detalheDaViagem.veiculos.length);
+    }
+
+    _formatarHorario(dataHora){
+        return this._dateUtil.obterHorario(dataHora);
+    }
+
+    _abrirPopup(){
+        this._document
+            .querySelector('.popup')
+                .classList
+                    .remove('none');
+    }
+
     _formataCoordenadas(x, y){
         return x + " / " + y;
     }
 }
 
-InfoViagemPopup.$inject = ['$document'];
+InfoViagemPopup.$inject = ['$document','DateUtil'];
 
 angular.module('monitriip-web')
         .service('InfoViagemPopup', InfoViagemPopup);

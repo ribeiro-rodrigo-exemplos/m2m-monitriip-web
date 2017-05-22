@@ -10,7 +10,6 @@ class TempoViagemTotalizador extends Totalizador{
     }
 
     atualizar(event){
-
         let objeto = {
             name:"Tempo Viagem",
             data:[]
@@ -26,7 +25,7 @@ class TempoViagemTotalizador extends Totalizador{
             return totalizador;
         });
 
-        this.media = this.formatarNumero(this.media/event.datas.length,0);
+        this.media = this.formatarNumero(event.datas.length ? this.media/event.datas.length : 0,0);
         this.criarGrafico(this.totalizadoresPorData.map(t => parseFloat(t.mediaTempoViagem)));
         this.trocarCorLinhaGrafico("#358fcd");
 
