@@ -117,7 +117,7 @@ class GraficoGeral{
     }
 
     criaCabecalhoGrafico(cabecalho){
-        this._grafico.xAxis.categories=cabecalho;
+        this._grafico.xAxis.categories=cabecalho.map(data => this.formatarData(data));
     }
 
     formatarData(data){
@@ -131,10 +131,7 @@ class GraficoGeral{
         this.criarGrafico(this.totalizadorDirecaoContinua);
         this.criarGrafico(this.totalizadorJornada);
         this.criarGrafico(this.totalizadorParadas);
-        this.criaCabecalhoGrafico(this.dias);
-        // this.dias.forEach(dia =>{
-        //     this.criaCabecalhoGrafico(dia);
-        // }); 
+        this.criaCabecalhoGrafico(event.datas);
     }
 
     get render(){

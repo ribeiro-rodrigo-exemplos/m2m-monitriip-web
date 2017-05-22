@@ -21,7 +21,7 @@ class KmPercorridoTotalizador extends Totalizador{
                 totalizador.totalKm = this.formatarNumero(event[data].totalKm);
                 this.total += parseFloat(totalizador.totalKm);
             } 
-            objeto.data.push(totalizador.totalKm);           
+            objeto.data.push(parseFloat(totalizador.totalKm));           
             return totalizador;
         });
 

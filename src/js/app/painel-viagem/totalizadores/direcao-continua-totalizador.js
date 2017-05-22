@@ -32,11 +32,13 @@ class DirecaoContinuaTotalizador extends Totalizador{
 
         this.trocarCorLinhaGrafico("#9157ab");
         this.criarGrafico(this.direcoesContinuas.map(direcao => direcao.maxima));
-        
+
         let objeto = {
             name:"Direção Contínua",
             data:[]
         };
+
+        this.direcoesContinuas.forEach(direcao => objeto.data.push(parseFloat(direcao.maxima)));
 
         this.graficoGeral.totalizadorDirecaoContinua = objeto; 
     }
