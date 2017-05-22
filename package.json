@@ -15,6 +15,7 @@
   },
   "scripts": {
     "gulp": "gulp",
+    "server":"gulp server",
     "test": "echo \"Error: no test specified\" && exit 1"
   },
   "author": "M2M Solutions",
