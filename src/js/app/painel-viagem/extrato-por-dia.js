@@ -27,7 +27,9 @@ class ExtratoPorDia{
             extratoPorDia.totalParadas = event[data].totalParadas ? event[data].totalParadas : 0;
             extratoPorDia.totalTempo = event[data].tempo ? event[data].tempo : 0;
             extratoPorDia.viagensExtrato = event[data].extratos;
-            extratoPorDia.totalDirecao = 0;
+            extratoPorDia.totalDirecao = event[data].direcoesContinuas
+                                                    .map(direcao => direcao.tempoMaximo)
+                                                    .reduce((tempo,maior) => tempo>maior ? tempo : maior,0);
             extratoPorDia.totalTempoJornada = 0;
 
             return extratoPorDia;

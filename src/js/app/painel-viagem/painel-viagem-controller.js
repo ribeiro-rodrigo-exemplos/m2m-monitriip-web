@@ -28,7 +28,7 @@ class PainelViagemController{
     }
 
     consultarPeriodo() {
-
+console.log(this.filtro);
         let dataInicial = '2017-04-01';
         let dataFinal = '2017-04-03';
         let cnpjCliente = '123456';
@@ -42,7 +42,7 @@ class PainelViagemController{
         this._viagemService.obterViagemPorId(id)
             .then(detalheViagem => {
                 this.infoViagemPopup.obterDetalheViagem(detalheViagem);
-            }); 
+            });
     }
 
     limparFiltros(){

@@ -3,7 +3,7 @@
  */
 class RoutesConfig{
 
-    configurarRotas($stateProvider,$urlRouterProvider){
+    configurarRotas($stateProvider,$urlRouterProvider,$httpProvider){
 
         $stateProvider.state('painel-viagem',{
             url:'/painel/viagem',
@@ -13,6 +13,7 @@ class RoutesConfig{
         });
 
         $urlRouterProvider.otherwise('/painel/viagem');
+        $httpProvider.interceptors.push('Interceptor');
     }
 }
 
