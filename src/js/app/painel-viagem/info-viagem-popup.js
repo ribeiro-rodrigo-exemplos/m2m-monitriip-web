@@ -1,6 +1,7 @@
 class InfoViagemPopup{
-    constructor(document,dateUtil){
+    constructor(document,dateUtil,geoCoderHelper){
         this._dateUtil = dateUtil;
+        this._geocoderHelper = geoCoderHelper;
         this._document = document[0];
         this._detalheDaViagem = {};
     }
@@ -12,6 +13,8 @@ class InfoViagemPopup{
             return; 
 
         this._montarInfoViagem(detalheViagem);
+
+        this._geocoderHelper.obterEndereco(-43.285343,-22.834171);
         
     }
 
@@ -26,20 +29,49 @@ class InfoViagemPopup{
         return this._detalheDaViagem;
     }
 
-    _montarInfoViagem(detalheViagem){
-        this._detalheDaViagem = detalheViagem[0];
-        this._detalheDaViagem.transbordos = detalheViagem.map(servicos => {
+    _montarInfoViagem(servicosDaViagem){
+        this._detalheDaViagem = servicosDaViagem[0];
+
+        this._detalheDaViagem.servicos = servicosDaViagem.map(servico => {
             return {
-                placaVeiculo:servicos.placaVeiculo,
-                dataHoraInicio:this._formatarHorario(servicos.dataHoraInicial),
-                dataHoraFim:this._formatarHorario(servicos.dataHoraFinal)
+                placaVeiculo:servico.placaVeiculo,
+                cpfMotorista:servico.cpfMotorista,
+                horaInicio:this._dateUtil.obterHorario(servico.dataHoraInicial),
+                horaFim:this._dateUtil.obterHorario(servico.dataHoraFinal)
             };
         });
-        console.log(this._detalheDaViagem.veiculos.length);
+
+        this._detalheDaViagem.quantidadeDeMotoristas = [...new Set(this._detalheDaViagem.servicos.map(t => t.cpfMotorista)).values()].length;
+        this._detalheDaViagem.quantidadeDeVeiculos = [...new Set(this._detalheDaViagem.servicos.map(t => t.placaVeiculo)).values()].length;
+
+        let dataHoraInicial = this._detalheDaViagem.dataHoraInicial;
+        let dataHoraFinal = servicosDaViagem[servicosDaViagem.length-1].dataHoraFinal;
+
+        this._detalheDaViagem.dataHoraInicial = this._dateUtil.formatarDataHora(dataHoraInicial);
+        this._detalheDaViagem.dataHoraFinal = this._dateUtil.formatarDataHora(dataHoraFinal);
+
+        this._detalheDaViagem.duracaoTotalDaViagem = this._dateUtil.obterDuracao(dataHoraInicial,dataHoraFinal);
+
+        this._detalheDaViagem.calculoVelocidades = this._calcularVelocidades(servicosDaViagem);
+
+        
     }
 
-    _formatarHorario(dataHora){
-        return this._dateUtil.obterHorario(dataHora);
+    _calcularVelocidades(servicos){
+   
+        let calculoVelocidade = {};
+
+        let velocidades = servicos.map(servico => servico.localizacoes)
+                                  .reduce((acc,localizacoes) => {
+                                      localizacoes.forEach(l => acc.push(l.velocidade));
+                                      return acc; 
+                                  },[]);
+
+        calculoVelocidade.velocidadeMaxima = Math.max.apply(null,velocidades);
+        calculoVelocidade.velocidadeMinima = Math.min.apply(null,velocidades); 
+        calculoVelocidade.velocidadeMedia = velocidades.reduce((acumulador,velocidade) => acumulador+velocidade,0)/velocidades.length; 
+
+        return calculoVelocidade; 
     }
 
     _abrirPopup(){
@@ -54,7 +86,7 @@ class InfoViagemPopup{
     }
 }
 
-InfoViagemPopup.$inject = ['$document','DateUtil'];
+InfoViagemPopup.$inject = ['$document','DateUtil','GeocoderHelper'];
 
 angular.module('monitriip-web')
         .service('InfoViagemPopup', InfoViagemPopup);

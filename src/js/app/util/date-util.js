@@ -2,7 +2,7 @@
  * Created by Rodrigo Ribeiro on 25/04/17.
  */
 class DateUtil{
-    constructor(){
+    constructor(numberUtil){
         this.meses = [
             "Jan",
             "Fev",
@@ -18,6 +18,7 @@ class DateUtil{
             "Dez"
         ];
 
+        this._numberUtil = numberUtil;
         this._isoDatePattern = 'YYYY-MM-DD';
         this._horarioPattern = 'HH:mm:ss';
     }
@@ -34,6 +35,18 @@ class DateUtil{
 
     obterHorario(dataHora){
         return moment(dataHora).format(this._horarioPattern);
+    }
+
+    obterDuracao(dataInicial,dataFinal){
+        
+        let dataInicialMoment = moment(dataInicial);
+        let dataFinalMoment = moment(dataFinal);
+
+        let diferencaEmMs = dataFinalMoment.diff(dataInicialMoment);
+        let duracao = moment.duration(diferencaEmMs);
+        
+        return `${this._numberUtil.formatarNumero(duracao.asHours(),0)}:${this._numberUtil.formatarNumero(duracao.asMinutes(),0)}:${this._numberUtil
+            .formatarNumero(duracao.asSeconds(),0)}`;
     }
 
     formatarDataHora(dataHora){
@@ -57,6 +70,8 @@ class DateUtil{
         return dataInicial.getTime() <= dataFinal.getTime();
     }
 }
+
+DateUtil.$inject = ['NumberUtil'];
 
 angular.module('monitriip-web')
         .service('DateUtil',DateUtil);
