@@ -1,71 +1,120 @@
 /**
  * Created by Rodrigo Ribeiro on 20/04/17.
  */
+
 class JornadaTrabalhoTotalizador extends Totalizador{
     constructor(graficoGeral){
         super();
 
         this.graficoGeral = graficoGeral;
-        this.combo = [];
-        this.event = [];
-        this.total = 0; 
+        this.jornadaTrabalhoMaxima = 0;
     }
 
     atualizar(event){
-        
-        let objeto = {
-            name:"Jornada Trabalho",
-            data:[]
-        };
-        
-        this.event = event;
-        this.combo = this.event.motoristasCombo;
 
+        this._ultimoEvento = event;
 
-        this.datas = this.event.dias.map(dia => {
-            objeto.data.push(dia.totalizadores.totalJornadas); 
-            return {dia:this.formatarData(dia.data),total:dia.totalizadores.totalJornadas};
+        let valores = [];
+        let jornadaTrabalhoMaxima = [];
+
+        if(!this._motoristas)
+            this._montarComboDeMotoristas(event);
+        
+        this.jornadasTrabalho = event.datas.map(data => {
+            return {
+                data:this.formatarData(data),
+                maxima:event[data].jornadas
+                                    .filter(this._filtrarMotorista.bind(this))
+                                    .map(jornada => {
+                                        if(jornada.horasPorData){
+                                            let array = Object.keys(jornada.horasPorData).sort();
+
+                                            array.forEach(dt =>{
+                                                valores.push(jornada.horasPorData[dt]);
+                                            });
+
+                                            return valores;
+                                        } 
+                                    }) 
+                                    .reduce(this._obterMaiorJornada,0)
+            };
+        });
+        
+        event.datas.forEach(data => {            
+            jornadaTrabalhoMaxima.push(event[data].jornadas
+                                            .map(jornada => {
+                                                if(jornada.horasPorData){
+                                                    let array = Object.keys(jornada.horasPorData).sort();
+
+                                                    array.forEach(dt =>{
+                                                        valores.push(jornada.horasPorData[dt]);
+                                                    });
+
+                                                    return valores;
+                                                } 
+                                            }) 
+                                            .reduce(this._obterMaiorJornada,0));
         });
 
-        if (this.combo[0] != "Todos"){
-            this.combo.splice(0, 0, "Todos");
-        }
-
-        this.criarGrafico(this.datas.map(data => data.total));
+        this.jornadaTrabalhoMaxima = Math.max.apply(Math, jornadaTrabalhoMaxima);
 
         this.trocarCorLinhaGrafico("#ec6051");
+        this.criarGrafico(this.jornadasTrabalho.map(jornada => jornada.maxima));
 
-        this.total = this.datas.reduce((total,data) => total+data.total,0);
+        let objeto = {
+            name:"Jornada de Trabalho",
+            data:[]
+        };
 
-        this.graficoGeral.totalizadorJornada = objeto;
-        
+        this.jornadasTrabalho.forEach(jornada => objeto.data.push(parseFloat(jornada.maxima)));
+
+        this.graficoGeral.totalizadorJornada = objeto; 
+     }
+
+    get motoristas(){
+        return this._motoristas;
     }
 
-    buscaCombo(motorista){
-        let grafico = [];
-        this.datas = [];
+    get motoristaSelecionado(){
+        return this._motoristaSelecionado;
+    }
+
+    set motoristaSelecionado(motorista){
+        this._motoristaSelecionado = motorista;
+        this.atualizar(this._ultimoEvento);
+    }
+
+    _montarComboDeMotoristas(event){
+        this._motoristas = new Set();
+
+        event.datas.forEach(data => {
+            if(event[data].jornadas)
+                event[data].jornadas
+                           .forEach(jornada => this._motoristas.add(jornada.cpfMotorista));
+        });
+
+        this._motoristas = ['Todos'].concat([...this._motoristas.values()]);
+        this._motoristaSelecionado = this._motoristas[0];
+    }
+
+    _filtrarMotorista(jornada){
+        return this._motoristaSelecionado == "Todos" || this._motoristaSelecionado == jornada.cpfMotorista;
+    }
+
+    _obterMaiorJornada(tempo,valor){
+        let maior = 0;
         
-        if(motorista != "Todos"){
-            this.event.dias.forEach(dia =>{
-                dia.jornadas.forEach(jornada =>{
-                    if(jornada.motorista == motorista){
-                        grafico.push(jornada.duracao);
-                        this.datas.push({dia:this.formatarData(dia.data),total:jornada.duracao});
-                    }
-                });
+        if(valor){            
+            valor.forEach(val =>{
+                maior = tempo > val ? tempo : val;
             });
-
-            this.criarGrafico(grafico);
-
-            this.total = this.datas.reduce((total,data) => total+data.total,0);
-
-        }else{
-            this.atualizar(this.event);
         }
+
+        return maior;
     }
 }
 
 JornadaTrabalhoTotalizador.$inject = ['GraficoGeral'];
 
 angular.module('monitriip-web')
-        .service('JornadaTrabalhoTotalizador', JornadaTrabalhoTotalizador); 
+        .service('JornadaTrabalhoTotalizador', JornadaTrabalhoTotalizador);
