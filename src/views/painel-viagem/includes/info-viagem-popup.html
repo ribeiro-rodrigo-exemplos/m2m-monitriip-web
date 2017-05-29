@@ -28,7 +28,7 @@
             <div class="popup__pills">
                 <section class="popup__pills__pill green-bg">
                 <ng-include src="'views/icons/km-percorrido-info-icon.html'"></ng-include>
-                    <span class="text-size-24">{{ctrl.infoViagemPopup.detalheViagem.totalKm | number:2}}</span><span> km</span>
+                    <span class="text-size-24">{{ctrl.infoViagemPopup.detalheViagem.totalKm}}</span><span> km</span>
                 </section>
                 <section class="popup__pills__pill blue-bg">
                     <ng-include src="'views/icons/tempo-viagem-info-icon.html'"></ng-include>
@@ -36,7 +36,7 @@
                 </section>
                 <section class="popup__pills__pill purple-bg">
                     <ng-include src="'views/icons/tempo-viagem-info-icon.html'"></ng-include>
-                    <span class="text-size-24">{{ctrl.infoViagemPopup.detalheViagem.direcaoContinua.tempoMaximo}} min</span>
+                    <span class="text-size-24">{{ctrl.infoViagemPopup.detalheViagem.direcaoContinuaMaxima}}</span><span> min</span>
                 </section>
             </div>
 
@@ -88,7 +88,7 @@
                     <span class="popup__content__informations text-size-13 equidistant">{{ctrl.infoViagemPopup.detalheViagem.dataHoraFinal}}</span>
                 </div>
                 <span class="popup__content__label text-size-13 eq">Tempo de Viagem</span><br>
-                <span class="popup__content__informations text-size-13">{{ctrl.infoViagemPopup.detalheViagem.duracao}} min</span><br><br>
+                <span class="popup__content__informations text-size-13">{{ctrl.infoViagemPopup.detalheViagem.duracaoEmMinutos}} min</span><br><br>
 
                 <span class="m2m-green">
                     DISTÂNCIA
@@ -98,7 +98,7 @@
                     <span class="popup__content__label text-size-13 equidistant">Velocidade Média</span>
                 </div>
                 <div class="row">
-                    <span class="popup__content__informations text-size-13 equidistant">{{ctrl.infoViagemPopup.detalheViagem.totalKm | number:0}} km</span>
+                    <span class="popup__content__informations text-size-13 equidistant">{{ctrl.infoViagemPopup.detalheViagem.totalKm}} km</span>
                     <span class="popup__content__informations text-size-13 equidistant">{{ctrl.infoViagemPopup.detalheViagem.calculoVelocidades.velocidadeMedia | number:0}} km</span>
                 </div>
                 <div class="row">
