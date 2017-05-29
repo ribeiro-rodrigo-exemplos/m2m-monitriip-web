@@ -6,7 +6,7 @@ class KmPercorridoTotalizador extends Totalizador{
         super();
 
         this.graficoGeral = graficoGeral;
-        this.total = 0;
+        this._total = 0;
     }
 
     atualizar(event){
@@ -15,21 +15,27 @@ class KmPercorridoTotalizador extends Totalizador{
             data:[]
         };
 
+        this._total = 0;
+
         this.totalizadoresPorData = event.datas.map(data => {
             let totalizador = {data:this.formatarData(data),totalKm:0};
             if(event[data].totalKm){
                 totalizador.totalKm = this.formatarNumero(event[data].totalKm);
-                this.total += parseFloat(totalizador.totalKm);
+                this._total += parseFloat(totalizador.totalKm);
             } 
             objeto.data.push(parseFloat(totalizador.totalKm));           
             return totalizador;
         });
 
-        this.total = this.formatarNumero(this.total);
+        this._total = this.formatarNumero(this._total);
         this.criarGrafico(this.totalizadoresPorData.map(t => parseFloat(t.totalKm)));
         this.trocarCorLinhaGrafico("#0bb48d");
 
         this.graficoGeral.totalizadorKmPercorrido = objeto;
+    }
+
+    get total(){
+        return this._total;
     }
 }
 

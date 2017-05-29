@@ -6,7 +6,7 @@ class TempoViagemTotalizador extends Totalizador{
         super();
 
         this.graficoGeral = graficoGeral;
-        this.media = 0;
+        this._media = 0;
     }
 
     atualizar(event){
@@ -14,6 +14,8 @@ class TempoViagemTotalizador extends Totalizador{
             name:"Tempo Viagem",
             data:[]
         };
+
+        this._media = 0;
 
         this.totalizadoresPorData = event.datas.map(data => {
             let totalizador = {data:this.formatarData(data),mediaTempoViagem:0};
@@ -25,11 +27,15 @@ class TempoViagemTotalizador extends Totalizador{
             return totalizador;
         });
 
-        this.media = this.formatarNumero(event.datas.length ? this.media/event.datas.length : 0,0);
+        this._media = this.formatarNumero(event.datas.length ? this._media/event.datas.length : 0,0);
         this.criarGrafico(this.totalizadoresPorData.map(t => parseFloat(t.mediaTempoViagem)));
         this.trocarCorLinhaGrafico("#358fcd");
 
         this.graficoGeral.mediaTempoViagem = objeto;
+    }
+
+    get media(){
+        return this._media; 
     }
 }
 
