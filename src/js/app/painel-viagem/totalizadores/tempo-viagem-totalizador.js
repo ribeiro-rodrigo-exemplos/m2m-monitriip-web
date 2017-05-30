@@ -21,7 +21,7 @@ class TempoViagemTotalizador extends Totalizador{
             let totalizador = {data:this.formatarData(data),mediaTempoViagem:0};
             if(event[data].tempo){
                 totalizador.mediaTempoViagem = event[data].tempo;
-                this.media += parseFloat(totalizador.mediaTempoViagem);
+                this._media += parseFloat(totalizador.mediaTempoViagem);
             } 
             objeto.data.push(totalizador.mediaTempoViagem);           
             return totalizador;

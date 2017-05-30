@@ -1,7 +1,3 @@
-/**
- * Created by Rodrigo Ribeiro on 20/04/17.
- */
-
 class JornadaTrabalhoTotalizador extends Totalizador{
     constructor(graficoGeral){
         super();
@@ -47,7 +43,8 @@ class JornadaTrabalhoTotalizador extends Totalizador{
                                                     let array = Object.keys(jornada.horasPorData).sort();
 
                                                     array.forEach(dt =>{
-                                                        valores.push(jornada.horasPorData[dt]);
+                                                        if(jornada.cpfMotorista == this.motoristaSelecionado)
+                                                            valores.push(jornada.horasPorData[dt]);
                                                     });
 
                                                     return valores;
