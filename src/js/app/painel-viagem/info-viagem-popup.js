@@ -1,8 +1,9 @@
 class InfoViagemPopup{
-    constructor(document,dateUtil,geoCoderHelper,numberUtil,jornadaService){
+    constructor(document,promise,dateUtil,geoCoderHelper,numberUtil,jornadaService){
         this._dateUtil = dateUtil;
         this._geocoderHelper = geoCoderHelper;
         this._document = document[0];
+        this._promise = promise;
         this._detalheDaViagem = {};
         this._numberUtil = numberUtil;
         this._jornadaService = jornadaService;
@@ -37,6 +38,12 @@ class InfoViagemPopup{
 
         this._detalheDaViagem = servicosDaViagem[0];
 
+        let dataHoraInicial = this._obterDataHoraInicial(servicosDaViagem);
+        dataHoraInicial = dataHoraInicial ? this._dateUtil.formatarDataHora(dataHoraInicial) : '';
+
+        let dataHoraFinal = this._obterDataHoraFinal(servicosDaViagem);
+        dataHoraFinal = dataHoraFinal ? this._dateUtil.formatarDataHora(dataHoraFinal) : '';
+
         this._detalheDaViagem.dataHoraInicial = this._obterDataHoraInicial(servicosDaViagem);
         this._detalheDaViagem.dataHoraFinal = this._obterDataHoraFinal(servicosDaViagem);
 
@@ -46,7 +53,20 @@ class InfoViagemPopup{
     }
 
     _montarAbaJornadas(servicosDaViagem){
+        let motoristas = [...new Set(servicosDaViagem.map(servico => servico.cpfMotorista)).values()]; 
 
+        let consultasJornadas = motoristas.map(cpfMotorista => this._jornadaService.obterJornadas({
+            cpfMotorista:cpfMotorista,
+            dataInicial:this._dateUtil.formatarParaIsoDate(this._obterDataHoraInicial(servicosDaViagem)),
+            dataFinal:this._obterDataHoraFinal(servicosDaViagem) ? 
+                this._dateUtil.formatarParaIsoDate(this._obterDataHoraFinal(servicosDaViagem)) : this._dateUtil.formatarParaIsoDate(new Date())
+        }));
+
+        this._promise
+            .all(consultasJornadas)
+            .then(responses => {
+                console.log(responses);
+            }); 
     }
 
     _montarAbaInfoViagem(servicosDaViagem){
@@ -112,18 +132,17 @@ class InfoViagemPopup{
     }
 
     _obterDataHoraInicial(servicosDaViagem){
-        let dataHoraInicial = servicosDaViagem[0].dataHoraInicial;
-        return dataHoraInicial ? this._dateUtil.formatarDataHora(dataHoraInicial) : '';
+        return servicosDaViagem[0].dataHoraInicial;
     }
 
     _obterDataHoraFinal(servicosDaViagem){
-        let dataHoraFinal = servicosDaViagem[servicosDaViagem.length-1].dataHoraFinal;
-        return dataHoraFinal ? this._dateUtil.formatarDataHora(dataHoraFinal) : '';
+        return servicosDaViagem[servicosDaViagem.length-1].dataHoraFinal;
     }
 }
 
 InfoViagemPopup.$inject = [
     '$document',
+    '$q',
     'DateUtil',
     'GeocoderHelper',
     'NumberUtil',
