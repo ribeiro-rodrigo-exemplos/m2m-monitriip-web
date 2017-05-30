@@ -1,19 +1,22 @@
 class InfoViagemPopup{
-    constructor(document,dateUtil,geoCoderHelper,numberUtil){
+    constructor(document,dateUtil,geoCoderHelper,numberUtil,jornadaService){
         this._dateUtil = dateUtil;
         this._geocoderHelper = geoCoderHelper;
         this._document = document[0];
         this._detalheDaViagem = {};
         this._numberUtil = numberUtil;
+        this._jornadaService = jornadaService;
     }
 
-    exibirDetalhesDaViagem(detalheViagem){
+    exibirDetalhesDaViagem(servicosDaViagem){
         this._abrirPopup();
         
-        if(detalheViagem.length === 0)
+        if(servicosDaViagem.length === 0)
             return; 
 
-        this._montarInfoViagem(detalheViagem);
+        this._montarInformacoesBasicasDaViagem(servicosDaViagem);
+        this._montarAbaInfoViagem(servicosDaViagem);
+        this._montarAbaJornadas(servicosDaViagem);
 
         this._geocoderHelper.obterEndereco(-43.285343,-22.834171);
         
@@ -30,9 +33,24 @@ class InfoViagemPopup{
         return this._detalheDaViagem;
     }
 
-    _montarInfoViagem(servicosDaViagem){
+    _montarInformacoesBasicasDaViagem(servicosDaViagem){
+
         this._detalheDaViagem = servicosDaViagem[0];
 
+        this._detalheDaViagem.dataHoraInicial = this._obterDataHoraInicial(servicosDaViagem);
+        this._detalheDaViagem.dataHoraFinal = this._obterDataHoraFinal(servicosDaViagem);
+
+        this._detalheDaViagem.duracaoTotalDaViagem = this._obterDuracaoDaViagem(this._detalheDaViagem.dataHoraInicial,this._detalheDaViagem.dataHoraFinal);
+        let duracaoEmMinutos = servicosDaViagem.reduce((total,servico) => total+servico.duracao ? servico.duracao : 0,0);
+        this._detalheDaViagem.duracaoEmMinutos = duracaoEmMinutos ? this._detalheDaViagem.duracaoEmMinutos : '';
+    }
+
+    _montarAbaJornadas(servicosDaViagem){
+
+    }
+
+    _montarAbaInfoViagem(servicosDaViagem){
+        
         this._detalheDaViagem.servicos = servicosDaViagem.map(servico => {
             return {
                 placaVeiculo:servico.placaVeiculo,
@@ -45,16 +63,6 @@ class InfoViagemPopup{
         this._detalheDaViagem.quantidadeDeMotoristas = [...new Set(this._detalheDaViagem.servicos.map(t => t.cpfMotorista)).values()].length;
         this._detalheDaViagem.quantidadeDeVeiculos = [...new Set(this._detalheDaViagem.servicos.map(t => t.placaVeiculo)).values()].length;
 
-        let dataHoraInicial = this._detalheDaViagem.dataHoraInicial;
-        let dataHoraFinal = servicosDaViagem[servicosDaViagem.length-1].dataHoraFinal;
-
-        this._detalheDaViagem.dataHoraInicial = dataHoraInicial ? this._dateUtil.formatarDataHora(dataHoraInicial) : '';
-        this._detalheDaViagem.dataHoraFinal = dataHoraFinal ? this._dateUtil.formatarDataHora(dataHoraFinal) : '';
-
-        this._detalheDaViagem.duracaoTotalDaViagem = dataHoraInicial && dataHoraFinal ? this._dateUtil.obterDuracao(dataHoraInicial,dataHoraFinal) : '';
-        let duracaoEmMinutos = servicosDaViagem.reduce((total,servico) => total+servico.duracao ? servico.duracao : 0,0);
-        this._detalheDaViagem.duracaoEmMinutos = duracaoEmMinutos ? this._detalheDaViagem.duracaoEmMinutos : '';
-
         let totalKm = servicosDaViagem.reduce((total,servico) => total+servico.totalKm,0);
         this._detalheDaViagem.totalKm = totalKm ? this._numberUtil.formatarNumero(totalKm) : '';
 
@@ -64,8 +72,6 @@ class InfoViagemPopup{
         this._detalheDaViagem.direcaoContinuaMaxima = direcaoContinuaMaxima ? direcaoContinuaMaxima : '';
 
         this._detalheDaViagem.calculoVelocidades = this._calcularVelocidades(servicosDaViagem);
-
-        
     }
 
     _calcularVelocidades(servicos){
@@ -75,7 +81,7 @@ class InfoViagemPopup{
         let velocidades = servicos.map(servico => servico.localizacoes)
                                   .reduce((acc,localizacoes) => {
                                       localizacoes.forEach(l => {
-                                          if(typeof(l.velocidade) == typeof(Number))
+                                          if(typeof(l.velocidade) == 'number')
                                             acc.push(l.velocidade);
                                       });
                                       return acc; 
@@ -100,13 +106,28 @@ class InfoViagemPopup{
     _formataCoordenadas(x, y){
         return x + " / " + y;
     }
+
+    _obterDuracaoDaViagem(dataHoraInicial,dataHoraFinal){
+        return dataHoraInicial && dataHoraFinal ? this._dateUtil.obterDuracao(dataHoraInicial,dataHoraFinal) : '';
+    }
+
+    _obterDataHoraInicial(servicosDaViagem){
+        let dataHoraInicial = servicosDaViagem[0].dataHoraInicial;
+        return dataHoraInicial ? this._dateUtil.formatarDataHora(dataHoraInicial) : '';
+    }
+
+    _obterDataHoraFinal(servicosDaViagem){
+        let dataHoraFinal = servicosDaViagem[servicosDaViagem.length-1].dataHoraFinal;
+        return dataHoraFinal ? this._dateUtil.formatarDataHora(dataHoraFinal) : '';
+    }
 }
 
 InfoViagemPopup.$inject = [
     '$document',
     'DateUtil',
     'GeocoderHelper',
-    'NumberUtil'
+    'NumberUtil',
+    'JornadaService'
 ];
 
 angular.module('monitriip-web')
