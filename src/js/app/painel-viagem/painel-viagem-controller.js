@@ -66,7 +66,7 @@ class PainelViagemController{
             this.leituraBilhetesTotalizador,
             this.kmPercorridoTotalizador,
             this.tempoViagemTotalizador,
-            //this.jornadaTrabalhoTotalizador,
+            this.jornadaTrabalhoTotalizador,
             this.direcaoContinuaTotalizador,
             this.paradasTotalizador,
             this.graficoGeral,

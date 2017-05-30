@@ -145,14 +145,14 @@
 
     <div class="info-box">
         <div class="info-box__content info-box__content--red info-jornada-de-trabalho-js">
-            <select ng-model="comboJornada" ng-options="data for data in ctrl.jornadaTrabalhoTotalizador.combo"
-            ng-change="ctrl.jornadaTrabalhoTotalizador.buscaCombo(comboJornada)" class="info-box__select">
+            <select ng-model="ctrl.jornadaTrabalhoTotalizador.motoristaSelecionado" ng-options="data for data in ctrl.jornadaTrabalhoTotalizador.motoristas"
+             class="info-box__select">
             </select>
             
             <h5 class="info-box__content__title text-size-13">Jornada de Trabalho</h5>
             <div class="row row--align-baseline">
                 <ng-include src="'views/icons/jornada-trabalho-totalizador-icon.html'"></ng-include>
-                <span class="info-box__content__span text-size-56">{{ctrl.jornadaTrabalhoTotalizador.total}}</span>
+                <span class="info-box__content__span text-size-56">{{ctrl.jornadaTrabalhoTotalizador.jornadaTrabalhoMaxima}}</span>
             </div>
 
             <!-- gráfico -->
@@ -161,9 +161,9 @@
             </div>
         </div>
         <footer class="info-box__footer red-bg">
-            <section ng-repeat="data in ctrl.jornadaTrabalhoTotalizador.datas" class="column info-box__footer__column">
-                <span class="semitransparent-text">{{data.dia}}</span>
-                <span class="text-size-24">{{data.total}}</span>
+            <section ng-repeat="data in ctrl.jornadaTrabalhoTotalizador.jornadasTrabalho" class="column info-box__footer__column">
+                <span class="semitransparent-text">{{data.data}}</span>
+                <span class="text-size-24">{{data.maxima}}</span>
             </section>
         </footer>
     </div><!-- fim info-box jornada de trabalho-->
