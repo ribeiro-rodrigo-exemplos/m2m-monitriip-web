@@ -1,11 +1,14 @@
+let self;
+
 class Interceptor{
     constructor(promise,window){
-        this._promise = promise;
-        this._window = window;
+        self = this;
+        self._promise = promise;
+        self._window = window;
     }
 
     request(config){
-        console.log('request');
+        config.headers.Authorization = localStorage.token;
         return config;
     }
 
