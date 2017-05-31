@@ -2,7 +2,7 @@
     <div class="popup__content">
         <header class="popup__content__header text-size-14">
             <span class="number-box number-box--larger">{{$index + 1}}</span>
-            <span>{{ctrl.infoViagemPopup.viagem.descricaoDaLinha}}</span>
+            <span>Linha {{ctrl.infoViagemPopup.viagem.identificacaoLinha}}</span>
             <span class="popup__content__close"></span>
         </header>
         <div class="popup__tabs">
@@ -46,7 +46,7 @@
                     INFORMAÇÕES BÁSICAS
                 </span><br>
                 <span class="popup__content__label text-size-13">Linha</span><br>
-                <span class="popup__content__informations text-size-13">{{ctrl.infoViagemPopup.viagem.identificacaoLinha}} - {{ctrl.infoViagemPopup.viagem.descricaoDaLinha}} </span><br>
+                <span class="popup__content__informations text-size-13">{{ctrl.infoViagemPopup.viagem.identificacaoLinha}}</span><br>
 
                 <span class="popup__content__label text-size-13">Sentido</span><br>
                 <span class="popup__content__informations text-size-13">{{ctrl.infoViagemPopup.viagem.sentidoLinha}}</span><br>
@@ -154,9 +154,8 @@
 
         <div class="tab__content popup__scrollable jornada-de-trabalho-js none">
             <table cellspacing="0" class="table table--tab">
-                <thead>
+                <thead >
                     <tr class="table__header__row">
-                        <td>NOME</td>
                         <td>CPF</td>
                         <td>DATA INICIO</td>
                         <td>DATA FIM</td>
@@ -168,29 +167,16 @@
                     </tr>
                 </thead>
                 <tbody>
-                    <tr class="table__row darker-gray-bg table__row--large-td">
-                        <td><span class="number-box absolute-first-corner">1</span>Marcelo Campos</td>
-                        <td>633599587-10</td>
-                        <td>12/07/17 09:00:04</td>
-                        <td>12/07/17 18:23:15</td>
-                        <td>8985458545 / 896587458<br> Av. Victor Civita, 77 - Barra, Rio de Janeiro - 20900-200</td>
-                        <td>8985458545 / 896587458<br> Av. Victor Civita, 77 - Barra, Rio de Janeiro - 20900-200</td>
-                        <td>05:05:23</td>
+                    <tr class="table__row darker-gray-bg table__row--large-td" ng-repeat="jornada in ctrl.infoViagemPopup.jornadas">
+                        <td><span class="number-box absolute-first-corner">{{$index + 1}}</span>{{jornada.cpfMotorista}}</td>
+                        <td>{{jornada.dataHoraInicial}}</td>
+                        <td>{{jornada.dataHoraFinal}}</td>
+                        <td>{{jornada.latitudeInicial}} / {{jornada.longitudeInicial}}<br><!--endereco aqui--></td>
+                        <td><div ng-if="jornada.latitudeFinal">{{jornada.latitudeFinal}} / {{jornada.longitudeFinal}}<br><!-- endereco aqui --></div></td>
+                        <td>{{ctrl.infoViagemPopup.formatarDuracaoDaJornada(jornada)}}</td>
                         <!-- classe red quando o tempo for excedido e classe green quando tempo for positivo -->
                         <td class="red">00:05:23</td>
-                        <td>52000, 56980, 78800, 56900</td>
-                    </tr>
-                    <tr class="table__row darker-gray-bg table__row table__row--large-td">
-                        <td><span class="number-box absolute-first-corner">2</span>Ricardo Souza</td>
-                        <td>633598999-25</td>
-                        <td>12/07/17 09:00:04</td>
-                        <td>12/07/17 18:23:15</td>
-                        <td>8985458545 / 896587458<br> Av. Victor Civita, 77 - Barra, Rio de Janeiro - 20900-200</td>
-                        <td>8985458545 / 896587458<br> Av. Victor Civita, 77 - Barra, Rio de Janeiro - 20900-200</td>
-                        <td>04:55:00</td>
-                        <!-- classe red quando o tempo for excedido e classe green quando tempo for positivo -->
-                        <td class="green">00:05:00</td>
-                        <td>52000, 56980, 78800, 56900</td>
+                        <td>{{jornada.placaVeiculo}}</td>
                     </tr>
                 </tbody>
             </table>
@@ -209,10 +195,10 @@
                     <tr class="table__row dark-gray-bg" ng-repeat="parada in ctrl.infoViagemPopup.viagem.paradas">
                         <td class="table__larger-row">
                             <span class="number-box">{{$index + 1}}</span>
-                            {{parada.motivoParada}}
+                            {{parada.motivo}}
                         </td>
-                        <td>{{parada.dataHora}}</td>
-                        <td>{{parada.coordenadasFormatadas}}</td>
+                        <td>{{ctrl.infoViagemPopup.formatarDataHora(parada.dataHora)}}</td>
+                        <td><div ng-if="parada.latitude">{{parada.latitude}} / {{parada.longitude}}</div></td>
                     </tr>
                 </tbody>
             </table>
