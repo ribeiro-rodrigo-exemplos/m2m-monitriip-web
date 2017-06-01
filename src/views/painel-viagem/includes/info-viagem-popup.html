@@ -110,6 +110,21 @@
                     <span class="popup__content__informations text-size-13 equidistant">{{ctrl.infoViagemPopup.viagem.velocidadeMinima ? ctrl.infoViagemPopup.viagem.velocidadeMinima : ''}} km</span>
                 </div>
             </div>
+            <!--<ng-map zoom="5" center="current-location"
+                scrollwheel="false"
+                zoom-to-include-markers="true"
+                geo-fallback-center="4.672585, -74.059525">
+                <marker ng-repeat="coordenada in ctrl.infoViagemPopup.viagem.coordenadasPercurso"
+                position="{{coordenada.posicao}}" title="pos: {{coordenada.posicao}}"></marker>
+            </ng-map>-->
+
+            <ng-map zoom="11" center="[40.74, -74.18]"
+                scrollwheel="false"
+                zoom-to-include-markers="true">
+                <marker ng-repeat="coordenada in ctrl.infoViagemPopup.viagem.coordenadasPercurso"
+                position="{{coordenada.posicao}}" title="pos: {{coordenada.posicao}}"></marker>
+            </ng-map>
+
         </div>
 
         <div class="tab__content popup__scrollable bilhetes-js none">

@@ -17,7 +17,7 @@
   "dependencies": {
     "angular-ui-router": "^0.3.2",
     "angular": "^1.5.8",
-    "ngmap": "^1.17.8",
+    "ngmap": "^1.18.4",
     "jquery": "^3.1.1",
     "highcharts-chart": "^2.0.1",
     "angular-fullscreen": "^1.0.1",

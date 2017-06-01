@@ -10,6 +10,9 @@ class Viagem{
         this._bilhetes = [];
         this._paradas = [];
         this._servicos = [];
+        this._coordenadasPercurso = [];
+        this._localizacaoInicial = {};
+        this._localizacaoFinal = {};
 
         if(periodos && periodos.length)
             this._montarViagem(); 
@@ -99,6 +102,19 @@ class Viagem{
         return this._descricaoDaLinha;
     }
 
+    get coordenadasPercurso(){
+        return this._coordenadasPercurso;
+    }
+    
+    get localizacaoInicial(){
+        return this._localizacaoInicial;
+    }
+
+    get localizacaoFinal(){
+        return this._localizacaoFinal;
+    }
+    
+
     _montarViagem(){
 
         let primeiroPeriodo = this._periodos[0];
@@ -145,7 +161,20 @@ class Viagem{
                         .reduce((acc,paradas) => {
                             paradas.forEach(parada => acc.push(parada));
                             return acc;
-                        },[]); 
+                        },[]);
+        
+        this._periodos.map(periodo =>{
+            periodo.localizacoes.forEach(local =>{
+                if(local && local.localizacao)
+                    this._coordenadasPercurso.push({'posicao' : `${local.localizacao.coordinates[1]}, ${local.localizacao.coordinates[0]}`});
+            });
+        });
+
+        let totalPeriodos = this._periodos.length;
+
+        this._localizacaoInicial = {'posicao' : `${this._periodos[0].localizacaoInicial.coordinates[0]}, ${this._periodos[0].localizacaoInicial.coordinates[1]}`};
+        this._localizacaoFinal = {'posicao' : `${this._periodos[totalPeriodos - 1].localizacaoFinal.coordinates[0]}, ${this._periodos[totalPeriodos - 1].localizacaoFinal.coordinates[1]}`};
+   
     }
 
     _calcularVelocidades(){
