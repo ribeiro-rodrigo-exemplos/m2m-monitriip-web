@@ -3,8 +3,19 @@ class Jornada{
         this._properties = properties; 
     }
 
+    get nomeMotorista(){
+        return this._properties.nomeMotorista ? this._properties.nomeMotorista : '';
+    }
+
     get cpfMotorista(){
         return this._properties.cpfMotorista;
+    }
+
+    get tempoExcedido(){
+        if(this._properties.duracaoMaximaPermitida && this._properties.duracao)
+            return this._properties.duracao > this._properties.duracaoMaximaPermitida ? this._properties.duracao - this._properties.duracaoMaximaPermitida : 0;
+        else
+            return 0;
     }
 
     get placaVeiculo(){

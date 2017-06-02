@@ -156,6 +156,7 @@
             <table cellspacing="0" class="table table--tab">
                 <thead >
                     <tr class="table__header__row">
+                        <td>NOME</td>
                         <td>CPF</td>
                         <td>DATA INICIO</td>
                         <td>DATA FIM</td>
@@ -168,14 +169,15 @@
                 </thead>
                 <tbody>
                     <tr class="table__row darker-gray-bg table__row--large-td" ng-repeat="jornada in ctrl.infoViagemPopup.jornadas">
-                        <td><span class="number-box absolute-first-corner">{{$index + 1}}</span>{{jornada.cpfMotorista}}</td>
+                        <td><span class="number-box absolute-first-corner">{{$index + 1}}</span>{{jornada.nomeMotorista}}</td>
+                        <td>{{jornada.cpfMotorista}}</td>
                         <td>{{jornada.dataHoraInicial}}</td>
                         <td>{{jornada.dataHoraFinal}}</td>
                         <td>{{jornada.latitudeInicial}} / {{jornada.longitudeInicial}}<br><!--endereco aqui--></td>
                         <td><div ng-if="jornada.latitudeFinal">{{jornada.latitudeFinal}} / {{jornada.longitudeFinal}}<br><!-- endereco aqui --></div></td>
                         <td>{{ctrl.infoViagemPopup.formatarDuracaoDaJornada(jornada)}}</td>
                         <!-- classe red quando o tempo for excedido e classe green quando tempo for positivo -->
-                        <td class="red">00:05:23</td>
+                        <td class="red">{{jornada.tempoExcedido}}min</td>
                         <td>{{jornada.placaVeiculo}}</td>
                     </tr>
                 </tbody>
