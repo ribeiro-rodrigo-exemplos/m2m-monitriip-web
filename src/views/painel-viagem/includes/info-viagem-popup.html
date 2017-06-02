@@ -1,8 +1,8 @@
-<div class="popup none">
-    <div class="popup__content">
+<div class="popup flip-horizontal--container hidden">
+    <div class="popup__content flip-horizontal">
         <header class="popup__content__header text-size-14">
             <span class="number-box number-box--larger">{{$index + 1}}</span>
-            <span>{{ctrl.infoViagemPopup.viagem.descricaoDaLinha}}</span>
+            <span>Linha {{ctrl.infoViagemPopup.viagem.identificacaoLinha}}</span>
             <span class="popup__content__close"></span>
         </header>
         <div class="popup__tabs">
@@ -46,7 +46,7 @@
                     INFORMAÇÕES BÁSICAS
                 </span><br>
                 <span class="popup__content__label text-size-13">Linha</span><br>
-                <span class="popup__content__informations text-size-13">{{ctrl.infoViagemPopup.viagem.identificacaoLinha}} - {{ctrl.infoViagemPopup.viagem.descricaoDaLinha}} </span><br>
+                <span class="popup__content__informations text-size-13">{{ctrl.infoViagemPopup.viagem.identificacaoLinha}}</span><br>
 
                 <span class="popup__content__label text-size-13">Sentido</span><br>
                 <span class="popup__content__informations text-size-13">{{ctrl.infoViagemPopup.viagem.sentidoLinha}}</span><br>
@@ -110,15 +110,8 @@
                     <span class="popup__content__informations text-size-13 equidistant">{{ctrl.infoViagemPopup.viagem.velocidadeMinima ? ctrl.infoViagemPopup.viagem.velocidadeMinima : ''}} km</span>
                 </div>
             </div>
-            <!--<ng-map zoom="5" center="current-location"
-                scrollwheel="false"
-                zoom-to-include-markers="true"
-                geo-fallback-center="4.672585, -74.059525">
-                <marker ng-repeat="coordenada in ctrl.infoViagemPopup.viagem.coordenadasPercurso"
-                position="{{coordenada.posicao}}" title="pos: {{coordenada.posicao}}"></marker>
-            </ng-map>-->
-
-            <ng-map zoom="11" center="current-location" scrollwheel="true" zoom-to-include-markers="true">
+            
+            <ng-map zoom="4" center="{{ctrl.infoViagemPopup.viagem._localizacaoInicial}}" scrollwheel="true" zoom-to-include-markers="false">
                 <marker position="{{ctrl.infoViagemPopup.viagem._localizacaoInicial}}" title=""></marker>
                 <marker position="{{ctrl.infoViagemPopup.viagem._localizacaoFinal}}" title=""></marker>
                 <shape name="polyline" path='{{ctrl.infoViagemPopup.viagem.coordenadasPercurso}}' geodesic="true" stroke-color="#FF0000" stroke-opacity="1.0" stroke-weight="4"></shape>
@@ -168,9 +161,8 @@
 
         <div class="tab__content popup__scrollable jornada-de-trabalho-js none">
             <table cellspacing="0" class="table table--tab">
-                <thead>
+                <thead >
                     <tr class="table__header__row">
-                        <td>NOME</td>
                         <td>CPF</td>
                         <td>DATA INICIO</td>
                         <td>DATA FIM</td>
@@ -182,29 +174,16 @@
                     </tr>
                 </thead>
                 <tbody>
-                    <tr class="table__row darker-gray-bg table__row--large-td">
-                        <td><span class="number-box absolute-first-corner">1</span>Marcelo Campos</td>
-                        <td>633599587-10</td>
-                        <td>12/07/17 09:00:04</td>
-                        <td>12/07/17 18:23:15</td>
-                        <td>8985458545 / 896587458<br> Av. Victor Civita, 77 - Barra, Rio de Janeiro - 20900-200</td>
-                        <td>8985458545 / 896587458<br> Av. Victor Civita, 77 - Barra, Rio de Janeiro - 20900-200</td>
-                        <td>05:05:23</td>
+                    <tr class="table__row darker-gray-bg table__row--large-td" ng-repeat="jornada in ctrl.infoViagemPopup.jornadas">
+                        <td><span class="number-box absolute-first-corner">{{$index + 1}}</span>{{jornada.cpfMotorista}}</td>
+                        <td>{{jornada.dataHoraInicial}}</td>
+                        <td>{{jornada.dataHoraFinal}}</td>
+                        <td>{{jornada.latitudeInicial}} / {{jornada.longitudeInicial}}<br><!--endereco aqui--></td>
+                        <td><div ng-if="jornada.latitudeFinal">{{jornada.latitudeFinal}} / {{jornada.longitudeFinal}}<br><!-- endereco aqui --></div></td>
+                        <td>{{ctrl.infoViagemPopup.formatarDuracaoDaJornada(jornada)}}</td>
                         <!-- classe red quando o tempo for excedido e classe green quando tempo for positivo -->
                         <td class="red">00:05:23</td>
-                        <td>52000, 56980, 78800, 56900</td>
-                    </tr>
-                    <tr class="table__row darker-gray-bg table__row table__row--large-td">
-                        <td><span class="number-box absolute-first-corner">2</span>Ricardo Souza</td>
-                        <td>633598999-25</td>
-                        <td>12/07/17 09:00:04</td>
-                        <td>12/07/17 18:23:15</td>
-                        <td>8985458545 / 896587458<br> Av. Victor Civita, 77 - Barra, Rio de Janeiro - 20900-200</td>
-                        <td>8985458545 / 896587458<br> Av. Victor Civita, 77 - Barra, Rio de Janeiro - 20900-200</td>
-                        <td>04:55:00</td>
-                        <!-- classe red quando o tempo for excedido e classe green quando tempo for positivo -->
-                        <td class="green">00:05:00</td>
-                        <td>52000, 56980, 78800, 56900</td>
+                        <td>{{jornada.placaVeiculo}}</td>
                     </tr>
                 </tbody>
             </table>
@@ -223,10 +202,10 @@
                     <tr class="table__row dark-gray-bg" ng-repeat="parada in ctrl.infoViagemPopup.viagem.paradas">
                         <td class="table__larger-row">
                             <span class="number-box">{{$index + 1}}</span>
-                            {{parada.motivoParada}}
+                            {{parada.motivo}}
                         </td>
-                        <td>{{parada.dataHora}}</td>
-                        <td>{{parada.coordenadasFormatadas}}</td>
+                        <td>{{ctrl.infoViagemPopup.formatarDataHora(parada.dataHora)}}</td>
+                        <td><div ng-if="parada.latitude">{{parada.latitude}} / {{parada.longitude}}</div></td>
                     </tr>
                 </tbody>
             </table>
@@ -272,7 +251,8 @@
 
     /*fecha popup ao se clicar no X*/
     $(".popup__content__close").click(function(){
-        $(".popup").addClass("none");
+        $(".popup__content").removeClass("flip-horizontal--active");
+         $(".popup").addClass("hidden");
     });
 
 </script>

@@ -1,17 +1,17 @@
 class JornadaService{
-    constructor(httpClient){
+    constructor(httpClient, m2mconfig){
         this._httpClient = httpClient;
-        this._url = "http://localhost:3009/v1";
+        this._url = m2mconfig.apiMonitriipPainel;
     }
 
     obterJornadas(query){
         return this._httpClient
-                    .get(`${this._url}/jornadas`,{params:query})
+                    .get(`${this._url}/v1/jornadas`,{params:query})
                     .then(response => response.status == 200 ? response.data : []);
     }
 }
 
-JornadaService.$inject = ['$http'];
+JornadaService.$inject = ['$http', 'm2mconfig'];
 
 angular.module('monitriip-web')
         .service('JornadaService',JornadaService);

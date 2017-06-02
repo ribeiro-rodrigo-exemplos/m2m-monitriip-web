@@ -2,10 +2,10 @@
  * Created by Rodrigo Ribeiro on 25/04/17.
  */
 class PainelService{
-    constructor(httpClient,promise){
+    constructor(httpClient,promise, m2mconfig){
         this._httpClient = httpClient;
         this._promise = promise;
-        this._url = "http://localhost:3009/v1";
+        this._url = m2mconfig.apiMonitriipPainel;
     }
 
     consultarPeriodo(dataInicial,dataFinal,cnpjCliente,cpfMotorista,placaVeiculo){
@@ -26,19 +26,19 @@ class PainelService{
 
     _obterTotalizadores(query){
         return this._httpClient
-                    .get(`${this._url}/viagens/totalizadores`,{params:query})
+                    .get(`${this._url}/v1/viagens/totalizadores`,{params:query})
                     .then(response => response.status == 200 ? response.data : []);
     }
 
     _obterExtratos(query){
         return this._httpClient
-                    .get(`${this._url}/viagens/extratos`,{params:query})
+                    .get(`${this._url}/v1/viagens/extratos`,{params:query})
                     .then(response => response.status == 200 ? response.data : []);
     }
 
     _obterJornadas(query){
         return this._httpClient
-                    .get(`${this._url}/jornadas`,{params:query})
+                    .get(`${this._url}/v1/jornadas`,{params:query})
                     .then(response => response.status == 200 ? response.data : []);
     }
 
@@ -111,7 +111,7 @@ class PainelService{
     }
 }
 
-PainelService.$inject = ['$http',"$q"];
+PainelService.$inject = ['$http',"$q", 'm2mconfig'];
 
 angular.module('monitriip-web')
         .service('PainelService',PainelService);

@@ -16,12 +16,9 @@ class InfoViagemPopup{
         this._viagem = new Viagem(periodosDaViagem);
 
         this._obterJornadas(periodosDaViagem)
-            .then(jornadas => {
-                console.log(jornadas);
-            });
+            .then(jornadas => this._jornadas = jornadas);
 
-        //this._geocoderHelper.obterEndereco(-43.285343,-22.834171);
-        
+        //this._geocoderHelper.obterEndereco(-43.285343,-22.834171);   
     }
 
     abrirDetalhesDoBilhete(campo){
@@ -43,13 +40,21 @@ class InfoViagemPopup{
         return horario ? this._dateUtil.obterHorario(horario) : ''; 
     }
 
+    formatarDuracaoDaJornada(jornada){
+        return jornada.dataHoraInicial && jornada.dataHoraFinal ? this._dateUtil.obterDuracao(jornada.dataHoraInicial,jornada.dataHoraFinal) : '';
+    }
+
     obterDuracaoDaViagem(){
         return this._viagem && this._viagem.dataHoraInicial && this._viagem.dataHoraFinal ? 
         this._dateUtil.obterDuracao(this._viagem.dataHoraInicial,this._viagem.dataHoraFinal) : '';
     }
-
+    
     get viagem(){
         return this._viagem;
+    }
+
+    get jornadas(){
+        return this._jornadas;
     }
 
     _obterJornadas(periodosDaViagem){
@@ -63,14 +68,22 @@ class InfoViagemPopup{
         }));
 
         return this._promise
-                    .all(consultasJornadas);
+                    .all(consultasJornadas)
+                    .then(consultas => !consultas.length ? [] : consultas.reduce((acc,jornadas) => {
+                        jornadas.forEach(j => acc.push(new Jornada(j)));
+                        return acc; 
+                    },[]));
     }
 
     _abrirPopup(){
         this._document
             .querySelector('.popup')
                 .classList
-                    .remove('none');
+                    .remove('hidden');
+            this._document
+                .querySelector('.popup__content')
+                .classList
+                    .add('flip-horizontal--active');
     }
 
     _formataCoordenadas(x, y){

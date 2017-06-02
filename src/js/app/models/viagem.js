@@ -158,8 +158,8 @@ class Viagem{
                                 },[]);
 
         this._paradas = this._periodos.map(periodo => periodo.paradas) 
-                        .reduce((acc,paradas) => {
-                            paradas.forEach(parada => acc.push(parada));
+                        .reduce((acc,paradasProperties) => {
+                            paradasProperties.forEach(properties => acc.push(new Parada(properties)));
                             return acc;
                         },[]);
         
