@@ -13,6 +13,8 @@ class Viagem{
         this._coordenadasPercurso = [];
         this._localizacaoInicial = {};
         this._localizacaoFinal = {};
+        this._LAT = 0;
+        this._LONG = 1;
 
         if(periodos && periodos.length)
             this._montarViagem(); 
@@ -163,21 +165,20 @@ class Viagem{
                             return acc;
                         },[]);
         
+
+        this._localizacaoInicial = `${primeiroPeriodo.localizacaoInicial.coordinates[this._LAT]}, ${primeiroPeriodo.localizacaoInicial.coordinates[this._LONG]}`;
+        this._localizacaoFinal = `${ultimoServico.localizacaoFinal.coordinates[this._LAT]}, ${ultimoServico.localizacaoFinal.coordinates[this._LONG]}`;
         
-        let totalPeriodos = this._periodos.length;
-        this._localizacaoInicial = `${this._periodos[0].localizacaoInicial.coordinates[0]}, ${this._periodos[0].localizacaoInicial.coordinates[1]}`;
-        this._localizacaoFinal = `${this._periodos[totalPeriodos - 1].localizacaoFinal.coordinates[0]}, ${this._periodos[totalPeriodos - 1].localizacaoFinal.coordinates[1]}`;
-        
-        this._coordenadasPercurso.push([this._periodos[0].localizacaoInicial.coordinates[0], this._periodos[0].localizacaoInicial.coordinates[1]]);
+        this._coordenadasPercurso.push([primeiroPeriodo.localizacaoInicial.coordinates[this._LAT], primeiroPeriodo.localizacaoInicial.coordinates[this._LONG]]);
 
         this._periodos.map(periodo =>{
             periodo.localizacoes.forEach(local =>{
                 if(local && local.localizacao)
-                    this._coordenadasPercurso.push([local.localizacao.coordinates[0], local.localizacao.coordinates[1]]);
+                    this._coordenadasPercurso.push([local.localizacao.coordinates[this._LAT], local.localizacao.coordinates[this._LONG]]);
             });
         });
 
-        this._coordenadasPercurso.push([this._periodos[totalPeriodos - 1].localizacaoFinal.coordinates[0], this._periodos[totalPeriodos - 1].localizacaoFinal.coordinates[1]]);
+        this._coordenadasPercurso.push([ultimoServico.localizacaoFinal.coordinates[this._LAT], ultimoServico.localizacaoFinal.coordinates[this._LONG]]);
    
     }
 
