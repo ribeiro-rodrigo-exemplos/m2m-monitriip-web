@@ -1,5 +1,5 @@
-<div class="popup none">
-    <div class="popup__content">
+<div class="popup flip-horizontal--container hidden">
+    <div class="popup__content flip-horizontal">
         <header class="popup__content__header text-size-14">
             <span class="number-box number-box--larger">{{$index + 1}}</span>
             <span>Linha {{ctrl.infoViagemPopup.viagem.identificacaoLinha}}</span>
@@ -244,7 +244,7 @@
 
     /*fecha popup ao se clicar no X*/
     $(".popup__content__close").click(function(){
-        $(".popup").addClass("none");
+        $(".popup__content").removeClass("flip-horizontal--active");
     });
 
 </script>

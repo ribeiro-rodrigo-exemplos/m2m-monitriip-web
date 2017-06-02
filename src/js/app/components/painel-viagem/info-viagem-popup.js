@@ -79,7 +79,10 @@ class InfoViagemPopup{
         this._document
             .querySelector('.popup')
                 .classList
-                    .remove('none');
+                    .remove('hidden');
+            .querySelector('.popup__content')
+                .classList
+                    .add('flip-horizontal--active');
     }
 
     _formataCoordenadas(x, y){
