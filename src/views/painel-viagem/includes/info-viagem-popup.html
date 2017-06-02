@@ -177,7 +177,7 @@
                         <td><div ng-if="jornada.latitudeFinal">{{jornada.latitudeFinal}} / {{jornada.longitudeFinal}}<br><!-- endereco aqui --></div></td>
                         <td>{{ctrl.infoViagemPopup.formatarDuracaoDaJornada(jornada)}}</td>
                         <!-- classe red quando o tempo for excedido e classe green quando tempo for positivo -->
-                        <td class="red">{{jornada.tempoExcedido}}min</td>
+                        <td class="red"><span ng-if="jornada.tempoExcedido != 0">{{jornada.tempoExcedido}} min</span></td>
                         <td>{{jornada.placaVeiculo}}</td>
                     </tr>
                 </tbody>
