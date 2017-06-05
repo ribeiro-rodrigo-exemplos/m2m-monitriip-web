@@ -111,7 +111,7 @@
                 </div>
             </div>
             
-            <ng-map zoom="4" center="{{ctrl.infoViagemPopup.viagem._localizacaoInicial}}" scrollwheel="true" zoom-to-include-markers="false">
+            <ng-map zoom="4" center="{{ctrl.infoViagemPopup.viagem._localizacaoInicial}}" style="height:200px" scrollwheel="true" zoom-to-include-markers="false">
                 <marker position="{{ctrl.infoViagemPopup.viagem._localizacaoInicial}}" title=""></marker>
                 <marker position="{{ctrl.infoViagemPopup.viagem._localizacaoFinal}}" title=""></marker>
                 <shape name="polyline" path='{{ctrl.infoViagemPopup.viagem.coordenadasPercurso}}' geodesic="true" stroke-color="#FF0000" stroke-opacity="1.0" stroke-weight="4"></shape>
