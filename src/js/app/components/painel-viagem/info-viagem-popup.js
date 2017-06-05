@@ -51,6 +51,15 @@ class InfoViagemPopup{
         return this._viagem && this._viagem.dataHoraInicial && this._viagem.dataHoraFinal ? 
         this._dateUtil.obterDuracao(this._viagem.dataHoraInicial,this._viagem.dataHoraFinal) : '';
     }
+
+    obterDuracaoTotalDasJornadas(){
+        return this._numberUtil
+                    .formatarNumero(this._jornadas.reduce((total,jornada) => 
+                                        this._dateUtil.obterDuracaoEmHoras(jornada.dataHoraInicial,
+                                        jornada.dataHoraFinal ? jornada.dataHoraFinal : new Date()) + total,0 
+                                   )
+        );
+    }
     
     get viagem(){
         return this._viagem;
