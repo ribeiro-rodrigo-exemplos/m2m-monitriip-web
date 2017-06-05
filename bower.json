@@ -23,7 +23,6 @@
     "angular-fullscreen": "^1.0.1",
     "highcharts-ng": "^1.1.0",
     "moment": "^2.18.1",
-    "numeral": "^2.0.6",
-    "geocoder-js": "^0.0.1"
+    "numeral": "^2.0.6"
   }
 }

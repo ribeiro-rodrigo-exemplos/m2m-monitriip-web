@@ -3,6 +3,11 @@ class Jornada{
         this._properties = properties; 
     }
 
+    carregarLocalizacoes(locationStrategy){
+        this._carregarLocalizacaoInicial(locationStrategy);
+        this._carregarLocalizacaoFinal(locationStrategy);
+    }
+
     get nomeMotorista(){
         return this._properties.nomeMotorista ? this._properties.nomeMotorista : '';
     }
@@ -44,5 +49,21 @@ class Jornada{
 
     get longitudeFinal(){
         return this._properties.coordenadasFim ? this._properties.coordenadasFim.coordinates[1] : null;
+    }
+
+    get enderecoInicial(){
+        return this._properties.enderecoInicial;
+    }
+
+    _carregarLocalizacaoInicial(locationStrategy){
+        if(this.longitudeInicial && this.latitudeInicial)
+            locationStrategy(this.longitudeInicial,this.latitudeInicial)
+                .then(endereco => this._properties.enderecoInicial = endereco);
+    }
+
+    _carregarLocalizacaoFinal(locationStrategy){
+        if(this.longitudeFinal && this.latitudeFinal)
+            locationStrategy(this.longitudeFinal,this.latitudeFinal)
+                .then(endereco => this._properties.enderecoFinal = endereco);
     }
 }

@@ -12,10 +12,10 @@ class Parada{
     }
 
     get latitude(){
-        return this._properties.localizacao ? this._properties.localizacao.coordinates[0] : null;
+        return this._properties.localizacao ? this._properties.localizacao.coordinates[1] : null;
     }
 
     get longitude(){
-        return this._properties.localizacao ? this._properties.localizacao.coordinates[1] : null;
+        return this._properties.localizacao ? this._properties.localizacao.coordinates[0] : null;
     }
 }
