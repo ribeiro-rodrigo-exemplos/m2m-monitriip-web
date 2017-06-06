@@ -13,8 +13,8 @@ class Viagem{
         this._coordenadasPercurso = [];
         this._localizacaoInicial = {};
         this._localizacaoFinal = {};
-        this._LAT = 0;
-        this._LONG = 1;
+        this._LAT = 1;
+        this._LONG = 0;
 
         if(periodos && periodos.length)
             this._montarViagem(); 
@@ -167,8 +167,6 @@ class Viagem{
         
 
         this._localizacaoInicial = `${primeiroPeriodo.localizacaoInicial.coordinates[this._LAT]}, ${primeiroPeriodo.localizacaoInicial.coordinates[this._LONG]}`;
-        this._localizacaoFinal = `${ultimoServico.localizacaoFinal.coordinates[this._LAT]}, ${ultimoServico.localizacaoFinal.coordinates[this._LONG]}`;
-        
         this._coordenadasPercurso.push([primeiroPeriodo.localizacaoInicial.coordinates[this._LAT], primeiroPeriodo.localizacaoInicial.coordinates[this._LONG]]);
 
         this._periodos.map(periodo =>{
@@ -178,8 +176,13 @@ class Viagem{
             });
         });
 
-        this._coordenadasPercurso.push([ultimoServico.localizacaoFinal.coordinates[this._LAT], ultimoServico.localizacaoFinal.coordinates[this._LONG]]);
-   
+        if (ultimoServico.localizacaoFinal){
+            this._localizacaoFinal = `${ultimoServico.localizacaoFinal.coordinates[this._LAT]}, ${ultimoServico.localizacaoFinal.coordinates[this._LONG]}`;
+            this._coordenadasPercurso.push([ultimoServico.localizacaoFinal.coordinates[this._LAT], ultimoServico.localizacaoFinal.coordinates[this._LONG]]);
+        }else{
+            let ultimaCoordenadaPercurso = this._coordenadasPercurso.length - 1;
+            this._localizacaoFinal = `${this._coordenadasPercurso[ultimaCoordenadaPercurso][this._LONG]},${this._coordenadasPercurso[ultimaCoordenadaPercurso][this._LAT]}`;
+        }
     }
 
     _calcularVelocidades(){
