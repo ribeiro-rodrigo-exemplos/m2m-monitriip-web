@@ -154,8 +154,8 @@ class Viagem{
         this._calculoVelocidades = this._calcularVelocidades();
 
         this._bilhetes = this._periodos.map(periodo => periodo.bilhetes) 
-                                .reduce((acc,bilhetes) => {
-                                    bilhetes.forEach(bilhete => acc.push(bilhete));
+                                .reduce((acc,bilhetesProperties) => {
+                                    bilhetesProperties.forEach(properties => acc.push(new Bilhete(properties)));
                                     return acc;
                                 },[]);
 

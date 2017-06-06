@@ -16,7 +16,7 @@
             </span>
             <span class="popup__tab text-size-24 popup__tab__jornada-de-trabalho">
                 <ng-include src="'views/icons/jornada-trabalho-info-icon.html'"></ng-include>
-                23hs
+                {{ctrl.infoViagemPopup.obterDuracaoTotalDasJornadas()}}hs
             </span>
             <span class="popup__tab text-size-24 popup__tab__detector-de-paradas">
                 <ng-include src="'views/icons/detector-parada-info-icon.html'"></ng-include>
@@ -127,13 +127,13 @@
                     </div>
 
                     <div ng-repeat="bilhete in ctrl.infoViagemPopup.viagem.bilhetes">
-                        <div class="bilhete-{{$index + 1}} table--like tbody--like table--toggle-control" ng-click='ctrl.infoViagemPopup.abrirDetalhesDoBilhete($index + 1)'>
+                        <div class="bilhete-{{$index + 1}} table--like tbody--like table--toggle-control" ng-click='ctrl.infoViagemPopup.abrirDetalhesDoBilhete($index + 1,bilhete)'>
                             <span class="td--like">
                                 <span class="number-box number-box--square">{{$index + 1}}</span>
-                                {{bilhete.numeroBilheteEmbarque}}
+                                {{bilhete.numeroDeEmbarque}}
                             </span>
                             <span class="td--like">{{bilhete.valorTarifa | number:2}}</span>
-                            <span class="td--like">{{bilhete.dataHoraEvento}}</span>
+                            <span class="td--like">{{ctrl.infoViagemPopup.formatarDataHora(bilhete.dataHoraLeitura)}}</span>
                             <span class="td--like text-size-14 toggle-control">+</span>
                         </div>	
 
@@ -152,7 +152,7 @@
                                 <td>{{bilhete.percentualDesconto}}%</td>
                                 <td>{{ctrl.infoViagemPopup.detalheViagem.descricaoDaLinha}}</td>
                                 <td>{{bilhete.celularPassageiro}}</td>
-                                <td>{{bilhete.coordenadasFormatadas}}<br> Av. Victor Civita, 77 - Barra, Rio de Janeiro - 0990-900</td>
+                                <td><div ng-if="bilhete.longitude">{{bilhete.longitude}} / {{bilhete.latitude}}<br>{{bilhete.enderecoLeitura}}</div></td>
                             </tr>
                         </table>
                     </div>
@@ -163,6 +163,7 @@
             <table cellspacing="0" class="table table--tab">
                 <thead >
                     <tr class="table__header__row">
+                        <td>NOME</td>
                         <td>CPF</td>
                         <td>DATA INICIO</td>
                         <td>DATA FIM</td>
@@ -175,14 +176,15 @@
                 </thead>
                 <tbody>
                     <tr class="table__row darker-gray-bg table__row--large-td" ng-repeat="jornada in ctrl.infoViagemPopup.jornadas">
-                        <td><span class="number-box absolute-first-corner">{{$index + 1}}</span>{{jornada.cpfMotorista}}</td>
+                        <td><span class="number-box absolute-first-corner">{{$index + 1}}</span>{{jornada.nomeMotorista}}</td>
+                        <td>{{jornada.cpfMotorista}}</td>
                         <td>{{jornada.dataHoraInicial}}</td>
                         <td>{{jornada.dataHoraFinal}}</td>
-                        <td>{{jornada.latitudeInicial}} / {{jornada.longitudeInicial}}<br><!--endereco aqui--></td>
-                        <td><div ng-if="jornada.latitudeFinal">{{jornada.latitudeFinal}} / {{jornada.longitudeFinal}}<br><!-- endereco aqui --></div></td>
+                        <td>{{jornada.latitudeInicial}} / {{jornada.longitudeInicial}}<br>{{jornada.enderecoInicial}}</td>
+                        <td><div ng-if="jornada.latitudeFinal">{{jornada.latitudeFinal}} / {{jornada.longitudeFinal}}<br>{{jornada.enderecoFinal}}</div></td>
                         <td>{{ctrl.infoViagemPopup.formatarDuracaoDaJornada(jornada)}}</td>
                         <!-- classe red quando o tempo for excedido e classe green quando tempo for positivo -->
-                        <td class="red">00:05:23</td>
+                        <td class="red"><span ng-if="jornada.tempoExcedido != 0">{{jornada.tempoExcedido}} min</span></td>
                         <td>{{jornada.placaVeiculo}}</td>
                     </tr>
                 </tbody>

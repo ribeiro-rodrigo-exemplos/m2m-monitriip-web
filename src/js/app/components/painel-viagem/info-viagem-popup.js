@@ -8,6 +8,8 @@ class InfoViagemPopup{
         this._numberUtil = numberUtil;
         this._jornadaService = jornadaService;
         this._jornadas = [];
+
+        this._locationStrategy = this._geocoderHelper.obterEndereco.bind(this._geocoderHelper);
     }
 
     exibirDetalhesDaViagem(periodosDaViagem){
@@ -16,18 +18,19 @@ class InfoViagemPopup{
         this._viagem = new Viagem(periodosDaViagem);
 
         this._obterJornadas(periodosDaViagem)
-            .then(jornadas => this._jornadas = jornadas);
-
-        //this._geocoderHelper.obterEndereco(-43.285343,-22.834171);   
+            .then(jornadas => this._jornadas = jornadas)
+            .then(() => this._obterEnderecosDasJornadas());   
     }
 
-    abrirDetalhesDoBilhete(campo){
+    abrirDetalhesDoBilhete(campo,bilhete){
         this._document
                 .querySelector(`.bilhete-${campo} + .toggle_table`)
                 .classList
                 .toggle('none');
-    }
 
+        bilhete.carregarLocalizacao(this._locationStrategy);
+    }
+    
     formatarNumero(numero){
         return this._numberUtil.formatarNumero(numero);
     }
@@ -47,6 +50,15 @@ class InfoViagemPopup{
     obterDuracaoDaViagem(){
         return this._viagem && this._viagem.dataHoraInicial && this._viagem.dataHoraFinal ? 
         this._dateUtil.obterDuracao(this._viagem.dataHoraInicial,this._viagem.dataHoraFinal) : '';
+    }
+
+    obterDuracaoTotalDasJornadas(){
+        return this._numberUtil
+                    .formatarNumero(this._jornadas.reduce((total,jornada) => 
+                                        this._dateUtil.obterDuracaoEmHoras(jornada.dataHoraInicial,
+                                        jornada.dataHoraFinal ? jornada.dataHoraFinal : new Date()) + total,0 
+                                   )
+        );
     }
     
     get viagem(){
@@ -70,9 +82,14 @@ class InfoViagemPopup{
         return this._promise
                     .all(consultasJornadas)
                     .then(consultas => !consultas.length ? [] : consultas.reduce((acc,jornadas) => {
-                        jornadas.forEach(j => acc.push(new Jornada(j)));
+                        jornadas.forEach(properties => acc.push(new Jornada(properties)));
                         return acc; 
                     },[]));
+    }
+
+    _obterEnderecosDasJornadas(){
+        this._jornadas
+            .forEach(jornada => jornada.carregarLocalizacoes(this._locationStrategy));
     }
 
     _abrirPopup(){
