@@ -1,5 +1,5 @@
 class Viagem{
-    constructor(periodos){
+    constructor(periodos, geocoderHelper){
         this._periodos = periodos;
 
         this._quantidadeDeMotoristas = 0;
@@ -15,6 +15,7 @@ class Viagem{
         this._localizacaoFinal = {};
         this._LAT = 1;
         this._LONG = 0;
+        this._geocoderHelper = geocoderHelper;
 
         if(periodos && periodos.length)
             this._montarViagem(); 
@@ -115,6 +116,14 @@ class Viagem{
     get localizacaoFinal(){
         return this._localizacaoFinal;
     }
+
+    get enderecoLocalizacaoInicial(){
+        return this._enderecoLocalizacaoInicial;
+    }
+
+    get enderecoLocalizacaoFinal(){
+        return this._enderecoLocalizacaoFinal;
+    }
     
 
     _montarViagem(){
@@ -167,6 +176,10 @@ class Viagem{
         
 
         this._localizacaoInicial = `${primeiroPeriodo.localizacaoInicial.coordinates[this._LAT]}, ${primeiroPeriodo.localizacaoInicial.coordinates[this._LONG]}`;
+        
+        this._geocoderHelper.obterEndereco(primeiroPeriodo.localizacaoInicial.coordinates[this._LONG], primeiroPeriodo.localizacaoInicial.coordinates[this._LAT])
+            .then(endereco => this._enderecoLocalizacaoInicial = endereco);
+
         this._coordenadasPercurso.push([primeiroPeriodo.localizacaoInicial.coordinates[this._LAT], primeiroPeriodo.localizacaoInicial.coordinates[this._LONG]]);
 
         this._periodos.map(periodo =>{
@@ -178,10 +191,18 @@ class Viagem{
 
         if (ultimoServico.localizacaoFinal){
             this._localizacaoFinal = `${ultimoServico.localizacaoFinal.coordinates[this._LAT]}, ${ultimoServico.localizacaoFinal.coordinates[this._LONG]}`;
+            
+            this._geocoderHelper.obterEndereco(ultimoServico.localizacaoFinal.coordinates[this._LONG], ultimoServico.localizacaoFinal.coordinates[this._LAT])
+                .then(endereco => this._enderecoLocalizacaoFinal = endereco);
+
             this._coordenadasPercurso.push([ultimoServico.localizacaoFinal.coordinates[this._LAT], ultimoServico.localizacaoFinal.coordinates[this._LONG]]);
         }else{
             let ultimaCoordenadaPercurso = this._coordenadasPercurso.length - 1;
             this._localizacaoFinal = `${this._coordenadasPercurso[ultimaCoordenadaPercurso][this._LONG]},${this._coordenadasPercurso[ultimaCoordenadaPercurso][this._LAT]}`;
+            
+            this._geocoderHelper.obterEndereco(this._coordenadasPercurso[ultimaCoordenadaPercurso][this._LAT], this._coordenadasPercurso[ultimaCoordenadaPercurso][this._LONG])
+                .then(endereco => this._enderecoLocalizacaoFinal = endereco);
+
         }
     }
 

@@ -15,7 +15,7 @@ class InfoViagemPopup{
     exibirDetalhesDaViagem(periodosDaViagem){
         this._abrirPopup();
 
-        this._viagem = new Viagem(periodosDaViagem);
+        this._viagem = new Viagem(periodosDaViagem, this._geocoderHelper);
 
         this._obterJornadas(periodosDaViagem)
             .then(jornadas => this._jornadas = jornadas)

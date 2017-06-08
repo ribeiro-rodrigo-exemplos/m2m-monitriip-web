@@ -22,7 +22,19 @@ class GeocoderHelper{
             return;
 
         const address = result.address;
-        return `${address.road}, ${address.suburb}, ${address.city}, ${address.state}`;
+        let rua = this._validaEndereco(address.road);
+        let bairro = this._validaEndereco(address.suburb);
+        let cidade = this._validaEndereco(address.city);
+        let estado = this._validaEndereco(address.state, true);
+
+        return `${rua} ${bairro} ${cidade} ${estado}`;
+    }
+
+    _validaEndereco(campo, ultimoCampo){
+        if(!ultimoCampo)
+            return campo ? campo + ", " : "";
+        else
+            return  campo ? campo : "";
     }
 }
 
