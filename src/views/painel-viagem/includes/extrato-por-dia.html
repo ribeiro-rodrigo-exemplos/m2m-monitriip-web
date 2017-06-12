@@ -3,7 +3,7 @@
     <button class="button button--row-search-and-export reduzir-js">REDUZIR</button>
 </header>
 
-<div ng-repeat="extrato in ctrl.extratoPorDia.extratos">
+<div ng-repeat="extrato in ctrl.extratoPorDia.extratos track by $index">
     <h4 class="sidebar__day text-size-13">
         {{extrato.data}}
         <span class="sidebar__day__toggle-control toggle-control-js" ng-click="ctrl.extratoPorDia.minimizar($index+1)">
@@ -54,9 +54,8 @@
                 <tr ng-repeat="viagem in extrato.viagensExtrato" class="table__row open-pop-up" ng-click="ctrl.consultarViagemPorId(viagem._id)">
                     <td class="table__larger-row">
                         <span class="number-box">{{$index + 1}}</span>
-                        {{viagem.descricaoLinha}}
+                        {{viagem.identificacaoLinha}}
                     </td>
-
                     <td><span class="purple">{{viagem.tipoTransporte}}</span></td>
                     <td>{{ctrl.extratoPorDia.formatarNumero(viagem.totalKm)}}</td>
                     <td>{{viagem.totalTempo ? viagem.totalTempo : 0}}</td>

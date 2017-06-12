@@ -28,11 +28,11 @@
             <div class="popup__pills">
                 <section class="popup__pills__pill green-bg">
                 <ng-include src="'views/icons/km-percorrido-info-icon.html'"></ng-include>
-                    <span class="text-size-24">{{ctrl.infoViagemPopup.formatarNumero(ctrl.infoViagemPopup.viagem.totalKm)}}</span><span> km</span>
+                    <span class="text-size-24">{{ctrl.infoViagemPopup.formatarNumeroComDuasCasasDecimais(ctrl.infoViagemPopup.viagem.totalKm)}}</span><span> km</span>
                 </section>
                 <section class="popup__pills__pill blue-bg">
                     <ng-include src="'views/icons/tempo-viagem-info-icon.html'"></ng-include>
-                    <span class="text-size-24">{{ctrl.infoViagemPopup.obterDuracaoDaViagem()}}</span>
+                    <span class="text-size-24">{{ctrl.infoViagemPopup.obterDuracaoDaViagem()}}</span><span> min</span>
                 </section>
                 <section class="popup__pills__pill purple-bg">
                     <ng-include src="'views/icons/tempo-viagem-info-icon.html'"></ng-include>

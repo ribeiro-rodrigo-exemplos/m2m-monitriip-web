@@ -18,9 +18,30 @@ class ExtratoPorDia{
     }
 
     atualizar(event){
-
+        let totalPorData = {};
+        let totalDt = {};
+        
+        this.extratos = {};
+        
         this.extratos = event.datas.map(data => {
-            let extratoPorDia = {}
+            
+            let extratoPorDia = {};
+            
+            event[data].jornadas
+                .forEach(jornada => {
+                    if(jornada.horasPorData){
+                        let array = Object.keys(jornada.horasPorData).sort();
+
+                        array.forEach(dt =>{
+                            if (!totalPorData[dt])
+                                totalPorData[dt] = jornada.horasPorData[dt];
+                            else
+                                if(totalPorData[dt] < jornada.horasPorData[dt])
+                                    totalPorData[dt] = jornada.horasPorData[dt];
+                        });
+                    } 
+                });
+
             extratoPorDia.data = this.formatarData(data);
             extratoPorDia.totalKm = this.formatarNumero(event[data].totalKm);
             extratoPorDia.totalBilhetes = event[data].totalBilhetes ? event[data].totalBilhetes : 0;
@@ -30,8 +51,9 @@ class ExtratoPorDia{
             extratoPorDia.totalDirecao = event[data].direcoesContinuas
                                                     .map(direcao => direcao.tempoMaximo)
                                                     .reduce((tempo,maior) => tempo>maior ? tempo : maior,0);
-            extratoPorDia.totalTempoJornada = 0;
-
+            
+            extratoPorDia.totalTempoJornada = totalPorData[data];
+            
             return extratoPorDia;
         });
     }

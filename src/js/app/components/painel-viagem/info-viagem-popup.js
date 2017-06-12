@@ -35,6 +35,10 @@ class InfoViagemPopup{
         return this._numberUtil.formatarNumero(numero);
     }
 
+    formatarNumeroComDuasCasasDecimais(numero){
+        return this._numberUtil.formatarNumeroComDuasCasasDecimais(numero);
+    }
+
     formatarDataHora(dataHora){
         return dataHora ? this._dateUtil.formatarDataHora(dataHora) : '';
     }

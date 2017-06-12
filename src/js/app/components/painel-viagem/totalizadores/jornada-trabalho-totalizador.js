@@ -10,52 +10,42 @@ class JornadaTrabalhoTotalizador extends Totalizador{
 
         this._ultimoEvento = event;
 
-        let valores = [];
-        let jornadaTrabalhoMaxima = [];
+        let totalPorData = {};
 
         if(!this._motoristas)
             this._montarComboDeMotoristas(event);
         
+        
         this.jornadasTrabalho = event.datas.map(data => {
+           event[data].jornadas
+                .filter(this._filtrarMotorista.bind(this))
+                .map(jornada => {
+                    if(jornada.horasPorData){
+                        let array = Object.keys(jornada.horasPorData).sort();
+
+                        array.forEach(dt =>{
+                            if (!totalPorData[dt])
+                                totalPorData[dt] = jornada.horasPorData[dt];
+                            else
+                                if(totalPorData[dt] < jornada.horasPorData[dt])
+                                    totalPorData[dt] = jornada.horasPorData[dt];
+                        });
+                        return totalPorData;
+                    }
+                });
+
             return {
-                data:this.formatarData(data),
-                maxima:event[data].jornadas
-                                    .filter(this._filtrarMotorista.bind(this))
-                                    .map(jornada => {
-                                        if(jornada.horasPorData){
-                                            let array = Object.keys(jornada.horasPorData).sort();
-
-                                            array.forEach(dt =>{
-                                                valores.push(jornada.horasPorData[dt]);
-                                            });
-
-                                            return valores;
-                                        } 
-                                    }) 
-                                    .reduce(this._obterMaiorJornada,0)
+                data: this.formatarData(data),
+                maxima: totalPorData[data] ? totalPorData[data] : 0
             };
         });
         
-        event.datas.forEach(data => {            
-            jornadaTrabalhoMaxima.push(event[data].jornadas
-                                            .map(jornada => {
-                                                if(jornada.horasPorData){
-                                                    let array = Object.keys(jornada.horasPorData).sort();
-
-                                                    array.forEach(dt =>{
-                                                        if(jornada.cpfMotorista == this.motoristaSelecionado)
-                                                            valores.push(jornada.horasPorData[dt]);
-                                                    });
-
-                                                    return valores;
-                                                } 
-                                            }) 
-                                            .reduce(this._obterMaiorJornada,0));
-        });
-
-        this.jornadaTrabalhoMaxima = Math.max.apply(Math, jornadaTrabalhoMaxima);
+        this.jornadaTrabalhoMaxima = this.jornadasTrabalho
+                                         .map(jornada => jornada.maxima)
+                                         .reduce(this._obterMaiorJornada,0);
 
         this.trocarCorLinhaGrafico("#ec6051");
+        
         this.criarGrafico(this.jornadasTrabalho.map(jornada => jornada.maxima));
 
         let objeto = {
@@ -64,10 +54,10 @@ class JornadaTrabalhoTotalizador extends Totalizador{
         };
 
         this.jornadasTrabalho.forEach(jornada => objeto.data.push(parseFloat(jornada.maxima)));
-
+        
         this.graficoGeral.totalizadorJornada = objeto; 
      }
-
+    
     get motoristas(){
         return this._motoristas;
     }
@@ -98,16 +88,8 @@ class JornadaTrabalhoTotalizador extends Totalizador{
         return this._motoristaSelecionado == "Todos" || this._motoristaSelecionado == jornada.cpfMotorista;
     }
 
-    _obterMaiorJornada(tempo,valor){
-        let maior = 0;
-        
-        if(valor){            
-            valor.forEach(val =>{
-                maior = tempo > val ? tempo : val;
-            });
-        }
-
-        return maior;
+    _obterMaiorJornada(tempo,maior){
+        return tempo > maior ? tempo : maior;
     }
 }
 

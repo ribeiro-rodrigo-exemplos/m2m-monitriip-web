@@ -174,14 +174,16 @@ class Viagem{
                             return acc;
                         },[]);
         
-
+        
+        this._coordenadasPercurso = [];
+        
         this._localizacaoInicial = `${primeiroPeriodo.localizacaoInicial.coordinates[this._LAT]}, ${primeiroPeriodo.localizacaoInicial.coordinates[this._LONG]}`;
         
         this._geocoderHelper.obterEndereco(primeiroPeriodo.localizacaoInicial.coordinates[this._LONG], primeiroPeriodo.localizacaoInicial.coordinates[this._LAT])
             .then(endereco => this._enderecoLocalizacaoInicial = endereco);
 
         this._coordenadasPercurso.push([primeiroPeriodo.localizacaoInicial.coordinates[this._LAT], primeiroPeriodo.localizacaoInicial.coordinates[this._LONG]]);
-
+        
         this._periodos.map(periodo =>{
             periodo.localizacoes.forEach(local =>{
                 if(local && local.localizacao)

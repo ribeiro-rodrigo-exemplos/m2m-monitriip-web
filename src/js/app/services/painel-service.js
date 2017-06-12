@@ -2,26 +2,28 @@
  * Created by Rodrigo Ribeiro on 25/04/17.
  */
 class PainelService{
-    constructor(httpClient,promise, m2mconfig){
+    constructor(httpClient,promise, m2mconfig, DateUtil){
         this._httpClient = httpClient;
         this._promise = promise;
         this._url = m2mconfig.apiMonitriipPainel;
+        this._dateUtil = DateUtil;
     }
 
     consultarPeriodo(dataInicial,dataFinal,cnpjCliente,cpfMotorista,placaVeiculo){
 
          const query = this._createQuery(dataInicial,dataFinal,cnpjCliente,cpfMotorista,placaVeiculo);
-
+         
          let totalizadoresPromise = this._obterTotalizadores(query);
          let extratosPromise = this._obterExtratos(query);
          let jornadasPromise = this._obterJornadas(query);
+         let data = this._dateUtil._obterPeriodo(moment(dataInicial), moment(dataFinal));
 
         return this._promise.all({
                     totalizadoresPromise,
                     extratosPromise,
                     jornadasPromise
                })
-                .then(response => this._prepareResult(response));
+                .then(response => this._prepareResult(response, data));
     }
 
     _obterTotalizadores(query){
@@ -60,13 +62,17 @@ class PainelService{
         return query;
     }
 
-    _prepareResult(result){
+    _prepareResult(result, data){
         
         let totalizadores = result.totalizadoresPromise;
         let jornadas = result.jornadasPromise;
         let extratos = result.extratosPromise; 
 
         let rootData = {};
+
+        data.forEach(dt =>{
+            this._criarData(rootData,dt);
+        });
 
         totalizadores.forEach(t => {
             rootData[t._id] = t;
@@ -75,8 +81,8 @@ class PainelService{
         });
 
         extratos.forEach(extrato => {
-            if(!rootData[extrato.dataInicial])
-                this._criarData(rootData,extrato.dataInicial);
+            // if(!rootData[extrato.dataInicial])
+            //     this._criarData(rootData,extrato.dataInicial);
 
             rootData[extrato.dataInicial].extratos.push(extrato);
         });
@@ -111,7 +117,7 @@ class PainelService{
     }
 }
 
-PainelService.$inject = ['$http',"$q", 'm2mconfig'];
+PainelService.$inject = ['$http',"$q", 'm2mconfig', 'DateUtil'];
 
 angular.module('monitriip-web')
         .service('PainelService',PainelService);

@@ -1,6 +1,8 @@
 class Jornada{
     constructor(properties){
-        this._properties = properties; 
+        this._properties = properties;
+        this._LAT = 1;
+        this._LONG = 0;
     }
 
     carregarLocalizacoes(locationStrategy){
@@ -36,19 +38,19 @@ class Jornada{
     }
 
     get latitudeInicial(){
-        return this._properties.coordenadasInicio ? this._properties.coordenadasInicio.coordinates[0] : null;
+        return this._properties.coordenadasInicio ? this._properties.coordenadasInicio.coordinates[this._LAT] : null;
     }
 
     get longitudeInicial(){
-        return this._properties.coordenadasInicio ? this._properties.coordenadasInicio.coordinates[1] : null;
+        return this._properties.coordenadasInicio ? this._properties.coordenadasInicio.coordinates[this._LONG] : null;
     }
 
     get latitudeFinal(){
-        return this._properties.coordenadasFim ? this._properties.coordenadasFim.coordinates[1] : null;
+        return this._properties.coordenadasFim ? this._properties.coordenadasFim.coordinates[this._LAT] : null;
     }
 
     get longitudeFinal(){
-        return this._properties.coordenadasFim ? this._properties.coordenadasFim.coordinates[1] : null;
+        return this._properties.coordenadasFim ? this._properties.coordenadasFim.coordinates[this._LONG] : null;
     }
 
     get enderecoInicial(){

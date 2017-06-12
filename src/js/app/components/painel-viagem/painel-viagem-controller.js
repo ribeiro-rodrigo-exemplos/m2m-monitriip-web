@@ -46,13 +46,11 @@ class PainelViagemController{
     consultarViagemPorId(id){
         this._viagemService.obterViagemPorId(id)
             .then(detalheViagem => {
-
-                if(detalheViagem){
+                if(detalheViagem)
                     this.infoViagemPopup.exibirDetalhesDaViagem(detalheViagem);
-                    //this.mapaPopup.montarMapa(detalheViagem);
-                }else{
+                else
                     alert('Não foi possível consultar a viagem selecionada');
-                }
+                
             });
     }
 

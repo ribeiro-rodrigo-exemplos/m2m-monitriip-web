@@ -41,8 +41,7 @@ class DateUtil{
         
         let duracao = this._obterDuracao(dataInicial,dataFinal);
         
-        return `${this._numberUtil.formatarNumero(duracao.asHours(),0)}:${this._numberUtil.formatarNumero(duracao.asMinutes(),0)}:${this._numberUtil
-            .formatarNumero(duracao.asSeconds(),0)}`;
+        return `${this._numberUtil.formatarNumero(duracao.asMinutes(),0)}`;
     }
 
     obterDuracaoEmHoras(dataInicial,dataFinal){
@@ -79,6 +78,19 @@ class DateUtil{
 
         let diferencaEmMs = dataFinalMoment.diff(dataInicialMoment);
         return moment.duration(diferencaEmMs);
+    }
+
+    _obterPeriodo(dataInicial, dataFinal){
+        let dataControle = dataInicial;
+        let datas = [moment(dataInicial).format('YYYY-MM-DD')];  
+
+        while(dataControle < dataFinal){
+            dataControle = dataControle.add(1,'days');
+            datas.push(moment(dataControle).format('YYYY-MM-DD')); 
+        }
+
+        return datas;
+
     }
 }
 
