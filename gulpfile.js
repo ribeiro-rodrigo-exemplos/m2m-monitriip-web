@@ -4,12 +4,14 @@ let browserSync = require('browser-sync');
 let jshint = require('gulp-jshint');
 let jshintStylish = require('jshint-stylish');
 let csslint = require('gulp-csslint');
+let babel = require('gulp-babel');
+let clean = require('gulp-clean');
 
-gulp.task('server',() => {
+gulp.task('server',['copy'],() => {
 
   browserSync.init({
     server:{
-      baseDir:'src',
+      baseDir:'dist',
       index:'index.html',
       routes:{
         '/bower_components':'bower_components',
@@ -31,14 +33,21 @@ gulp.task('server',() => {
 
   gulp.watch('./src/sass/**/*.scss', ['sass']);
 
-  gulp.watch('src/**/*').on('change',browserSync.reload);
+  gulp.watch('dist/**/*').on('change',browserSync.reload);
+
+  gulp.start('sass');
 
 });
  
 gulp.task('sass', function () {
   return gulp.src('./src/sass/**/*.scss')
     .pipe(sass().on('error', sass.logError))
-    .pipe(gulp.dest('./src/css'));
+    .pipe(gulp.dest('./dist/css'));
+});
+
+gulp.task('copy',() => {
+  return gulp.src('src/**/*')
+              .pipe(gulp.dest('dist'));
 });
  
 
