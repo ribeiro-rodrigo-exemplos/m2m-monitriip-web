@@ -65,7 +65,7 @@ class DateUtil{
         let dataInicialMoment = moment(dataInicial,this._isoDatePattern);
         let dataFinalMoment = moment(dataFinal,this._isoDatePattern);
 
-        return dataFinalMoment.diff(dataInicialMoment,'days') <= dias; 
+        return dataFinalMoment.diff(dataInicialMoment,'days') < dias; 
     }
 
     periodoValido(dataInicial,dataFinal){
