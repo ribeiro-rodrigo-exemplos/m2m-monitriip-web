@@ -9,11 +9,11 @@ class DirecaoContinuaTotalizador extends Totalizador{
         this.direcaoContinuaMaxima = 0;
     }
 
-    atualizar(event){
+    atualizar(event, montarCombo = true){
 
         this._ultimoEvento = event;
 
-        if(!this._motoristas)
+        if(montarCombo)
             this._montarComboDeMotoristas(event);
         
         this.direcoesContinuas = event.datas.map(data => {
@@ -53,7 +53,7 @@ class DirecaoContinuaTotalizador extends Totalizador{
 
     set motoristaSelecionado(motorista){
         this._motoristaSelecionado = motorista;
-        this.atualizar(this._ultimoEvento);
+        this.atualizar(this._ultimoEvento, false);
     }
 
     _montarComboDeMotoristas(event){

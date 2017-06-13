@@ -7,12 +7,12 @@ class ParadasTotalizador extends Totalizador{
         this._total = 0;
     }
 
-    atualizar(event){
+    atualizar(event, montarCombo = true){
 
         this._ultimoEvento = event;
         this._total = 0;
 
-        if(!this._paradas)
+        if(montarCombo)
             this._montarComboDeParadas(event);
 
         this._totalPorData = event.datas
@@ -63,7 +63,7 @@ class ParadasTotalizador extends Totalizador{
 
     set paradaSelecionada(parada){
         this._paradaSelecionada = parada;
-        this.atualizar(this._ultimoEvento);
+        this.atualizar(this._ultimoEvento, false);
     }
 
     _montarComboDeParadas(event){

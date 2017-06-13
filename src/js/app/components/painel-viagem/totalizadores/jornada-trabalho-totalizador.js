@@ -6,16 +6,15 @@ class JornadaTrabalhoTotalizador extends Totalizador{
         this.jornadaTrabalhoMaxima = 0;
     }
 
-    atualizar(event){
+    atualizar(event, montarCombo = true){
 
         this._ultimoEvento = event;
 
         let totalPorData = {};
 
-        if(!this._motoristas)
+        if(montarCombo)
             this._montarComboDeMotoristas(event);
-        
-        
+                
         this.jornadasTrabalho = event.datas.map(data => {
            event[data].jornadas
                 .filter(this._filtrarMotorista.bind(this))
@@ -68,7 +67,7 @@ class JornadaTrabalhoTotalizador extends Totalizador{
 
     set motoristaSelecionado(motorista){
         this._motoristaSelecionado = motorista;
-        this.atualizar(this._ultimoEvento);
+        this.atualizar(this._ultimoEvento, false);
     }
 
     _montarComboDeMotoristas(event){
