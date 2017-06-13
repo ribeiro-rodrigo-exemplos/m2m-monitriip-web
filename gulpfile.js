@@ -45,9 +45,14 @@ gulp.task('sass', function () {
     .pipe(gulp.dest('./dist/css'));
 });
 
-gulp.task('copy',() => {
+gulp.task('copy',['clean'],() => {
   return gulp.src('src/**/*')
               .pipe(gulp.dest('dist'));
 });
+
+gulp.task('clean',() => {
+  return gulp.src('dist')
+              .pipe(clean());
+})
  
 
