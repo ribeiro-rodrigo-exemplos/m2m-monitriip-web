@@ -20,8 +20,9 @@ class TempoViagemTotalizador extends Totalizador{
         this.totalizadoresPorData = event.datas.map(data => {
             let totalizador = {data:this.formatarData(data),mediaTempoViagem:0};
             if(event[data].tempo){
-                totalizador.mediaTempoViagem = event[data].tempo;
-                this._media += parseFloat(totalizador.mediaTempoViagem);
+                let media = this._calcularTempoMedioDeViagemPorDia(data,event);
+                totalizador.mediaTempoViagem = this.formatarNumero(media,0);
+                this._media += media;
             } 
             objeto.data.push(totalizador.mediaTempoViagem);           
             return totalizador;
@@ -36,6 +37,13 @@ class TempoViagemTotalizador extends Totalizador{
 
     get media(){
         return this._media; 
+    }
+
+    _calcularTempoMedioDeViagemPorDia(data,event){
+        let extratos = event[data].extratos; 
+        return extratos.length ? event[data].extratos
+                                            .reduce((acc,extrato) => 
+                                                acc + extrato.tempo,0) / extratos.length : 0;
     }
 }
 
