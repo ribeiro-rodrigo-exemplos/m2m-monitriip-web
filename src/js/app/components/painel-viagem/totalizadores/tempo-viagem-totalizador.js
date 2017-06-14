@@ -27,7 +27,7 @@ class TempoViagemTotalizador extends Totalizador{
             return totalizador;
         });
 
-        this._media = event.datas.length ? this._media/event.datas.length : 0;
+        this._media = event.datas.length ? this.formatarNumero(this._media/event.datas.length,0) : 0;
         this.criarGrafico(this.totalizadoresPorData.map(t => parseFloat(t.mediaTempoViagem)));
         this.trocarCorLinhaGrafico("#358fcd");
 

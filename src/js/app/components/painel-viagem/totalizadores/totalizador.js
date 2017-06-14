@@ -69,7 +69,7 @@ class Totalizador{
     }
 
     formatarNumero(numero,fixade){
-        return parseFloat(numero).toFixed(fixade || 2);
+        return parseFloat(numero).toFixed(fixade === undefined ? 2:fixade);
     }
 
     atualizar(event){

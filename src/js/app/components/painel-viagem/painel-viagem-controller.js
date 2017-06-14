@@ -23,11 +23,17 @@ class PainelViagemController{
 
         this._FullScreen = FullScreen;
         this._dateUtil = dateUtil;
-
+        this.filtro = {dataInicial:null,dataFinal:null};
 
         this._listeners = [];
 
         this._init();
+    }
+
+    get filtroDeConsulta(){
+        let inicio = this.filtro.dataInicial ? this._dateUtil.obterDiaEMes(this.filtro.dataInicial) : '';
+        let fim = this.filtro.dataFinal ? this._dateUtil.obterDiaEMes(this.filtro.dataFinal) : '';
+        return `${inicio} - ${fim}`;
     }
 
     consultarPeriodo() {

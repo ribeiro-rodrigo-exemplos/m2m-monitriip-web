@@ -2,9 +2,9 @@
 
 <div class="row row--space-between row--search-and-export" data-ng-init="ctrl.postConstruct()">
     <div>
-        <span class="search-information text-size-13" ng-show="ctrl.filtro.placa || filtro.cpf">
-            {{ctrl.filtro.placa}} | {{ctrl.filtro.cpf}} |
-            <i class="fa fa-calendar"></i> Fev 02 - Fev 05, 2017
+        <span class="search-information text-size-13" ng-show="ctrl.filtro.placaVeiculo || ctrl.filtro.cpfMotorista">
+            {{ctrl.filtro.cpfMotorista}} | {{ctrl.filtro.placaVeiculo}} |<span ng-show="ctrl.filtro.cnpjCliente">{{ctrl.filtro.cnpjCliente}} | </span>
+            <span ng-show="ctrl.filtro.dataInicial && ctrl.filtro.dataFinal"><i class="fa fa-calendar"></i> {{ctrl.filtroDeConsulta}}</span>
         </span>
     </div>
     <div class="row row--align-flex-end">
