@@ -58,6 +58,10 @@ gulp.task('server',['transpile'],() => {
 
   gulp.watch('./src/sass/**/*.scss', ['sass']);
 
+  gulp.watch('./src/**/*.html', ['concat-min']);
+
+  gulp.watch('./src/index.html', ['concat-min']);
+  
   gulp.watch('dist/**/*').on('change',browserSync.reload);
 
   gulp.start('sass');
