@@ -6,7 +6,7 @@ class PainelViagemController{
     constructor(viagemService,painelService,FullScreen,graficoGeral,kmPercorridoTotalizador,leituraBilhetesTotalizador, 
                 tempoViagemTotalizador, jornadaTrabalhoTotalizador,direcaoContinuaTotalizador, paradasTotalizador, 
                 extratoPorDia, infoViagemPopup,dateUtil, mapaPopup){
-        
+
         this.graficoGeral = graficoGeral;
         this.kmPercorridoTotalizador = kmPercorridoTotalizador;
         this.leituraBilhetesTotalizador = leituraBilhetesTotalizador;

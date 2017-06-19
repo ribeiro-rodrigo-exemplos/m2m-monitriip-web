@@ -6,8 +6,21 @@ let jshintStylish = require('jshint-stylish');
 let csslint = require('gulp-csslint');
 let babel = require('gulp-babel');
 let clean = require('gulp-clean');
+let del = require('del');
+let path = require('path');
+let sourcemaps = require('gulp-sourcemaps');
 
-gulp.task('server',['copy'],() => {
+function transpile(origin,dest){
+  return gulp.src(origin)
+              .pipe(sourcemaps.init({loadMaps:true}))
+              .pipe(babel({
+                presets:['es2015']
+              }))
+              .pipe(sourcemaps.write('.'))
+              .pipe(gulp.dest(dest));
+}
+
+gulp.task('server',['transpile'],() => {
 
   browserSync.init({
     server:{
@@ -19,11 +32,16 @@ gulp.task('server',['copy'],() => {
     }
   });
 
-  gulp.watch('src/js/**/*').on('change',event => 
-      gulp.src(event.path) 
-          .pipe(jshint({esversion:6})) 
-          .pipe(jshint.reporter(jshintStylish))
-  );
+  gulp.watch('src/js/**/*').on('change',event =>{
+    gulp.src(event.path) 
+        .pipe(jshint({esversion:6})) 
+        .pipe(jshint.reporter(jshintStylish))
+
+        const fileUpdated = event.path.replace('src','dist');
+
+        del([fileUpdated])
+          .then(() => transpile(event.path,path.dirname(fileUpdated)));
+  });
 
   gulp.watch('src/css/**/*').on('change',event => 
       gulp.src(event.path)
@@ -53,6 +71,16 @@ gulp.task('copy',['clean'],() => {
 gulp.task('clean',() => {
   return gulp.src('dist')
               .pipe(clean());
-})
+});
+
+gulp.task('clean-js-dist',['copy'],() => {
+  return gulp.src('dist/js')
+              .pipe(clean()); 
+
+});
+
+gulp.task('transpile',['clean-js-dist'],() => {
+  return transpile('src/js/**/*','dist/js');
+});
  
 
