@@ -9,6 +9,9 @@ let clean = require('gulp-clean');
 let del = require('del');
 let path = require('path');
 let sourcemaps = require('gulp-sourcemaps');
+let usemin = require('gulp-usemin');
+let cssmin = require('gulp-cssmin');
+let uglify = require('gulp-uglify');
 
 function transpile(origin,dest){
   return gulp.src(origin)
@@ -20,7 +23,11 @@ function transpile(origin,dest){
               .pipe(gulp.dest(dest));
 }
 
-gulp.task('server',['transpile'],() => {
+gulp.task('default',['transpile'],() => {
+  gulp.start('concat-min');
+});
+
+gulp.task('server',() => {
 
   browserSync.init({
     server:{
@@ -81,6 +88,15 @@ gulp.task('clean-js-dist',['copy'],() => {
 
 gulp.task('transpile',['clean-js-dist'],() => {
   return transpile('src/js/**/*','dist/js');
+});
+
+gulp.task('concat-min',() => {
+  gulp.src('dist/**/*.html')
+        .pipe(usemin({
+          'js':[uglify],
+          'css':[cssmin]
+        }))
+        .pipe(gulp.dest('dist'));
 });
  
 
