@@ -2,7 +2,9 @@
 .none{
 	display: none !important
 }
-
+.auto-right{
+  margin-right: auto;
+}
 /*atomic background colors*/
 .m2m-green-bg{
 	background-color: $m2m_green !important
@@ -66,37 +68,64 @@
 }
 /*atomic colors*/
 .purple{
-	color: $purple;
-}
-.red{
-	color: $red;
+  color: $purple;
 }
 .green{
-	color: $green
-}
-.blue{
-	color: $blue
+  color: $green
 }
 .m2m-green{
-	color: $m2m_green !important;
+  color: $m2m_green !important;
+}
+.emerald{
+  color: $emerald;
+}
+.blue{
+  color: $blue
+}
+.dark-blue{
+  color: $dark_blue;
+}
+.royal-blue{
+  color: $royal_blue;
+}
+.orange{
+  color: $orange;
+}
+.yellow-orange{
+  color: $yellow_orange;
+}
+.red-orange{
+  color: $red_orange;
+}
+.light-red{
+  color: $light_red;
+}
+.red{
+  color: $red;
 }
 .light-gray{
-	color: $light_gray;
+  color: $light_gray;
 }
 .gray{
-	color: $gray;
+  color: $gray;
 }
 .light-gray{
-	color: $light_gray;
+  color: $light_gray;
 }
 .dark-gray{
-	color: $dark_gray;
+  color: $dark_gray;
+}
+.bright-gray{
+  color: $bright_gray;
 }
 .white{
-	color: #fff;
+  color: #fff !important;
 }
 .yellow{
-	color: $yellow;
+  color: $yellow;
+}
+.black{
+  color: #000 !important;
 }
 .green-according-to-theme{
 	color: $dark_green;

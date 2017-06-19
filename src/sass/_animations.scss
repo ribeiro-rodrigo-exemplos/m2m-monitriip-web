@@ -20,7 +20,12 @@
     border-color: transparent; 
     background-color: $dark_gray; }
 }
-
+@-webkit-keyframes slide{
+  to {
+    position: absolute;
+    top: -35px;
+  }
+}
 .opacity-animation{
 	animation: opacity .5s;
 	&--infinite{
