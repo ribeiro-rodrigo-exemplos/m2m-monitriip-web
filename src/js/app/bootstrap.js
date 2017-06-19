@@ -6,8 +6,8 @@ angular.module('monitriip-web',[
         'FBAngular',
         'highcharts-ng',
         'ngMap'
-    ]).config(new RoutesConfig().configurarRotas).
-        run(($rootScope,$state) => {
+    ]).config(['$stateProvider','$urlRouterProvider','$httpProvider',new RoutesConfig().configurarRotas]).
+        run(['$rootScope','$state',(rootScope,state) => {
             console.log('monitriip-web rodando....');
-            $rootScope.state = $state;
-        });
+            rootScope.state = state;
+        }]);

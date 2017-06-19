@@ -27,7 +27,7 @@ gulp.task('default',['transpile'],() => {
   gulp.start('concat-min');
 });
 
-gulp.task('server',() => {
+gulp.task('server',['transpile'],() => {
 
   browserSync.init({
     server:{

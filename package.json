@@ -22,6 +22,7 @@
   },
   "scripts": {
     "gulp": "gulp",
+    "build":"gulp",
     "server": "gulp server",
     "test": "echo \"Error: no test specified\" && exit 1"
   },
