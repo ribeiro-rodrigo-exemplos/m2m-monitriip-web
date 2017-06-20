@@ -31,21 +31,17 @@
                     </div>
                 </section>
 
-               <!--  <section class="form">
+                <section class="form">
                     <label class="form__label">De</label>
                     <input ng-model="ctrl.filtro.dataInicial" type="date" class="input input--icon">
                     <i class="fa fa-calendar"></i>
-                </section> -->
+                </section>
 
-                <m2m-input-element icon="icons:date-range" content="De" night onkeyup="formataData(this)" objeto-selecionado="{{dataInicio}}" is-date night="[[night]]"></m2m-input-element>
-
-               <!--  <section class="form">
+                <section class="form">
                     <label class="form__label">Até</label>
                     <input ng-model="ctrl.filtro.dataFinal" type="date" class="input input--icon">
                     <i class="fa fa-calendar"></i>
-                </section> -->
-
-                 <m2m-input-element icon="icons:date-range" content="Até" night onkeyup="formataData(this)" objeto-selecionado="{{dataInicio}}" is-date night="[[night]]"></m2m-input-element>
+                </section>
             </div>
 
             <section class="filter__content__buttons">
@@ -56,7 +52,8 @@
 </div>
 <script>
     /*Toggle do Filtro*/
+     
     $(".toggle").click(function(){
         $(this).find(".fa-chevron-down").toggleClass("none");
-    })
+    });          
 </script>
