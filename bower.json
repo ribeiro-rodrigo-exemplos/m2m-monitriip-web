@@ -25,6 +25,6 @@
     "highcharts-ng": "^1.1.0",
     "moment": "^2.18.1",
     "numeral": "^2.0.6",
-    "m2m-input-element": "http://git.m2mfacil.com.br/m2m-polymer/m2m-input-element.git"
+    "m2m-input-element": "~1.0.0"
   }
 }
