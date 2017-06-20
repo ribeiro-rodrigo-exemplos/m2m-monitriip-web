@@ -31,11 +31,13 @@
                     </div>
                 </section>
 
-                <section class="form">
+               <!--  <section class="form">
                     <label class="form__label">De</label>
                     <input ng-model="ctrl.filtro.dataInicial" type="date" class="input input--icon">
                     <i class="fa fa-calendar"></i>
-                </section>
+                </section> -->
+
+                <m2m-input-element icon="icons:date-range" content="Vigência" onkeyup="formataData(this)" objeto-selecionado="{{dataInicio}}" is-date night="[[night]]"></m2m-input-element>
 
                 <section class="form">
                     <label class="form__label">Até</label>
