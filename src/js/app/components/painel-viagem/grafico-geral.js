@@ -13,6 +13,7 @@ class GraficoGeral{
         this._dateUtil = new DateUtil();
 
         this._grafico = {
+            credits:false,
             chart: {
                 backgroundColor: 'transparent',
                 renderTo: 'container',
