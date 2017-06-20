@@ -31,7 +31,7 @@ gulp.task('default',['transpile'],() => {
 });
 
 gulp.task('bower-task',() => {
-      run('bower install').exec('',() => gulp.src('bower_components/**/*')
+      run('bower install --allow-root').exec('',() => gulp.src('bower_components/**/*')
         .pipe(gulp.dest('dist/bower_components')));
 });
 
