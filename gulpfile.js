@@ -106,5 +106,3 @@ gulp.task('concat-min',() => {
         }))
         .pipe(gulp.dest('dist'));
 });
- 
-

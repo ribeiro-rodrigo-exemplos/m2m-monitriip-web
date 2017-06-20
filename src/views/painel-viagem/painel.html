@@ -1,3 +1,8 @@
+<div class="row orange-bg alerts-container"><!-- fazer aparecer adicionando a classe alerts-container--active -->
+  <i class="auto-right fa fa-clock-o"></i>
+  <p class="auto-right info-label">Vigência Final não pode ser menor que Vigência Inicial.</p>
+</div>
+
 <div class="filter" ng-include="'views/painel-viagem/includes/filtro.html'"></div>
 
 <div class="row row--space-between row--search-and-export" data-ng-init="ctrl.postConstruct()">
@@ -8,17 +13,17 @@
         </span>
     </div>
     <div class="row row--align-flex-end">
-        <div class="layout-mode">
+   <!--      <div class="layout-mode">
             <img class="layout-mode__image" src="img/moon.png">
             <span class="layout-mode__description">Modo Noite</span>
             <input class="switch" type="checkbox" checked='checked'/>
-        </div>
-        <div class="layout-mode">
+        </div> -->
+<!--         <div class="layout-mode">
             <button class="button button--row-search-and-export" ng-click="ctrl.habilitarTelaCheia()">
                 <ng-include src="'views/icons/tela-cheia-icon.html'"></ng-include>
                 TELA CHEIA
             </button>
-        </div>
+        </div> -->
         <!--<div class="row row--buttons">
             <button class="button button--row-search-and-export"><i class="fa fa-file-excel-o"></i> CSV</button>
             <button class="button button--row-search-and-export"><i class="fa fa-file-excel-o"></i> PDF</button>
