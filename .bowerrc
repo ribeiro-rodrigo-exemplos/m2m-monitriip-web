@@ -2,5 +2,6 @@
     "registry": "https://bower-user:AKCp2WXMsHT1prgrVQrUpBiKX2AJYyz75AD8stYDimRCmpDEnGDdZ93tEuDqjSmBoseVVHuHB@m2msolutions.jfrog.io/m2msolutions/api/bower/bower",
     "resolvers": [
         "bower-art-resolver"
-    ]
+    ],
+  "directory": "src/bower_components"
 }
