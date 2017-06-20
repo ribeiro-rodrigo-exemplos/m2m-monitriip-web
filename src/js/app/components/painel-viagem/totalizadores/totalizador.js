@@ -11,6 +11,7 @@ class Totalizador{
                 backgroundColor: 'transparent',
                 margin: [0, 30, 20, 30],
             },
+            credits: false,
             title: {
                 text: ''
             },
