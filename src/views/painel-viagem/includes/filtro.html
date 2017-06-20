@@ -37,13 +37,15 @@
                     <i class="fa fa-calendar"></i>
                 </section> -->
 
-                <m2m-input-element icon="icons:date-range" content="Vigência" onkeyup="formataData(this)" objeto-selecionado="{{dataInicio}}" is-date night="[[night]]"></m2m-input-element>
+                <m2m-input-element icon="icons:date-range" content="De" night onkeyup="formataData(this)" objeto-selecionado="{{dataInicio}}" is-date night="[[night]]"></m2m-input-element>
 
-                <section class="form">
+               <!--  <section class="form">
                     <label class="form__label">Até</label>
                     <input ng-model="ctrl.filtro.dataFinal" type="date" class="input input--icon">
                     <i class="fa fa-calendar"></i>
-                </section>
+                </section> -->
+
+                 <m2m-input-element icon="icons:date-range" content="Até" night onkeyup="formataData(this)" objeto-selecionado="{{dataInicio}}" is-date night="[[night]]"></m2m-input-element>
             </div>
 
             <section class="filter__content__buttons">

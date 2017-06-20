@@ -31,7 +31,7 @@ gulp.task('server',['transpile'],() => {
 
   browserSync.init({
     server:{
-      baseDir:'src',
+      baseDir:'dist',
       index:'index.html',
       routes:{
         '/bower_components':'bower_components',
@@ -67,7 +67,7 @@ gulp.task('server',['transpile'],() => {
 gulp.task('sass', function () {
   return gulp.src('./src/sass/**/*.scss')
     .pipe(sass().on('error', sass.logError))
-    .pipe(gulp.dest('src/dist/css'));
+    .pipe(gulp.dest('./dist/css'));
 });
 
 gulp.task('copy',['clean'],() => {
@@ -98,5 +98,3 @@ gulp.task('concat-min',() => {
         }))
         .pipe(gulp.dest('dist'));
 });
- 
-
