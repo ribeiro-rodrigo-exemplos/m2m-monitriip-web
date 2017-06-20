@@ -12,6 +12,7 @@ let sourcemaps = require('gulp-sourcemaps');
 let usemin = require('gulp-usemin');
 let cssmin = require('gulp-cssmin');
 let uglify = require('gulp-uglify');
+let run = require('gulp-run');
 
 function transpile(origin,dest){
   return gulp.src(origin)
@@ -25,6 +26,15 @@ function transpile(origin,dest){
 
 gulp.task('default',['transpile'],() => {
   gulp.start('concat-min');
+  gulp.start('sass');
+  gulp.start('bower-task');
+});
+
+gulp.task('bower-task',() => {
+  run('npm install -g bower@1.8.0').exec('',() => {
+      run('bower install').exec('',() => gulp.src('bower_components/**/*')
+        .pipe(gulp.dest('dist/bower_components')));
+  });
 });
 
 gulp.task('server',['transpile'],() => {
