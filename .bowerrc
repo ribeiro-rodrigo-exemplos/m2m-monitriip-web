@@ -3,5 +3,5 @@
     "resolvers": [
         "bower-art-resolver"
     ],
-  "directory": "app/bower_components"
+  "directory": "src/bower_components"
 }
