@@ -31,10 +31,8 @@ gulp.task('default',['transpile'],() => {
 });
 
 gulp.task('bower-task',() => {
-  run('npm install -g bower@1.8.0').exec('',() => {
       run('bower install').exec('',() => gulp.src('bower_components/**/*')
         .pipe(gulp.dest('dist/bower_components')));
-  });
 });
 
 gulp.task('server',['transpile'],() => {
