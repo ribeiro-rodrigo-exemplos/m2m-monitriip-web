@@ -24,12 +24,12 @@ class TempoViagemTotalizador extends Totalizador{
                 totalizador.mediaTempoViagem = this.formatarNumero(media,0);
                 this._media += media;
             } 
-            objeto.data.push(totalizador.mediaTempoViagem);           
+            objeto.data.push(parseFloat(totalizador.mediaTempoViagem));           
             return totalizador;
         });
 
         this._media = event.datas.length ? this.formatarNumero(this._media/event.datas.length,0) : 0;
-        this.criarGrafico(this.totalizadoresPorData.map(t => parseFloat(t.mediaTempoViagem)));
+        this.criarGrafico(this.totalizadoresPorData.map(t => t.mediaTempoViagem));
         this.trocarCorLinhaGrafico("#358fcd");
 
         this.graficoGeral.mediaTempoViagem = objeto;

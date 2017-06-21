@@ -30,7 +30,7 @@ class ExtratoPorDia{
         extratoPorDia.totalKm = this.formatarNumero(event[data].totalKm);
         extratoPorDia.totalBilhetes = event[data].totalBilhetes ? event[data].totalBilhetes : 0;
         extratoPorDia.totalParadas = event[data].totalParadas ? event[data].totalParadas : 0;
-        extratoPorDia.totalTempo = this._calcularTempoMedioDeViagemPorDia(data,event);
+        extratoPorDia.totalTempo = this._numberUtil.formatarNumeroDecimal(this._calcularTempoMedioDeViagemPorDia(data,event),0);
         extratoPorDia.viagensExtrato = event[data].extratos;
         extratoPorDia.totalDirecao = event[data].direcoesContinuas
                                                 .map(direcao => direcao.tempoMaximo)
