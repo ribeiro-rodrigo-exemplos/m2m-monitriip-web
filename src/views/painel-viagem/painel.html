@@ -32,8 +32,8 @@
 </div>
 
 <div class="content-flex"><!-- will hold main panel and sidebar -->
-    <div class="main-panel" ng-include="'views/painel-viagem/includes/main.html'"></div>
-    <aside class="sidebar" ng-include="'views/painel-viagem/includes/extrato-por-dia.html'"></aside>
+    <div ng-show="ctrl.exibirTela" class="main-panel" ng-include="'views/painel-viagem/includes/main.html'"></div>
+    <aside ng-show="ctrl.exibirTela" class="sidebar" ng-include="'views/painel-viagem/includes/extrato-por-dia.html'"></aside>
 </div>
 
 <div class="popup none" ng-include="'views/painel-viagem/includes/info-viagem-popup.html'"></div>

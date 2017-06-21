@@ -81,10 +81,8 @@ class PainelService{
         });
 
         extratos.forEach(extrato => {
-            // if(!rootData[extrato.dataInicial])
-            //     this._criarData(rootData,extrato.dataInicial);
-
-            rootData[extrato.dataInicial].extratos.push(extrato);
+            if(rootData[extrato.dataInicial])
+                rootData[extrato.dataInicial].extratos.push(extrato);
         });
 
         jornadas.forEach(jornada => {

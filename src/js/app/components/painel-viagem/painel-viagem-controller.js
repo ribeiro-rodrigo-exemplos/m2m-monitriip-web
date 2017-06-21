@@ -46,7 +46,8 @@ class PainelViagemController{
 
         this._painelService.consultarPeriodo(dataInicial,dataFinal,this.filtro.cnpjCliente,this.filtro.cpfMotorista,this.filtro.placaVeiculo)
             .then(retorno => this._notify(retorno))
-            .catch(error => console.error(error)); 
+            .then(() => this.exibirTela = true)
+            .catch(error => {console.error(error);}); 
     }
 
     consultarViagemPorId(id){
