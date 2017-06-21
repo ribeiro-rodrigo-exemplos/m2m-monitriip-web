@@ -64,6 +64,9 @@ class PainelService{
 
     _prepareResult(result, data){
         
+        if(this._semRetorno(result))
+            return null; 
+
         let totalizadores = result.totalizadoresPromise;
         let jornadas = result.jornadasPromise;
         let extratos = result.extratosPromise; 
@@ -95,6 +98,10 @@ class PainelService{
         rootData.datas = Object.keys(rootData).sort(); 
 
         return rootData;
+    }
+
+    _semRetorno(result){
+        return !result.totalizadoresPromise.length && !result.jornadasPromise.length && !result.extratosPromise.length;
     }
 
     _criarData(rootData,data){

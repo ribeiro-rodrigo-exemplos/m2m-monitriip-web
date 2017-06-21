@@ -45,8 +45,14 @@ class PainelViagemController{
         let dataFinal = this._dateUtil.formatarParaIsoDate(this.filtro.dataFinal);
 
         this._painelService.consultarPeriodo(dataInicial,dataFinal,this.filtro.cnpjCliente,this.filtro.cpfMotorista,this.filtro.placaVeiculo)
-            .then(retorno => this._notify(retorno))
-            .then(() => this.exibirTela = true)
+            .then(retorno => {
+                if(!retorno){
+                    alert('Nenhum resultado encontrado.');
+                    return; 
+                }
+                this._notify(retorno);
+                this.exibirTela = true;                     
+            })
             .catch(error => {console.error(error);}); 
     }
 
