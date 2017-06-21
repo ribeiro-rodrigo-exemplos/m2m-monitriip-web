@@ -31,9 +31,11 @@ gulp.task('default',['transpile'],() => {
 });
 
 gulp.task('bower-task',() => {
-      run('bower cache clean --allow-root').exec('');
-      run('bower install --allow-root').exec('',() => gulp.src('bower_components/**/*')
-        .pipe(gulp.dest('dist/bower_components')));
+      run('bower cache clean --allow-root').exec('', () => {
+        run('bower install --allow-root').exec('',() => gulp.src('bower_components/**/*')
+          .pipe(gulp.dest('dist/bower_components')));
+      });
+
 });
 
 gulp.task('server',['transpile'],() => {
@@ -100,7 +102,7 @@ gulp.task('transpile',['clean-js-dist'],() => {
 });
 
 gulp.task('concat-min',() => {
-  gulp.src('dist/**/*.html')
+  gulp.src('dist/*.html')
         .pipe(usemin({
           'js':[uglify],
           'css':[cssmin]
