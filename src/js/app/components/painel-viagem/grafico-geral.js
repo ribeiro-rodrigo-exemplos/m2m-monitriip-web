@@ -26,6 +26,17 @@ class GraficoGeral{
             subtitle: {
                 text: ""
             },
+            legend: {
+                itemStyle: {
+                    color: "#ccc"
+                },
+                itemHoverStyle: {
+                    color: "#95ca31"
+                },
+                itemHiddenStyle: {
+                    color: "#95ca31"
+                }
+            },
              yAxis: {
                 title: {
                     text: ''
@@ -79,7 +90,7 @@ class GraficoGeral{
                     fill: '#505053',
                     stroke: '#000000',
                     style: {
-                        color: '#CCC'
+                        color: '#95ca31'
                     },
                     states: {
                         hover: {
