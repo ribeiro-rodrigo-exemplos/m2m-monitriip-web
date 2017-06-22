@@ -33,3 +33,5 @@ bower_components/*
 var/
 var/log
 var/log/*
+
+src/js/scripts/m2mconfig.js
