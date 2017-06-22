@@ -12,23 +12,6 @@
             <span ng-show="ctrl.filtro.dataInicial && ctrl.filtro.dataFinal"><i class="fa fa-calendar"></i> {{ctrl.filtroDeConsulta}}</span>
         </span>
     </div>
-    <div class="row row--align-flex-end">
-   <!--      <div class="layout-mode">
-            <img class="layout-mode__image" src="img/moon.png">
-            <span class="layout-mode__description">Modo Noite</span>
-            <input class="switch" type="checkbox" checked='checked'/>
-        </div> -->
-<!--         <div class="layout-mode">
-            <button class="button button--row-search-and-export" ng-click="ctrl.habilitarTelaCheia()">
-                <ng-include src="'views/icons/tela-cheia-icon.html'"></ng-include>
-                TELA CHEIA
-            </button>
-        </div> -->
-        <!--<div class="row row--buttons">
-            <button class="button button--row-search-and-export"><i class="fa fa-file-excel-o"></i> CSV</button>
-            <button class="button button--row-search-and-export"><i class="fa fa-file-excel-o"></i> PDF</button>
-        </div>-->
-    </div>
 </div>
 
 <div class="content-flex"><!-- will hold main panel and sidebar -->
@@ -36,4 +19,4 @@
     <aside ng-show="ctrl.exibirTela" class="sidebar" ng-include="'views/painel-viagem/includes/extrato-por-dia.html'"></aside>
 </div>
 
-<div class="popup none" ng-include="'views/painel-viagem/includes/info-viagem-popup.html'"></div>
+<div ng-include="'views/painel-viagem/includes/info-viagem-popup.html'"></div>
