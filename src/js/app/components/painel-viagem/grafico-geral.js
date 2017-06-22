@@ -28,13 +28,13 @@ class GraficoGeral{
             },
             legend: {
                 itemStyle: {
-                    color: "#ccc"
+                    color: "#95ca31"
                 },
                 itemHoverStyle: {
-                    color: "#95ca31"
+                    color: "#ccc"
                 },
                 itemHiddenStyle: {
-                    color: "#95ca31"
+                    color: "#ccc"
                 }
             },
              yAxis: {
@@ -90,7 +90,7 @@ class GraficoGeral{
                     fill: '#505053',
                     stroke: '#000000',
                     style: {
-                        color: '#95ca31'
+                        color: '#fff'
                     },
                     states: {
                         hover: {
