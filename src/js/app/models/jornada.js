@@ -57,6 +57,10 @@ class Jornada{
         return this._properties.enderecoInicial;
     }
 
+    get enderecoFinal(){
+        return this._properties.enderecoFinal;
+    }
+
     _carregarLocalizacaoInicial(locationStrategy){
         if(this.longitudeInicial && this.latitudeInicial)
             locationStrategy(this.longitudeInicial,this.latitudeInicial)
