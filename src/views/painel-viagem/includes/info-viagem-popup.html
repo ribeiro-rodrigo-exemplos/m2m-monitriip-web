@@ -182,7 +182,7 @@
                         <td>{{jornada.dataHoraFinal}}</td>
                         <td>{{jornada.latitudeInicial}} / {{jornada.longitudeInicial}}<br>{{jornada.enderecoInicial}}</td>
                         <td><div ng-if="jornada.latitudeFinal">{{jornada.latitudeFinal}} / {{jornada.longitudeFinal}}<br>{{jornada.enderecoFinal}}</div></td>
-                        <td>{{ctrl.infoViagemPopup.formatarDuracaoDaJornada(jornada)}}</td>
+                        <td>{{ctrl.infoViagemPopup.formatarDuracaoDaJornada(jornada)}} min</td>
                         <!-- classe red quando o tempo for excedido e classe green quando tempo for positivo -->
                         <td class="red"><span ng-if="jornada.tempoExcedido != 0">{{jornada.tempoExcedido}} min</span></td>
                         <td>{{jornada.placaVeiculo}}</td>
