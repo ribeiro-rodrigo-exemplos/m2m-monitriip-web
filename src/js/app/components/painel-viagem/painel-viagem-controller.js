@@ -44,6 +44,8 @@ class PainelViagemController{
         let dataInicial = this._dateUtil.formatarParaIsoDate(this.filtro.dataInicial);
         let dataFinal = this._dateUtil.formatarParaIsoDate(this.filtro.dataFinal);
 
+        this.loading = true; 
+
         this._painelService.consultarPeriodo(dataInicial,dataFinal,this.filtro.cnpjCliente,this.filtro.cpfMotorista,this.filtro.placaVeiculo)
             .then(retorno => {
                 if(!retorno){
@@ -51,9 +53,13 @@ class PainelViagemController{
                     return; 
                 }
                 this._notify(retorno);
-                this.exibirTela = true;                     
+                this.exibirTela = true;
+                this.loading = false;                      
             })
-            .catch(error => {console.error(error);}); 
+            .catch(error => {
+                console.error(error);
+                this.loading = false; 
+            }); 
     }
 
     consultarViagemPorId(id){
