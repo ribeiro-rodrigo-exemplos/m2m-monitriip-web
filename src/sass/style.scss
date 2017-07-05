@@ -41,6 +41,15 @@ body{
 	font-size: 62.5%; /* now our em = 10px */
 	background: #fff;
 }
+.loader{
+  height: 100px;
+  width: 97%;
+  text-align: center;
+  padding: 1em;
+  margin: 200px auto 1em;
+  display: inline-block;
+  vertical-align: top;
+}
 /* csslint ignore:end*/
 
 
