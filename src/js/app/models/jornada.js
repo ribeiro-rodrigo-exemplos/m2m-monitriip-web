@@ -61,6 +61,10 @@ class Jornada{
         return this._properties.enderecoFinal;
     }
 
+    get duracaoEmMinutos(){
+        return this._properties.duracao; 
+    }
+
     _carregarLocalizacaoInicial(locationStrategy){
         if(this.longitudeInicial && this.latitudeInicial)
             locationStrategy(this.longitudeInicial,this.latitudeInicial)

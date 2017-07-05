@@ -48,12 +48,12 @@ class InfoViagemPopup{
     }
 
     formatarDuracaoDaJornada(jornada){
-        return jornada.dataHoraInicial && jornada.dataHoraFinal ? this._dateUtil.obterDuracao(jornada.dataHoraInicial,jornada.dataHoraFinal) : '';
+        return jornada.duracaoEmMinutos ? this.formatarNumero(jornada.duracaoEmMinutos) : '';
     }
 
     obterDuracaoDaViagem(){
         return this._viagem && this._viagem.dataHoraInicial && this._viagem.dataHoraFinal ? 
-        this._dateUtil.obterDuracao(this._viagem.dataHoraInicial,this._viagem.dataHoraFinal) : '';
+        this.formatarNumero(this._viagem.duracaoEmMinutos) : '';
     }
 
     obterDuracaoTotalDasJornadas(){
