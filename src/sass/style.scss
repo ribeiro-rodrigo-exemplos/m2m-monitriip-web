@@ -50,6 +50,10 @@ body{
   display: inline-block;
   vertical-align: top;
 }
+.priority-position{
+	z-index: 1040;
+	position: relative;
+}
 /* csslint ignore:end*/
 
 
