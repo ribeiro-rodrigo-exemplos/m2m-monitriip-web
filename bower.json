@@ -1,6 +1,6 @@
 {
   "name": "m2m-monitriip-web",
-  "version": "1.0.1",
+  "version": "1.0.2",
   "description": "Módulo web do projeto Monitriip",
   "main": "index.js",
   "authors": [
