@@ -48,13 +48,15 @@ class PainelViagemController{
 
         this._painelService.consultarPeriodo(dataInicial,dataFinal,this.filtro.cnpjCliente,this.filtro.cpfMotorista,this.filtro.placaVeiculo)
             .then(retorno => {
+                this.loading = false;
+
                 if(!retorno){
                     alert('Nenhum resultado encontrado.');
                     return; 
                 }
+                
                 this._notify(retorno);
-                this.exibirTela = true;
-                this.loading = false;                      
+                this.exibirTela = true;                      
             })
             .catch(error => {
                 console.error(error);
