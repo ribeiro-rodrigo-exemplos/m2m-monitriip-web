@@ -44,17 +44,17 @@ class PainelViagemController{
         let dataInicial = this._dateUtil.formatarParaIsoDate(this.filtro.dataInicial);
         let dataFinal = this._dateUtil.formatarParaIsoDate(this.filtro.dataFinal);
 
-        this.loading = true; 
+        this.loading = true;
 
         this._painelService.consultarPeriodo(dataInicial,dataFinal,this.filtro.cnpjCliente,this.filtro.cpfMotorista,this.filtro.placaVeiculo)
             .then(retorno => {
                 this.loading = false;
 
                 if(!retorno){
-                    alert('Nenhum resultado encontrado.');
+                    this._exibirAlert('Nenhum dado encontrato.');
                     return; 
                 }
-                
+
                 this._notify(retorno);
                 this.exibirTela = true;                      
             })
@@ -70,7 +70,7 @@ class PainelViagemController{
                 if(detalheViagem)
                     this.infoViagemPopup.exibirDetalhesDaViagem(detalheViagem);
                 else
-                    alert('Não foi possível consultar a viagem selecionada');
+                    this._exibirAlert('Não foi possível consultar a viagem selecionada');
                 
             });
     }
@@ -109,20 +109,27 @@ class PainelViagemController{
         return JSON.parse(JSON.stringify(event)); 
     }
 
+    _exibirAlert(mensagem){
+        let alert = document.getElementById('alert');
+        this.alert = {mensagem:mensagem};
+        alert.classList.remove('alerts-container--active');
+        setTimeout(() => alert.classList.add('alerts-container--active'),10);
+    }
+
     _consultaInvalida(){
 
         if(!this.filtro || !this.filtro.dataInicial || !this.filtro.dataFinal){
-            alert('Informe das datas inicias e finais');
+            this._exibirAlert('Informe das datas inicias e finais');
             return true; 
         }
 
         if(!this._dateUtil.periodoValido(this.filtro.dataInicial,this.filtro.dataFinal)){
-            alert('A data inicial deve ser menor que a data final');
+            this._exibirAlert('A data inicial deve ser menor que a data final');
             return true; 
         }
 
         if(!this._dateUtil.dentroDoPeriodoDeDias(this.filtro.dataInicial,this.filtro.dataFinal,3)){
-            alert('O período máximo de consulta é de até 3 dias.');
+            this._exibirAlert('O período máximo de consulta é de até 3 dias.');
             return true;
         }
 
