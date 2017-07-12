@@ -11,7 +11,7 @@
 	@media screen and (max-width:1400px){
     	min-height: 23px;
     }
-	&--icon + .fa{
+	&--icon ~ .fa{
 		background: $m2m_green;
 		position: absolute;
 		bottom: 0;
@@ -20,8 +20,8 @@
 		color: #000;
 		@extend .text-size-10;
 		@media screen and (max-width:1400px){
-	    	right: 0;
-	    	padding: 7px;
+	    	right: 1px;
+    		padding: 6.5px;
 	    }
 	}
 	&--icon + .fa-clock-o{
@@ -31,4 +31,84 @@
 	    	padding: 5px;
 	    }
     }
+}
+/*Fuga do Padrão BEM para estilizar componente externo (calendário)*/
+/*container calendário*/
+.ws-po-box{
+	background: $darker_gray;
+	border: none;
+    border-radius: 13px;
+}
+.ws-popover{
+    padding: 0;
+}
+.ws-po-outerbox{
+	padding: 0;
+}
+.ws-po-arrow{
+	display: none;
+}
+.input-picker{
+	width: 200px;
+	font-size: 10px;
+}
+.input-picker .ws-po-box{
+	padding: 15px;
+}
+.input-picker li, .input-picker button{
+	font-size: 10px;
+}
+/*botões próximo mês/mês anterior*/
+.input-picker .ws-picker-controls>button,
+.input-picker .ws-button-row > button{
+	background: none;
+	color: #fff;
+	border: none;
+	border-radius: 20px;
+	outline: none;
+}
+/*botão mês anterior*/
+.input-picker .prev-controls>.ws-year-btn:after, .input-picker .prev-controls>button:before, .input-picker .ws-po-box[dir=rtl] .next-controls>.ws-year-btn:after, .input-picker .ws-po-box[dir=rtl] .next-controls>button:before {
+    border-color: transparent #fff transparent transparent;
+}
+.input-picker .next-controls>.ws-year-btn:after, .input-picker .next-controls>button:before, .input-picker .ws-po-box[dir=rtl] .prev-controls>.ws-year-btn:after, .input-picker .ws-po-box[dir=rtl] .prev-controls>button:before {
+    border-color: transparent transparent transparent #fff;
+}
+/*nome mês*/
+.input-picker .ws-picker-header>button{
+	color: #fff;
+	text-transform: uppercase;
+}
+/*dias do mês*/
+.input-picker .picker-list td>button{
+	background: none;
+	color: #fff;
+	border-radius: 50%;
+	outline: none;
+}
+/*container dos dias do mês*/
+.input-picker .picker-list{
+	background: none;
+}
+/*dias do mês seguinte ou anterior*/
+.input-picker .picker-list td>button.othermonth{
+	color: $light_gray;
+}
+/*dias da semana*/
+.input-picker .picker-list th, .input-picker .picker-list td.week-cell{
+	color: $m2m_green;
+	font-size: 10px;
+}
+.input-picker abbr[title]{
+	text-decoration: none;
+	cursor: default;
+}
+/*dia de hoje "pré-selecionado" (comportamento não é padrão e deve ser implementado por devs)*/
+.input-picker .picker-list td>button.this-value{
+	background-color: $m2m_green;
+	color: $dark_gray;
+}
+/*botões "hoje" e "limpar" que não existem no layout*/
+.ws-button-row{
+	display: none;
 }
