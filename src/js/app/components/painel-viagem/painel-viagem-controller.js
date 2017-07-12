@@ -5,7 +5,7 @@ class PainelViagemController{
 
     constructor(viagemService,painelService,FullScreen,graficoGeral,kmPercorridoTotalizador,leituraBilhetesTotalizador, 
                 tempoViagemTotalizador, jornadaTrabalhoTotalizador,direcaoContinuaTotalizador, paradasTotalizador, 
-                extratoPorDia, infoViagemPopup,dateUtil, mapaPopup){
+                extratoPorDia, infoViagemPopup,dateUtil, mapaPopup,eventBus){
 
         this.graficoGeral = graficoGeral;
         this.kmPercorridoTotalizador = kmPercorridoTotalizador;
@@ -20,14 +20,12 @@ class PainelViagemController{
         
         this._viagemService = viagemService;
         this._painelService = painelService;
+        this._eventBus = eventBus;
 
         this._FullScreen = FullScreen;
         this._dateUtil = dateUtil;
         this.filtro = {dataInicial:null,dataFinal:null};
 
-        this._listeners = [];
-
-        this._init();
     }
 
     get filtroDeConsulta(){
@@ -70,8 +68,7 @@ class PainelViagemController{
                 if(detalheViagem)
                     this.infoViagemPopup.exibirDetalhesDaViagem(detalheViagem);
                 else
-                    this._exibirAlert('Não foi possível consultar a viagem selecionada');
-                
+                    this._exibirAlert('Não foi possível consultar a viagem selecionada'); 
             });
     }
 
@@ -83,30 +80,8 @@ class PainelViagemController{
         this._FullScreen.enable(document.documentElement);
     }
 
-    _init(){
-
-        this._addListener(
-            this.leituraBilhetesTotalizador,
-            this.kmPercorridoTotalizador,
-            this.tempoViagemTotalizador,
-            this.jornadaTrabalhoTotalizador,
-            this.direcaoContinuaTotalizador,
-            this.paradasTotalizador,
-            this.graficoGeral,
-            this.extratoPorDia
-        );
-    }
-
-    _addListener(){
-        this._listeners.push(...arguments);
-    }
-
     _notify(event){
-        this._listeners.forEach(listener => listener.atualizar(this._clone(event)));
-    }
-
-    _clone(event){
-        return JSON.parse(JSON.stringify(event)); 
+        this._eventBus.emit('event:painel:update',event);
     }
 
     _exibirAlert(mensagem){
@@ -151,7 +126,8 @@ PainelViagemController.$inject = [
                                     'ExtratoPorDia',
                                     'InfoViagemPopup',
                                     'DateUtil',
-                                    'MapaPopup'
+                                    'MapaPopup',
+                                    'EventBusService'
                                  ];
 
 angular.module('monitriip-web')

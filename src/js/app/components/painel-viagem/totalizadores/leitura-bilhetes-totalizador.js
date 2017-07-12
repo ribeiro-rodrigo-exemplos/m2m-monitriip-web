@@ -2,14 +2,20 @@
  * Created by Rodrigo Ribeiro on 20/04/17.
  */
 class LeituraBilhetesTotalizador extends Totalizador{
-    constructor(graficoGeral){
+    constructor(graficoGeral,eventBus){
         super();
 
         this.graficoGeral = graficoGeral;
         this._total = 0;
+
+        eventBus.on('event:painel:update',this._atualizar.bind(this));
     }
 
-    atualizar(event){
+    get total(){
+        return this._total;
+    }
+
+    _atualizar(event){
 
         let objeto = {
             name:"Bilhetes",
@@ -33,13 +39,9 @@ class LeituraBilhetesTotalizador extends Totalizador{
 
         this.graficoGeral.totalizadorLeituraBilhetes = objeto;
     }
+ }
 
-    get total(){
-        return this._total;
-    }
-}
-
-LeituraBilhetesTotalizador.$inject = ["GraficoGeral"];
+LeituraBilhetesTotalizador.$inject = ["GraficoGeral",'EventBusService'];
 
 angular.module('monitriip-web')
         .service('LeituraBilhetesTotalizador', LeituraBilhetesTotalizador);

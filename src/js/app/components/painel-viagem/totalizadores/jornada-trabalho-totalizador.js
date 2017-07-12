@@ -1,12 +1,29 @@
 class JornadaTrabalhoTotalizador extends Totalizador{
-    constructor(graficoGeral){
+    constructor(graficoGeral,eventBus){
         super();
 
         this.graficoGeral = graficoGeral;
         this.jornadaTrabalhoMaxima = 0;
+
+        this._eventBus = eventBus;
+
+        eventBus.on('event:painel:update',this._atualizar.bind(this));
     }
 
-    atualizar(event, montarCombo = true){
+    get motoristas(){
+        return this._motoristas;
+    }
+
+    get motoristaSelecionado(){
+        return this._motoristaSelecionado;
+    }
+
+    set motoristaSelecionado(motorista){
+        this._motoristaSelecionado = motorista;
+        this._atualizar(this._ultimoEvento, false);
+    }
+
+    _atualizar(event, montarCombo = true){
 
         this._ultimoEvento = event;
 
@@ -55,21 +72,8 @@ class JornadaTrabalhoTotalizador extends Totalizador{
         this.jornadasTrabalho.forEach(jornada => objeto.data.push(parseFloat(jornada.maxima)));
         
         this.graficoGeral.totalizadorJornada = objeto; 
-     }
+    }
     
-    get motoristas(){
-        return this._motoristas;
-    }
-
-    get motoristaSelecionado(){
-        return this._motoristaSelecionado;
-    }
-
-    set motoristaSelecionado(motorista){
-        this._motoristaSelecionado = motorista;
-        this.atualizar(this._ultimoEvento, false);
-    }
-
     _montarComboDeMotoristas(event){
         this._motoristas = new Set();
 
@@ -92,7 +96,7 @@ class JornadaTrabalhoTotalizador extends Totalizador{
     }
 }
 
-JornadaTrabalhoTotalizador.$inject = ['GraficoGeral'];
+JornadaTrabalhoTotalizador.$inject = ['GraficoGeral','EventBusService'];
 
 angular.module('monitriip-web')
         .service('JornadaTrabalhoTotalizador', JornadaTrabalhoTotalizador);

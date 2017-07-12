@@ -2,14 +2,20 @@
  * Created by Rodrigo Ribeiro on 20/04/17.
  */
 class KmPercorridoTotalizador extends Totalizador{
-    constructor(graficoGeral){
+    constructor(graficoGeral,eventBus){
         super();
 
         this.graficoGeral = graficoGeral;
         this._total = 0;
+
+        eventBus.on('event:painel:update',this._atualizar.bind(this));
     }
 
-    atualizar(event){
+    get total(){
+        return this._total;
+    }
+
+    _atualizar(event){
         let objeto = {
             name:"Km Percorrido",
             data:[]
@@ -33,13 +39,9 @@ class KmPercorridoTotalizador extends Totalizador{
 
         this.graficoGeral.totalizadorKmPercorrido = objeto;
     }
-
-    get total(){
-        return this._total;
-    }
 }
 
-KmPercorridoTotalizador.$inject = ['GraficoGeral'];
+KmPercorridoTotalizador.$inject = ['GraficoGeral','EventBusService'];
 
 angular.module('monitriip-web')
         .service('KmPercorridoTotalizador',KmPercorridoTotalizador);

@@ -1,13 +1,36 @@
 
 class ParadasTotalizador extends Totalizador{
-    constructor(graficoGeral){
+    constructor(graficoGeral,eventBus){
         super();
 
         this.graficoGeral = graficoGeral;
         this._total = 0;
+
+        eventBus.on('event:painel:update',this._atualizar.bind(this));
     }
 
-    atualizar(event, montarCombo = true){
+    get total(){
+        return this._total;
+    }
+
+    get paradas(){
+        return this._paradas;
+    }
+
+    get totalPorData(){
+        return this._totalPorData;
+    }
+
+    get paradaSelecionada(){
+        return this._paradaSelecionada;
+    }
+
+    set paradaSelecionada(parada){
+        this._paradaSelecionada = parada;
+        this.atualizar(this._ultimoEvento, false);
+    }
+
+    _atualizar(event, montarCombo = true){
 
         this._ultimoEvento = event;
         this._total = 0;
@@ -45,27 +68,6 @@ class ParadasTotalizador extends Totalizador{
         this.graficoGeral.totalizadorParadas = objeto; 
     }
 
-    get total(){
-        return this._total;
-    }
-
-    get paradas(){
-        return this._paradas;
-    }
-
-    get totalPorData(){
-        return this._totalPorData;
-    }
-
-    get paradaSelecionada(){
-        return this._paradaSelecionada;
-    }
-
-    set paradaSelecionada(parada){
-        this._paradaSelecionada = parada;
-        this.atualizar(this._ultimoEvento, false);
-    }
-
     _montarComboDeParadas(event){
         this._paradas = new Set();
 
@@ -92,7 +94,7 @@ class ParadasTotalizador extends Totalizador{
     }
 }
 
-ParadasTotalizador.$inject = ['GraficoGeral'];
+ParadasTotalizador.$inject = ['GraficoGeral','EventBusService'];
 
 angular.module('monitriip-web')
         .service('ParadasTotalizador', ParadasTotalizador); 

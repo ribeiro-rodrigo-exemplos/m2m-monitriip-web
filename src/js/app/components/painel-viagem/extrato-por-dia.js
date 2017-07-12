@@ -1,9 +1,12 @@
 class ExtratoPorDia{
-    constructor(document,numberUtil){
+    constructor(document,numberUtil,eventBus){
         this._dateUtil = new DateUtil();
         this._numberUtil = numberUtil;
+
         this.viagens = [];
         this._document = document[0];
+
+        eventBus.on('event:painel:update',this._atualizar.bind(this));
     }
 
     formatarData(data){
@@ -14,14 +17,14 @@ class ExtratoPorDia{
         return this._numberUtil.formatarNumeroDecimal(numero,casas);
     }
 
-    atualizar(event){
-        this.extratos = event.datas.filter(data => event[data].extratos.length)
-                                    .map(data => this._montarExtratoDoDia(data,event));
-    }
-
     minimizar(index){
         let element = this._document.querySelector(`.minimizar-${index}`);
         element.classList.toggle('none');
+    }
+
+    _atualizar(event){
+        this.extratos = event.datas.filter(data => event[data].extratos.length)
+                                    .map(data => this._montarExtratoDoDia(data,event));
     }
 
     _montarExtratoDoDia(data,event){
@@ -59,12 +62,11 @@ class ExtratoPorDia{
                                     return jornada.horasPorData && maior < jornada.horasPorData[data] ? jornada.horasPorData[data] : maior;
                                 },0);
         
-        console.log(maior);
         return maior;
     }
 }
 
-ExtratoPorDia.$inject = ['$document','NumberUtil'];
+ExtratoPorDia.$inject = ['$document','NumberUtil','EventBusService'];
 
 angular.module('monitriip-web')
         .service('ExtratoPorDia', ExtratoPorDia);

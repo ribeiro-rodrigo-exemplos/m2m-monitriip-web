@@ -2,14 +2,30 @@
  * Created by Rodrigo Ribeiro on 20/04/17.
  */
 class DirecaoContinuaTotalizador extends Totalizador{
-    constructor(graficoGeral){
+    constructor(graficoGeral,eventBus){
         super();
 
         this.graficoGeral = graficoGeral;
+        this._eventBus = eventBus;
         this.direcaoContinuaMaxima = 0;
+
+        eventBus.on('event:painel:update',this._atualizar.bind(this));
     }
 
-    atualizar(event, montarCombo = true){
+    get motoristas(){
+        return this._motoristas;
+    }
+
+    get motoristaSelecionado(){
+        return this._motoristaSelecionado;
+    }
+
+    set motoristaSelecionado(motorista){
+        this._motoristaSelecionado = motorista;
+        this.atualizar(this._ultimoEvento, false);
+    }
+
+    _atualizar(event, montarCombo = true){
 
         this._ultimoEvento = event;
 
@@ -43,19 +59,6 @@ class DirecaoContinuaTotalizador extends Totalizador{
         this.graficoGeral.totalizadorDirecaoContinua = objeto; 
     }
 
-    get motoristas(){
-        return this._motoristas;
-    }
-
-    get motoristaSelecionado(){
-        return this._motoristaSelecionado;
-    }
-
-    set motoristaSelecionado(motorista){
-        this._motoristaSelecionado = motorista;
-        this.atualizar(this._ultimoEvento, false);
-    }
-
     _montarComboDeMotoristas(event){
         this._motoristas = new Set();
 
@@ -78,7 +81,7 @@ class DirecaoContinuaTotalizador extends Totalizador{
     }
 }
 
-DirecaoContinuaTotalizador.$inject = ['GraficoGeral'];
+DirecaoContinuaTotalizador.$inject = ['GraficoGeral','EventBusService'];
 
 angular.module('monitriip-web')
         .service('DirecaoContinuaTotalizador', DirecaoContinuaTotalizador); 

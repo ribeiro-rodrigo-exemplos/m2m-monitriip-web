@@ -2,14 +2,20 @@
  * Created by Rodrigo Ribeiro on 20/04/17.
  */
 class TempoViagemTotalizador extends Totalizador{
-    constructor(graficoGeral){
+    constructor(graficoGeral,eventBus){
         super();
 
         this.graficoGeral = graficoGeral;
         this._media = 0;
+
+        eventBus.on('event:painel:update',this._atualizar.bind(this));
     }
 
-    atualizar(event){
+    get media(){
+        return this._media; 
+    }
+
+    _atualizar(event){
         let objeto = {
             name:"Tempo Viagem",
             data:[]
@@ -35,10 +41,6 @@ class TempoViagemTotalizador extends Totalizador{
         this.graficoGeral.mediaTempoViagem = objeto;
     }
 
-    get media(){
-        return this._media; 
-    }
-
     _calcularTempoMedioDeViagemPorDia(data,event){
         let extratos = event[data].extratos; 
         return extratos.length ? event[data].extratos
@@ -47,7 +49,7 @@ class TempoViagemTotalizador extends Totalizador{
     }
 }
 
-TempoViagemTotalizador.$inject = ['GraficoGeral'];
+TempoViagemTotalizador.$inject = ['GraficoGeral','EventBusService'];
 
 angular.module('monitriip-web')
         .service('TempoViagemTotalizador', TempoViagemTotalizador);
