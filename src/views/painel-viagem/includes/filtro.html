@@ -33,13 +33,13 @@
 
                 <section class="form">
                     <label class="form__label">De</label>
-                    <input ng-model="ctrl.filtro.dataInicial" type="date" class="input input--icon">
+                    <input type="date" ng-model="ctrl.filtro.dataInicial" type="date" class="input input--calendar input--icon" data-date-inline-picker="false" data-date-open-on-focus="true" placeholder="dd/mm/aaaa">
                     <i class="fa fa-calendar"></i>
                 </section>
 
                 <section class="form">
                     <label class="form__label">Até</label>
-                    <input ng-model="ctrl.filtro.dataFinal" type="date" class="input input--icon">
+                    <input type="date" ng-model="ctrl.filtro.dataFinal" type="date" class="input input--calendar input--icon" data-date-inline-picker="false" data-date-open-on-focus="true" placeholder="dd/mm/aaaa">
                     <i class="fa fa-calendar"></i>
                 </section>
             </div>
@@ -55,5 +55,19 @@
      
     $(".toggle").click(function(){
         $(this).find(".fa-chevron-down").toggleClass("none");
-    });          
+    });
+   
+webshim.setOptions('forms-ext', {
+    replaceUI: 'auto',
+    types: 'date',
+    date: {
+        startView: 2,
+        inlinePicker: true,
+        classes: 'hide-inputbtns'
+    }
+});
+
+//start polyfilling
+webshim.polyfill('forms forms-ext');
+
 </script>
