@@ -2,15 +2,15 @@
  * Created by Rodrigo Ribeiro on 20/04/17.
  */
 class GraficoGeral{
-    constructor(){
+    constructor(eventBus){
         this.totalizadorDirecaoContinua = [];
         this.totalizadorJornada = [];
         this.totalizadorKmPercorrido = [];
         this.totalizadorLeituraBilhetes = [];
         this.mediaTempoViagem = [];
-        this.dias = [];
         
         this._dateUtil = new DateUtil();
+        eventBus.on('event:painel:components:updated',this._atualizar.bind(this));
 
         this._grafico = {
             credits:false,
@@ -136,20 +136,22 @@ class GraficoGeral{
         return this._dateUtil.obterDiaEMes(data);
     }
 
-    atualizar(event){
+    get render(){
+        return this._grafico;
+    }
+
+    _atualizar(dados){
         this.criarGrafico(this.totalizadorKmPercorrido);
         this.criarGrafico(this.totalizadorLeituraBilhetes);
         this.criarGrafico(this.mediaTempoViagem);
         this.criarGrafico(this.totalizadorDirecaoContinua);
         this.criarGrafico(this.totalizadorJornada);
         this.criarGrafico(this.totalizadorParadas);
-        this.criaCabecalhoGrafico(event.datas);
-    }
-
-    get render(){
-        return this._grafico;
+        this.criaCabecalhoGrafico(dados.datas);
     }
 }
+
+GraficoGeral.$inject = ['EventBusService'];
 
 angular.module('monitriip-web')
         .service('GraficoGeral',GraficoGeral);

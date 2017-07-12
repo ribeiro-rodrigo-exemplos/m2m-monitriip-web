@@ -53,7 +53,7 @@ class PainelViagemController{
                     return; 
                 }
 
-                this._notify(retorno);
+                this._notifyComponents(retorno);
                 this.exibirTela = true;                      
             })
             .catch(error => {
@@ -80,8 +80,9 @@ class PainelViagemController{
         this._FullScreen.enable(document.documentElement);
     }
 
-    _notify(event){
+    _notifyComponents(event){
         this._eventBus.emit('event:painel:update',event);
+        this._eventBus.emit('event:painel:components:updated',event);
     }
 
     _exibirAlert(mensagem){
