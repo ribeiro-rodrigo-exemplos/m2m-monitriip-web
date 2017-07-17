@@ -5,7 +5,7 @@ class PainelViagemController{
 
     constructor(viagemService,painelService,FullScreen,graficoGeral,kmPercorridoTotalizador,leituraBilhetesTotalizador, 
                 tempoViagemTotalizador, jornadaTrabalhoTotalizador,direcaoContinuaTotalizador, paradasTotalizador, 
-                extratoPorDia, infoViagemPopup,dateUtil, mapaPopup,eventBus){
+                extratoPorDia, infoViagemPopup,dateUtil,eventBus){
 
         this.graficoGeral = graficoGeral;
         this.kmPercorridoTotalizador = kmPercorridoTotalizador;
@@ -16,7 +16,6 @@ class PainelViagemController{
         this.paradasTotalizador = paradasTotalizador;
         this.extratoPorDia = extratoPorDia;
         this.infoViagemPopup = infoViagemPopup;
-        this.mapaPopup = mapaPopup;
         
         this._viagemService = viagemService;
         this._painelService = painelService;
@@ -25,7 +24,6 @@ class PainelViagemController{
         this._FullScreen = FullScreen;
         this._dateUtil = dateUtil;
         this.filtro = {dataInicial:null,dataFinal:null};
-
     }
 
     get filtroDeConsulta(){
@@ -127,7 +125,6 @@ PainelViagemController.$inject = [
                                     'ExtratoPorDia',
                                     'InfoViagemPopup',
                                     'DateUtil',
-                                    'MapaPopup',
                                     'EventBusService'
                                  ];
 
