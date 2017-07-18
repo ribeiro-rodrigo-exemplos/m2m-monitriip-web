@@ -175,6 +175,8 @@ class Viagem{
                                         },[])
                                         .filter(localizacao => localizacao[this._LAT] && localizacao[this._LONG]);
 
+        //this._coordenadasPercurso = this._coordenadasPercurso.splice(0,5)
+
         this._definirLocalizacaoInicial();
         this._definirLocalizacaoFinal();
 
