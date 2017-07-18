@@ -168,11 +168,12 @@ class Viagem{
                                         .map(periodo => periodo.localizacoes)
                                         .reduce((acc,localizacoesPorPeriodo) => {
                                             localizacoesPorPeriodo.forEach(loc => acc.push([
-                                                loc.localizacao.coordinates[this._LONG],
-                                                loc.localizacao.coordinates[this._LAT]
+                                                loc.localizacao.coordinates[this._LAT],
+                                                loc.localizacao.coordinates[this._LONG]
                                             ]));
                                             return acc;
-                                        },[]);
+                                        },[])
+                                        .filter(localizacao => localizacao[this._LAT] && localizacao[this._LONG]);
 
         this._definirLocalizacaoInicial();
         this._definirLocalizacaoFinal();
@@ -181,6 +182,8 @@ class Viagem{
         console.log(this._coordenadasPercurso);
         console.log('localizacao inicial')
         console.log(this.localizacaoInicial);
+        console.log('localizacao final');
+        console.log(this.localizacaoFinal);
     }
 
     _calcularVelocidades(){
@@ -208,7 +211,10 @@ class Viagem{
         if(this._naoPossuiLocalizacaoInicialValida())
             this._localizacaoInicial = this._definirPrimeiraLocalizacaoValida(this._coordenadasPercurso);  
         else
-            this._localizacaoInicial = this._primeiroPeriodo.localizacaoInicial.coordinates;
+            this._localizacaoInicial = [
+                this._primeiroPeriodo.localizacaoInicial.coordinates[this._LAT],
+                this._primeiroPeriodo.localizacaoInicial.coordinates[this._LONG]
+            ];
 
         if(this._localizacaoInicial.length)
             this._geocoderHelper.obterEndereco(this.localizacaoInicial[this._LAT],this.localizacaoInicial[this._LONG])
@@ -221,7 +227,10 @@ class Viagem{
         if(this._naoPossuiLocalizacaoFinalValida())
             this._localizacaoFinal = this._definirPrimeiraLocalizacaoValida(this._coordenadasPercurso.reverse());
         else
-            this._localizacaoFinal = this._ultimoPeriodo.localizacaoFinal.coordinates;
+            this._localizacaoFinal = [
+                this._ultimoPeriodo.localizacaoFinal.coordinates[this._LAT],
+                this._ultimoPeriodo.localizacaoFinal.coordinates[this._LONG]
+            ];
 
         if(this.localizacaoFinal.length)
             this._geocoderHelper.obterEndereco(this.localizacaoFinal[this._LAT],this.localizacaoFinal[this._LONG])
@@ -231,7 +240,7 @@ class Viagem{
     }
 
     _formatarCoordenada(coordenada){
-        return `${coordenada.coordinates[this._LAT]}, ${coordenada.coordinates[this._LONG]}`;
+        return `${coordenada.coordinates[this._LONG]}, ${coordenada.coordinates[this._LAT]}`;
     }
 
     _naoPossuiLocalizacaoInicialValida(){
