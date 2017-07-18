@@ -227,7 +227,7 @@ class Viagem{
 
     _definirLocalizacaoFinal(){
         if(this._naoPossuiLocalizacaoFinalValida())
-            this._localizacaoFinal = this._definirPrimeiraLocalizacaoValida(this._coordenadasPercurso.reverse());
+            this._localizacaoFinal = this._definirPrimeiraLocalizacaoValida(this._coordenadasPercurso.concat([]).reverse());
         else
             this._localizacaoFinal = [
                 this._ultimoPeriodo.localizacaoFinal.coordinates[this._LAT],
