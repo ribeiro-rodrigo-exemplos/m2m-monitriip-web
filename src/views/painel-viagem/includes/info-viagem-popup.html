@@ -132,7 +132,7 @@
                                 <span class="number-box number-box--square">{{$index + 1}}</span>
                                 {{bilhete.numeroDeEmbarque}}
                             </span>
-                            <span class="td--like">{{bilhete.valorTarifa | number:2}}</span>
+                            <span class="td--like">{{bilhete.valorTarifaFormatadoComVirgula}}</span>
                             <span class="td--like">{{ctrl.infoViagemPopup.formatarDataHora(bilhete.dataHoraLeitura)}}</span>
                             <span class="td--like text-size-14 toggle-control">+</span>
                         </div>	

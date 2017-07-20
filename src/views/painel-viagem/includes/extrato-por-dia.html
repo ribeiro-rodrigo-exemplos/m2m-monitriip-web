@@ -57,7 +57,7 @@
                         {{viagem.identificacaoLinha}}
                     </td>
                     <td><span class="purple">{{viagem.tipoTransporte}}</span></td>
-                    <td>{{ctrl.extratoPorDia.formatarNumero(viagem.totalKm)}}</td>
+                    <td>{{ctrl.extratoPorDia.formatarNumeroComDuasCasasDecimaisComVirgula(viagem.totalKm)}}</td>
                     <td>{{viagem.tempo ? viagem.tempo : 0}}</td>
                     <td>{{viagem.totalBilhetes}}</td>
                     <td>{{viagem.totalParadas}}</td>

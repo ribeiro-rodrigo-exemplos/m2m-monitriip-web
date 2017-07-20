@@ -1,6 +1,7 @@
 class Bilhete{
-    constructor(properties){
-        this._properties = properties; 
+    constructor(properties, numberUtil){
+        this._properties = properties;
+        this._numberUtil = numberUtil;
     }
 
     carregarLocalizacao(locationStrategy){
@@ -35,6 +36,10 @@ class Bilhete{
 
     get valorTarifa(){
         return this._properties.valorTarifa;
+    }
+
+    get valorTarifaFormatadoComVirgula(){
+        return this._numberUtil.formatarNumeroComDuasCasasDecimaisComVirgula(this._properties.valorTarifa);
     }
 
     get latitude(){

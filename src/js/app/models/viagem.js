@@ -1,5 +1,5 @@
 class Viagem{
-    constructor(periodos, geocoderHelper){
+    constructor(periodos, geocoderHelper, numberUtil){
 
         this._quantidadeDeMotoristas = 0;
         this._quantidadeDeVeiculos = 0;
@@ -15,6 +15,7 @@ class Viagem{
         this._LAT = 1;
         this._LONG = 0;
         this._geocoderHelper = geocoderHelper;
+        this._numberUtil = numberUtil;
 
         if(periodos && periodos.length)
             this._montarViagem(periodos); 
@@ -154,7 +155,7 @@ class Viagem{
 
         this._bilhetes = this._periodos.map(periodo => periodo.bilhetes) 
                                 .reduce((acc,bilhetesProperties) => {
-                                    bilhetesProperties.forEach(properties => acc.push(new Bilhete(properties)));
+                                    bilhetesProperties.forEach(properties => acc.push(new Bilhete(properties, this._numberUtil)));
                                     return acc;
                                 },[]);
 
@@ -189,9 +190,13 @@ class Viagem{
                                         },[]);
 
         if(velocidades.length){
-            calculoVelocidade.velocidadeMaxima = Math.max.apply(null,velocidades);
-            calculoVelocidade.velocidadeMinima = Math.min.apply(null,velocidades); 
-            calculoVelocidade.velocidadeMedia = velocidades.reduce((acumulador,velocidade) => acumulador+velocidade,0)/velocidades.length;
+            calculoVelocidade.velocidadeMaxima = this._numberUtil.formatarNumeroComDuasCasasDecimais(Math.max.apply(null,velocidades));
+            calculoVelocidade.velocidadeMinima = this._numberUtil.formatarNumeroComDuasCasasDecimais(Math.min.apply(null,velocidades)); 
+            calculoVelocidade.velocidadeMedia = this._numberUtil.formatarNumeroComDuasCasasDecimais(velocidades.reduce((acumulador,velocidade) => acumulador+velocidade,0)/velocidades.length);
+
+            calculoVelocidade.velocidadeMaxima = this._numberUtil.formatarNumeroComDuasCasasDecimaisComVirgula(calculoVelocidade.velocidadeMaxima);
+            calculoVelocidade.velocidadeMinima = this._numberUtil.formatarNumeroComDuasCasasDecimaisComVirgula(calculoVelocidade.velocidadeMinima);
+            calculoVelocidade.velocidadeMedia = this._numberUtil.formatarNumeroComDuasCasasDecimaisComVirgula(calculoVelocidade.velocidadeMedia);
         } 
 
         return calculoVelocidade; 

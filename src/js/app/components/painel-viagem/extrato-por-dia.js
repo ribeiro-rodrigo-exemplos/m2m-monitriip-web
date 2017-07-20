@@ -13,6 +13,11 @@ class ExtratoPorDia{
         return this._dateUtil.obterDiaEMes(data);
     }
 
+    formatarNumeroComDuasCasasDecimaisComVirgula(numero){
+        let num = this.formatarNumero(numero, 2);
+        return this._numberUtil.formatarNumeroComDuasCasasDecimaisComVirgula(num);
+    }
+
     formatarNumero(numero,casas){
         return this._numberUtil.formatarNumeroDecimal(numero,casas);
     }
@@ -30,7 +35,7 @@ class ExtratoPorDia{
     _montarExtratoDoDia(data,event){
         let extratoPorDia = {};
         extratoPorDia.data = this.formatarData(data);
-        extratoPorDia.totalKm = this.formatarNumero(event[data].totalKm);
+        extratoPorDia.totalKm = this._numberUtil.formatarNumeroComDuasCasasDecimaisComVirgula(this.formatarNumero(event[data].totalKm));
         extratoPorDia.totalBilhetes = event[data].totalBilhetes ? event[data].totalBilhetes : 0;
         extratoPorDia.totalParadas = event[data].totalParadas ? event[data].totalParadas : 0;
         extratoPorDia.totalTempo = this._numberUtil.formatarNumeroDecimal(this._calcularTempoMedioDeViagemPorDia(data,event),0);
