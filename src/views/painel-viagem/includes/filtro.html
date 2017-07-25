@@ -31,17 +31,9 @@
                     </div>
                 </section>
 
-                <section class="form">
-                    <label class="form__label">De</label>
-                    <input type="date" ng-model="ctrl.filtro.dataInicial" type="date" class="input input--calendar input--icon" data-date-inline-picker="false" data-date-open-on-focus="true" placeholder="dd/mm/aaaa">
-                    <i class="fa fa-calendar"></i>
-                </section>
+                <m2m-input-element icon="icons:date-range" content="De" subtype="less-padding" night onkeyup="formataData(this)" objeto-selecionado="{{dataInicio}}" is-date></m2m-input-element>
 
-                <section class="form">
-                    <label class="form__label">Até</label>
-                    <input type="date" ng-model="ctrl.filtro.dataFinal" type="date" class="input input--calendar input--icon" data-date-inline-picker="false" data-date-open-on-focus="true" placeholder="dd/mm/aaaa">
-                    <i class="fa fa-calendar"></i>
-                </section>
+                <m2m-input-element icon="icons:date-range" content="Até" subtype="less-padding" night onkeyup="formataData(this)" objeto-selecionado="{{dataInicio}}" is-date></m2m-input-element>
             </div>
 
             <section class="filter__content__buttons">
