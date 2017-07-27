@@ -6,6 +6,8 @@ class PainelViagemController{
     constructor(viagemService,painelService,FullScreen,graficoGeral,kmPercorridoTotalizador,leituraBilhetesTotalizador, 
                 tempoViagemTotalizador, jornadaTrabalhoTotalizador,direcaoContinuaTotalizador, paradasTotalizador, 
                 extratoPorDia, infoViagemPopup,dateUtil, mapaPopup,eventBus){
+        
+        this._seletor = document.getElementById.bind(document);
 
         this.graficoGeral = graficoGeral;
         this.kmPercorridoTotalizador = kmPercorridoTotalizador;
@@ -36,6 +38,9 @@ class PainelViagemController{
 
     consultarPeriodo() {
 
+        this.filtro.dataInicial = this._dateUtil.formatarIsoDatePattern(this._seletor('dataInicial').objetoSelecionado);
+        this.filtro.dataFinal = this._dateUtil.formatarIsoDatePattern(this._seletor('dataFinal').objetoSelecionado);
+
         if(this._consultaInvalida())
             return; 
         
@@ -50,7 +55,7 @@ class PainelViagemController{
 
                 if(!retorno){
                     this._exibirAlert('Nenhum dado encontrato.');
-                    return; 
+                    return;
                 }
 
                 this._notifyComponents(retorno);
@@ -74,10 +79,17 @@ class PainelViagemController{
 
     limparFiltros(){
         this.filtro = {};
+        this._limpaDataFiltro('dataInicial');
+        this._limpaDataFiltro('dataFinal');
     }
 
     habilitarTelaCheia(){
         this._FullScreen.enable(document.documentElement);
+    }
+
+    _limpaDataFiltro(campo){
+        this._seletor(campo).dataPadrao = new Date();
+        this._seletor(campo).objetoSelecionado = moment().format("DD/MM/YYYY");
     }
 
     _notifyComponents(event){

@@ -23,12 +23,16 @@ class DateUtil{
         this._horarioPattern = 'HH:mm:ss';
     }
 
+    formatarIsoDatePattern(data){
+        let vetData = data.split("/");
+        return new Date(vetData[2], vetData[1] - 1, vetData[0]);
+    }
+
     obterMes(data){
         return this.meses[new Date(data).getMonth()];
     }
 
     obterDiaEMes(data){
-
         data = moment(data);
         return `${data.format('DD')} ${this.meses[data.month()]}`;
     }
