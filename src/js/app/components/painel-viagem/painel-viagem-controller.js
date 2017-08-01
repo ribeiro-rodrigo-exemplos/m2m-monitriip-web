@@ -55,11 +55,12 @@ class PainelViagemController{
 
                 if(!retorno){
                     this._exibirAlert('Nenhum dado encontrato.');
-                    return;
+                    this.exibirTela = false;
+                    return; 
                 }
 
                 this._notifyComponents(retorno);
-                this.exibirTela = true;                      
+                this.exibirTela = true;
             })
             .catch(error => {
                 console.error(error);
