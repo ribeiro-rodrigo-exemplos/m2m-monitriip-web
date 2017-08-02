@@ -73,10 +73,6 @@ class Totalizador{
         return parseFloat(numero).toFixed(fixade === undefined ? 2:fixade);
     }
 
-    atualizar(event){
-        throw new Error('É preciso implementar o método atualizar');
-    }
-
     trocarCorLinhaGrafico(cor){
         this._grafico.plotOptions.series.color = cor;
     }

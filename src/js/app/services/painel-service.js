@@ -29,19 +29,23 @@ class PainelService{
     _obterTotalizadores(query){
         return this._httpClient
                     .get(`${this._url}/v1/viagens/totalizadores`,{params:query})
-                    .then(response => response.status == 200 ? response.data : []);
+                    .then(this._avaliarResposta);
     }
-
+    
     _obterExtratos(query){
         return this._httpClient
                     .get(`${this._url}/v1/viagens/extratos`,{params:query})
-                    .then(response => response.status == 200 ? response.data : []);
+                    .then(this._avaliarResposta);
     }
 
     _obterJornadas(query){
         return this._httpClient
                     .get(`${this._url}/v1/jornadas`,{params:query})
-                    .then(response => response.status == 200 ? response.data : []);
+                    .then(this._avaliarResposta);
+    }
+
+    _avaliarResposta(response){
+        return response && response.status == 200 ? response.data : [];
     }
 
     _createQuery(dataInicial,dataFinal,cnpjCliente,cpfMotorista,placaVeiculo){
@@ -101,8 +105,9 @@ class PainelService{
     }
 
     _semRetorno(result){
-        return !result.totalizadoresPromise.length && !result.jornadasPromise.length && !result.extratosPromise.length;
-    }
+        if (result && result.totalizadoresPromise && result.jornadasPromise && result.extratosPromise)
+            return !result.totalizadoresPromise.length && !result.jornadasPromise.length && !result.extratosPromise.length;
+     }
 
     _criarData(rootData,data){
         if(!rootData[data])

@@ -27,7 +27,7 @@ class ParadasTotalizador extends Totalizador{
 
     set paradaSelecionada(parada){
         this._paradaSelecionada = parada;
-        this.atualizar(this._ultimoEvento, false);
+        this._atualizar(this._ultimoEvento, false);
     }
 
     _atualizar(event, montarCombo = true){

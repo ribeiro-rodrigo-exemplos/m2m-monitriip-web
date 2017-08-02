@@ -22,7 +22,7 @@ class DirecaoContinuaTotalizador extends Totalizador{
 
     set motoristaSelecionado(motorista){
         this._motoristaSelecionado = motorista;
-        this.atualizar(this._ultimoEvento, false);
+        this._atualizar(this._ultimoEvento, false);
     }
 
     _atualizar(event, montarCombo = true){
