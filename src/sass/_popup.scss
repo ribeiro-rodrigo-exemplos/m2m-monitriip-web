@@ -146,7 +146,7 @@
 	&__scrollable{
 		padding-right: 10px;
 	    overflow-x: auto;
-	    max-height: 100%;
+	    max-height: calc(100% - 100px);
 	}
 	&__pills{
 		display: flex;
