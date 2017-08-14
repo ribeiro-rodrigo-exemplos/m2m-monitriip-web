@@ -39,7 +39,7 @@ class Bilhete{
     }
 
     get valorTarifaFormatadoComVirgula(){
-        return this._numberUtil.formatarNumeroComDuasCasasDecimaisComVirgula(this._properties.valorTarifa);
+        return this._numberUtil.formatarNumeroComDuasCasasDecimaisComVirgula(this._numberUtil.formatarNumeroComDuasCasasDecimais(this._properties.valorTarifa));
     }
 
     get latitude(){
