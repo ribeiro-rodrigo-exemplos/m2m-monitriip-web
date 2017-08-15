@@ -7,14 +7,14 @@ class GeocoderHelper{
     obterEndereco(longitude,latitude){
         const query = {
             format:'json',
-            lat:latitude,
-            lon:longitude,
+            lat:Number(latitude),
+            lon:Number(longitude),
             addressdetails:1,
             zoom:18 
         };
 
         return this._httpClient.get(this._URL,{params:query})
-                    .then(result => this._formatarEndereco(result.data));
+                    .then(result => result ? this._formatarEndereco(result.data) : "");
     }
 
     _formatarEndereco(result){

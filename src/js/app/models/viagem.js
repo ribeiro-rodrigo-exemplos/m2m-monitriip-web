@@ -127,8 +127,7 @@ class Viagem{
         return this._enderecoLocalizacaoFinal;
     }
     
-
-    _montarViagem(){
+    _montarViagem(periodos){
 
         let primeiroPeriodo = this._periodos[0];
         let ultimoServico = this._periodos[this._periodos.length-1];
@@ -184,30 +183,20 @@ class Viagem{
         this._geocoderHelper.obterEndereco(primeiroPeriodo.localizacaoInicial.coordinates[this._LONG], primeiroPeriodo.localizacaoInicial.coordinates[this._LAT])
             .then(endereco => this._enderecoLocalizacaoInicial = endereco);
 
-        this._coordenadasPercurso.push([primeiroPeriodo.localizacaoInicial.coordinates[this._LAT], primeiroPeriodo.localizacaoInicial.coordinates[this._LONG]]);
-        
-        this._periodos.map(periodo =>{
-            periodo.localizacoes.forEach(local =>{
-                if(local && local.localizacao)
-                    this._coordenadasPercurso.push([local.localizacao.coordinates[this._LAT], local.localizacao.coordinates[this._LONG]]);
-            });
-        });
+        this._coordenadasPercurso = this._periodos
+                                        .map(periodo => periodo.localizacoes)
+                                        .reduce((acc,localizacoesPorPeriodo) => {
+                                            localizacoesPorPeriodo.forEach(loc => acc.push([
+                                                loc.localizacao.coordinates[this._LAT],
+                                                loc.localizacao.coordinates[this._LONG]
+                                            ]));
+                                            return acc;
+                                        },[])
+                                        .filter(localizacao => localizacao[this._LAT] && localizacao[this._LONG]);
 
-        if (ultimoServico.localizacaoFinal){
-            this._localizacaoFinal = `${ultimoServico.localizacaoFinal.coordinates[this._LAT]}, ${ultimoServico.localizacaoFinal.coordinates[this._LONG]}`;
-            
-            this._geocoderHelper.obterEndereco(ultimoServico.localizacaoFinal.coordinates[this._LONG], ultimoServico.localizacaoFinal.coordinates[this._LAT])
-                .then(endereco => this._enderecoLocalizacaoFinal = endereco);
-
-            this._coordenadasPercurso.push([ultimoServico.localizacaoFinal.coordinates[this._LAT], ultimoServico.localizacaoFinal.coordinates[this._LONG]]);
-        }else{
-            let ultimaCoordenadaPercurso = this._coordenadasPercurso.length - 1;
-            this._localizacaoFinal = `${this._coordenadasPercurso[ultimaCoordenadaPercurso][this._LONG]},${this._coordenadasPercurso[ultimaCoordenadaPercurso][this._LAT]}`;
-            
-            this._geocoderHelper.obterEndereco(this._coordenadasPercurso[ultimaCoordenadaPercurso][this._LAT], this._coordenadasPercurso[ultimaCoordenadaPercurso][this._LONG])
-                .then(endereco => this._enderecoLocalizacaoFinal = endereco);
-
-        }
+        this._definirLocalizacaoInicial();
+        this._definirLocalizacaoFinal();
+       
     }
 
     _calcularVelocidades(){
@@ -233,6 +222,56 @@ class Viagem{
         } 
 
         return calculoVelocidade; 
+    }
+
+    _definirLocalizacaoInicial(){
+        if(this._naoPossuiLocalizacaoInicialValida())
+            this._localizacaoInicial = this._definirPrimeiraLocalizacaoValida(this._coordenadasPercurso);  
+        else
+            this._localizacaoInicial = [
+                this._primeiroPeriodo.localizacaoInicial.coordinates[this._LAT],
+                this._primeiroPeriodo.localizacaoInicial.coordinates[this._LONG]
+            ];
+
+        if(this._localizacaoInicial.length)
+            this._geocoderHelper.obterEndereco(this.localizacaoInicial[this._LAT],this.localizacaoInicial[this._LONG])
+                .then(endereco => this._enderecoLocalizacaoInicial = endereco);
+
+        this.coordenadasPercurso.unshift(this._localizacaoInicial);
+    }
+
+    _definirLocalizacaoFinal(){
+        if(this._naoPossuiLocalizacaoFinalValida())
+            this._localizacaoFinal = this._definirPrimeiraLocalizacaoValida(this._coordenadasPercurso.concat([]).reverse());
+        else
+            this._localizacaoFinal = [
+                this._ultimoPeriodo.localizacaoFinal.coordinates[this._LAT],
+                this._ultimoPeriodo.localizacaoFinal.coordinates[this._LONG]
+            ];
+
+        if(this.localizacaoFinal.length)
+            this._geocoderHelper.obterEndereco(this.localizacaoFinal[this._LAT],this.localizacaoFinal[this._LONG])
+                .then(endereco => this._enderecoLocalizacaoFinal = endereco);
+        
+        this._coordenadasPercurso.push(this._localizacaoFinal);
+    }
+
+    _formatarCoordenada(coordenada){
+        return `${coordenada.coordinates[this._LONG]}, ${coordenada.coordinates[this._LAT]}`;
+    }
+
+    _naoPossuiLocalizacaoInicialValida(){
+        return !this._primeiroPeriodo.localizacaoInicial || !this._primeiroPeriodo.localizacaoInicial.coordinates ||
+        !this._primeiroPeriodo.localizacaoInicial.coordinates[this._LAT] || !this._primeiroPeriodo.localizacaoInicial.coordinates[this._LONG];
+    }
+
+    _naoPossuiLocalizacaoFinalValida(){
+        return !this._ultimoPeriodo.localizacaoFinal || !this._ultimoPeriodo.localizacaoFinal.coordinates || 
+        !this._ultimoPeriodo.localizacaoFinal.coordinates[this._LAT] || !this._ultimoPeriodo.localizacaoFinal.coordinates[this._LONG];
+    }
+
+    _definirPrimeiraLocalizacaoValida(localizacoes){
+        return localizacoes.find(coordinates => coordinates[this._LAT] && coordinates[this._LONG]) || [0,0];
     }
 
     _obterDataHoraInicial(){
