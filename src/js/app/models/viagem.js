@@ -1,7 +1,5 @@
 class Viagem{
-
     constructor(periodos, geocoderHelper, numberUtil){
-        this._periodos = periodos;
 
         this._quantidadeDeMotoristas = 0;
         this._quantidadeDeVeiculos = 0;
@@ -20,15 +18,15 @@ class Viagem{
         this._numberUtil = numberUtil;
 
         if(periodos && periodos.length)
-            this._montarViagem(); 
+            this._montarViagem(periodos); 
     }
 
     get dataHoraInicial(){
-        return this._dataHoraInicial;
+        return this._primeiroPeriodo.dataHoraInicial;
     }
 
     get dataHoraFinal(){
-        return this._dataHoraFinal;
+        return this._ultimoPeriodo.dataHoraFinal;
     }
 
     get quantidadeDeMotoristas(){
@@ -80,11 +78,11 @@ class Viagem{
     }
 
     get identificacaoLinha(){
-        return this._identificacaoLinha;
+        return this._primeiroPeriodo.identificacaoLinha;
     }
 
     get sentidoLinha(){
-        return this._sentidoLinha;
+        return this._primeiroPeriodo.sentidoLinha;
     }
 
     get duracaoEmMinutos(){
@@ -96,15 +94,15 @@ class Viagem{
     }
 
     get imei(){
-        return this._imei; 
+        return this._primeiroPeriodo.imei; 
     }
 
     get pdop(){
-        return this._pdop; 
+        return this._primeiroPeriodo.pdop; 
     }
 
     get descricaoDaLinha(){
-        return this._descricaoDaLinha;
+        return this._primeiroPeriodo.descricaoDaLinha;
     }
 
     get coordenadasPercurso(){
@@ -129,18 +127,9 @@ class Viagem{
     
     _montarViagem(periodos){
 
-        let primeiroPeriodo = this._periodos[0];
-        let ultimoServico = this._periodos[this._periodos.length-1];
-
-        this._dataHoraInicial = primeiroPeriodo.dataHoraInicial;
-        this._dataHoraFinal = ultimoServico.dataHoraFinal;
-
-        this._identificacaoLinha = primeiroPeriodo.identificacaoLinha;
-        this._descricaoDaLinha = primeiroPeriodo.descricaoDaLinha;
-        this._sentidoLinha = primeiroPeriodo.sentidoLinha;
-        this._tipoViagem = primeiroPeriodo.tipoViagem;
-        this._imei = primeiroPeriodo.imei; 
-        this._pdop = primeiroPeriodo.pdop; 
+        this._periodos = periodos;
+        this._primeiroPeriodo = periodos[0]; 
+        this._ultimoPeriodo = periodos[periodos.length -1];
 
         this._servicos = this._periodos.map(servico => {
             return {
@@ -175,13 +164,6 @@ class Viagem{
                             return acc;
                         },[]);
         
-        
-        this._coordenadasPercurso = [];
-        
-        this._localizacaoInicial = `${primeiroPeriodo.localizacaoInicial.coordinates[this._LAT]}, ${primeiroPeriodo.localizacaoInicial.coordinates[this._LONG]}`;
-        
-        this._geocoderHelper.obterEndereco(primeiroPeriodo.localizacaoInicial.coordinates[this._LONG], primeiroPeriodo.localizacaoInicial.coordinates[this._LAT])
-            .then(endereco => this._enderecoLocalizacaoInicial = endereco);
 
         this._coordenadasPercurso = this._periodos
                                         .map(periodo => periodo.localizacoes)
@@ -196,7 +178,7 @@ class Viagem{
 
         this._definirLocalizacaoInicial();
         this._definirLocalizacaoFinal();
-       
+
     }
 
     _calcularVelocidades(){
@@ -212,13 +194,9 @@ class Viagem{
                                         },[]);
 
         if(velocidades.length){
-            calculoVelocidade.velocidadeMaxima = this._numberUtil.formatarNumeroComDuasCasasDecimais(Math.max.apply(null,velocidades));
-            calculoVelocidade.velocidadeMinima = this._numberUtil.formatarNumeroComDuasCasasDecimais(Math.min.apply(null,velocidades)); 
-            calculoVelocidade.velocidadeMedia = this._numberUtil.formatarNumeroComDuasCasasDecimais(velocidades.reduce((acumulador,velocidade) => acumulador+velocidade,0)/velocidades.length);
-
-            calculoVelocidade.velocidadeMaxima = this._numberUtil.formatarNumeroComDuasCasasDecimaisComVirgula(calculoVelocidade.velocidadeMaxima);
-            calculoVelocidade.velocidadeMinima = this._numberUtil.formatarNumeroComDuasCasasDecimaisComVirgula(calculoVelocidade.velocidadeMinima);
-            calculoVelocidade.velocidadeMedia = this._numberUtil.formatarNumeroComDuasCasasDecimaisComVirgula(calculoVelocidade.velocidadeMedia);
+            calculoVelocidade.velocidadeMaxima = Math.max.apply(null,velocidades);
+            calculoVelocidade.velocidadeMinima = Math.min.apply(null,velocidades); 
+            calculoVelocidade.velocidadeMedia = velocidades.reduce((acumulador,velocidade) => acumulador+velocidade,0)/velocidades.length;
         } 
 
         return calculoVelocidade; 
