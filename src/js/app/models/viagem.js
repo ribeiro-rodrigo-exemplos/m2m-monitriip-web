@@ -194,9 +194,13 @@ class Viagem{
                                         },[]);
 
         if(velocidades.length){
-            calculoVelocidade.velocidadeMaxima = Math.max.apply(null,velocidades);
-            calculoVelocidade.velocidadeMinima = Math.min.apply(null,velocidades); 
-            calculoVelocidade.velocidadeMedia = velocidades.reduce((acumulador,velocidade) => acumulador+velocidade,0)/velocidades.length;
+            calculoVelocidade.velocidadeMaxima = this._numberUtil.formatarNumeroComDuasCasasDecimais(Math.max.apply(null,velocidades));
+            calculoVelocidade.velocidadeMinima = this._numberUtil.formatarNumeroComDuasCasasDecimais(Math.min.apply(null,velocidades)); 
+            calculoVelocidade.velocidadeMedia = this._numberUtil.formatarNumeroComDuasCasasDecimais(velocidades.reduce((acumulador,velocidade) => acumulador+velocidade,0)/velocidades.length);
+
+            calculoVelocidade.velocidadeMaxima = this._numberUtil.formatarNumeroComDuasCasasDecimaisComVirgula(calculoVelocidade.velocidadeMaxima);
+            calculoVelocidade.velocidadeMinima = this._numberUtil.formatarNumeroComDuasCasasDecimaisComVirgula(calculoVelocidade.velocidadeMinima);
+            calculoVelocidade.velocidadeMedia = this._numberUtil.formatarNumeroComDuasCasasDecimaisComVirgula(calculoVelocidade.velocidadeMedia);
         } 
 
         return calculoVelocidade; 
