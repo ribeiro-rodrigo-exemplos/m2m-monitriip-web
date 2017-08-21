@@ -13,17 +13,20 @@ var HashHack = {
 
       if (0 === sDecodedHash.indexOf(HashHack.PREFIX)) {
         sMessage = sDecodedHash.replace(HashHack.PREFIX, '');
-        HashHack.sLastHash = sHash;
+        localStorage.token = sMessage; 
+
+        /*HashHack.sLastHash = sHash;
 
         for (i = HashHack.aCallbacks.length - 1; i >=0; i -= 1) {
           HashHack.aCallbacks[i]({data: sMessage});
-        }
+        } */
       }
     }
   },
 
   init: function() {
-    setInterval(HashHack.handleInterval, 250);
+    //setInterval(HashHack.handleInterval, 250);
+    HashHack.handleInterval();
   },
 
   onMessage: function(fnCallback) {
