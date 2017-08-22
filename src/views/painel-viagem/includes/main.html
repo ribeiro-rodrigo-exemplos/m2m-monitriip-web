@@ -62,14 +62,14 @@
             <h5 class="info-box__content__title text-size-13">Km Percorrido</h5>
             <div class="row row--align-baseline">
                 <ng-include src="'views/icons/km-percorrido-totalizador-icon.html'"></ng-include>
-                <span class="info-box__content__span text-size-56">{{ctrl.kmPercorridoTotalizador.total}}</span><span class="light-gray text-size-16"> km</span>
+                <span class="info-box__content__span">{{ctrl.kmPercorridoTotalizador.total}}</span><span class="light-gray text-size-16"> km</span>
             </div>
             <highchart class="info-box__chart" id="info-box-km-percorrido" config="ctrl.kmPercorridoTotalizador.grafico"></highchart>
         </div>
         <footer class="info-box__footer green-bg">
             <section ng-repeat="totalizador in ctrl.kmPercorridoTotalizador.totalizadoresPorData" class="column info-box__footer__column">
                 <span class="semitransparent-text">{{totalizador.data}}</span>
-                <span><span class="text-size-24">{{totalizador.totalKm}}</span>km</span>
+                <span><span class="totalizador-infobox">{{totalizador.totalKm}}</span>km</span>
             </section>
         </footer>
     </div><!-- fim info-box km percorrido-->
@@ -80,7 +80,7 @@
 
             <div class="row row--align-baseline">
                 <ng-include src="'views/icons/leitura-bilhetes-totalizador-icon.html'"></ng-include>
-                <span class="info-box__content__span text-size-56">{{ctrl.leituraBilhetesTotalizador.total}}</span>
+                <span class="info-box__content__span">{{ctrl.leituraBilhetesTotalizador.total}}</span>
             </div>
             
             <!-- gráfico -->
@@ -91,7 +91,7 @@
         <footer class="info-box__footer pink-bg">
             <section ng-repeat="totalizador in ctrl.leituraBilhetesTotalizador.totalizadoresPorData" class="column info-box__footer__column">
                 <span class="semitransparent-text">{{totalizador.data}}</span>
-                <span class="text-size-24">{{totalizador.totalBilhetes}}</span>
+                <span class="totalizador-infobox">{{totalizador.totalBilhetes}}</span>
             </section>
         </footer>
     </div><!-- fim info-box leitura de bilhetes-->
@@ -102,7 +102,7 @@
             <h5 class="info-box__content__title text-size-13">Tempo de Viagem (média)</h5>
             <div class="row row--align-baseline">
                 <ng-include src="'views/icons/tempo-viagem-totalizador-icon.html'"></ng-include>
-                <span class="info-box__content__span text-size-56">{{ctrl.tempoViagemTotalizador.media}}</span><span class="light-gray text-size-16"> min</span>
+                <span class="info-box__content__span">{{ctrl.tempoViagemTotalizador.media}}</span><span class="light-gray text-size-16"> min</span>
             </div>
             <!-- gráfico -->
             <div id="info-box-chartdiv3" class="info-box__chart">
@@ -112,7 +112,7 @@
         <footer class="info-box__footer blue-bg">
             <section ng-repeat="totalizador in ctrl.tempoViagemTotalizador.totalizadoresPorData" class="column info-box__footer__column">
                 <span class="semitransparent-text">{{totalizador.data}}</span>
-                <span><span class="text-size-24">{{totalizador.mediaTempoViagem}}</span>min</span>
+                <span><span class="totalizador-infobox">{{totalizador.mediaTempoViagem}}</span>min</span>
             </section>
         </footer>
     </div><!-- fim info-box tempo de viagem-->
@@ -128,7 +128,7 @@
             <h5 class="info-box__content__title text-size-13">Direção Contínua (maior)</h5>
             <div class="row row--align-baseline">
                 <ng-include src="'views/icons/direcao-continua-totalizador-icon.html'"></ng-include>
-                <span class="info-box__content__span text-size-56">{{ctrl.direcaoContinuaTotalizador.direcaoContinuaMaxima}}</span><span class="light-gray text-size-16"> min</span>
+                <span class="info-box__content__span">{{ctrl.direcaoContinuaTotalizador.direcaoContinuaMaxima}}</span><span class="light-gray text-size-16"> min</span>
             </div>
             <!-- gráfico -->
             <div id="info-box-chartdiv4" class="info-box__chart">
@@ -138,7 +138,7 @@
         <footer class="info-box__footer purple-bg">
             <section ng-repeat="direcao in ctrl.direcaoContinuaTotalizador.direcoesContinuas" class="column info-box__footer__column">
                 <span class="semitransparent-text">{{direcao.data}}</span>
-                <span><span class="text-size-24">{{direcao.maxima}}</span>min</span>
+                <span><span class="totalizador-infobox">{{direcao.maxima}}</span>min</span>
             </section>
         </footer>
     </div><!-- fim info-box direção contínua-->
@@ -152,7 +152,7 @@
             <h5 class="info-box__content__title text-size-13">Jornada de Trabalho (maior)</h5>
             <div class="row row--align-baseline">
                 <ng-include src="'views/icons/jornada-trabalho-totalizador-icon.html'"></ng-include>
-                <span class="info-box__content__span text-size-56">{{ctrl.jornadaTrabalhoTotalizador.jornadaTrabalhoMaxima}}</span><span class="light-gray text-size-16">hora(s)</span>
+                <span class="info-box__content__span">{{ctrl.jornadaTrabalhoTotalizador.jornadaTrabalhoMaxima}}</span><span class="light-gray text-size-16">hora(s)</span>
             </div>
 
             <!-- gráfico -->
@@ -163,7 +163,7 @@
         <footer class="info-box__footer red-bg">
             <section ng-repeat="data in ctrl.jornadaTrabalhoTotalizador.jornadasTrabalho" class="column info-box__footer__column">
                 <span class="semitransparent-text">{{data.data}}</span>
-                <span><span class="text-size-24">{{data.maxima}}</span>hs</span>
+                <span><span class="totalizador-infobox">{{data.maxima}}</span>hs</span>
             </section>
         </footer>
     </div><!-- fim info-box jornada de trabalho-->
@@ -177,7 +177,7 @@
             <h5 class="info-box__content__title text-size-13">Detector de Paradas</h5>
             <div class="row row--align-baseline">
                 <ng-include src="'views/icons/detector-parada-totalizador-icon.html'"></ng-include>
-                <span class="info-box__content__span text-size-56">{{ctrl.paradasTotalizador.total}}</span>
+                <span class="info-box__content__span">{{ctrl.paradasTotalizador.total}}</span>
             </div>
 
             <!-- gráfico -->
@@ -188,7 +188,7 @@
         <footer class="info-box__footer orange-bg">
             <section ng-repeat="totalizador in ctrl.paradasTotalizador.totalPorData" class="column info-box__footer__column">
                 <span class="semitransparent-text">{{totalizador.data}}</span>
-                <span class="text-size-24">{{totalizador.total}}</span>
+                <span class="totalizador-infobox">{{totalizador.total}}</span>
             </section>
         </footer>
     </div>

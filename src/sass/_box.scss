@@ -167,7 +167,11 @@
 		}
 		&__span{
 			font-weight: 300;
+			font-size: 5em;
 			margin-right: 3px;
+			@media screen and (max-width: 1440px){
+				font-size: 3em;
+			}
 		}
 	}
 	&__footer{
@@ -188,5 +192,11 @@
 				border-left: 1px solid #fff;
 			}
 		}
+	}
+}
+.totalizador-infobox{
+	font-size: 2em;
+	@media screen and (max-width: 1440px){
+		font-size: 1.4em;
 	}
 }
