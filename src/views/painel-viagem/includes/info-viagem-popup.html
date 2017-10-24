@@ -143,7 +143,7 @@
                     </span>
                     <span class="td--like">{{bilhete.valorTarifaFormatadoComVirgula}}</span>
                     <span class="td--like">{{ctrl.infoViagemPopup.formatarDataHora(bilhete.dataHoraLeitura)}}</span>
-                    <span class="td--like"><i class="fa fa-check m2m-green font-size-13"></i>{{ctrl.verificaCheckinBilhete(bilhete.numeroDeEmbarque)}}</span>
+                    <span class="td--like"><i ng-class="ctrl.verificaCheckinBilhete(bilhete.numeroDeEmbarque) ? 'fa fa-check m2m-green font-size-13' : ''"></i></span>
                     <span class="td--like text-size-14 toggle-control">+</span>
                 </div>	
 
