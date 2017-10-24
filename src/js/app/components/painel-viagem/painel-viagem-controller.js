@@ -3,10 +3,11 @@
  */
 class PainelViagemController{
 
-    constructor(viagemService,painelService,FullScreen,graficoGeral,kmPercorridoTotalizador,leituraBilhetesTotalizador, 
+    constructor(viagemService,painelService,checkinService,FullScreen,graficoGeral,kmPercorridoTotalizador,leituraBilhetesTotalizador, 
                 tempoViagemTotalizador, jornadaTrabalhoTotalizador,direcaoContinuaTotalizador, paradasTotalizador, 
                 extratoPorDia, infoViagemPopup,dateUtil,eventBus){
         
+        this._bilhetesCheckin = [];
         this._seletor = document.getElementById.bind(document);
         this.graficoGeral = graficoGeral;
         this.kmPercorridoTotalizador = kmPercorridoTotalizador;
@@ -20,6 +21,7 @@ class PainelViagemController{
         
         this._viagemService = viagemService;
         this._painelService = painelService;
+        this._checkinService = checkinService;
         this._eventBus = eventBus;
 
         this._FullScreen = FullScreen;
@@ -66,13 +68,34 @@ class PainelViagemController{
     }
 
     consultarViagemPorId(id){
-        this._viagemService.obterViagemPorId(id)
-            .then(detalheViagem => {
+
+        var promises = [
+            this._checkinService.obterBilheteCheckin(id),
+            this._viagemService.obterViagemPorId(id)
+        ];
+
+        Promise.all(promises)
+            .then(result => {
+
+                this._bilhetesCheckin = result[0];
+                let detalheViagem = result[1];
+                
+                this._bilhetesCheckin = this._bilhetesCheckin.map(bilCheckin => bilCheckin.bilhete.numeroBilheteEmbarque);
+
                 if(detalheViagem)
                     this.infoViagemPopup.exibirDetalhesDaViagem(detalheViagem);
                 else
-                    this._exibirAlert('Não foi possível consultar a viagem selecionada'); 
+                    this._exibirAlert('Não foi possível consultar a viagem selecionada');
+
             });
+
+    }
+
+    verificaCheckinBilhete(bilhete){
+        let retorno = false;
+        this._bilhetesCheckin.filter(bil => bil == bilhete ? retorno = true : null);
+
+        return retorno;
     }
 
     limparFiltros(){
@@ -126,6 +149,7 @@ class PainelViagemController{
 PainelViagemController.$inject = [
                                     'ViagemService',
                                     'PainelService',
+                                    'CheckinService',
                                     'Fullscreen',
                                     'GraficoGeral',
                                     'KmPercorridoTotalizador',

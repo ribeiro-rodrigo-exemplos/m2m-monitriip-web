@@ -123,6 +123,7 @@
                 <span class="td--like">N BILHETE</span>
                 <span class="td--like">VALOR</span>
                 <span class="td--like">DATA/HORA</span>
+                <span class="td--like">CHECKIN</span>
             </div>
 
             <div ng-repeat="bilhete in ctrl.infoViagemPopup.viagem.bilhetes">
@@ -133,6 +134,7 @@
                     </span>
                     <span class="td--like">{{bilhete.valorTarifaFormatadoComVirgula}}</span>
                     <span class="td--like">{{ctrl.infoViagemPopup.formatarDataHora(bilhete.dataHoraLeitura)}}</span>
+                    <span class="td--like text-size-14 toggle-control">{{ctrl.verificaCheckinBilhete(bilhete.numeroDeEmbarque)}}</span>
                     <span class="td--like text-size-14 toggle-control">+</span>
                 </div>	
 
