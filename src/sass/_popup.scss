@@ -15,7 +15,10 @@
 	    margin: 50px auto 0;
 	    width: 750px;
 	    height: 600px;
-	    box-shadow: 0px 0px 25px 5px $gray;
+		box-shadow: 0px 0px 25px 5px $gray;
+		@media screen and (max-height: 800px){
+			height: 500px;
+		}
 		&--small{
 			width: 300px;
     		height: 220px;
@@ -75,7 +78,10 @@
 		&__scrollable{
 			padding-left: 27px;
 			max-height: 300px;
-    		overflow-y: scroll;
+			overflow-y: scroll;
+			@media screen and (max-height: 800px){
+				height: 200px;
+			}
 		}
 		&__label{
 			padding-top: 5px;
