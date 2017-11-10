@@ -80,7 +80,8 @@ class PainelViagemController{
                 this._bilhetesCheckin = result[0];
                 let detalheViagem = result[1];
                 
-                this._bilhetesCheckin = this._bilhetesCheckin.map(bilCheckin => bilCheckin.bilhete.numeroBilheteEmbarque);
+                if(this._bilhetesCheckin)
+                    this._bilhetesCheckin = this._bilhetesCheckin.map(bilCheckin => bilCheckin.bilhete.numeroBilheteEmbarque);
 
                 if(detalheViagem)
                     this.infoViagemPopup.exibirDetalhesDaViagem(detalheViagem);
