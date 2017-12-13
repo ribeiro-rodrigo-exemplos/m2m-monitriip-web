@@ -45,18 +45,27 @@
                 <br><span class="m2m-green">
                     INFORMAÇÕES BÁSICAS
                 </span><br>
-                <span class="popup__content__label text-size-13">Linha</span><br>
-                <span class="popup__content__informations text-size-13">{{ctrl.infoViagemPopup.viagem.identificacaoLinha}}</span><br>
 
-                <span class="popup__content__label text-size-13">Sentido</span><br>
-                <span class="popup__content__informations text-size-13">{{ctrl.infoViagemPopup.viagem.sentidoLinha}}</span><br>
+                <div class="row">
+                    <span class="popup__content__label equidistant text-size-13">Linha</span>
+                    <span class="popup__content__label equidistant text-size-13">Sentido</span>
+                </div>
 
-                <span class="popup__content__label text-size-13">Tipo</span><br>
-                <span class="popup__content__informations text-size-13 purple">{{ctrl.infoViagemPopup.viagem.tipoViagem}}</span><br>
+                <div class="row">
+                    <span class="popup__content__informations equidistant text-size-13">{{ctrl.infoViagemPopup.viagem.identificacaoLinha}}</span>
+                    <span class="popup__content__informations equidistant text-size-13">{{ctrl.infoViagemPopup.viagem.sentidoLinha}}</span>
+                </div>
+                
+                <div class="row">
+                    <span class="popup__content__label equidistant text-size-13">Tipo</span>
+                    <span class="popup__content__label equidistant text-size-13">IMEI</span>
+                </div>
 
-                <span class="popup__content__label text-size-13">IMEI</span><br>
-                <span class="popup__content__informations text-size-13">{{ctrl.infoViagemPopup.viagem.imei}}</span><br>
-
+                <div class="row">
+                    <span class="popup__content__informations equidistant text-size-13 purple">{{ctrl.infoViagemPopup.viagem.tipoViagem}}</span>
+                    <span class="popup__content__informations equidistant text-size-13">{{ctrl.infoViagemPopup.viagem.imei}}</span>
+                </div>
+                
                 <span class="popup__content__label text-size-13">PDOP</span><br>
                 <span class="popup__content__informations text-size-13">{{ctrl.infoViagemPopup.viagem.pdop}}</span><br>
                 
@@ -123,6 +132,7 @@
                 <span class="td--like">N BILHETE</span>
                 <span class="td--like">VALOR</span>
                 <span class="td--like">DATA/HORA</span>
+                <span class="td--like align-flex">CHECKIN</span>
             </div>
 
             <div ng-repeat="bilhete in ctrl.infoViagemPopup.viagem.bilhetes">
@@ -133,6 +143,7 @@
                     </span>
                     <span class="td--like">{{bilhete.valorTarifaFormatadoComVirgula}}</span>
                     <span class="td--like">{{ctrl.infoViagemPopup.formatarDataHora(bilhete.dataHoraLeitura)}}</span>
+                    <span class="td--like"><i ng-class="ctrl.verificaCheckinBilhete(bilhete.numeroDeEmbarque) ? 'fa fa-check m2m-green font-size-13' : ''"></i></span>
                     <span class="td--like text-size-14 toggle-control">+</span>
                 </div>	
 
