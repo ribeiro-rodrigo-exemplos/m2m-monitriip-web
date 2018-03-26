@@ -148,7 +148,7 @@ class Viagem{
         this._direcaoContinuaMaxima = this._periodos.reduce((maior,servico) => 
             servico.direcaoContinua.tempoMaximo > maior ? servico.direcaoContinua.tempoMaximo :maior,0);
 
-        this._duracaoEmMinutos = this._periodos.reduce((total,servico) => total+servico.duracao ? servico.duracao : 0,0);
+        this._duracaoEmMinutos = this._periodos.reduce((total,servico) => servico.duracao ? total+ servico.duracao : total,0);
     
         this._calculoVelocidades = this._calcularVelocidades();
 
