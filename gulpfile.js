@@ -68,10 +68,22 @@ gulp.task('server',['transpile'],() => {
   );
 
   gulp.watch('./src/sass/**/*.scss', ['sass']);
+  
+  gulp.start('sass');
+
+  //gulp.watch('src/**/*').on('change','concat-min');
+
+  // gulp.watch('./src/views/**/*').on('change', event => {
+  //   console.log("change detected");
+  // });
+
+ // gulp.watch('./src/views/**/*').on('change', 'copy');
+
+  gulp.watch('./src/views/**/*').on('change', 'concat-min');
 
   gulp.watch('dist/**/*').on('change',browserSync.reload);
 
-  gulp.start('sass');
+  
 
 });
  
