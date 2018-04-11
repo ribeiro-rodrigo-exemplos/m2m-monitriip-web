@@ -42,6 +42,11 @@
 				position: relative;			
 			}
 		}
+		&:nth-child(even){
+			td{
+				background-color: $off_white;
+			}
+		}
 	}
 	td{/*idealmente eu teria criado uma classe .td para todos os td's, mas como eles podem ser muitos, confesso que fugi do ideal e resolvi abrir uma exceção*/
 		&.table__td{

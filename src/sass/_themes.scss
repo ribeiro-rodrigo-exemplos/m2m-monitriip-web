@@ -94,6 +94,9 @@
 				background-color: $gray !important;/*certificando-se de que o disabled SEMPRE será cinza*/
 			}
 		}
+		&__row:nth-child(odd) td{
+			background-color: $bright_gray;
+		}
 		&__more-options{
 			background-color: $bright_gray;
 	    	box-shadow: 0px 0px 25px 5px $dark_gray;
