@@ -24,7 +24,8 @@
     "highcharts-ng": "^1.1.0",
     "moment": "^2.18.1",
     "numeral": "^2.0.6",
+    "m2m-autocomplete-element": "~1.0.0",
     "m2m-input-element": "~1.0.0",
-    "m2m-autocomplete-element": "~1.0.0"
+    "m2m-switch-element": "~1.0.0"
   }
 }

@@ -26,15 +26,20 @@
 			padding: 8px 5px;
 		}
 	}
+	&--justify-end{
+		justify-content: flex-end;
+	}
 	&--totalizadores{
 		justify-content: space-between;
 		padding: 0 1.2%;
 		align-items: flex-start;
 	}
 	&__start{
-		display: flex;
 		justify-content: space-around;
 		flex-grow: 0.5
+	}
+	&__flex1{
+		flex: 1;
 	}
 }
 
@@ -48,11 +53,9 @@
 	display: flex;
     padding-right: 10px;
     border-right: 1px solid $light_gray;
-    margin-right: 10px;
-    &--border-left{
-    	border-left: 1px solid #899b9b;
-    	padding-left: 10px;
-    }
+	margin-right: 10px;
+	border-left: 1px solid #899b9b;
+    padding-left: 10px;
 	&__image{
 	    width: 15px;
 	    height: 15px;
