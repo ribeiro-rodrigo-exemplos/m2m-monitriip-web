@@ -1,2 +1,26 @@
-<h1>Quantitativo Linha</h1>
-<h2>Teste 17</h2>
+<div class="filter">
+    <div class="filter__header">
+        <p class="filter__header__title">Filtro</p>
+        <div class="toggle">
+            <a href="#nav-toggle" data-id="nav-toggle-filter">
+                <i class="fa fa-chevron-down"></i>
+                <i class="fa fa-chevron-right"></i>
+            </a>
+        </div>
+    </div>
+    <div class="filter__content">
+            <div class="filter__content__forms">
+                <m2m-autocomplete-element night></m2m-autocomplete-element>
+                
+                <m2m-input-element icon="icons:date-range" id="dataInicial" content="De" subtype="less-padding" night onkeyup="formataData(this)" objeto-selecionado="{{dataInicio}}" is-date></m2m-input-element>
+
+                <m2m-input-element icon="icons:date-range" id="dataFinal" content="Até" subtype="less-padding" night onkeyup="formataData(this)" objeto-selecionado="{{dataInicio}}" is-date></m2m-input-element>
+                
+            </div>
+
+            <section class="filter__content__buttons">
+                <button class="button button--cancel" ng-click="ctrl.limparFiltros()">LIMPAR</button>
+                <button class="button button--confirm" ng-click="ctrl.consultarPeriodo()">CONSULTAR</button>
+            </section>
+        </div>
+</div>

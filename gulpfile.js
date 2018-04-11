@@ -45,7 +45,7 @@ gulp.task('server',['transpile'],() => {
       baseDir:'dist',
       index:'index.html',
       routes:{
-        '/bower_components':'bower_components',
+         '/bower_components':'bower_components',
       }
     }
   });
@@ -61,6 +61,26 @@ gulp.task('server',['transpile'],() => {
           .then(() => transpile(event.path,path.dirname(fileUpdated)));
   });
 
+  gulp.watch("./src/**/*.html").on('change',event => {
+      
+    const fileUpdated = event.path.replace('src','dist');
+    const dir = path.dirname(fileUpdated)
+
+    del([fileUpdated])
+      .then(() => {
+          gulp.src(event.path)
+                .pipe(gulp.dest(dir))
+      });
+  });
+
+  // gulp.watch('./src/views/**/*.html', ['concat-min']);//triggers reload but the page isn't updated
+
+  // gulp.watch('./src/views/**/*.html', ['copy']); //HTML updates but there's no CSS //I've tried both copy and concat-min in same line, but an error ocurred
+
+  // gulp.watch('./src/views/**/*.html').on('change',event =>{
+  //   console.log("html was changed");
+  // });
+
   gulp.watch('src/css/**/*').on('change',event => 
       gulp.src(event.path)
           .pipe(csslint())
@@ -68,22 +88,10 @@ gulp.task('server',['transpile'],() => {
   );
 
   gulp.watch('./src/sass/**/*.scss', ['sass']);
-  
-  gulp.start('sass');
-
-  //gulp.watch('src/**/*').on('change','concat-min');
-
-  // gulp.watch('./src/views/**/*').on('change', event => {
-  //   console.log("change detected");
-  // });
-
- // gulp.watch('./src/views/**/*').on('change', 'copy');
-
-  gulp.watch('./src/views/**/*').on('change', 'concat-min');
 
   gulp.watch('dist/**/*').on('change',browserSync.reload);
 
-  
+  gulp.start('sass');
 
 });
  
@@ -114,10 +122,10 @@ gulp.task('transpile',['clean-js-dist'],() => {
 });
 
 gulp.task('concat-min',() => {
-  gulp.src('dist/*.html')
+  return gulp.src('dist/*.html')
         .pipe(usemin({
           'js':[uglify],
           'css':[cssmin]
         }))
-        .pipe(gulp.dest('dist'));
+      .pipe(gulp.dest('dist'));
 });
