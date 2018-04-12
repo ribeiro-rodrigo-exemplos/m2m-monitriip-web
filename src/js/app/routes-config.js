@@ -19,7 +19,14 @@ class RoutesConfig{
             templateUrl:'../../views/quantitativo-linha/quantitativo-linha.html'
         });
 
-        $urlRouterProvider.otherwise('/quantitativo/linha');
+        $stateProvider.state('quantitativo-empresa',{
+            url:'/quantitativo/empresa',
+            controller:'PainelViagemController',
+            controllerAs:'ctrl',
+            templateUrl:'../../views/quantitativo-empresa/quantitativo-empresa.html'
+        });
+
+        $urlRouterProvider.otherwise('/quantitativo/empresa');
         $httpProvider.interceptors.push('Interceptor');
     }
 }
