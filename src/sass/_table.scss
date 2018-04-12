@@ -50,7 +50,7 @@
 	}
 	&__row--header{
 		td{
-			font-size: 11px;
+			font-size: 10px;
 			font-weight: bold;
 		}
 	}
@@ -171,6 +171,18 @@
 	}
 	&--scroll-and-alert{ //necessário para aparecer os círculos de "after" dos alertas das tabelas
 		margin-left: 21px;
+	}
+	&--adjust-width{
+		width: 130px;
+		@media screen and (max-width: 1400px){
+			width: 80px
+		}
+	}
+	&--important-td{/*good for company names and other long fields of data*/
+		min-width: 200px;
+		@media screen and (max-width: 1400px){
+			min-width: 150px;
+		}
 	}
 	&--like{/*imita table mas é outro elemento*/
 		display: flex;
