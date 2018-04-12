@@ -185,7 +185,7 @@
 	    background: linear-gradient(to left, $dark_gray , $dark_gray 5%, transparent);
 	}
 	.green-according-to-theme{
-		color: $m2m_green
+		color: $m2m_green !important;
 	}
 	.gray-according-to-theme{
 		color: #fff;
