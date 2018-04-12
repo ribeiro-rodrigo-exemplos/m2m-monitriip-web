@@ -130,6 +130,9 @@
 .green-according-to-theme{
 	color: $dark_green;
 }
+.gray-according-to-theme{
+	color: $gray;
+}
 .bold{
 	font-weight: bold !important;
 }
@@ -148,6 +151,9 @@
 }
 .right-side-padding{
 	padding: 0 0 0 1.2%
+}
+.icon-margin{
+	margin-right: 5px;
 }
 .absolute-first-corner{
 	position: absolute;
