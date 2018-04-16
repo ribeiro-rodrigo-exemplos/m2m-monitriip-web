@@ -1,4 +1,4 @@
-<div id="layoutJS"><!-- container para o night-theme -->
+<div class="fill-height" id="layoutJS"><!-- container para o night-theme -->
     <div class="filter">
         <div class="filter__header">
             <p class="filter__header__title">Filtro</p>
@@ -151,19 +151,18 @@
         // });
         var night = false;
         $("m2m-switch-element").on('click', function(){
-            console.log("função ok");
             if(night){
                 night = false;
-                $(".theme-description-js").html("Modo Noite");
-                $(".layout-mode__image").attr("src", "../img/moon.png");
+                $(".theme-description-js").html("Modo Dia");
+                $(".layout-mode__image").attr("src", "../img/sun.png");
                 $("m2m-autocomplete-element").removeAttr("night");
                 $("m2m-input-element").removeAttr("night");
                 $("#layoutJS").removeClass("night-theme");
                 Polymer.updateStyles();
             }else{
                 night = true;
-                $(".theme-description-js").html("Modo Dia");
-                $(".layout-mode__image").attr("src", "../img/sun.png");
+                $(".theme-description-js").html("Modo Noite");
+                $(".layout-mode__image").attr("src", "../img/moon.png");
                 $("m2m-autocomplete-element").attr("night", "true");
                 $("m2m-input-element").attr("night", "true");
                 $("#layoutJS").addClass("night-theme");
