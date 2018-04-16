@@ -1,25 +1,28 @@
-<div id="alert" class="row orange-bg alerts-container"><!-- fazer aparecer adicionando a classe alerts-container--active -->
-  <i class="auto-right fa fa-clock-o"></i>
-  <p class="auto-right info-label">{{ctrl.alert.mensagem}}</p>
+<div class="fill-height night-theme">
+        <div id="alert" class="row orange-bg alerts-container"><!-- fazer aparecer adicionando a classe alerts-container--active -->
+            <i class="auto-right fa fa-clock-o"></i>
+            <p class="auto-right info-label">{{ctrl.alert.mensagem}}</p>
+          </div>
+          
+          <div class="filter" ng-include="'views/painel-viagem/includes/filtro.html'"></div>
+          
+          <div class="row row--space-between row--search-and-export" data-ng-init="ctrl.postConstruct()">
+              <div>
+                  <span class="search-information text-size-13" ng-show="ctrl.filtro.placaVeiculo || ctrl.filtro.cpfMotorista">
+                      {{ctrl.filtro.cpfMotorista}} | {{ctrl.filtro.placaVeiculo}} |<span ng-show="ctrl.filtro.cnpjCliente">{{ctrl.filtro.cnpjCliente}} | </span>
+                      <span ng-show="ctrl.filtro.dataInicial && ctrl.filtro.dataFinal"><i class="fa fa-calendar"></i> {{ctrl.filtroDeConsulta}}</span>
+                  </span>
+              </div>
+          </div>
+          
+          <div ng-show="ctrl.loading"  ng-include="'views/painel-viagem/includes/loading.html'"></div>
+          
+          <div class="content-flex"><!-- will hold main panel and sidebar -->
+              <div ng-show="ctrl.exibirTela" class="main-panel" ng-include="'views/painel-viagem/includes/main.html'"></div>
+              <aside ng-show="ctrl.exibirTela" class="sidebar" ng-include="'views/painel-viagem/includes/extrato-por-dia.html'"></aside>
+          </div>
+          
+          <div ng-include="'views/painel-viagem/includes/info-viagem-popup.html'"></div>
 </div>
 
-<div class="filter" ng-include="'views/painel-viagem/includes/filtro.html'"></div>
-
-<div class="row row--space-between row--search-and-export" data-ng-init="ctrl.postConstruct()">
-    <div>
-        <span class="search-information text-size-13" ng-show="ctrl.filtro.placaVeiculo || ctrl.filtro.cpfMotorista">
-            {{ctrl.filtro.cpfMotorista}} | {{ctrl.filtro.placaVeiculo}} |<span ng-show="ctrl.filtro.cnpjCliente">{{ctrl.filtro.cnpjCliente}} | </span>
-            <span ng-show="ctrl.filtro.dataInicial && ctrl.filtro.dataFinal"><i class="fa fa-calendar"></i> {{ctrl.filtroDeConsulta}}</span>
-        </span>
-    </div>
-</div>
-
-<div ng-show="ctrl.loading"  ng-include="'views/painel-viagem/includes/loading.html'"></div>
-
-<div class="content-flex"><!-- will hold main panel and sidebar -->
-    <div ng-show="ctrl.exibirTela" class="main-panel" ng-include="'views/painel-viagem/includes/main.html'"></div>
-    <aside ng-show="ctrl.exibirTela" class="sidebar" ng-include="'views/painel-viagem/includes/extrato-por-dia.html'"></aside>
-</div>
-
-<div ng-include="'views/painel-viagem/includes/info-viagem-popup.html'"></div>
 
