@@ -196,6 +196,9 @@
 .fixed-min-width{
 	min-width: 115px;
 }
+.smaller-min-width{
+	min-width: 70px !important
+}
 .equidistant{ /*flex-items will be same width and same distance with this*/
 	flex-basis: 0;
 	flex-grow: 1;
