@@ -156,7 +156,7 @@
                 night = false;
                 $(".theme-description-js").html("Modo Noite");
                 $(".layout-mode__image").attr("src", "../img/moon.png");
-                $("m2m-autocomplete-element").attr("night", "false");
+                $("m2m-autocomplete-element").removeAttr("night");
                 $("m2m-input-element").removeAttr("night");
                 $("#layoutJS").removeClass("night-theme");
                 Polymer.updateStyles();
@@ -171,18 +171,7 @@
             }           
         })
         
-        // function switchTheme(){//essa função não funciona (não é ativada) ao se clicar no m2m-input-element, por isso o uso da função acima
-            
-         
-        // }
-       
-            //falta implementar:
-            //o body ou o container principal devem receber a classe night-theme
-            //elementos polymer recebem atributo night
-       
-            //falta implementar:
-            //remover atributo 'night' de todos os elementos polymer
-            //remover night-theme do body ou container principal
+      
 
             //IMPORTANTE:
             //originalmente, o index.html (na raiz de views) tinha a classe night-theme
