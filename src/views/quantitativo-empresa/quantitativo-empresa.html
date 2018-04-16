@@ -10,11 +10,11 @@
         </div>
         <div class="filter__content">
             <div class="filter__content__forms">
-                <m2m-autocomplete-element content="Visão*" night="[[night]]"></m2m-autocomplete-element>  
+                <m2m-autocomplete-element content="Visão*"></m2m-autocomplete-element>  
                 
-                <m2m-autocomplete-element content="Mês*" night="[[night]]"></m2m-autocomplete-element>  
+                <m2m-autocomplete-element content="Mês*"></m2m-autocomplete-element>  
     
-                <m2m-input-element icon="icons:date-range" id="dataFinal" content="Data*" subtype="default-height" night onkeyup="formataData(this)" objeto-selecionado="{{dataInicio}}" is-date></m2m-input-element>
+                <m2m-input-element icon="icons:date-range" id="dataFinal" content="Data*" subtype="default-height" onkeyup="formataData(this)" objeto-selecionado="{{dataInicio}}" is-date></m2m-input-element>
                 
             </div>
     
@@ -152,12 +152,16 @@
             console.log("função ok");
             if(night){
                 night = false;
-            $(".theme-description-js").html("Modo Noite");
-            $(".layout-mode__image").attr("src", "../img/moon.png");
+                $(".theme-description-js").html("Modo Noite");
+                $(".layout-mode__image").attr("src", "../img/moon.png");
+                $("m2m-autocomplete-element").attr("night", "false");
+                $("m2m-input-element").removeAttr("night");
             }else{
                 night = true;
-            $(".theme-description-js").html("Modo Dia");
-            $(".layout-mode__image").attr("src", "../img/sun.png");
+                $(".theme-description-js").html("Modo Dia");
+                $(".layout-mode__image").attr("src", "../img/sun.png");
+                $("m2m-autocomplete-element").attr("night", "true");
+                $("m2m-input-element").attr("night", "true");
             }           
         })
         // function switchTheme(){//essa função não funciona (não é ativada) ao se clicar no m2m-input-element, por isso o uso da função acima
