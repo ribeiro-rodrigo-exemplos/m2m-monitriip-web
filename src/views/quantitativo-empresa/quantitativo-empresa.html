@@ -1,4 +1,5 @@
-<div class="filter">
+<div id="layoutJS"><!-- container para o night-theme -->
+    <div class="filter">
         <div class="filter__header">
             <p class="filter__header__title">Filtro</p>
             <div class="toggle">
@@ -113,6 +114,7 @@
             </tr>
         </table>
     </div>
+</div>
     <script>
         var buttonsToShrink = $("m2m-button-element").attr("subtype","button--day-mode");
         if(window.outerWidth < 1400){//it currently doesn't work real time
@@ -156,12 +158,14 @@
                 $(".layout-mode__image").attr("src", "../img/moon.png");
                 $("m2m-autocomplete-element").attr("night", "false");
                 $("m2m-input-element").removeAttr("night");
+                $("#layoutJS").removeClass("night-theme");
             }else{
                 night = true;
                 $(".theme-description-js").html("Modo Dia");
                 $(".layout-mode__image").attr("src", "../img/sun.png");
                 $("m2m-autocomplete-element").attr("night", "true");
                 $("m2m-input-element").attr("night", "true");
+                $("#layoutJS").addClass("night-theme");
             }           
         })
         // function switchTheme(){//essa função não funciona (não é ativada) ao se clicar no m2m-input-element, por isso o uso da função acima
