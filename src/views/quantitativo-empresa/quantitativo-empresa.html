@@ -159,6 +159,7 @@
                 $("m2m-autocomplete-element").attr("night", "false");
                 $("m2m-input-element").removeAttr("night");
                 $("#layoutJS").removeClass("night-theme");
+                Polymer.updateStyles();
             }else{
                 night = true;
                 $(".theme-description-js").html("Modo Dia");
@@ -166,8 +167,10 @@
                 $("m2m-autocomplete-element").attr("night", "true");
                 $("m2m-input-element").attr("night", "true");
                 $("#layoutJS").addClass("night-theme");
+                Polymer.updateStyles();
             }           
         })
+        
         // function switchTheme(){//essa função não funciona (não é ativada) ao se clicar no m2m-input-element, por isso o uso da função acima
             
          
