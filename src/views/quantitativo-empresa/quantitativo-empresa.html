@@ -39,14 +39,14 @@
                     <i class="fa fa-chevron-down"></i>
                 </div>
                 <div class="layout-mode">
-                    <img class="layout-mode__image" src="../img/moon.png">
-                    <span class="layout-mode__description theme-description-js">Modo Noite</span>
-                    <m2m-switch-element on-click="switchTheme()"></m2m-switch-element>
+                    <img class="layout-mode__image" src="../img/sun.png">
+                    <span class="layout-mode__description theme-description-js">Modo Dia</span>
+                    <m2m-switch-element ></m2m-switch-element>
                 </div>
                 <div class="row row--buttons fixed-min-width">
-                        <m2m-button-element subtype="button--day-mode button--icon-button button--small-window-fit" content="PDF" icon="icons:description">
+                        <m2m-button-element subtype="button--day-mode button--icon-button" content="PDF" icon="icons:description">
                         </m2m-button-element>
-                        <m2m-button-element subtype="button--day-mode button--icon-button button--small-window-fit" content="CSV" icon="icons:description">
+                        <m2m-button-element subtype="button--day-mode button--icon-button" content="CSV" icon="icons:description">
                         </m2m-button-element>
                 </div>
             </div> 
@@ -114,6 +114,12 @@
         </table>
     </div>
     <script>
+        var buttonsToShrink = $("m2m-button-element").attr("subtype","button--day-mode");
+        if(window.outerWidth < 1400){//it currently doesn't work real time
+           $(buttonsToShrink).attr("subtype","button--small-window-fit button--day-mode button--icon-button");
+        }else{
+            $(buttonsToShrink).attr("subtype","button-alignment button--day-mode button--icon-button");
+        }
         // Polymer({
         // is: 'my-app',
         // properties: {
@@ -142,17 +148,34 @@
         //     }
         // });
         var night = false;
-        function switchTheme(){
-            night = true;
-            return night;
-        }
-        if(night){
+        $("m2m-switch-element").on('click', function(){
+            console.log("função ok");
+            if(night){
+                night = false;
             $(".theme-description-js").html("Modo Noite");
             $(".layout-mode__image").attr("src", "../img/moon.png");
-            //body or main-container also must receive night-theme class
-        }else{
+            }else{
+                night = true;
             $(".theme-description-js").html("Modo Dia");
             $(".layout-mode__image").attr("src", "../img/sun.png");
-            //também tem que remover atributo 'night' de todos os elementos polymer
-        }
+            }           
+        })
+        // function switchTheme(){//essa função não funciona (não é ativada) ao se clicar no m2m-input-element, por isso o uso da função acima
+            
+         
+        // }
+       
+            //falta implementar:
+            //o body ou o container principal devem receber a classe night-theme
+            //elementos polymer recebem atributo night
+       
+            //falta implementar:
+            //remover atributo 'night' de todos os elementos polymer
+            //remover night-theme do body ou container principal
+
+            //IMPORTANTE:
+            //originalmente, o index.html (na raiz de views) tinha a classe night-theme
+            //tive que remover para ser possível alternar nestas novas telas
+            //isso significa que o painel de viagens está sem night-theme! ele precisa de um novo container ou outra solução
+       
     </script>

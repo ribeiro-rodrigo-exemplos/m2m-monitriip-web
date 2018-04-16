@@ -44,9 +44,9 @@
                 <m2m-switch-element on-click="switchTheme()"></m2m-switch-element>
             </div>
             <div class="row row--buttons fixed-min-width">
-                    <m2m-button-element subtype="button--day-mode button--icon-button button--small-window-fit" content="PDF" icon="icons:description">
+                    <m2m-button-element subtype="button--day-mode button--icon-button" content="PDF" icon="icons:description">
                     </m2m-button-element>
-                    <m2m-button-element subtype="button--day-mode button--icon-button button--small-window-fit" content="CSV" icon="icons:description">
+                    <m2m-button-element subtype="button--day-mode button--icon-button" content="CSV" icon="icons:description">
                     </m2m-button-element>
             </div>
         </div> 
@@ -100,45 +100,10 @@
     </table>
 </div>
 <script>
-    // Polymer({
-    // is: 'my-app',
-    // properties: {
-    //     night:{
-    //         type: Boolean,
-    //         value:true
-    //     }
-    // },
-    // switchTheme: function(){
-    //     var getCurrentTheme = this.get('night');
-    //     console.log("works");
-    //     getCurrentTheme
-    //     ?
-    //     (this.$$('.theme-description-js').innerText = 'Modo Dia',this.imageSrc = this.resolveUrl('img/sun.png'),this.nightTheme = '')
-    //     :
-    //     (this.$$('.theme-description-js').innerText = 'Modo Noite',this.imageSrc = this.resolveUrl('img/moon.png'),this.nightTheme = 'night-theme');
-
-    //     var noite = this.get('night');
-    //     if (noite){
-    //         this.set('night', false);
-    //     }else{
-    //         this.set('night', true);
-    //     }
-    //         //Essencial para a mudança nos componentes
-    //         Polymer.updateStyles();
-    //     }
-    // });
-    var night = false;
-    function switchTheme(){
-        night = true;
-        return night;
-    }
-    if(night){
-        $(".theme-description-js").html("Modo Noite");
-        $(".layout-mode__image").attr("src", "../img/moon.png");
-        //body or main-container also must receive night-theme class
+    var buttonsToShrink = $("m2m-button-element").attr("subtype","button--day-mode");
+    if(window.outerWidth < 1400){//it currently doesn't work real time
+        $(buttonsToShrink).attr("subtype","button--small-window-fit button--day-mode button--icon-button");
     }else{
-        $(".theme-description-js").html("Modo Dia");
-        $(".layout-mode__image").attr("src", "../img/sun.png");
-        //também tem que remover atributo 'night' de todos os elementos polymer
+        $(buttonsToShrink).attr("subtype","button-alignment button--day-mode button--icon-button");
     }
 </script>
