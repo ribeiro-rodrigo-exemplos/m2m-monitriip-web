@@ -27,12 +27,12 @@
     </div>
     <div class="main-chart margin-top">
         <div class="row row--space-between">
-            <i class="fa fa-bar-chart icon-margin gray-according-to-theme"></i>
-            <h3>Relatório Detalhado</h3>
-            <div class="row row--justify-end standard-padding row__flex1">
+            <i class="fa fa-bar-chart text-size-13 alignment-left icon-margin gray-according-to-theme"></i>
+            <h3 class="text-size-13 no-margin">Relatório Detalhado</h3>
+            <div class="row row--justify-end row__flex1">
                 <span class="standard-padding">Exibição de Itens</span>
                 <div class="row">
-                    <select class="select bright-gray-bg"><!-- valores arbitrários -->
+                    <select class="select light-gray-bg"><!-- valores arbitrários -->
                         <option>5</option>
                         <option>10</option>
                         <option>15</option>
@@ -40,8 +40,8 @@
                     <i class="fa fa-chevron-down"></i>
                 </div>
                 <div class="layout-mode">
-                    <img class="layout-mode__image" src="../img/moon.png">
-                    <span class="layout-mode__description theme-description-js">Modo Noite</span>
+                    <img class="layout-mode__image" src="../img/sun.png">
+                    <span class="layout-mode__description theme-description-js">Modo Dia</span>
                     <m2m-switch-element></m2m-switch-element>
                 </div>
                 <div class="row row--buttons fixed-min-width">
@@ -130,6 +130,6 @@
     })
     $(".toggle").click(function(){
         $(this).find(".fa-chevron-down").toggleClass("none");
-        $(".filter-content").toggleClass("none");
+        $(".filter__content").toggleClass("none");
     });
 </script>
