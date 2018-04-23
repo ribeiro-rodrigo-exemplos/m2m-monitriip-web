@@ -53,7 +53,7 @@
                     <m2m-switch-element ></m2m-switch-element>
                 </div>
                 <div class="row row--buttons fixed-min-width">
-                        <m2m-button-element subtype="button--day-mode button--icon-button" content="PDF" icon="icons:description">
+                        <m2m-button-element ng-click="ctrl.gerarPDF()" subtype="button--day-mode button--icon-button" content="PDF" icon="icons:description">
                         </m2m-button-element>
                         <m2m-button-element ng-csv="ctrl.csv" csv-header="ctrl.csvHeaders" filename="test.csv" subtype="button--day-mode button--icon-button" content="CSV" icon="icons:description">
                         </m2m-button-element>

@@ -1,10 +1,11 @@
 class QuantitativoLinhaController {
-    constructor(document,dateUtil,quantitativosService,alertService){
+    constructor(document,dateUtil,quantitativosService,alertService,relatoriosService){
 
         this._document = document[0]; 
         this._dateUtil = dateUtil; 
         this._quantitativosService = quantitativosService; 
         this._alertService = alertService; 
+        this._relatoriosService = relatoriosService; 
 
         this._inicializar(); 
     }
@@ -33,17 +34,29 @@ class QuantitativoLinhaController {
         this._setarDataAtual(); 
         this._setarMesAtual();  
     }
+
+    gerarPDF(){
+        
+        var periodo = ''; 
+
+        if(this.visaoSelecionada == this._visaoDiaria)
+            periodo = this._dateUtil.formatarParaPtBr(this._obterDataSelecionada()); 
+        else
+            periodo = this._dateUtil.formatarMesParaPtBr(this._obterMesSelecionado()); 
+
+        this._relatoriosService.gerarPDF(this.quantitativos,periodo); 
+    }
     
     get quantitativos(){
         return this._quantitativos; 
     }
 
     get csv(){
-        return this._quantitativosService.gerarCsv(this.quantitativos); 
+        return this._relatoriosService.gerarCSV(this.quantitativos); 
     }
 
     get csvHeaders(){
-        return this._quantitativosService.obterCsvHeaders(); 
+        return this._relatoriosService.obterCabecalhos(); 
     }
 
     _obterQuantitativosDoDia(){
@@ -65,7 +78,6 @@ class QuantitativoLinhaController {
                                             .filter(quantitativo => quantitativo.resultado)
                                             .map(quantitativo => new Quantitativo(quantitativo)); 
 
-        console.log(this._quantitativos);
         if(!this._quantitativos.length){
             this._alertService.exibirAlert("Nenhum resultado encontrado.",this); 
         }
@@ -142,7 +154,8 @@ QuantitativoLinhaController.$inject = [
     "$document", 
     "DateUtil",
     "QuantitativosService", 
-    "AlertService"
+    "AlertService", 
+    "QuantitativoRelatoriosService" 
 ]; 
 
 angular.module('monitriip-web')

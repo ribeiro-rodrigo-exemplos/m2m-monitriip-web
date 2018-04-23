@@ -20,7 +20,8 @@ class DateUtil{
 
         this._numberUtil = numberUtil;
         this._isoDatePattern = 'YYYY-MM-DD';
-        this._ptBrDatePattern = 'DD/MM/YYYY'
+        this._ptBrDatePattern = 'DD/MM/YYYY'; 
+        this._ptBrMesPattern = 'MM/YYYY'; 
         this._horarioPattern = 'HH:mm:ss';
     }
 
@@ -73,6 +74,10 @@ class DateUtil{
 
     formatarParaPtBr(data){
         return moment(data).format(this._ptBrDatePattern)
+    }
+
+    formatarMesParaPtBr(data){
+        return moment(data).format(this._ptBrMesPattern); 
     }
 
     dentroDoPeriodoDeDias(dataInicial,dataFinal,dias){
