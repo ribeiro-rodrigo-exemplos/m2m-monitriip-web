@@ -5,7 +5,7 @@ class PainelViagemController{
 
     constructor(viagemService,painelService,checkinService,FullScreen,graficoGeral,kmPercorridoTotalizador,leituraBilhetesTotalizador, 
                 tempoViagemTotalizador, jornadaTrabalhoTotalizador,direcaoContinuaTotalizador, paradasTotalizador, 
-                extratoPorDia, infoViagemPopup,dateUtil,eventBus){
+                extratoPorDia, infoViagemPopup,dateUtil,eventBus,alertService){
         
         this._bilhetesCheckin = [];
         this._seletor = document.getElementById.bind(document);
@@ -23,6 +23,7 @@ class PainelViagemController{
         this._painelService = painelService;
         this._checkinService = checkinService;
         this._eventBus = eventBus;
+        this._alertService = alertService; 
 
         this._FullScreen = FullScreen;
         this._dateUtil = dateUtil;
@@ -53,7 +54,7 @@ class PainelViagemController{
                 this.loading = false;
 
                 if(!retorno){
-                    this._exibirAlert('Nenhum dado encontrato.');
+                    this._alertService.exibirAlert('Nenhum dado encontrato.',this);
                     this.exibirTela = false;
                     return; 
                 }
@@ -86,7 +87,7 @@ class PainelViagemController{
                 if(detalheViagem)
                     this.infoViagemPopup.exibirDetalhesDaViagem(detalheViagem);
                 else
-                    this._exibirAlert('Não foi possível consultar a viagem selecionada');
+                    this._alertService.exibirAlert('Não foi possível consultar a viagem selecionada',this);
 
             });
 
@@ -119,27 +120,20 @@ class PainelViagemController{
         this._eventBus.emit('event:painel:components:updated',event);
     }
 
-    _exibirAlert(mensagem){
-        let alert = document.getElementById('alert');
-        this.alert = {mensagem:mensagem};
-        alert.classList.remove('alerts-container--active');
-        setTimeout(() => alert.classList.add('alerts-container--active'),10);
-    }
-
     _consultaInvalida(){
 
         if(!this.filtro || !this.filtro.dataInicial || !this.filtro.dataFinal){
-            this._exibirAlert('Informe das datas inicias e finais');
+            this._alertService.exibirAlert('Informe das datas inicias e finais',this);
             return true; 
         }
 
         if(!this._dateUtil.periodoValido(this.filtro.dataInicial,this.filtro.dataFinal)){
-            this._exibirAlert('A data inicial deve ser menor que a data final');
+            this._alertService.exibirAlert('A data inicial deve ser menor que a data final',this);
             return true; 
         }
 
         if(!this._dateUtil.dentroDoPeriodoDeDias(this.filtro.dataInicial,this.filtro.dataFinal,3)){
-            this._exibirAlert('O período máximo de consulta é de até 3 dias.');
+            this._alertService.exibirAlert('O período máximo de consulta é de até 3 dias.',this);
             return true;
         }
 
@@ -162,7 +156,8 @@ PainelViagemController.$inject = [
                                     'ExtratoPorDia',
                                     'InfoViagemPopup',
                                     'DateUtil',
-                                    'EventBusService'
+                                    'EventBusService',
+                                    'AlertService'
                                  ];
 
 angular.module('monitriip-web')

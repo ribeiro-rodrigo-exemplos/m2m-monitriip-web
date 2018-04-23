@@ -20,6 +20,7 @@ class DateUtil{
 
         this._numberUtil = numberUtil;
         this._isoDatePattern = 'YYYY-MM-DD';
+        this._ptBrDatePattern = 'DD/MM/YYYY'
         this._horarioPattern = 'HH:mm:ss';
     }
 
@@ -35,6 +36,11 @@ class DateUtil{
     obterDiaEMes(data){
         data = moment(data);
         return `${data.format('DD')} ${this.meses[data.month()]}`;
+    }
+
+    obterMesEAnoAtual(){
+        var data = moment(new Date())
+        return `${data.format('YYYY')}-${data.format("MM")}`
     }
 
     obterHorario(dataHora){
@@ -63,6 +69,10 @@ class DateUtil{
 
     formatarParaIsoDate(data){
         return moment(data).format(this._isoDatePattern);
+    }
+
+    formatarParaPtBr(data){
+        return moment(data).format(this._ptBrDatePattern)
     }
 
     dentroDoPeriodoDeDias(dataInicial,dataFinal,dias){

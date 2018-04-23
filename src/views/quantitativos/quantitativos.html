@@ -1,4 +1,5 @@
 <div class="fill-height" id="layoutJS"><!-- container para o night-theme -->
+    <div ng-include="'views/includes/alert.html'"></div>
     <div class="filter">
         <div class="filter__header">
             <p class="filter__header__title">Filtro</p>
@@ -11,17 +12,24 @@
         </div>
         <div class="filter__content">
             <div class="filter__content__forms">
-                <m2m-autocomplete-element content="Visão*"></m2m-autocomplete-element>  
+                <!--m2m-autocomplete-element content="Visão*"></m2m-autocomplete-element>  
                 
-                <m2m-autocomplete-element content="Mês*"></m2m-autocomplete-element>  
+                <m2m-autocomplete-element content="Mês*"></m2m-autocomplete-element-->  
+                <label for="visao">Visão:&nbsp;
+                    <select ng-options="visao for visao in ctrl.visoes" ng-model="ctrl.visaoSelecionada"></select>
+                </label>
     
-                <m2m-input-element icon="icons:date-range" id="dataFinal" content="Data*" subtype="default-height" onkeyup="formataData(this)" objeto-selecionado="{{dataInicio}}" is-date></m2m-input-element>
+                <label ng-hide="ctrl.esconderFiltroDeMeses()">&nbsp;Mês:&nbsp;
+                    <input type="month" id="mes"/>
+                </label>
+                
+                <m2m-input-element ng-hide="ctrl.esconderFiltroDeDia()" icon="icons:date-range" id="data" content="Data*" subtype="default-height" onkeyup="formataData(this)" is-date></m2m-input-element>
                 
             </div>
     
             <section class="filter__content__buttons">
-                <button class="button button--cancel" ng-click="ctrl.limparFiltros()">LIMPAR</button>
-                <button class="button button--confirm" ng-click="ctrl.consultarPeriodo()">GERAR RELATÓRIO</button>
+                <button class="button button--cancel" ng-click="ctrl.limpar()">LIMPAR</button>
+                <button class="button button--confirm" ng-click="ctrl.consultar()">GERAR RELATÓRIO</button>
             </section>
         </div>
     </div>
@@ -30,15 +38,15 @@
             <i class="fa fa-bar-chart text-size-13 alignment-left icon-margin gray-according-to-theme"></i>
             <h3 class="text-size-13 no-margin">Relatório Detalhado</h3>
             <div class="row row--justify-end row__flex1">
-                <span class="standard-padding">Exibição de Itens</span>
+                <!--span class="standard-padding">Exibição de Itens</span>
                 <div class="row">
-                    <select class="select smaller-min-width light-gray-bg"><!-- valores arbitrários -->
+                    <select class="select smaller-min-width light-gray-bg">
                         <option>5</option>
                         <option>10</option>
                         <option>20</option>
                     </select>
                     <i class="fa fa-chevron-down"></i>
-                </div>
+                </div-->
                 <div class="layout-mode">
                     <img class="layout-mode__image" src="../img/sun.png">
                     <span class="layout-mode__description theme-description-js">Modo Dia</span>
@@ -47,16 +55,18 @@
                 <div class="row row--buttons fixed-min-width">
                         <m2m-button-element subtype="button--day-mode button--icon-button" content="PDF" icon="icons:description">
                         </m2m-button-element>
-                        <m2m-button-element subtype="button--day-mode button--icon-button" content="CSV" icon="icons:description">
+                        <m2m-button-element ng-csv="ctrl.csv" csv-header="ctrl.csvHeaders" filename="test.csv" subtype="button--day-mode button--icon-button" content="CSV" icon="icons:description">
                         </m2m-button-element>
                 </div>
             </div> 
         </div>
+
+        <div ng-show="ctrl.loading"  ng-include="'views/painel-viagem/includes/loading.html'"></div>
+
         <table class="table avg-margin-top table--transparent-borders">
             <tr class="table__row table__row--header table__row--room bold">
-                <td class="text-align-left table--transparent-borders__td table--important-td">RAZÃO SOCIAL</td>
                 <td class="table--transparent-borders__td">LINHA</td>
-                <td class="table--transparent-borders__td" colspan="7">DADOS EMBARCADOS
+                <td class="table--transparent-borders__td" colspan="6">EMBARCADOS
                     <div class="row row--space-between">
                         <span class="fixed-width">Velocidade Tempo</span>
                         <span class="fixed-width">Motorista</span>
@@ -64,22 +74,37 @@
                         <span class="fixed-width">Início/Fim Viagem</span>
                         <span class="fixed-width">Início/Fim Viagem Fretado</span>
                         <span class="fixed-width">Bilhete Embarque</span>
-                        <p class="fixed-width no-margin">Leitor <br> de Cartão</p>
                     </div>
                 </td>
-                <td class="table--transparent-borders__td" colspan="6">DADOS EMBARCADOS
+                <td class="table--transparent-borders__td" colspan="2">NÃO EMBARCADOS
                     <div class="row row--space-between">
                         <span class="fixed-width">Venda Passagem</span>
-                        <span class="fixed-width">Ocorrência Rodoviário</span>
-                        <span class="fixed-width">Cartão Emitido</span>
-                        <span class="fixed-width">Ocorrência Semiurbano</span>
                         <span class="fixed-width">Cancelamento Passagem</span>
-                        <span class="fixed-width">Reembolso Cartão</span>
                     </div>
                 </td>
+                <td class="table--transparent-borders__td" colspan="3">PLANEJAMENTO
+                        <div class="row row--space-between">
+                            <span class="green-according-to-theme fixed-width">Viagens Programadas</span>
+                            <span class="green-according-to-theme fixed-width">Viagens Válidas Monitriip</span>
+                            <span class="fixed-width">%Executadas</span>
+                        </div>
+                </td>
             </tr>
-           <tr class="table__row table__row--room">
-                <td class="text-align-left table--transparent-borders__td">EXPRESSO GUANABARA S/A</td>
+            <tr class="table__row table__row--room" ng-repeat="quantitativo in ctrl.quantitativos">
+                    <td class="table--transparent-borders__td">{{quantitativo.linha}}</td>
+                    <td class="table--transparent-borders__td">{{quantitativo.qtdVelocidadeTempo}}</td>
+                    <td class="table--transparent-borders__td">{{quantitativo.qtdJornadas}}</td>
+                    <td class="table--transparent-borders__td">{{quantitativo.qtdDetectorParada}}</td>
+                    <td class="table--transparent-borders__td">{{quantitativo.qtdInicioFimViagem}}</td>
+                    <td class="table--transparent-borders__td">{{quantitativo.qtdInicioFimViagemFretado}}</td>
+                    <td class="table--transparent-borders__td">{{quantitativo.qtdBilheteEmbarque}}</td>
+                    <td class="table--transparent-borders__td">{{quantitativo.qtdVendaPassagem}}</td>
+                    <td class="table--transparent-borders__td">{{quantitativo.qtdCancelamentoPassagem}}</td>
+                    <td class="table--transparent-borders__td">{{quantitativo.qtdViagensProgramadas}}</td>
+                    <td class="table--transparent-borders__td">{{quantitativo.qtdViagensValidas}}</td>
+                    <td class="table--transparent-borders__td">{{quantitativo.percentualDeViagensPlanejadasExecutadas}}</td>
+            </tr>
+           <!--tr class="table__row table__row--room">
                 <td class="table--transparent-borders__td">02000300</td>
                 <td class="table--transparent-borders__td table--adjust-width">0</td>
                 <td class="table--transparent-borders__td table--adjust-width">0</td>
@@ -93,10 +118,9 @@
                 <td class="table--transparent-borders__td table--adjust-width">0</td>
                 <td class="table--transparent-borders__td table--adjust-width">4</td>
                 <td class="table--transparent-borders__td table--adjust-width">0</td>
-                <td class="table--transparent-borders__td table--adjust-width">0</td>
+                <td class="table--transparent-borders__td table--adjust-width">92</td>
             </tr>
             <tr class="table__row  table__row--room">
-                <td class="text-align-left table--transparent-borders__td">EXPRESSO GUANABARA S/A</td>
                 <td class="table--transparent-borders__td">02000400</td>
                 <td class="table--transparent-borders__td table--adjust-width">5.296</td>
                 <td class="table--transparent-borders__td table--adjust-width">15</td>
@@ -110,8 +134,8 @@
                 <td class="table--transparent-borders__td table--adjust-width">92</td>
                 <td class="table--transparent-borders__td table--adjust-width">4</td>
                 <td class="table--transparent-borders__td table--adjust-width">0</td>
-                <td class="table--transparent-borders__td table--adjust-width">0</td>
-            </tr>
+                <td class="table--transparent-borders__td table--adjust-width">92</td>
+            </tr-->
         </table>
     </div>
 </div>

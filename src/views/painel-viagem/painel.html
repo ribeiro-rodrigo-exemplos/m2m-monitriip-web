@@ -1,8 +1,5 @@
 <div class="fill-height night-theme">
-        <div id="alert" class="row orange-bg alerts-container"><!-- fazer aparecer adicionando a classe alerts-container--active -->
-            <i class="auto-right fa fa-clock-o"></i>
-            <p class="auto-right info-label">{{ctrl.alert.mensagem}}</p>
-          </div>
+          <div ng-include="'views/includes/alert.html'"></div>
           
           <div class="filter" ng-include="'views/painel-viagem/includes/filtro.html'"></div>
           
