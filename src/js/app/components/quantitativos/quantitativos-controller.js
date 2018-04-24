@@ -20,7 +20,7 @@ class QuantitativoLinhaController {
 
     consultar(){
         
-        this.loading = true 
+        this.loading = true;  
 
         if(this.visaoSelecionada == this._visaoMensal){
             this._obterQuantitativosDoMes(); 
@@ -33,6 +33,7 @@ class QuantitativoLinhaController {
     limpar(){
         this._setarDataAtual(); 
         this._setarMesAtual();  
+        this._setarAnoAtual(); 
     }
 
     gerarPDF(){
@@ -114,8 +115,37 @@ class QuantitativoLinhaController {
         ]; 
 
         this.visaoSelecionada = this.visoes[1]; 
+        
+        this._carregarMeses();
+        this._carregarAnos(); 
 
         this._setarMesAtual(); 
+        this._setarAnoAtual(); 
+    }
+
+    _carregarMeses(){
+        this.meses = [
+            {numero:"01",nome:"Janeiro"},
+            {numero:"02",nome:"Fevereiro"},
+            {numero:"03",nome:"Março"},
+            {numero:"04",nome:"Abril"},
+            {numero:"05",nome:"Maio"},
+            {numero:"06",nome:"Junho"},
+            {numero:"07",nome:"Julho"},
+            {numero:"08",nome:"Agosto"}, 
+            {numero:"09",nome:"Setembro"},
+            {numero:"10",nome:"Outubro"},
+            {numero:"11",nome:"Novembro"},
+            {numero:"12",nome:"Dezembro"}
+        ];
+    }
+
+    _carregarAnos(){
+        var anoAtual = this._dateUtil.obterAnoAtual(); 
+        this.anos = []; 
+        for(var ano =2016; ano<=anoAtual; ano++){
+            this.anos.push(ano); 
+        }
     }
 
     _setarDataAtual(){
@@ -124,8 +154,11 @@ class QuantitativoLinhaController {
     }
 
     _setarMesAtual(){
-        let mesElement = this._document.getElementById("mes")
-        mesElement.value = this._obterMesAtual();  
+        this.mesSelecionado = this.meses[new Date().getMonth()]; 
+    }
+
+    _setarAnoAtual(){
+        this.anoSelecionado = this.anos[this.anos.length-1];
     }
 
     _obterDataAtual(){
@@ -141,12 +174,7 @@ class QuantitativoLinhaController {
     }
 
     _obterMesSelecionado(){
-        let mesElement = this._document.getElementById("mes")
-        return mesElement.value 
-    }
-
-    _obterMesAtual(){
-        return this._dateUtil.obterMesEAnoAtual();  
+        return `${this.anoSelecionado}-${this.mesSelecionado.numero}`; 
     }
 }
 

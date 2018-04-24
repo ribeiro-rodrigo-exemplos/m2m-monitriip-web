@@ -33,20 +33,7 @@
                 <label class="label" ng-hide="ctrl.esconderFiltroDeMeses()">&nbsp;Mês:&nbsp;
                     <!-- <input type="month" id="mes"/> -->
                     <div class="row">
-                        <select class="select smaller-min-width">
-                            <option value="1">Janeiro</option>
-                            <option value="2">Fevereiro</option>
-                            <option value="3">Março</option>
-                            <option value="4">Abril</option>
-                            <option value="5">Maio</option>
-                            <option value="6">Junho</option>
-                            <option value="7">Julho</option>
-                            <option value="8">Agosto</option>
-                            <option value="9">Setembro</option>
-                            <option value="10">Outubro</option>
-                            <option value="11">Novembro</option>
-                            <option value="12">Dezembro</option>
-                        </select>
+                        <select class="select smaller-min-width" ng-options=" mes as mes.nome for mes in ctrl.meses" ng-model="ctrl.mesSelecionado"></select>
                         <i class="fa fa-chevron-down"></i>
                     </div>
                 </label>
@@ -54,11 +41,7 @@
                 <label class="label" ng-hide="ctrl.esconderFiltroDeMeses()">&nbsp;Ano:&nbsp;
                     <!-- <input type="month" id="mes"/> -->
                     <div class="row">
-                        <select class="select smaller-min-width">
-                            <option>2018</option>
-                            <option>2019</option>
-                            <option>2020</option>
-                        </select>
+                        <select class="select smaller-min-width" ng-options="ano for ano in ctrl.anos" ng-model="ctrl.anoSelecionado"></select>
                         <i class="fa fa-chevron-down"></i>
                     </div>
                 </label>

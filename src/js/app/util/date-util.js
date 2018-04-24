@@ -44,6 +44,11 @@ class DateUtil{
         return `${data.format('YYYY')}-${data.format("MM")}`
     }
 
+    obterAnoAtual(){
+        var data = moment(new Date())
+        return data.format('YYYY'); 
+    }
+
     obterHorario(dataHora){
         return moment(dataHora).format(this._horarioPattern);
     }
