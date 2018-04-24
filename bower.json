@@ -27,6 +27,8 @@
     "m2m-autocomplete-element": "~1.0.0",
     "m2m-button-element": "~1.0.0",
     "m2m-input-element": "~1.0.0",
-    "m2m-switch-element": "~1.0.0"
+    "m2m-switch-element": "~1.0.0",
+    "ng-csv": "^0.3.6",
+    "pdfmake": "^0.1.36"
   }
 }
