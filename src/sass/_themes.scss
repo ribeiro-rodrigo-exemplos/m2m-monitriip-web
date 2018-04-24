@@ -1,6 +1,9 @@
 .night-theme{
 	background-color: $dark_gray;
 	color: #fff;
+	.label{
+		color: $lighter_gray
+	}
 	.search-information{
 		color: $light_gray;
 	}

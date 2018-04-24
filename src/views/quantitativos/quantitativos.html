@@ -15,12 +15,52 @@
                 <!--m2m-autocomplete-element content="Visão*"></m2m-autocomplete-element>  
                 
                 <m2m-autocomplete-element content="Mês*"></m2m-autocomplete-element-->  
-                <label for="visao">Visão:&nbsp;
+                <!-- <label for="visao">Visão:&nbsp;
                     <select ng-options="visao for visao in ctrl.visoes" ng-model="ctrl.visaoSelecionada"></select>
                 </label>
     
                 <label ng-hide="ctrl.esconderFiltroDeMeses()">&nbsp;Mês:&nbsp;
                     <input type="month" id="mes"/>
+                </label> -->
+
+                <label class="label" for="visao">Visão:&nbsp;
+                    <div class="row">
+                        <select class="select smaller-min-width" ng-options="visao for visao in ctrl.visoes" ng-model="ctrl.visaoSelecionada"></select>
+                        <i class="fa fa-chevron-down"></i>
+                    </div>
+                </label>
+    
+                <label class="label" ng-hide="ctrl.esconderFiltroDeMeses()">&nbsp;Mês:&nbsp;
+                    <!-- <input type="month" id="mes"/> -->
+                    <div class="row">
+                        <select class="select smaller-min-width">
+                            <option value="1">Janeiro</option>
+                            <option value="2">Fevereiro</option>
+                            <option value="3">Março</option>
+                            <option value="4">Abril</option>
+                            <option value="5">Maio</option>
+                            <option value="6">Junho</option>
+                            <option value="7">Julho</option>
+                            <option value="8">Agosto</option>
+                            <option value="9">Setembro</option>
+                            <option value="10">Outubro</option>
+                            <option value="11">Novembro</option>
+                            <option value="12">Dezembro</option>
+                        </select>
+                        <i class="fa fa-chevron-down"></i>
+                    </div>
+                </label>
+
+                <label class="label" ng-hide="ctrl.esconderFiltroDeMeses()">&nbsp;Ano:&nbsp;
+                    <!-- <input type="month" id="mes"/> -->
+                    <div class="row">
+                        <select class="select smaller-min-width">
+                            <option>2018</option>
+                            <option>2019</option>
+                            <option>2020</option>
+                        </select>
+                        <i class="fa fa-chevron-down"></i>
+                    </div>
                 </label>
                 
                 <m2m-input-element ng-hide="ctrl.esconderFiltroDeDia()" icon="icons:date-range" id="data" content="Data*" subtype="default-height" onkeyup="formataData(this)" is-date></m2m-input-element>
@@ -33,7 +73,7 @@
             </section>
         </div>
     </div>
-    <div class="main-chart margin-top">
+    <div class="standard-padding margin-top">
         <div class="row row--space-between">
             <i class="fa fa-bar-chart text-size-13 alignment-left icon-margin gray-according-to-theme"></i>
             <h3 class="text-size-13 no-margin">Relatório Detalhado</h3>
