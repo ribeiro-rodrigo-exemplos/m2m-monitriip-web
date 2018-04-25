@@ -1,6 +1,9 @@
 .night-theme{
 	background-color: $dark_gray;
 	color: #fff;
+	.label{
+		color: $lighter_gray
+	}
 	.search-information{
 		color: $light_gray;
 	}
@@ -94,6 +97,9 @@
 				background-color: $gray !important;/*certificando-se de que o disabled SEMPRE será cinza*/
 			}
 		}
+		&__row:nth-child(even) td{
+			background-color: $bright_gray;
+		}
 		&__more-options{
 			background-color: $bright_gray;
 	    	box-shadow: 0px 0px 25px 5px $dark_gray;
@@ -182,6 +188,9 @@
 	    background: linear-gradient(to left, $dark_gray , $dark_gray 5%, transparent);
 	}
 	.green-according-to-theme{
-		color: $m2m_green
+		color: $m2m_green !important;
+	}
+	.gray-according-to-theme{
+		color: #fff;
 	}
 }
