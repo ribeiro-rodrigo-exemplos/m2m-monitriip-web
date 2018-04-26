@@ -78,7 +78,7 @@
                 <div class="row row--buttons fixed-min-width">
                         <m2m-button-element ng-click="ctrl.gerarPDF()" subtype="button--day-mode button--icon-button" content="PDF" icon="icons:description">
                         </m2m-button-element>
-                        <m2m-button-element ng-csv="ctrl.csv" csv-header="ctrl.csvHeaders" filename="test.csv" subtype="button--day-mode button--icon-button" content="CSV" icon="icons:description">
+                        <m2m-button-element field-separator=";" filename="relatorio.csv" ng-csv="ctrl.csv" csv-header="ctrl.csvHeaders" filename="test.csv" subtype="button--day-mode button--icon-button" content="CSV" icon="icons:description">
                         </m2m-button-element>
                 </div>
             </div> 
