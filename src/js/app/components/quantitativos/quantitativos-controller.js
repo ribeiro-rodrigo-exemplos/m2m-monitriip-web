@@ -143,7 +143,7 @@ class QuantitativoLinhaController {
     _carregarAnos(){
         var anoAtual = this._dateUtil.obterAnoAtual(); 
         this.anos = []; 
-        for(var ano =2016; ano<=anoAtual; ano++){
+        for(var ano =2018; ano<=anoAtual; ano++){
             this.anos.push(ano); 
         }
     }
