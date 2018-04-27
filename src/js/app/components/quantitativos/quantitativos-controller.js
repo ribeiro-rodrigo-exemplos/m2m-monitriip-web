@@ -50,7 +50,9 @@ class QuantitativoLinhaController {
     }
 
     formatarNumero(numero){
-        return this._numberUtil.formatarNumeroDecimal(numero,2); 
+
+        var numeroFormatado = this._numberUtil.formatarNumeroDecimal(numero,2); 
+        return numeroFormatado.toString().replace(".00","")
     }
     
     get quantitativos(){
@@ -101,7 +103,6 @@ class QuantitativoLinhaController {
         }else{
    
             var quantitativosDaData = quantitativo.porDia ? quantitativo.porDia[this._obterDataSelecionada()] : undefined;          
-            console.log(quantitativosDaData)
             quantitativo.resultado =  quantitativosDaData ? quantitativosDaData : null ; 
         }
 
