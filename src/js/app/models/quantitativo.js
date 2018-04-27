@@ -48,7 +48,10 @@ class Quantitativo{
     }
 
     get percentualDeViagensPlanejadasExecutadas(){
-        var percentual = this.qtdViagensProgramadas * this.qtdViagensValidas / 100; 
+        if(this.qtdViagensProgramadas == 0){
+            return 0
+        }
+        var percentual = this.qtdViagensValidas * 100 / this.qtdViagensProgramadas; 
         return percentual; 
     }
 

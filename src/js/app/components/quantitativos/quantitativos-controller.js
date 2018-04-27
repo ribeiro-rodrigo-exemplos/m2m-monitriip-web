@@ -1,11 +1,12 @@
 class QuantitativoLinhaController {
-    constructor(document,dateUtil,quantitativosService,alertService,relatoriosService){
+    constructor(document,dateUtil,quantitativosService,alertService,relatoriosService,numberUtil){
 
         this._document = document[0]; 
         this._dateUtil = dateUtil; 
         this._quantitativosService = quantitativosService; 
         this._alertService = alertService; 
         this._relatoriosService = relatoriosService; 
+        this._numberUtil = numberUtil; 
 
         this._inicializar(); 
     }
@@ -46,6 +47,10 @@ class QuantitativoLinhaController {
             periodo = this._dateUtil.formatarMesParaPtBr(this._obterMesSelecionado()); 
 
         this._relatoriosService.gerarPDF(this.quantitativos,periodo); 
+    }
+
+    formatarNumero(numero){
+        return this._numberUtil.formatarNumeroDecimal(numero,2); 
     }
     
     get quantitativos(){
@@ -183,7 +188,8 @@ QuantitativoLinhaController.$inject = [
     "DateUtil",
     "QuantitativosService", 
     "AlertService", 
-    "QuantitativoRelatoriosService" 
+    "QuantitativoRelatoriosService",
+    "NumberUtil" 
 ]; 
 
 angular.module('monitriip-web')
