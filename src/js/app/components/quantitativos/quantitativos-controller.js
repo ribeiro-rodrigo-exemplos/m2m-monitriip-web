@@ -48,12 +48,6 @@ class QuantitativoLinhaController {
 
         this._relatoriosService.gerarPDF(this.quantitativos,periodo); 
     }
-
-    formatarNumero(numero){
-
-        var numeroFormatado = this._numberUtil.formatarNumeroDecimal(numero,2); 
-        return numeroFormatado.toString().replace(".00","")
-    }
     
     get quantitativos(){
         return this._quantitativos; 

@@ -1,6 +1,7 @@
 class Quantitativo{
-    constructor(properties){
-        this._properties = properties; 
+    constructor(properties,numberUtil){
+        this._properties = properties;
+        this._numberUtil = numberUtil;  
     }
 
     get linha(){
@@ -55,6 +56,11 @@ class Quantitativo{
         return percentual; 
     }
 
+    get percentualDeViagensPlanejadasExecutadasFormatado(){
+        var numeroFormatado = this._numberUtil.formatarNumeroDecimal(this.percentualDeViagensPlanejadasExecutadas,2); 
+        return numeroFormatado.toString().replace(".00",""); 
+    }
+
     toJson(){
         return {
             linha: this.linha,
@@ -68,7 +74,7 @@ class Quantitativo{
             qtdCancelamentoPassagem: this.qtdCancelamentoPassagem, 
             qtdViagensProgramadas: this.qtdViagensProgramadas, 
             qtdViagensValidas: this.qtdViagensValidas, 
-            percentualExecutadasEPlanejadas: this.percentualDeViagensPlanejadasExecutadas
+            percentualExecutadasEPlanejadas: this.percentualDeViagensPlanejadasExecutadasFormatado
         }; 
     }
 

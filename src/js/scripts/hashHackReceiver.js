@@ -6,8 +6,8 @@ var HashHack = {
   handleInterval: function() {
     var sHash = window.location.hash,
       sDecodedHash, sMessage, i;
-      
-      sHash = sHash.substr(HashHack.PREFIX); 
+
+      sHash = sHash.substr(sHash.indexOf(HashHack.PREFIX)); 
 
     if (sHash !== HashHack.sLastHash) {
       // is it valid
