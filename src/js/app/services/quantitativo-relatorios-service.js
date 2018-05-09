@@ -79,7 +79,7 @@ class QuantitativoRelatoriosService{
             {text:quantitativo.qtdCancelamentoPassagem,alignment:'center'},
             {text:quantitativo.qtdViagensProgramadas,alignment:'center'},
             {text:quantitativo.qtdViagensValidas,alignment:'center'},
-            {text:quantitativo.percentualDeViagensPlanejadasExecutadas,alignment:'center'}
+            {text:quantitativo.percentualDeViagensPlanejadasExecutadasFormatado,alignment:'center'}
         ]; 
     }
 }

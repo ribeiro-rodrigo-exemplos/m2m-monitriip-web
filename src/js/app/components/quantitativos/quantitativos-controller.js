@@ -78,7 +78,7 @@ class QuantitativoLinhaController {
     _tratarQuantitativosRetornados(quantitativos){
         this._quantitativos = quantitativos.map(quantitativo => this._prepararExibicao(quantitativo))
                                             .filter(quantitativo => quantitativo.resultado)
-                                            .map(quantitativo => new Quantitativo(quantitativo)); 
+                                            .map(quantitativo => new Quantitativo(quantitativo,this._numberUtil)); 
 
         if(!this._quantitativos.length){
             this._alertService.exibirAlert("Nenhum resultado encontrado.",this); 
