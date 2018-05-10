@@ -22,7 +22,7 @@
 			background-color: $gelo;
 			color: $darker_gray;
 			font-weight: 600;
-			padding: 6px 0;
+			padding: 6px 0;/* para o painel de viagens e outras situações em que há pouco espaço e muita informação na tela*/
 			border-bottom: 2px solid $dark_gray;
 			font-size: 10px;
 			position: relative;
@@ -41,6 +41,22 @@
 				height: 90px;
 				position: relative;			
 			}
+		}
+		&:nth-child(even){
+			td{
+				background-color: $off_white;
+			}
+		}
+	}
+	&__row--header{
+		td{
+			font-size: 10px;
+			font-weight: bold;
+		}
+	}
+	&__row--room{/*para o caso de haver espaço suficiente na tela para as informações, ou seja, o padding usado acima default está pequeno demais*/
+		td{
+			padding: 10px;
 		}
 	}
 	td{/*idealmente eu teria criado uma classe .td para todos os td's, mas como eles podem ser muitos, confesso que fugi do ideal e resolvi abrir uma exceção*/
@@ -155,6 +171,18 @@
 	}
 	&--scroll-and-alert{ //necessário para aparecer os círculos de "after" dos alertas das tabelas
 		margin-left: 21px;
+	}
+	&--adjust-width{
+		width: 130px;
+		@media screen and (max-width: 1400px){
+			width: 80px
+		}
+	}
+	&--important-td{/*good for company names and other long fields of data*/
+		min-width: 200px;
+		@media screen and (max-width: 1400px){
+			min-width: 150px;
+		}
 	}
 	&--like{/*imita table mas é outro elemento*/
 		display: flex;

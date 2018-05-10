@@ -9,9 +9,7 @@
 		background: #fff;
 		border-radius: 50px;
 	}
-	&::-webkit-progress-value {
-		border-radius: 50px;
-	}
+	
 	&--filled::-webkit-progress-value {
 		background: $green;
 	}

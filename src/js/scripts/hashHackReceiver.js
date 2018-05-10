@@ -7,6 +7,8 @@ var HashHack = {
     var sHash = window.location.hash,
       sDecodedHash, sMessage, i;
 
+      sHash = sHash.substr(sHash.indexOf(HashHack.PREFIX)); 
+
     if (sHash !== HashHack.sLastHash) {
       // is it valid
       sDecodedHash = decodeURIComponent(sHash);
